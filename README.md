@@ -1,5 +1,7 @@
 # README
 
+[![CodeFactor](https://www.codefactor.io/repository/github/we-have-tta/icoder/badge)](https://www.codefactor.io/repository/github/we-have-tta/icoder)
+
 :cloud:
 
 - Ruby version
