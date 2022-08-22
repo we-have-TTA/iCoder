@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CodeFactor](https://www.codefactor.io/repository/github/we-have-tta/icoder/badge)](https://www.codefactor.io/repository/github/we-have-tta/icoder)
 
-Things you may want to cover:
+:cloud:
 
-* Ruby version
+```
+$ bundle
+$ yarn install
+$ ./bin/dev
+```
 
-* System dependencies
+- Ruby version
 
-* Configuration
+`ruby '3.1.2'`
+`gem 'rails', '~> 6.1.6', '>= 6.1.6.1'`
 
-* Database creation
+- System dependencies
 
-* Database initialization
+`tailwind css v2.2.17 for compatibility with rails 6`
 
-* How to run the test suite
+- Configuration
 
-* Services (job queues, cache servers, search engines, etc.)
+- Database creation
 
-* Deployment instructions
+- Database initialization
 
-* ...
+- How to run the test suite
+
+- Services (job queues, cache servers, search engines, etc.)
+
+- Deployment instructions
+
+- ...
