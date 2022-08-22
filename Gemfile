@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -26,20 +28,20 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'aasm', '~> 5.3'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem "net-smtp", "~> 0.3.1", require: false
-gem "aasm", "~> 5.3"
-gem "devise", "~> 4.8"
-gem "kaminari", "~> 1.2"
-gem "paranoia", "~> 2.6"
-gem "pundit", "~> 2.2"
+gem 'devise', '~> 4.8'
+gem 'kaminari', '~> 1.2'
+gem 'net-smtp', '~> 0.3.1', require: false
+gem 'paranoia', '~> 2.6'
+gem 'pundit', '~> 2.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "dotenv-rails", "~> 2.8"
-  gem "faker", "~> 2.22"
-  gem "rubocop", "~> 1.35"
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails', '~> 2.8'
+  gem 'faker', '~> 2.22'
+  gem 'rubocop', '~> 1.35'
 end
 
 group :development do
@@ -47,11 +49,11 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'foreman', '~> 0.87.2'
   gem 'spring'
-  gem "foreman", "~> 0.87.2"
 end
 
 group :test do
@@ -59,11 +61,11 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'rspec-rails', '~> 5.1'
+  gem 'timecop', '~> 0.9.5'
   gem 'webdrivers'
-  gem "factory_bot_rails", "~> 6.2"
-  gem "rspec-rails", "~> 5.1"
-  gem "timecop", "~> 0.9.5"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
