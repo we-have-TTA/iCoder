@@ -1,0 +1,36 @@
+<header class="site-header">
+  <div class="bg-yellow-100">
+    <p class="text-center">
+      <%= link_to "Call to Action", "#" %>
+    </p>
+  </div>
+  <div class="nav_bar flex">
+    <%= link_to "logo", "#", class: "logo" %>
+    <nav id="main-navigation">
+      <button class="md:hidden">close menu</button>
+      <ul>
+        <li data-controller="expandable">
+          <%= link_to "placeholder", "#" %>
+          <ul class="sub-nav">
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+          </ul>
+        </li>
+        <li><%= link_to "placeholder", "#" %></li>
+        <li><%= link_to "placeholder", "#" %></li>
+        <li><%= link_to "placeholder", "#" %></li>
+      </ul>
+      <ul>
+        <li><%= link_to "Sign up", "#" %></li>
+        <li><%= link_to "Sign in", "#" %></li>
+      </ul>
+    </nav>
+    <div class="hamburger md:hidden">
+      <button class="toggler">
+        hamburger
+      </button>
+    </div>
+  </div>
+</header>
