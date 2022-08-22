@@ -7,4 +7,6 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+import "controllers"
+import "stylesheets"
 import "../application.css"

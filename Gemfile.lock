@@ -259,6 +259,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stimulus-rails (1.1.0)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.5)
@@ -321,6 +323,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
+  stimulus-rails (~> 1.1)
   timecop (~> 0.9.5)
   turbolinks (~> 5)
   tzinfo-data
