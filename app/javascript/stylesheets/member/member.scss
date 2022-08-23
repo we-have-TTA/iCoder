@@ -1,0 +1,27 @@
+.section-center {
+  @apply px-4 py-2 text-center;
+  .h2-type {
+    @apply text-3xl font-thin mb-2;
+  }
+}
+
+input {
+  border: 1px solid rgb(120 113 108);
+}
+
+input[name="submit"] {
+  @apply bg-yellow-900;
+  margin: 30px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.user-button {
+  @apply p-2 mx-2 bg-red-500 hover:bg-red-900 border-gray-900 rounded-lg;
+}
+
+.field_with_errors input {
+  @apply border-2 border-red-600;
+}

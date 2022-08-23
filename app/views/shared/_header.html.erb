@@ -22,9 +22,15 @@
         <li><%= link_to "placeholder", "#" %></li>
         <li><%= link_to "placeholder", "#" %></li>
       </ul>
+
       <ul>
-        <li><%= link_to "Sign up", new_user_registration_path %></li>
-        <li><%= link_to "Sign in", new_user_session_path %></li>
+        <% if user_signed_in? %>
+        <li><%= link_to "帳戶", "#" %></li>
+        <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+        <% else %>
+        <li><%= link_to "註冊", new_user_registration_path %></li>
+        <li><%= link_to "登入", new_user_session_path %></li>
+        <% end %>
       </ul>
     </nav>
     <div class="hamburger md:hidden">
