@@ -26,13 +26,26 @@ toolbar.addEventListener("change", (e) => {
     lineWidth = e.target.value
   }
 })
+const draw = (e) => {
+  if (!isPainting) {
+    return
+  }
+  ctx.lineWidth = lineWidth
+  ctx.lineCap = "round"
+
+  ctx.lineTo(e.clientX - canvasOffsetX, e.clientY)
+  // ctx.stroke()
+}
 canvas.addEventListener("mousedown", (e) => {
   isPainting = true
   startX = e.clientX
   startY = e.clientY
+  // console.log(e.target)
+  // console.log(isPainting)
 })
 canvas.addEventListener("mouseup", (e) => {
   isPainting = false
   ctx.stroke()
   ctx.beginPath()
 })
+canvas.addEventListener("mousemove", draw)
