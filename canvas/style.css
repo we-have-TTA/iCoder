@@ -10,8 +10,36 @@ h1 {
   background: #ff0060;
   /* 背景漸層 */
   background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-  background: linear-gradient((to right, #91eae4, #86a8e7, #7f7fd5));
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.container {
+  height: 100%;
+  display: flex;
+}
+
+#toolbar {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 70px;
+  background-color: darkgray;
+}
+#toolbar * {
+  margin-bottom: 6px;
+}
+#toolbar label {
+  font-size: 12px;
+}
+#toolbar input {
+  width: 100%;
+}
+#toolbar button {
+  background-color: hotpink;
+  border: none;
+  border-radius: 4px;
+  color: wheat;
+  padding: 2px;
 }
