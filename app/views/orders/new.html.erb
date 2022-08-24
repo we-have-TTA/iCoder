@@ -1,0 +1,9 @@
+<h1>會員方案</h1>
+
+<%= form_with model: @order do |form| %>
+ <div>
+    <h3>備註：</h3>
+    <%= form.text_area :note%>
+ </div>
+    <%= form.submit "建立訂單"%>
+<% end %>

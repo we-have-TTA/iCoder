@@ -9,5 +9,10 @@ Rails.application.routes.draw do
 
   get 'pages/home'
   root to: 'pages#home'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  #金流路徑
+  resources :plans,only:[:show]
+  resources :orders,except:[:edit,:update,:destroy] do
+    member do delete :cancel 
+    end
+  end
 end
