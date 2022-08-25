@@ -5,7 +5,7 @@ export default function () {
 
   const canvasOffsetX = canvas.offsetLeft
   const canvasOffsetY = canvas.offsetTop
-  // 是一個只讀屬性，返回當前元素左上角相對於 HTMLElement.offsetParent 節點的左邊界偏移的像素值。
+
   canvas.width = window.innerWidth - canvasOffsetX
   canvas.height = window.innerHeight - canvasOffsetY
 
@@ -13,41 +13,47 @@ export default function () {
   let lineWidth = 5
   let startX
   let startY
+
   toolbar.addEventListener("click", (e) => {
     if (e.target.id === "clear") {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
   })
+
   toolbar.addEventListener("change", (e) => {
     if (e.target.id === "stroke") {
       ctx.strokeStyle = e.target.value
     }
+
     if (e.target.id === "lineWidth") {
       lineWidth = e.target.value
     }
   })
+
   const draw = (e) => {
     if (!isPainting) {
       return
     }
+
     ctx.lineWidth = lineWidth
     ctx.lineCap = "round"
-    // ctx.lineJoin = "round"
+    ctx.lineJoin = "round"
 
     ctx.lineTo(e.clientX - canvasOffsetX, e.clientY)
-    // ctx.stroke()
+    ctx.stroke()
   }
+
   canvas.addEventListener("mousedown", (e) => {
     isPainting = true
     startX = e.clientX
     startY = e.clientY
-    // console.log(e.target)
-    // console.log(isPainting)
   })
+
   canvas.addEventListener("mouseup", (e) => {
     isPainting = false
     ctx.stroke()
     ctx.beginPath()
   })
+
   canvas.addEventListener("mousemove", draw)
 }
