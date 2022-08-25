@@ -39,7 +39,7 @@ export default function () {
     ctx.lineCap = "round"
     ctx.lineJoin = "round"
 
-    ctx.lineTo(e.clientX - canvasOffsetX, e.clientY)
+    ctx.lineTo(e.clientX - 0.7 * canvasOffsetX, e.clientY - canvasOffsetY)
     ctx.stroke()
   }
 
