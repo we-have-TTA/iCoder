@@ -1,22 +1,22 @@
 <section class="section-center">
   <h2 class="h2-type">登入</h2>
-
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="flex-col">
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div>
       <div class="field">
-        <%= f.label :email, "電子郵件信箱" %><br />
+        <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="field">
-        <%= f.label :password, "密碼" %><br />
+        <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
         <div class="field">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, "記住帳號密碼" %>
+          <%= f.label :remember_me %>
         </div>
       <% end %>
     </div>

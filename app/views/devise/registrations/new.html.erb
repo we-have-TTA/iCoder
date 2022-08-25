@@ -1,34 +1,31 @@
 <section class="section-center">
-  <h2 class="h2-type" >帳號註冊</h2>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<h2 class="h2-type" >帳號註冊</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="field">
+      <%= f.label :email, "Email" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請填寫使用者信箱" %>
+    </div>
 
-      <div class="field">
-        <%= f.label :email, "Email" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        
-      </div>
+    <div class="field">
+      <%= f.label :username %><br />
+      <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "請填寫名稱" %>
+    </div>
 
-      <div class="field">
-        <%= f.label :password, "密碼" %>
-        <% if @minimum_password_length %>
-        <em>(最少<%= @minimum_password_length %>個字元 )</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "至少6個字元" %>
+    </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, "確認密碼" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "再次輸入密碼"  %>
+    </div>
 
-      <div class="actions">
-        <%= f.submit "註冊" %>
-      </div>
-    <% end %>
-
-    <%#= render "devise/shared/links" %>
-
-
+    <div class="actions">
+      <%= f.submit "註冊" %>
+    </div>
+  <% end %>
+  <%#= render "devise/shared/links" %>
 </section>
 
