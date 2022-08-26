@@ -30,14 +30,15 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'aasm', '~> 5.3'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'braintree'
 gem 'devise', '~> 4.8'
 gem 'kaminari', '~> 1.2'
+gem 'libxml-ruby'
 gem 'net-smtp', '~> 0.3.1', require: false
 gem 'paranoia', '~> 2.6'
 gem 'pundit', '~> 2.2'
-gem 'rails-i18n'
-gem 'braintree'
-gem 'libxml-ruby'
+gem 'rails-i18n',
+gem 'braintree', '~> 4.8.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

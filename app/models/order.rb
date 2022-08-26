@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
-    belogs_to :user
+  belongs_to :user_id
 end

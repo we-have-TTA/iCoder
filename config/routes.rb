@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   #金流路徑
   resources :plans,only:[:show]
   resources :orders,except:[:edit,:update,:destroy] do
-    member do delete :cancel 
+    member do 
+      get :pay
+      post :pay, action: "提交付款"
+      delete :cancel 
     end
   end
 end
