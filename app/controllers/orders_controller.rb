@@ -44,8 +44,8 @@ end
 def gateway
   Braintree::Gateway.new(
     environment: :sandbox,
-    merchant_id: ENV.fetch('MERCHANT_ID', nil),
-    public_key: ENV.fetch('PUBLIC_KEY', nil),
-    private_key: ENV.fetch('PRIVATE_KEY', nil)
+    merchant_id: ENV['MERCHANT_ID'],
+    public_key: ENV['PUBLIC_KEY'],
+    private_key: ENV['PRIVATE_KEY'],
   )
 end
