@@ -1,10 +1,12 @@
 import { Controller } from "stimulus"
 import dropin from "braintree-web-drop-in"
+import { Alert } from "bootstrap"
 
 export default class extends Controller {
   static targets = ["payment"]
 
   connect() {
+    console.log(123)
     const { token } = this.element.dataset
 
     dropin

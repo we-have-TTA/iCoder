@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :orders,except:[:edit,:update,:destroy] do
     member do 
       get :pay
-      post :pay, action: "提交付款"
+      post :pay, action: "submit_payment"
       delete :cancel 
     end
   end
