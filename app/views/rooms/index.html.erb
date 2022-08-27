@@ -1,6 +1,10 @@
 <div class="p-20">
   
+<<<<<<< HEAD
     <div class="py-5">hello!</div>
+=======
+    <div class="py-5">hello! <%= current_user.email %></div>
+>>>>>>> feature/Room
   
     <% if notice %>
         <p class="notice"><%= notice %></p>
@@ -8,6 +12,7 @@
 
     <div class="py-5 text-right"> <%= link_to "create room", new_room_path, target: "_blank" , :class => "createBtn" %> </div>
 
+<<<<<<< HEAD
     <table class="table-auto w-full border">
         <thead>
             <tr>
@@ -19,11 +24,25 @@
                 <td class="font-bold p-3 border-b text-center">Created</td>
                 <td class="font-bold p-3 border-b text-center"></td>
                 <td class="font-bold p-3 border-b text-center">delete</td>
+=======
+    <table class="room_table">
+        <thead>
+            <tr>
+                <td>Title</td>
+                <td>Creator ID</td>
+                <td>Status</td>
+                <td></td>
+                <td>Language</td>
+                <td>Created</td>
+                <td></td>
+                <td>delete</td>
+>>>>>>> feature/Room
             </tr>
         </thead>
         <tbody>
             <% @rooms.each do | room | %>
             <tr>
+<<<<<<< HEAD
                 <td class="p-3 border-b text-center"><%= room.title %></td>
                 <td class="p-3 border-b text-center"><%= room.user_id %></td>
                 <td class="p-3 border-b text-center"><%= room.status %></td>
@@ -35,6 +54,19 @@
             </tr>
             <% end %>
         </tbody>
+=======
+                <td><%= room.title %></td>
+                <td><%= room.user_id %></td>
+                <td><%= room.status %></td>
+                <td><%= room.category %></td>
+                <td><%= room.language %></td>
+                <td><%= room.created_at.to_s.split.first %></td>
+                <td><%= link_to "view",room_path(room) %></td>
+                <td><%= link_to "delete", room_path(room), method:"delete", data:{confirm:"Delete Room? Are you sure?"} %></td>
+            </tr>
+            <% end %>
+        </tbody> 
+>>>>>>> feature/Room
     </table>
 
 

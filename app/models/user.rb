@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
+<<<<<<< HEAD
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[github google_oauth2]
 
   def display_name
@@ -23,6 +24,9 @@ class User < ApplicationRecord
     )
     user
   end
+=======
+         :recoverable, :rememberable, :validatable
+>>>>>>> feature/Room
 
   has_many :rooms
       
