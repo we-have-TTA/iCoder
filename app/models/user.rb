@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # relationships
+  has_many :rooms
+  
+  # validatations
+  validates :username, presence: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,7 +16,6 @@ class User < ApplicationRecord
     # 如果有name就顯示，不然才顯示email
     username || email
   end
-  validates :username, presence: true
 
   # 第三方登入
   def self.from_omniauth(access_token)
@@ -23,4 +28,6 @@ class User < ApplicationRecord
     )
     user
   end
+
+      
 end
