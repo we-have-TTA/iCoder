@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # member
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   # 解決devise註冊及忘記密碼出錯時重新整理沒路徑
   devise_scope :user do
   get '/users', to: 'devise/registrations#new'

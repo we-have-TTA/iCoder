@@ -269,11 +269,11 @@ Devise.setup do |config|
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
 
-  # ==> OmniAuth
+  # ==> OmniAuth 第三方登入相關
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :google_oauth2, '260765218287-klf71h1mmarubbqnc6frqpi6qk92g1ru.apps.googleusercontent.com', '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'
+  config.omniauth :github, ENV["OAUTH_GITHUB_ID"] , ENV["OAUTH_GITHUB_SECRET"]
+  config.omniauth :google_oauth2, ENV["OAUTH_GOOGLE_ID"], ENV["OAUTH_GOOGLE_SECRET"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

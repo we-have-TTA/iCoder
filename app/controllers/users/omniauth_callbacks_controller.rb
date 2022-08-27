@@ -2,7 +2,8 @@
 
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-
+  
+  #第三方登入認證  
   def google_oauth2
     handle_auth "Google"
   end

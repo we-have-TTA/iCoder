@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/omniauth/omniauth-github.git
+  revision: 1633cbb33e58e072136bf92c5abd43dbcb9d0429
+  branch: master
+  specs:
+    omniauth-github (2.0.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.7.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -350,6 +359,7 @@ DEPENDENCIES
   kaminari (~> 1.2)
   listen (~> 3.3)
   net-smtp (~> 0.3.1)
+  omniauth-github!
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   paranoia (~> 2.6)

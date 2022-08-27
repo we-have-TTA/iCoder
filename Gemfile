@@ -37,6 +37,14 @@ gem 'paranoia', '~> 2.6'
 gem 'pundit', '~> 2.2'
 gem 'rails-i18n'
 
+gem 'stimulus-rails', '~> 1.1'
+
+# 第三方登入相關
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -71,7 +79,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'stimulus-rails', '~> 1.1'
-gem 'omniauth-rails_csrf_protection'
-gem 'omniauth-google-oauth2'
 
