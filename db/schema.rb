@@ -10,39 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2022_08_25_171729) do
-=======
 ActiveRecord::Schema.define(version: 2022_08_25_102248) do
->>>>>>> origin/feature/Canvas
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-<<<<<<< HEAD
-  create_table "papers", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.string "title"
-    t.string "language"
-    t.string "types"
-    t.text "internal_description"
-    t.text "candidate_instructions"
-=======
-  create_table "orders", force: :cascade do |t|
-    t.string "serial"
-    t.integer "price"
-    t.string "state"
-    t.integer "user_id"
-    t.text "note"
->>>>>>> origin/feature/Canvas
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
