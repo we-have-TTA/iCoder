@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/omniauth/omniauth-github.git
+  revision: 1633cbb33e58e072136bf92c5abd43dbcb9d0429
+  branch: master
+  specs:
+    omniauth-github (2.0.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.7.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -103,16 +112,22 @@ GEM
       railties (>= 5.0.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.5.2)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.0)
     ffi (1.15.5)
     foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.6.2)
+    jwt (2.5.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -139,6 +154,8 @@ GEM
     mini_mime (1.1.2)
     minitest (5.16.3)
     msgpack (1.5.4)
+    multi_json (1.15.0)
+    multi_xml (0.6.0)
     net-protocol (0.1.3)
       timeout
     net-smtp (0.3.1)
@@ -152,6 +169,27 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    oauth2 (1.4.10)
+      faraday (>= 0.17.3, < 3.0)
+      jwt (>= 1.0, < 3.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
+    omniauth (2.1.0)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
+    omniauth-google-oauth2 (1.0.1)
+      jwt (>= 2.0)
+      oauth2 (~> 1.1)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.7.1)
+    omniauth-oauth2 (1.7.3)
+      oauth2 (>= 1.4, < 3)
+      omniauth (>= 1.9, < 3)
+    omniauth-rails_csrf_protection (1.0.1)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     orm_adapter (0.5.0)
     parallel (1.22.1)
     paranoia (2.6.0)
@@ -168,6 +206,8 @@ GEM
     rack (2.2.4)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
+    rack-protection (2.2.2)
+      rack
     rack-proxy (0.7.2)
       rack
     rack-test (2.0.2)
@@ -241,6 +281,7 @@ GEM
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -322,6 +363,9 @@ DEPENDENCIES
   kaminari (~> 1.2)
   listen (~> 3.3)
   net-smtp (~> 0.3.1)
+  omniauth-github!
+  omniauth-google-oauth2
+  omniauth-rails_csrf_protection
   paranoia (~> 2.6)
   pg (~> 1.1)
   puma (~> 5.0)
