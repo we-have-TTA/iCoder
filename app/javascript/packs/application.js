@@ -9,5 +9,4 @@ ActiveStorage.start()
 
 import "controllers"
 import "stylesheets"
-import "canvas"
 import "../application.css"
