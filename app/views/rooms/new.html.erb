@@ -1,0 +1,13 @@
+<div class="p-10">
+    
+    <%= form_with model:@room do |form| %>
+    
+        <span class="px-5">title: <%= form.text_field :title %></span>
+
+        <span class="px-5">Language: <%= form.select :language, ["Javascript", "Ruby"] %></span>
+    
+        <%= form.submit "Enter interview" %>
+    
+    <% end %>
+    
+</div>

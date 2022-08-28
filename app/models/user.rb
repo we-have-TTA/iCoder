@@ -23,4 +23,7 @@ class User < ApplicationRecord
     )
     user
   end
+
+  has_many :rooms
+      
 end
