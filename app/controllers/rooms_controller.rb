@@ -20,9 +20,8 @@ class RoomsController < ApplicationController
         end
     end
 
-
     def destroy
-        @room = Rook.find_by(id: params[:id])
+        @room = Room.find_by(id: params[:id])
         @room.destroy
         redirect_to rooms_path
     end
@@ -30,7 +29,7 @@ class RoomsController < ApplicationController
 
     private
     def rooms_params
-        params.require(:room).permit(:title, :language)
+        params.require(:room).permit(:title, :language, :category, :status)
     end 
     
 end
