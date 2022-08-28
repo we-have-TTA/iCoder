@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   # relationships
   has_many :rooms
-  
+
   # validatations
   validates :username, presence: true
 
@@ -28,6 +28,4 @@ class User < ApplicationRecord
     )
     user
   end
-
-      
 end
