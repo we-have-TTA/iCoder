@@ -11,10 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_08_26_084152) do
 =======
 ActiveRecord::Schema.define(version: 2022_08_27_162205) do
 >>>>>>> feature/Room
+=======
+ActiveRecord::Schema.define(version: 2022_08_27_162205) do
+>>>>>>> 6aae5bb (feat:update room controller)
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +27,14 @@ ActiveRecord::Schema.define(version: 2022_08_27_162205) do
     t.string "title"
     t.boolean "status"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string "type"
 =======
     t.string "category"
 >>>>>>> feature/Room
+=======
+    t.string "category"
+>>>>>>> 6aae5bb (feat:update room controller)
     t.string "language"
     t.integer "user_id"
     t.integer "team_id"

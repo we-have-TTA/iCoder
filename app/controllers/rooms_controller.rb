@@ -21,6 +21,7 @@ class RoomsController < ApplicationController
     end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     def destroy
         @room = Rook.find_by(id: params[:id])
@@ -28,6 +29,10 @@ class RoomsController < ApplicationController
     def destroy
         @room = Room.find_by(id: params[:id])
 >>>>>>> feature/Room
+=======
+    def destroy
+        @room = Room.find_by(id: params[:id])
+>>>>>>> 6aae5bb (feat:update room controller)
         @room.destroy
         redirect_to rooms_path
     end
@@ -36,10 +41,14 @@ class RoomsController < ApplicationController
     private
     def rooms_params
 <<<<<<< HEAD
+<<<<<<< HEAD
         params.require(:room).permit(:title, :language)
 =======
         params.require(:room).permit(:title, :language, :category, :status)
 >>>>>>> feature/Room
+=======
+        params.require(:room).permit(:title, :language, :category, :status)
+>>>>>>> 6aae5bb (feat:update room controller)
     end 
     
 end

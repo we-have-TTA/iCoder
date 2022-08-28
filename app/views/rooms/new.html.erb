@@ -3,10 +3,19 @@
     <%= form_with model:@room do |form| %>
     
 <<<<<<< HEAD
+<<<<<<< HEAD
         <span class="px-5">title: <%= form.text_field :title %></span>
+=======
+        <span class="px-5">title: <%= form.text_field :title, value: "Untitled Pad - userid_#{current_user.id}" , :readonly => true , class:"border-0" %></span>
+>>>>>>> 6aae5bb (feat:update room controller)
 
         <span class="px-5">Language: <%= form.select :language, ["Javascript", "Ruby"] %></span>
+
+        <%= form.hidden_field :category, value: "Live" %>
+
+        <%= form.hidden_field :status, value: "Started" %>
     
+<<<<<<< HEAD
         <%= form.submit "Enter interview" %>
 =======
         <span class="px-5">title: <%= form.text_field :title, value: "Untitled Pad - userid_#{current_user.id}" , :readonly => true , class:"border-0" %></span>
@@ -19,6 +28,9 @@
     
         <%= form.submit "End Interview" %>
 >>>>>>> feature/Room
+=======
+        <%= form.submit "End Interview" %>
+>>>>>>> 6aae5bb (feat:update room controller)
     
     <% end %>
     

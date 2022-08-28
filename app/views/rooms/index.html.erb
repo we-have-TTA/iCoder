@@ -1,10 +1,14 @@
 <div class="p-20">
   
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div class="py-5">hello!</div>
 =======
     <div class="py-5">hello! <%= current_user.email %></div>
 >>>>>>> feature/Room
+=======
+    <div class="py-5">hello! <%= current_user.email %></div>
+>>>>>>> 6aae5bb (feat:update room controller)
   
     <% if notice %>
         <p class="notice"><%= notice %></p>
@@ -12,6 +16,7 @@
 
     <div class="py-5 text-right"> <%= link_to "create room", new_room_path, target: "_blank" , :class => "createBtn" %> </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     <table class="table-auto w-full border">
         <thead>
@@ -28,6 +33,11 @@
     <table class="room_table">
         <thead>
             <tr>
+=======
+    <table class="room_table">
+        <thead>
+            <tr>
+>>>>>>> 6aae5bb (feat:update room controller)
                 <td>Title</td>
                 <td>Creator ID</td>
                 <td>Status</td>
@@ -36,12 +46,16 @@
                 <td>Created</td>
                 <td></td>
                 <td>delete</td>
+<<<<<<< HEAD
 >>>>>>> feature/Room
+=======
+>>>>>>> 6aae5bb (feat:update room controller)
             </tr>
         </thead>
         <tbody>
             <% @rooms.each do | room | %>
             <tr>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <td class="p-3 border-b text-center"><%= room.title %></td>
                 <td class="p-3 border-b text-center"><%= room.user_id %></td>
@@ -67,6 +81,19 @@
             <% end %>
         </tbody> 
 >>>>>>> feature/Room
+=======
+                <td><%= room.title %></td>
+                <td><%= room.user_id %></td>
+                <td><%= room.status %></td>
+                <td><%= room.category %></td>
+                <td><%= room.language %></td>
+                <td><%= room.created_at.to_s.split.first %></td>
+                <td><%= link_to "view",room_path(room) %></td>
+                <td><%= link_to "delete", room_path(room), method:"delete", data:{confirm:"Delete Room? Are you sure?"} %></td>
+            </tr>
+            <% end %>
+        </tbody> 
+>>>>>>> 6aae5bb (feat:update room controller)
     </table>
 
 
