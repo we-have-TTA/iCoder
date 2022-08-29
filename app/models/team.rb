@@ -7,7 +7,7 @@ class Team < ApplicationRecord
   has_many :rooms
   has_many :homeworks
 
-  belongs_to :creator, class_name: "User", foreign_key: "user_id"
+  belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
 
   validates :name, presence: true
   validates :plan, presence: true

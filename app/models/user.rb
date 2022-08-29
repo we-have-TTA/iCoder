@@ -7,7 +7,6 @@ class User < ApplicationRecord
   has_many :questions
   has_many :homeworks
   has_many :orders
-  
 
   # validatations
   validates :username, presence: true
