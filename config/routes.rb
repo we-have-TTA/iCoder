@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get 'pages/home'
+  get '/canvas', to: 'pages#canvas'
   root to: 'pages#home'
 
   scope "dashboard" do
