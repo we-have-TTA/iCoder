@@ -8,11 +8,11 @@ class Order < ApplicationRecord
 
   before_create :create_serial
 
-  aasm column: 'state', no_direct_assignment: true do
+  aasm column: 'state', no_direct_assignment: true do 
     state :pending, initial: true
     state :paid, :refunded, :cancelled, :failed
 
-    event :pay do
+    event :pay do # 付款成功
       transitions from: %i[pending failed], to: :paid
 
       after do
@@ -20,15 +20,15 @@ class Order < ApplicationRecord
       end
     end
 
-    event :fail do
+    event :fail do # 付款失敗
       transitions from: :pending, to: :failed
     end
 
-    event :cancel do
+    event :cancel do # 訂單取消
       transitions from: %i[pending failed], to: :cancelled
     end
 
-    event :refund do
+    event :refund do # 訂單退款
       transitions from: :paid, to: :refunded
     end
   end
