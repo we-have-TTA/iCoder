@@ -24,14 +24,14 @@ class RoomsController < ApplicationController
     redirect_to room_path(id: room.id)
   end
 
-  def create
-    @room = current_user.rooms.new(rooms_params)
-    if @room.save
-      redirect_to rooms_path
-    else
-      render :new
-    end
-  end
+  # def create
+  #   @room = current_user.rooms.new(rooms_params)
+  #   if @room.save
+  #     redirect_to rooms_path
+  #   else
+  #     render :new
+  #   end
+  # end
 
   def destroy
     @room = Room.find_by(id: params[:id])
