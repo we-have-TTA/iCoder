@@ -2,7 +2,12 @@
 
 class User < ApplicationRecord
   # relationships
+  has_one :team
   has_many :rooms
+  has_many :questions
+  has_many :homeworks
+  has_many :orders
+  
 
   # validatations
   validates :username, presence: true
