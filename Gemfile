@@ -39,7 +39,6 @@ gem 'paranoia', '~> 2.6'
 gem 'pundit', '~> 2.2'
 gem 'rails-i18n'
 
-
 gem 'stimulus-rails', '~> 1.1'
 
 # 第三方登入相關

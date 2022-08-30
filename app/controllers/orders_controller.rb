@@ -1,0 +1,55 @@
+# frozen_string_literal: true
+
+class OrdersController < ApplicationController
+  def new
+    @order = Order.new
+  end
+
+  def create
+    order = current_user.orders.new(order_params)
+    order.price = 1000
+    if order.save
+      redirect_to pay_order_path(id: order.serial), notice: '訂單建立成功，準備刷卡'
+    else
+      redirect_to plans_path, notice: '系統正在忙碌中，請稍候再試'
+    end
+  end
+
+  def pay
+    @token = gateway.client_token.generate
+  end
+
+  def submit_payment
+    result = gateway.transaction.sale(
+      amount: @order.price,
+      payment_method_nonce: params[:nonce]
+    )
+
+    if result.success?
+      @order.pay!
+      redirect_to '/', notice: '恭喜升級為寶石團隊'
+    else
+      @order.fail!
+      redirect_to '/', notice: '交易失敗請重新提交訂單'
+    end
+  end
+end
+
+private
+
+def find_order
+  @order = Order.find_by!(serial: params[:id])
+end
+
+def order_params
+  params.require(:order).permit(:note)
+end
+
+def gateway
+  Braintree::Gateway.new(
+    environment: :sandbox,
+    merchant_id: ENV.fetch('MERCHANT_ID', nil),
+    public_key: ENV.fetch('PUBLIC_KEY', nil),
+    private_key: ENV.fetch('PRIVATE_KEY', nil)
+  )
+end
