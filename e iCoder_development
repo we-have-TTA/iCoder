@@ -1,0 +1,61 @@
+Available help:
+  ABORT                            CREATE FOREIGN TABLE             DROP SCHEMA
+  ALTER AGGREGATE                  CREATE FUNCTION                  DROP SEQUENCE
+  ALTER COLLATION                  CREATE GROUP                     DROP SERVER
+  ALTER CONVERSION                 CREATE INDEX                     DROP STATISTICS
+  ALTER DATABASE                   CREATE LANGUAGE                  DROP SUBSCRIPTION
+  ALTER DEFAULT PRIVILEGES         CREATE MATERIALIZED VIEW         DROP TABLE
+  ALTER DOMAIN                     CREATE OPERATOR                  DROP TABLESPACE
+  ALTER EVENT TRIGGER              CREATE OPERATOR CLASS            DROP TEXT SEARCH CONFIGURATION
+  ALTER EXTENSION                  CREATE OPERATOR FAMILY           DROP TEXT SEARCH DICTIONARY
+  ALTER FOREIGN DATA WRAPPER       CREATE POLICY                    DROP TEXT SEARCH PARSER
+  ALTER FOREIGN TABLE              CREATE PUBLICATION               DROP TEXT SEARCH TEMPLATE
+  ALTER FUNCTION                   CREATE ROLE                      DROP TRANSFORM
+  ALTER GROUP                      CREATE RULE                      DROP TRIGGER
+  ALTER INDEX                      CREATE SCHEMA                    DROP TYPE
+  ALTER LANGUAGE                   CREATE SEQUENCE                  DROP USER
+  ALTER LARGE OBJECT               CREATE SERVER                    DROP USER MAPPING
+  ALTER MATERIALIZED VIEW          CREATE STATISTICS                DROP VIEW
+  ALTER OPERATOR                   CREATE SUBSCRIPTION              END
+  ALTER OPERATOR CLASS             CREATE TABLE                     EXECUTE
+  ALTER OPERATOR FAMILY            CREATE TABLE AS                  EXPLAIN
+  ALTER POLICY                     CREATE TABLESPACE                FETCH
+  ALTER PUBLICATION                CREATE TEXT SEARCH CONFIGURATION GRANT
+  ALTER ROLE                       CREATE TEXT SEARCH DICTIONARY    IMPORT FOREIGN SCHEMA
+  ALTER RULE                       CREATE TEXT SEARCH PARSER        INSERT
+  ALTER SCHEMA                     CREATE TEXT SEARCH TEMPLATE      LISTEN
+  ALTER SEQUENCE                   CREATE TRANSFORM                 LOAD
+  ALTER SERVER                     CREATE TRIGGER                   LOCK
+  ALTER STATISTICS                 CREATE TYPE                      MOVE
+  ALTER SUBSCRIPTION               CREATE USER                      NOTIFY
+  ALTER SYSTEM                     CREATE USER MAPPING              PREPARE
+  ALTER TABLE                      CREATE VIEW                      PREPARE TRANSACTION
+  ALTER TABLESPACE                 DEALLOCATE                       REASSIGN OWNED
+  ALTER TEXT SEARCH CONFIGURATION  DECLARE                          REFRESH MATERIALIZED VIEW
+  ALTER TEXT SEARCH DICTIONARY     DELETE                           REINDEX
+  ALTER TEXT SEARCH PARSER         DISCARD                          RELEASE SAVEPOINT
+  ALTER TEXT SEARCH TEMPLATE       DO                               RESET
+  ALTER TRIGGER                    DROP ACCESS METHOD               REVOKE
+  ALTER TYPE                       DROP AGGREGATE                   ROLLBACK
+  ALTER USER                       DROP CAST                        ROLLBACK PREPARED
+  ALTER USER MAPPING               DROP COLLATION                   ROLLBACK TO SAVEPOINT
+  ALTER VIEW                       DROP CONVERSION                  SAVEPOINT
+  ANALYZE                          DROP DATABASE                    SECURITY LABEL
+  BEGIN                            DROP DOMAIN                      SELECT
+  CHECKPOINT                       DROP EVENT TRIGGER               SELECT INTO
+  CLOSE                            DROP EXTENSION                   SET
+  CLUSTER                          DROP FOREIGN DATA WRAPPER        SET CONSTRAINTS
+  COMMENT                          DROP FOREIGN TABLE               SET ROLE
+  COMMIT                           DROP FUNCTION                    SET SESSION AUTHORIZATION
+  COMMIT PREPARED                  DROP GROUP                       SET TRANSACTION
+  COPY                             DROP INDEX                       SHOW
+  CREATE ACCESS METHOD             DROP LANGUAGE                    START TRANSACTION
+  CREATE AGGREGATE                 DROP MATERIALIZED VIEW           TABLE
+  CREATE CAST                      DROP OPERATOR                    TRUNCATE
+  CREATE COLLATION                 DROP OPERATOR CLASS              UNLISTEN
+  CREATE CONVERSION                DROP OPERATOR FAMILY             UPDATE
+  CREATE DATABASE                  DROP OWNED                       VACUUM
+  CREATE DOMAIN                    DROP POLICY                      VALUES
+  CREATE EVENT TRIGGER             DROP PUBLICATION                 WITH
+  CREATE EXTENSION                 DROP ROLE                        
+  CREATE FOREIGN DATA WRAPPER      DROP RULE                        

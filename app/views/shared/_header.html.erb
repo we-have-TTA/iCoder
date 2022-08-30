@@ -1,0 +1,42 @@
+<header class="site-header">
+  <div class="bg-yellow-100">
+    <p class="text-center">
+      <%= link_to "Call to Action", "#" %>
+    </p>
+  </div>
+  <div class="nav_bar flex">
+    <%= link_to "logo", "#", class: "logo" %>
+    <nav id="main-navigation">
+      <button class="md:hidden">close menu</button>
+      <ul>
+        <li data-controller="expandable">
+          <%= link_to "placeholder", "#" %>
+          <ul class="sub-nav">
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+            <li><%= link_to "placeholder", "#" %></li>
+          </ul>
+        </li>
+        <li><%= link_to "placeholder", "#" %></li>
+        <li><%= link_to "placeholder", "#" %></li>
+        <li><%= link_to "placeholder", "#" %></li>
+      </ul>
+
+      <ul>
+        <% if user_signed_in? %>
+        <li><%= link_to current_user.email , "#" %></li>
+        <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+        <% else %>
+        <li><%= link_to "註冊", new_user_registration_path %></li>
+        <li><%= link_to "登入", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+    <div class="hamburger md:hidden">
+      <button class="toggler">
+        hamburger
+      </button>
+    </div>
+  </div>
+</header>

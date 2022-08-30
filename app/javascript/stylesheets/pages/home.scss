@@ -1,0 +1,91 @@
+section > section {
+  max-width: 1200px;
+  margin: 15px auto;
+  outline: 1px orchid solid;
+}
+
+.hero-block {
+  ::first-line {
+    @apply uppercase;
+  }
+
+  ::first-letter {
+    @apply text-7xl;
+  }
+
+  @apply px-5 py-10;
+
+  .box {
+    @apply rounded-3xl bg-gradient-to-tr from-green-400 to-blue-500;
+    height: 400px;
+    width: 600px;
+  }
+}
+
+.flow-chart-items-block {
+  @apply px-5 py-10;
+
+  .box {
+    @apply rounded-xl transition-colors bg-gradient-to-tr hover:text-white text-center text-5xl;
+    height: 200px;
+    width: 300px;
+    line-height: 12.5rem;
+  }
+
+  .box:nth-child(1) {
+    @apply hover:from-pink-500 hover:to-yellow-500;
+  }
+  .box:nth-child(2) {
+    @apply hover:from-yellow-500 hover:to-blue-500;
+  }
+  .box:nth-child(3) {
+    @apply hover:from-blue-500 hover:to-pink-500;
+  }
+
+  .chart-list {
+    @apply justify-evenly;
+  }
+}
+
+.slim-banner-block {
+  @apply text-center text-3xl bg-gray-200 py-5;
+}
+
+.supports-programming-languages {
+  ::first-line {
+    @apply uppercase;
+  }
+  ::first-letter {
+    @apply text-7xl;
+  }
+  @apply px-5 py-10;
+  .box {
+    @apply rounded-3xl bg-gradient-to-tr from-blue-300 to-green-500;
+    height: 400px;
+    width: 600px;
+  }
+}
+
+.features-block {
+  ::first-line {
+    @apply uppercase;
+  }
+  ::first-letter {
+    @apply text-7xl;
+  }
+  .tabs > * {
+    @apply hover:underline;
+  }
+  @apply px-5 py-10;
+  .box {
+    @apply rounded-3xl bg-gradient-to-tr from-blue-300 to-green-500;
+    height: 400px;
+    width: 600px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+}

@@ -1,0 +1,55 @@
+.site-header {
+  @apply top-0 sticky w-full border-b-4 bg-white;
+  .logo {
+    @apply text-8xl border border-red-500;
+    line-height: normal;
+  }
+}
+
+#main-navigation {
+  @apply flex flex-grow justify-between;
+  ul {
+    @apply flex;
+    > li {
+      @apply bg-purple-300 mx-4;
+      > a {
+        @apply block px-4 py-14;
+      }
+    }
+  }
+}
+
+.sub-nav {
+  // FIXME temporary
+  display: none !important;
+}
+
+// FIXME RWD
+
+// *[class]::before{
+//   content: attr(class);
+//   padding: 2px 16px;
+//   left: -8px;
+//   top: -8px;
+//   position: absolute;
+//   @apply m-2 bg-green-300;
+// }
+// *[class] {
+// padding: 1.8rem 1rem 10px;
+// @apply border-4 border-green-300 relative;
+// }
+// #main-navigation {
+// @apply fixed md:sticky md:top-3 md:flex md:flex-wrap;
+// ul {
+//   @apply md:flex border-2 border-yellow-200 flex-grow;
+//   li {
+//     @apply m-2 p-2 bg-gray-200 md:w-1/5;
+//   }
+// }
+// }
+// .hamburger {
+// @apply hidden absolute md:block md:right-0 md:top-0;
+// }
+// body > :last-child {
+// @apply hidden;
+// }
