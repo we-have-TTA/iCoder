@@ -1,0 +1,18 @@
+<section class="text-center">
+<h1>新增成員</h1>
+  <%= form_with model: @team, url: members_path do |f|%>
+    <div class="mb-3">
+      <%= f.label :eamil, "電子信箱 1:" %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :eamil, "電子信箱 2:" %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :eamil, "電子信箱 3:" %>
+      <%= f.text_field :email %>
+    </div>
+  <%= f.submit "邀請" %>
+  <% end %>
+</section>

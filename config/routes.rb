@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   get '/users/password', to: 'devise/passwords#new'
   end
 
-  get 'pages/home'
+  get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
-  root to: 'pages#home'
+  root to: 'teams#index'
 
   scope "dashboard" do
     resources :rooms
+    resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
