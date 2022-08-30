@@ -10,19 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_122911) do
+ActiveRecord::Schema.define(version: 2022_08_25_102248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "homeworks", force: :cascade do |t|
+    t.string "title"
+    t.string "status"
+    t.string "language"
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_homeworks_on_team_id"
+    t.index ["user_id"], name: "index_homeworks_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "serial"
-    t.integer "price"
+    t.decimal "price"
     t.string "state"
-    t.integer "user_id"
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_orders_on_team_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.string "language", default: "Ruby"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_questions_on_team_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "title"
+    t.boolean "status"
+    t.string "category"
+    t.string "language"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "teams_id", null: false
+    t.bigint "users_id", null: false
+    t.index ["teams_id"], name: "index_rooms_on_teams_id"
+    t.index ["users_id"], name: "index_rooms_on_users_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -41,6 +81,7 @@ ActiveRecord::Schema.define(version: 2022_08_28_122911) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
     t.bigint "team_id"
     t.string "role", default: "user"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -48,4 +89,10 @@ ActiveRecord::Schema.define(version: 2022_08_28_122911) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "homeworks", "teams"
+  add_foreign_key "homeworks", "users"
+  add_foreign_key "orders", "teams"
+  add_foreign_key "orders", "users"
+  add_foreign_key "questions", "teams"
+  add_foreign_key "questions", "users"
 end

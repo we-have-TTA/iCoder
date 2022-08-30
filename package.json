@@ -9,6 +9,7 @@
     "@rails/webpacker": "5.4.3",
     "braintree-web-drop-in": "^1.33.4",
     "stimulus": "^3.1.0",
+    "paper": "^0.12.15",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"

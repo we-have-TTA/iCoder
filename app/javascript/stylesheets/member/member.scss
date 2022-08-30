@@ -1,7 +1,7 @@
 .section-center {
-  @apply px-4 py-2 text-center;
+  @apply px-4 py-20 text-center;
   .h2-type {
-    @apply text-3xl font-thin mb-2;
+    @apply mb-10 text-3xl font-bold mb-2;
   }
 }
 
@@ -22,6 +22,13 @@ input[name="submit"] {
   @apply p-2 mx-2 bg-red-500 hover:bg-red-900 border-gray-900 rounded-lg;
 }
 
+.field_with_errors {
+  display: inline-block;
+}
 .field_with_errors input {
   @apply border-2 border-red-600;
+}
+
+#error_explanation {
+  @apply text-red-600 font-bold;
 }
