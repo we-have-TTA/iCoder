@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   # relationships
-  has_one :team
+  belongs_to :team, optional: true
   has_many :rooms
   has_many :questions
   has_many :homeworks
@@ -31,5 +31,14 @@ class User < ApplicationRecord
       password: Devise.friendly_token[0, 20]
     )
     user
+  end
+
+  after_create :join_team
+
+  private
+
+  def join_team
+    self.team = Team.create(name: username, creator: self) if team.nil?
+    save
   end
 end
