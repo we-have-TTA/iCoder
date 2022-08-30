@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="nav_bar flex">
+    <% if user_signed_in? %>
+    <%= link_to "logo", rooms_path, class: "logo" %>
+    <% else %>
+    <%= link_to "logo", "/", class: "logo" %>
+    <% end %>
+    <nav id="main-navigation">
+      <ul>
+        <% if user_signed_in? %>
+        <li> Hi! <%= current_user.display_name %> </li>
+        <li><%= link_to current_user.email, "#" %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
