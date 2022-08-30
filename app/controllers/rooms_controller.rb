@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
+
+  layout 'dashboard'
+
   def index
-    @rooms = Room.all
+    team_id = current_user.team_id
+    @rooms = Room.where(team_id: team_id)
   end
 
   def show
@@ -14,24 +18,27 @@ class RoomsController < ApplicationController
     status = "Not Started"
     category = "Live"
     language = "JavaScript"
-    users_id = current_user.id
-    teams_id = current_user.team_id
+    team_id = current_user.team_id
     room = Room.new(title: title, status: status, category: category, language: language,
-                    users_id: users_id,
-                    teams_id: teams_id
+                    creator: current_user,
+                    team_id: team_id
                     )
     room.save
-    redirect_to room_path(id: room.id)
+    redirect_to edit_room_path(id: room.id)
   end
 
-  # def create
-  #   @room = current_user.rooms.new(rooms_params)
-  #   if @room.save
-  #     redirect_to rooms_path
-  #   else
-  #     render :new
-  #   end
-  # end
+  def edit
+    @room = Room.find_by(id: params[:id])
+  end
+
+  def update
+    @room = Room.find_by(id: params[:id])
+    if @room.update(rooms_params) 
+      redirect_to rooms_path 
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @room = Room.find_by(id: params[:id])
