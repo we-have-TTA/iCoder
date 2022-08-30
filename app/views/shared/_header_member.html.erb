@@ -10,6 +10,7 @@
         <% if user_signed_in? %>
         <li> Hi! <%= current_user.display_name %> </li>
         <li><%= link_to current_user.email, "#" %></li>
+        <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
         <% end %>
       </ul>
     </nav>

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
-  root to: 'teams#index'
 
   scope "dashboard" do
     resources :rooms

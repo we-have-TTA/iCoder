@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :orders
 
   # validatations
-  # validates :username, presence: true 
+  # validates :username, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -39,6 +39,6 @@ class User < ApplicationRecord
 
   def join_team
     self.team = Team.create(name: username, creator: self) if team.nil?
-    self.save
+    save
   end
 end
