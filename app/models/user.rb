@@ -39,6 +39,6 @@ class User < ApplicationRecord
 
   def join_team
     self.team = Team.create(name: username, creator: self) if team.nil?
-    self.save
+    save
   end
 end
