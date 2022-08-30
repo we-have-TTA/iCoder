@@ -9,6 +9,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <%= render "shared/header" %>
+    <% if notice %>
+    <p class="notice"><%= notice %></p>
+    <% else %>
+    <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

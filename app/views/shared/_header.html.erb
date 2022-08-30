@@ -5,7 +5,7 @@
     </p>
   </div>
   <div class="nav_bar flex">
-    <%= link_to "logo", "#", class: "logo" %>
+    <%= link_to "logo", "/", class: "logo" %>
     <nav id="main-navigation">
       <button class="md:hidden">close menu</button>
       <ul>
@@ -18,14 +18,15 @@
             <li><%= link_to "placeholder", "#" %></li>
           </ul>
         </li>
-        <li><%= link_to "placeholder", "#" %></li>
+        <li><%= link_to "draw", "/canvas" %></li>
         <li><%= link_to "placeholder", "#" %></li>
         <li><%= link_to "placeholder", "#" %></li>
       </ul>
 
       <ul>
         <% if user_signed_in? %>
-        <li><%= link_to current_user.email , "#" %></li>
+        <li> Hi! <%= current_user.display_name %> </li>
+        <li><%= link_to current_user.email, "#" %></li>
         <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
         <% else %>
         <li><%= link_to "註冊", new_user_registration_path %></li>

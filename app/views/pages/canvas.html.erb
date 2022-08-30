@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%# FIXME need remove class.container to get accuracy of pointer %>
+    <section class="container" data-controller="canvas">
+      <div id="toolbar">
+        <h1>Draw</h1>
+        <!-- 選色器 -->
+        <label for="stroke">Color</label>
+        <input type="color" name="stroke" id="stroke" />
+        <!--畫筆粗細-->
+        <label for="lineWidth" line Width> Width</label>
+        <input type="number" name="lineWidth" id="lineWidth" value="5" />
+        <!-- 清除鈕 -->
+        <button id="clear">Clear</button>
+      </div>
+      <div class="drawing-board">
+        <canvas id="drawing-board"></canvas>
+      </div>
+    </section>
+  </body>
+</html>
