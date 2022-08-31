@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
       redirect_to plans_path, notice: '系統正在忙碌中，請稍候再試'
     end
   end
-
+  
   def pay
     @token = gateway.client_token.generate
   end

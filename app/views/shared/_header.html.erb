@@ -27,7 +27,7 @@
         <% if user_signed_in? %>
         <li> Hi! <%= current_user.display_name %> </li>
         <li><%= link_to current_user.email, "#" %></li>
-        <li><%= link_to "馬上升級" , "/plans/:id" %>
+        <li><%= link_to "升級會員", plans_path %><li>
         <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
         <% else %>
         <li><%= link_to "註冊", new_user_registration_path %></li>

@@ -1,9 +1,9 @@
+<h1>訂單編號 <%= @order.serial %></h1>
 <%= form_with url: pay_order_path(id: @order.serial),method: "post",
               data: {
                 controller: "braintree",
                 token: @token
-              } do |form|%>
-
+                } do |form|%>
   <span data-braintree-target="payment"></span>
   <%= form.submit "付款" %>
 <% end %>

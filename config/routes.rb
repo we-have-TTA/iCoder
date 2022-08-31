@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   scope "dashboard" do
     resources :rooms
   end
-  # 金流路徑
-  resources :plans,only:[:show]
-  resources :orders,except:[:edit,:update,:destroy] do
-    member do 
+    # 金流路徑
+    resource :plans, only: [:show]
+  resources :orders, except: [:edit, :update, :destroy] do
+    member do
       get :pay
       post :pay, action: "submit_payment"
-      delete :cancel 
+      delete :cancel
     end
   end
 
