@@ -8,9 +8,9 @@ module Users
     # end
 
     # POST /resource/password
-    # def create
-    #   super
-    # end
+    def create
+      super
+    end
 
     # GET /resource/password/edit?reset_password_token=abcdef
     # def edit

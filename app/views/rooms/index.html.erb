@@ -1,12 +1,7 @@
 <div class="p-20">
   
-    <div class="py-5">hello! <%= current_user.email %></div>
-  
-    <% if notice %>
-        <p class="notice"><%= notice %></p>
-    <% end %>
-
-    <div class="py-5 text-right"> <%= link_to "create room", new_room_path, target: "_blank" , :class => "createBtn" %> </div>
+    <div class="py-5 text-right"> <%= link_to "create room", new_room_path, target: "_blank" , :class => "createBtn" %> 
+    </div>
 
     <table class="room_table">
         <thead>
@@ -37,7 +32,3 @@
         </tbody> 
     </table>
 
-
-
-
-</div>
