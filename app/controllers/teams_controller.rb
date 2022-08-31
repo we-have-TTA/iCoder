@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
+  layout 'dashboard'
+
   def index
   end
 
@@ -8,9 +10,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-      end
-
-  
+  end
 
 end
 
