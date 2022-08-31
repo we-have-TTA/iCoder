@@ -28,7 +28,7 @@ class User < ApplicationRecord
     # Uncomment the section below if you want users to be created if they don't exist
     user ||= User.create(
       email: data['email'],
-      username: data['username'] || data['email'].split("@").first,
+      username: data['username'] || data['email'].split('@').first,
       password: Devise.friendly_token[0, 20]
     )
     user
