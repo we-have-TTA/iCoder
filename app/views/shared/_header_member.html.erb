@@ -1,16 +1,18 @@
 <header class="site-header">
-  <div class="nav_bar flex">
+  <div class="nav_bar flex justify-between">
     <% if user_signed_in? %>
     <%= link_to "logo", rooms_path, class: "logo" %>
     <% else %>
     <%= link_to "logo", "/", class: "logo" %>
     <% end %>
-    <nav id="main-navigation">
+    <nav>
       <ul>
         <% if user_signed_in? %>
-        <li> Hi! <%= current_user.display_name %> </li>
-        <li><%= link_to current_user.email, "#" %></li>
-        <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+          <li> Hi! <%= current_user.display_name %> </li>
+          <li><%= link_to current_user.email, "#" %></li>
+          <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+        <% else %>
+          <li class="bg-gray-300 p-3"><%= link_to "登入", new_user_session_path %></li>
         <% end %>
       </ul>
     </nav>
