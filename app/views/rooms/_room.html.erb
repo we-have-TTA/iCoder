@@ -1,15 +1,26 @@
-<div>
-  <div class="candidate-input">
+<div class="room-container">
+  <div class="candidate-input" data-controller="editor">
     <div class="control-panel">
-      control bar
+      <div>
+        <button class="run-btn"
+                data-editor-target="run"
+                data-action="click->editor#run">Run <span class="transform rotate-90 inline-block">▲</span></button>
+        <button class="draw-btn"><span class="pencil">✎</span></button>
+      </div>
+      <div>
+        <button>Question</button>
+      </div>
+      <div>
+        <button>Info</button>
+        <button>Packages</button>
+        <button>Ruby</button>
+      </div>
     </div>
-    <div class="editor">
-      editor
-    </div>
+    <%= render "editor" %>
   </div>
-  <div>
-    <p>
+  <div class="web-console" id="web-console">
+    <div class="border-4 border-red-500 h-full">
       web console
-    </p>
+    </div>
   </div>
 </div>

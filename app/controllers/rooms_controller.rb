@@ -2,35 +2,34 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
+  before_action :find_room, only: [:show, :edit, :update, :destroy]
 
   def index
-    team_id = current_user.team_id
-    @rooms = Room.where(team_id:)
+    @rooms = Room.where(team: current_user.team)
   end
 
   def show
-    @room = Room.find_by(id: params[:id])
+    render layout: "room"
   end
 
   def new
-    title = "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}"
-    status = 'Not Started'
-    category = 'Live'
-    language = 'JavaScript'
-    team_id = current_user.team_id
-    room = Room.new(title:, status:, category:, language:,
-                    creator: current_user,
-                    team_id:)
+    # FIXME fix here after #51
+    room = Room.new(
+      title: "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}",
+      status: 'Not Started',
+      category: 'Live',
+      language: 'JavaScript',
+      creator: current_user,
+      team: current_user.team)
     room.save
-    redirect_to edit_room_path(id: room.id)
+    redirect_to room
+    # redirect_to edit_room_path(id: room.id)
   end
 
   def edit
-    @room = Room.find_by(id: params[:id])
   end
 
   def update
-    @room = Room.find_by(id: params[:id])
     if @room.update(rooms_params)
       redirect_to rooms_path
     else
@@ -39,7 +38,6 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room = Room.find_by(id: params[:id])
     @room.destroy
     redirect_to rooms_path
   end
@@ -47,6 +45,10 @@ class RoomsController < ApplicationController
   private
 
   def rooms_params
-    params.require(:room).permit(:title, :language, :category, :status).merge(team_id: current_user.team_id)
+    params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
+  end
+
+  def find_room
+    @room = Room.find(params[:id])
   end
 end

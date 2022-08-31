@@ -1,23 +1,69 @@
 .createBtn {
-    @apply px-3 py-1 border-2
-    
+  @apply px-3 py-1 border-2;
 }
 
+.room_table {
+  @apply table-auto w-full border;
 
-
-.room_table{
-    @apply table-auto w-full border ; 
-
-    thead{
-        td{
-            @apply font-bold p-3 border-b text-center
-        }
+  thead {
+    td {
+      @apply font-bold p-3 border-b text-center;
     }
+  }
 
-    tbody{
-        td{
-            @apply p-3 border-b text-center
-        }
+  tbody {
+    td {
+      @apply p-3 border-b text-center;
     }
+  }
 }
 
+.room-container {
+  @apply flex;
+  .candidate-input {
+    @apply w-1/2 bg-red-200 p-2;
+    .control-panel {
+      button {
+        @apply border-2 bg-black text-white text-xs rounded px-5 py-2;
+      }
+      @apply flex justify-between;
+      .run-btn {
+        @apply border-green-400 bg-green-400;
+      }
+      .draw-btn {
+        @apply border-gray-300;
+      }
+    }
+  }
+  .web-console {
+    height: 440px;
+    @apply w-1/2 bg-blue-200 p-2;
+    > * {
+      @apply p-2;
+    }
+    > div {
+      overflow-y: auto;
+    }
+  }
+}
+
+.pencil {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+.editor {
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  font-family: "Source Code Pro", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  height: 378px;
+  letter-spacing: normal;
+  line-height: 20px;
+  padding: 10px;
+  tab-size: 4;
+  margin-top: 10px;
+  tab-size: 2;
+}
