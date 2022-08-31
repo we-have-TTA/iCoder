@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-include AASM
+
 class Order < ApplicationRecord
+  include AASM
   belongs_to :team
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
 
-  validates :price, :state, presence: true
+  validates :price, presence: true
 
   before_create :create_serial
 
@@ -16,7 +17,7 @@ class Order < ApplicationRecord
       transitions from: %i[pending failed], to: :paid
 
       after do
-        user.update(role: 'vip')
+        team.update(plan: 'vip')
       end
     end
 
@@ -32,17 +33,17 @@ class Order < ApplicationRecord
       transitions from: :paid, to: :refunded
     end
   end
+end
+
 private
 
-  def create_serial
-    # "ORD20220815XXXXXX(0~9a-zA-Z)"
-    now = Time.now
+def create_serial
+  # "ORD20220815XXXXXX(0~9a-zA-Z)"
+  now = Time.now
 
-    self.serial = format('ORD%<year>i%<month>.2i%<day>.2i%<rnd>s',
-                         year: now.year,
-                         month: now.month,
-                         day: now.day,
-                         rnd: SecureRandom.alphanumeric(6).upcase)
-  end
-
+  self.serial = format('ORD%<year>i%<month>.2i%<day>.2i%<rnd>s',
+                       year: now.year,
+                       month: now.month,
+                       day: now.day,
+                       rnd: SecureRandom.alphanumeric(6).upcase)
 end

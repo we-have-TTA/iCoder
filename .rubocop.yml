@@ -12,8 +12,8 @@ AllCops:
   # TargetRailsVersion: 7.0.3
   SuggestExtensions: false
 
-# Metrics/MethodLength:
-#   Max: 25
+Metrics/MethodLength:
+  Max: 25
 
 # Metrics/BlockLength:
 #   Enabled: false
