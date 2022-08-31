@@ -4,12 +4,11 @@
     <p class="notice"><%= notice %></p>
   <% end %>
   <div class="py-3 text-left">Question Bank</div>
-  <div class="py-3 text-right"> <%= link_to "Create Question", new_question_path , :class => "createBtn" %></div>
+  <div class="py-3 text-right"> <%= link_to "Create Question",  new_question_path , :class => "createBtn" %></div>
   <div class="rounded">
     <%= form_tag("/search", method: "get") do %>
       <%= label_tag(:q, "Search for:") %>
       <%= text_field_tag(:q) %>
-    
     <% end %>
     <%= form_with model:@questions do |form| %>
       <span class="px-5">Types: <%= form.select :Types, ["Live", "Take-Home"] %></span>
