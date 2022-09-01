@@ -10,5 +10,5 @@ application.register("canvas", CanvasController)
 import EditorController from "./editor_controller"
 application.register("editor", EditorController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import WebconsoleController from "./webconsole_controller"
+application.register("webconsole", WebconsoleController)

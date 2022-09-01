@@ -13,7 +13,8 @@ Rails.application.routes.draw do
 
   scope "dashboard" do
     resources :rooms
-    resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
+    resources :members, controller: :teams, only: [:index, :new, :create, :destroy]
+    post 'rooms/createruntime', action: "create_runtime", controller: :rooms
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -18,9 +18,15 @@
     </div>
     <%= render "editor" %>
   </div>
-  <div class="web-console" id="web-console">
+  <div
+    class="web-console"
+    id="web-console"
+    data-controller="webconsole"
+    data-user_id=<%= current_user.id %>
+    data-src=<%= src %>
+    >
     <div class="border-4 border-red-500 h-full">
-      web console
+      <%= render "webconsole", src: src %>
     </div>
   </div>
 </div>
