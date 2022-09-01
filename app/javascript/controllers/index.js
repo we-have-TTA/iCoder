@@ -12,3 +12,6 @@ application.register("hello", HelloController)
 
 import InviteController from "./invite_controller"
 application.register("invite", InviteController)
+
+import NoticeController from "./notice_controller"
+application.register("notice", NoticeController)
