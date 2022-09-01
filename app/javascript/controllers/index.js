@@ -9,3 +9,6 @@ application.register("canvas", CanvasController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import InviteController from "./invite_controller"
+application.register("invite", InviteController)
