@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
-gem 'dotenv-rails', groups: %i[development test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6'
 # Use postgresql as the database for Active Record
@@ -48,6 +48,7 @@ gem 'omniauth-rails_csrf_protection'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails', '~> 2.8'
   gem 'faker', '~> 2.22'
   gem 'rubocop', '~> 1.35'
 end
