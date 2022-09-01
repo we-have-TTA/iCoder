@@ -15,12 +15,10 @@ class RoomsController < ApplicationController
     status = 'Not Started'
     category = 'Live'
     language = 'JavaScript'
-    team_id = current_user.team_id
-    room = Room.new(title:, status:, category:, language:,
-                    creator: current_user,
-                    team_id:)
-    room.save
-    redirect_to edit_room_path(id: room.id)
+    room = Room.create(title:, status:, category:, language:,
+                      creator: current_user,
+                      team: current_user.team)
+    redirect_to edit_room_path(room)
   end
 
   def edit
