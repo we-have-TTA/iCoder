@@ -36,23 +36,23 @@ class OrdersController < ApplicationController
       redirect_to '/', notice: '交易失敗請重新提交訂單'
     end
   end
-end
 
-private
+  private
 
-def find_order
-  @order = Order.find_by!(serial: params[:id])
-end
+  def find_order
+    @order = Order.find_by!(serial: params[:id])
+  end
 
-def order_params
-  params.require(:order).permit(:note)
-end
+  def order_params
+    params.require(:order).permit(:note)
+  end
 
-def gateway
-  Braintree::Gateway.new(
-    environment: :sandbox,
-    merchant_id: ENV.fetch('MERCHANT_ID', nil),
-    public_key: ENV.fetch('PUBLIC_KEY', nil),
-    private_key: ENV.fetch('PRIVATE_KEY', nil)
-  )
+  def gateway
+    Braintree::Gateway.new(
+      environment: :sandbox,
+      merchant_id: ENV.fetch('MERCHANT_ID', nil),
+      public_key: ENV.fetch('PUBLIC_KEY', nil),
+      private_key: ENV.fetch('PRIVATE_KEY', nil)
+    )
+  end
 end
