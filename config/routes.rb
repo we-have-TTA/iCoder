@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/canvas', to: 'pages#canvas'
 
   scope "dashboard" do
-    resources :rooms
+    resources :rooms, except:[:new]
     resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
 

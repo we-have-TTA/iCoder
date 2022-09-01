@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_101428) do
+ActiveRecord::Schema.define(version: 2022_09_01_063431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_101428) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "title"
-    t.boolean "status"
+    t.string "status"
     t.string "category"
     t.string "language"
     t.datetime "created_at", precision: 6, null: false

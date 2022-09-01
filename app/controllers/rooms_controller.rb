@@ -4,15 +4,15 @@ class RoomsController < ApplicationController
   layout 'dashboard'
 
   def index
-    team_id = current_user.team_id
-    @rooms = Room.where(team_id:)
+    # team_id = current_user.team_id
+    @rooms = Room.where(team: current_user.team)
   end
 
   def show
-    @room = Room.find_by(id: params[:id])
+    @room = Room.find(params[:id])
   end
 
-  def new
+  def create
     title = "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}"
     status = 'Not Started'
     category = 'Live'
@@ -47,6 +47,6 @@ class RoomsController < ApplicationController
   private
 
   def rooms_params
-    params.require(:room).permit(:title, :language, :category, :status).merge(team_id: current_user.team_id)
+    params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
   end
 end
