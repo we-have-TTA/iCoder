@@ -1,28 +1,129 @@
+<style>
+    @charset "UTF-8";
+/* reset */
+  body, h1, ul, li {
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  /* NavBar */
+  nav {
+    background: #eee;
+    box-shadow: 0px 1px 3px #00000088;
+  }
+  nav::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  nav h1 {
+    float: left;
+    padding-left: 50px;
+    line-height: 50px;
+  }
+
+  /* 隱藏 checkbox */
+  input {
+    display: none;
+  }
+
+  /* 漢堡按鈕 */
+  label {
+    float: right;
+    padding-right: 50px;
+    line-height: 50px;
+    cursor: pointer;
+  }
+  label img {
+    width: 30px;
+    vertical-align: middle;
+  }
+
+  /* menu*/
+  .menu {
+    clear: both;
+    background: #fff;
+  }
+  .menu li {
+    text-align: center;
+    border-bottom: 1px solid #efefef;
+  }
+  .menu li a {
+    display: block;
+    line-height: 50px;
+    font-size: 18px;
+    color: #5d5d5d;
+  }
+  .menu li a:hover {
+    background: #5d5d5d;
+    color: #fff;
+  }
+
+  /* 下拉選單效果 */
+  .menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.2s;
+    /* 動畫秒數 */
+  }
+
+  input:checked ~ .menu {
+    max-height: 300px;
+  }
+
+  /* mediaquery */
+  @media screen and (min-width: 768px) {
+    label {
+      display: none;
+    }
+
+    .menu {
+      float: right;
+      clear: none;
+      max-height: 50px;
+      background: #eee;
+    }
+    .menu li {
+      display: inline-block;
+    }
+    .menu li a {
+      padding: 0 15px;
+    }
+}
+</style>
 <header class="site-header">
   <div class="bg-yellow-100">
     <p class="text-center">
       <%= link_to "Call to Action", "#" %>
     </p>
   </div>
-  <div class="nav_bar flex">
-    <%= link_to "logo", "/", class: "logo" %>
-    <nav id="main-navigation">
-      <button class="md:hidden">close menu</button>
-      <ul>
-        <li data-controller="expandable">
-          <%= link_to "placeholder", "#" %>
-          <ul class="sub-nav">
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-          </ul>
-        </li>
-        <li><%= link_to "draw", "/canvas" %></li>
-        <li><%= link_to "placeholder", "#" %></li>
-        <li><%= link_to "placeholder", "#" %></li>
+  <div>
+    <nav>
+      <h1>ICoder</h1>
+      <label for="switch"><img src="https://static.thenounproject.com/png/547171-200.png"></label>
+      <input type="checkbox" id="switch">
+      <ul class="menu">
+        <li><%= link_to "首頁", "/" %></li>
+        <li><%= link_to "平台功能介紹", "#" %></li>
+        <li><%= link_to "查看題庫", "#" %></li>
+        <li><%= link_to "小畫家功能", "/canvas" %></li>
+        <li><a href="##">Contact</a></li>
       </ul>
-
+    </nav>
+  </div>
+  <div>
+    <nav>
       <ul>
         <% if user_signed_in? %>
         <li> Hi! <%= current_user.display_name %> </li>
@@ -35,10 +136,5 @@
         <% end %>
       </ul>
     </nav>
-    <div class="hamburger md:hidden">
-      <button class="toggler">
-        hamburger
-      </button>
-    </div>
-  </div>
+  <div>
 </header>
