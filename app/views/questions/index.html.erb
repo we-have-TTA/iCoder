@@ -9,12 +9,12 @@
       <%= label_tag(:q, "Search for:") %>
       <%= text_field_tag(:q) %>
     <% end %>
-    <%= form_with model:@questions do |form| %>
+    <% @questions.each do |question| %>
       <span class="px-5">Types: <%= form.select :Types, ["Live", "Take-Home"] %></span>
       <span class="px-5">Language: <%= form.select :language, ["Javascript", "Ruby"] %></span>
     <% end %>
   </div>
-  <table class="room_table">
+  <table class="question_table">
     <thead>
       <tr>
         <td>Title</td>
