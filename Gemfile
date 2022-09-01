@@ -33,7 +33,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'braintree', '~> 4.8.0'
 gem 'devise', '~> 4.8'
 gem 'kaminari', '~> 1.2'
-gem 'libxml-ruby'
 gem 'net-smtp', '~> 0.3.1', require: false
 gem 'paranoia', '~> 2.6'
 gem 'pundit', '~> 2.2'
