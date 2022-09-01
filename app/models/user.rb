@@ -2,14 +2,14 @@
 
 class User < ApplicationRecord
   # relationships
-  has_one :team
+  belongs_to :team, optional: true
   has_many :rooms
   has_many :questions
   has_many :homeworks
   has_many :orders
 
   # validatations
-  validates :username, presence: true
+  # validates :username, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -28,8 +28,18 @@ class User < ApplicationRecord
     # Uncomment the section below if you want users to be created if they don't exist
     user ||= User.create(
       email: data['email'],
+      username: data['username'] || data['email'].split('@').first,
       password: Devise.friendly_token[0, 20]
     )
     user
+  end
+
+  after_create :join_team
+
+  private
+
+  def join_team
+    self.team = Team.create(name: username, creator: self) if team.nil?
+    save
   end
 end

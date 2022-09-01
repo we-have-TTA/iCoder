@@ -1,21 +1,19 @@
 .createBtn {
-    @apply px-3 py-1 border-2
-    
+  @apply px-3 py-1 border-2;
 }
 
-.room_table{
-    @apply table-auto w-full border; 
+.room_table {
+  @apply table-auto w-full border;
 
-    thead{
-        td{
-            @apply font-bold p-3 border-b text-center
-        }
+  thead {
+    td {
+      @apply font-bold p-3 border-b text-center;
     }
+  }
 
-    tbody{
-        td{
-            @apply p-3 border-b text-center
-        }
+  tbody {
+    td {
+      @apply p-3 border-b text-center;
     }
+  }
 }
-
