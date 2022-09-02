@@ -1,34 +1,37 @@
-// .section-center {
-//   @apply px-4 py-20 text-center;
-//   .h2-type {
-//     @apply mb-10 text-3xl font-bold mb-2;
-//   }
-// }
+.section-session {
+  @apply h-full flex items-center py-12;
+  .container {
+    @apply w-full max-w-md m-auto;
+    .box {
+      @apply shadow-md rounded px-8 pt-6 pb-8 mb-4;
+    }
+  }
+}
+.form-label {
+  @apply block text-gray-700 text-lg font-bold;
+}
+.form-input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+}
+.btn-summit {
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded;
+}
 
-// input {
-//   border: 1px solid rgb(120 113 108);
-// }
+.btn-third-party {
+  @apply mb-4 border border-gray-300 rounded  hover:bg-blue-200 text-gray-800 font-bold py-2 px-12 shadow appearance-none flex justify-center;
+}
 
-// input[name="submit"] {
-//   @apply bg-yellow-900;
-//   margin: 30px;
-// }
+.link-hover {
+  @apply font-bold hover:text-red-600;
+}
 
-// .field {
-//   margin-bottom: 15px;
-// }
+.field_with_errors {
+  display: block;
+}
+.field_with_errors input {
+  @apply border-2 border-red-600;
+}
 
-// .user-button {
-//   @apply p-2 mx-2 bg-red-500 hover:bg-red-900 border-gray-900 rounded-lg;
-// }
-
-// .field_with_errors {
-//   display: inline-block;
-// }
-// .field_with_errors input {
-//   @apply border-2 border-red-600;
-// }
-
-// #error_explanation {
-//   @apply text-red-600 font-bold;
-// }
+#error_explanation {
+  @apply text-red-600 font-bold;
+}

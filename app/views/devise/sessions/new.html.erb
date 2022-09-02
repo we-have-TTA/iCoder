@@ -1,35 +1,32 @@
-<section>
-  <div class="w-full max-w-xs m-auto">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<section class="section-session">
+  <div class="container">
+    <div class="box">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
-        <div class="mb-4">
-          <%= f.label :email, class:"block text-gray-700 text-sm font-bold mb-2" %>
-          <%= f.email_field :email, autofocus: true, class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <div class="mb-5">
+          <%= f.label :email, class:"form-label" %>
+          <%= f.email_field :email, autofocus: true, class:"form-input",placeholder: "輸入您的電子郵件信箱"  %>
         </div>
-        <div class="mb-4">
-          <%= f.label :password, class:"block text-gray-700 text-sm font-bold mb-2" %>
-          <%= f.password_field :password, autocomplete: "current-password", class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <div class="mb-8">
+          <%= f.label :password, class:"form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class:"form-input",placeholder: "******" %>
         </div>
-        <div class="actions mb-6 flex justify-center">
-          <%= f.submit "登入", class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded" %>
+        <div class="actions mb-8 flex justify-center">
+          <%= f.submit "登入", class:"btn-summit" %>
         </div>
-        <button class="mb-4 border border-gray-300 rounded inline-flex items-center hover:bg-blue-200 text-gray-800 font-bold py-2 px-10 shadow appearance-none ">
+        <button class="btn-third-party">
           <img alt="google logo" src="https://img.icons8.com/color/24/FFFFFF/google-logo.png" class="mr-1"/>
-          <%= link_to "使用goole帳號登入", user_google_oauth2_omniauth_authorize_url, method: :post %>
+          <%= link_to "使用goole帳號登入", user_google_oauth2_omniauth_authorize_url, method: :post, class:"w-64"%>
         </button>
-        <button class="mb-4 border border-gray-300 rounded inline-flex items-center hover:bg-blue-200 text-gray-800 font-bold py-2 px-9 shadow appearance-none">
+        <button class="btn-third-party">
           <img alt="Github logo" src="https://img.icons8.com/ios-glyphs/24/000000/github.png" class="ml-1"/>
-          <%= link_to "使用github帳號登入", user_github_omniauth_authorize_url, method: :post %>
+          <%= link_to "使用github帳號登入", user_github_omniauth_authorize_url, method: :post, class:"w-64" %>
         </button>
         <div class="devise_link text-center">
-          <%= link_to "註冊", new_registration_path(resource_name) %><br />
-          <%= link_to "忘記密碼?", new_password_path(resource_name) %><br />
+          <%= link_to "註冊", new_registration_path(resource_name), class:"link-hover"%><br />
+          <%= link_to "忘記密碼?", new_password_path(resource_name), class:"link-hover" %><br />
         </div>
       <% end %>
-    </form>
-    <p class="text-center text-gray-500 text-xs">
-      &copy;2020 Acme Corp. All rights reserved.
-    </p>
+    </div>
   </div>
 </section>

@@ -16,8 +16,8 @@ class RoomsController < ApplicationController
     category = 'Live'
     language = 'JavaScript'
     room = Room.create(title:, status:, category:, language:,
-                      creator: current_user,
-                      team: current_user.team)
+                       creator: current_user,
+                       team: current_user.team)
     redirect_to edit_room_path(room)
   end
 
