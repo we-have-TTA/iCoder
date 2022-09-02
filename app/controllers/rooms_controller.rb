@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
     render layout: 'room'
   end
 
-  def new
+  def create
     # FIXME: fix here after #51
     room = Room.new(
       title: "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}",
@@ -64,11 +64,11 @@ class RoomsController < ApplicationController
 
   private
 
-  def rooms_params
-    params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
-  end
-
   def find_room
     @room = Room.find(params[:id])
+  end
+
+  def rooms_params
+    params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
   end
 end
