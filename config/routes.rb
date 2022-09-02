@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   get '/users/password', to: 'devise/passwords#new'
   end
 
-  get 'pages/home'
+  get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
-  root to: 'pages#home'
 
   scope "dashboard" do
-    resources :rooms
+    resources :rooms, except:[:new]
+    resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
     # 金流路徑
     resource :plans, only: [:show]

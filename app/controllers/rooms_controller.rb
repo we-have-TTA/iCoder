@@ -2,17 +2,15 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
+  before_action :find_room, only: %i[show update edit destroy]
 
   def index
-    team_id = current_user.team_id
-    @rooms = Room.where(team_id:)
+    @rooms = Room.where(team: current_user.team)
   end
 
-  def show
-    @room = Room.find_by(id: params[:id])
-  end
+  def show; end
 
-  def new
+  def create
     title = "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}"
     status = 'Not Started'
     category = 'Live'
@@ -26,11 +24,10 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = Room.find_by(id: params[:id])
+    @room = Room.find(params[:id])
   end
 
   def update
-    @room = Room.find_by(id: params[:id])
     if @room.update(rooms_params)
       redirect_to rooms_path
     else
@@ -39,12 +36,15 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room = Room.find_by(id: params[:id])
     @room.destroy
     redirect_to rooms_path
   end
 
   private
+
+  def find_room
+    @room = Room.find(params[:id])
+  end
 
   def rooms_params
     params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
