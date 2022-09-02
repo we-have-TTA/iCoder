@@ -1,29 +1,45 @@
 <div class="p-20">
-  <% if notice %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
   <div class="py-3 text-left">Question Bank</div>
   <div class="py-3 text-right"> <%= link_to "Create Question",  new_question_path , :class => "createBtn" %></div>
   <div class="rounded">
-    <%= form_tag("/search", method: "get") do %>
-      <%= label_tag(:q, "Search for:") %>
-      <%= text_field_tag(:q) %>
-    <% end %>
-    <% @questions.each do |question| %>
-      <span class="px-5">Types: <%= form.select :Types, ["Live", "Take-Home"] %></span>
-      <span class="px-5">Language: <%= form.select :language, ["Javascript", "Ruby"] %></span>
-    <% end %>
+    <div>
+      <form action="./questions" method="get" class="mt-2">
+        Search:<input type="text" placeholder="關鍵字查詢" name="keyword" class="px-2 border border-black">
+        <button>送出</button>
+      </form>
+    </div>
+    <table class="question_table">
+      <thead>
+        <tr>
+          <td>Question_id</td>
+          <td>Title</td>
+          <td>Types</td>
+          <td>Language</td>
+          <td>Creator ID</td>
+          <td>Last Used</td>
+          <td>Team ID</td>
+          <td>Edit</td>
+          <td>delete</td>
+          <td>show</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <%= form_with model: question do |form| %>
+            <tr>
+              <td><%= question.id %></td>
+              <td><%= question.title %></td>
+              <td><%= form.select :Types, ["Live", "Take-Home"] %></td>
+              <td><%= form.select :language, ["Javascript", "Ruby"] %></td>
+              <td><%= question.created_at.to_s.split.first  %></td>
+              <td>Last Used</td>
+              <td><%= question.team.name %></td>
+              <td><%= link_to "Edit", edit_question_path(question.id) %></td>
+              <td><%= link_to "delete", question_path(question.id) ,method:"delete", data:{confirm:"Delete this question? Are you sure?"}%></td>
+              <td><%= link_to question.title, question_path(question.id) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <table class="question_table">
-    <thead>
-      <tr>
-        <td>Title</td>
-        <td>Language</td>
-        <td>Creator ID</td>
-        <td>Last Used</td>  
-      </tr>
-    </thead>
-    <tbody>
-    </tbody> 
-  </table>
-</div>
