@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  layout 'dashboard'
   def index
     @questions = Question.all
     # render html: params
