@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
   layout 'dashboard'
   def index
     @questions = Question.all
-    # render html: params
   end
 
   def new
@@ -14,7 +13,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(clean_params)
     if @question.save
-      redirect_to '/dashboard/questions', notice: 'question created'
+      redirect_to '/dashboard/questions', notice: '新增成功'
     else
       render :new
     end
@@ -31,7 +30,7 @@ class QuestionsController < ApplicationController
   def update
     find_question
     if @question.update(clean_params)
-      redirect_to '/dashboard/questions', notice: 'Edited!!'
+      redirect_to '/dashboard/questions', notice: '更新完畢!!'
     else
       render :edit
     end
@@ -40,7 +39,7 @@ class QuestionsController < ApplicationController
   def destroy
     find_question
     @question.destroy
-    redirect_to '/dashboard/questions', notice: 'DELETE!!'
+    redirect_to '/dashboard/questions', notice: '刪除完畢!!'
   end
 
   def search
@@ -58,6 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def clean_params
-    params.require(:question).permit(:title, :code).merge(team: current_user.team)
+    params.require(:question).permit(:title, :code,:candidate_instructions,:difficulty,:internal_description).merge(team: current_user.team)
   end
 end
+

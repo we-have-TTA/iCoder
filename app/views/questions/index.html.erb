@@ -11,16 +11,14 @@
     <table class="question_table">
       <thead>
         <tr>
-          <td>Question_id</td>
-          <td>Title</td>
-          <td>Types</td>
-          <td>Language</td>
-          <td>Creator ID</td>
-          <td>Last Used</td>
-          <td>Team ID</td>
-          <td>Edit</td>
-          <td>delete</td>
-          <td>show</td>
+          <td>題目編號</td>
+          <td>標題</td>
+          <td>模式</td>
+          <td>語言</td>
+          <td>建立者</td>
+          <td>建立日期</td>
+          <td>修改</td>
+          <td>刪除</td>
         </tr>
       </thead>
       <tbody>
@@ -28,15 +26,13 @@
           <%= form_with model: question do |form| %>
             <tr>
               <td><%= question.id %></td>
-              <td><%= question.title %></td>
+              <td><%= link_to question.title, question_path(question.id) %></td>
               <td><%= form.select :Types, ["Live", "Take-Home"] %></td>
               <td><%= form.select :language, ["Javascript", "Ruby"] %></td>
+              <td><%= question.creator.username %></td>
               <td><%= question.created_at.to_s.split.first  %></td>
-              <td>Last Used</td>
-              <td><%= question.team.name %></td>
               <td><%= link_to "Edit", edit_question_path(question.id) %></td>
-              <td><%= link_to "delete", question_path(question.id) ,method:"delete", data:{confirm:"Delete this question? Are you sure?"}%></td>
-              <td><%= link_to question.title, question_path(question.id) %></td>
+              <td><%= link_to "delete", question_path(question.id) ,method:"delete", data:{confirm:"確定要刪除這題嗎?"}%></td>
             </tr>
           <% end %>
         <% end %>
