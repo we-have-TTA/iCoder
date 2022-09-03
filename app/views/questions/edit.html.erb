@@ -5,6 +5,7 @@
       <%= form.label :title,"標題:" %>
       <%= form.text_field :title %>
     </div>
+    <div class="px-5 py-5">模式: <%= form.select :types, ["Live", "Take-Home"] %></div>
     <div class="px-5 py-5">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
     <div class="px-5 py-5">難易度:<%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %></div>
     <div class="px-5">
@@ -27,4 +28,7 @@
     </div>
     <div class="px-5"><%= form.submit "確定" %></div>
   <% end %>
+</div>
+<div>
+  <%= link_to "返回",   questions_path %>
 </div>
