@@ -2,8 +2,10 @@
   @apply top-0 sticky w-full border-b bg-white;
   z-index: 1;
   .logo {
-    @apply text-4xl border border-red-500;
+    @apply text-4xl;
     line-height: normal;
+    letter-spacing: 2px;
+    font-weight: 500;
   }
 }
 

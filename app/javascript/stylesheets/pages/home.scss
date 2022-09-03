@@ -12,6 +12,7 @@ section > section {
     @apply text-9xl;
     animation: byBottom 1s ease both;
     font-family: yantramanav;
+    padding-bottom:20px;
 
     p{
       @apply text-9xl;
@@ -22,13 +23,20 @@ section > section {
 
   p{
     @apply mb-5 text-2xl py-2.5;
-    animation: byBottom 1s 0.25s ease both
+    animation: byBottom 1s 0.25s ease both;
   }
+
+  a{
+    @apply inline-block px-10 py-2 bg-indigo-700 text-white rounded-full ;
+    cursor:pointer;
+  }
+
 }
 
 
 .hero-block {
-  @apply px-5 py-10;
+  @apply px-5 pt-10;
+  padding-bottom:150px;
 
   .box {
     @apply rounded-3xl bg-gradient-to-tr from-green-400 to-blue-500;
