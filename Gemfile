@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'aasm', '~> 5.3'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'braintree', '~> 4.8.0'
 gem 'devise', '~> 4.8'
 gem 'kaminari', '~> 1.2'
 gem 'net-imap', '~> 0.2.3', require: false

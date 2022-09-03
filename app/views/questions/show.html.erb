@@ -1,0 +1,12 @@
+<div class="p-10"><%= @question.title %></div>
+<ul class="p-20">
+  <li>標題: <%= @question.title %></li>
+  <li>語言: <%= @question.language %></li>
+  <li>難易度:<%= @question.difficulty %></li>
+  <li>面試官資訊:<%= @question.internal_description %></li>
+  <li>面試說明:<%= @question.candidate_instructions %></li>
+  <li>題目內容:<%= @question.code %></li>
+</ul>
+<div>
+  <%= link_to "返回",   questions_path %>
+</div>
