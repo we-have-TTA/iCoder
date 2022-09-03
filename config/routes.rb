@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
     # 金流路徑
-    resource :plans, only: [:show]
+  resource :plans, only: [:show]
   resources :orders, except: [:edit, :update, :destroy] do
     member do
       get :pay
