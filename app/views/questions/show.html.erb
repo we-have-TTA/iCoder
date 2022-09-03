@@ -1,5 +1,7 @@
 <div class="p-10"><%= @question.title %></div>
 <ul class="p-20">
+  <li>建立者: <%= @question.creator.username %></li>
+  <li>建立日期: <%= @question.created_at.to_s.split.first %></li>
   <li>標題: <%= @question.title %></li>
   <li>語言: <%= @question.language %></li>
   <li>難易度:<%= @question.difficulty %></li>
