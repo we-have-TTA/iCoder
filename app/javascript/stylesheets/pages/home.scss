@@ -1,35 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Yantramanav:400,500,700,900);
+
 section > section {
   max-width: 1200px;
   margin: 15px auto;
-  outline: 1px orchid solid;
 }
 
+.text{
+  @apply overflow-hidden;
+
+  h1 {
+    @apply text-9xl;
+    animation: byBottom 1s ease both;
+    font-family: yantramanav;
+
+    p{
+      @apply text-9xl;
+      padding: 0px 0px 20px 0px;
+      margin: 0px;
+    }
+  }
+
+  p{
+    @apply mb-5 text-2xl py-2.5;
+    animation: byBottom 1s 0.25s ease both
+  }
+}
+
+
 .hero-block {
-  ::first-line {
-    @apply uppercase;
-  }
-
-  ::first-letter {
-    @apply text-7xl;
-  }
-
   @apply px-5 py-10;
 
   .box {
     @apply rounded-3xl bg-gradient-to-tr from-green-400 to-blue-500;
-    height: 400px;
+    height: 95%;
     width: 600px;
+  }
+
+  .img {
+    transform: translateY(120px);
+
+    img {
+      border-radius: 100%;
+      height: auto;
+      width: 800px;
+      animation: byBottom 1s ease both;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
   }
 }
 
 .flow-chart-items-block {
   @apply px-5 py-10;
 
+  h2{
+    overflow: hidden;
+    animation: byBottom 1s 0.2s ease both;
+  }
+
   .box {
     @apply rounded-xl transition-colors bg-gradient-to-tr hover:text-white text-center text-5xl;
     height: 200px;
     width: 300px;
     line-height: 12.5rem;
+    animation: byBottom 1s 0.2s ease both;
   }
 
   .box:nth-child(1) {
@@ -44,6 +77,7 @@ section > section {
 
   .chart-list {
     @apply justify-evenly;
+    overflow: hidden;
   }
 }
 
@@ -87,5 +121,14 @@ section > section {
 @layer components {
   .btn-primary {
     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+}
+
+@keyframes byBottom {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
