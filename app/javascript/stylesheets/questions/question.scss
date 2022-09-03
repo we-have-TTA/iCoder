@@ -1,0 +1,38 @@
+.createBtn {
+  @apply px-3 py-1 border-2;
+}
+
+.question_table {
+  @apply table-auto w-full border;
+
+  thead {
+    td {
+      @apply font-bold p-3 border-b text-center;
+    }
+  }
+
+  tbody {
+    td {
+      @apply p-3 border-b text-center;
+    }
+  }
+}
+
+.question-container {
+  @apply flex;
+  .candidate-input {
+    @apply w-1/2 bg-red-200 p-2;
+    .control-panel {
+      button {
+        @apply border-2 bg-black text-white text-xs rounded px-5 py-2;
+      }
+      @apply flex justify-between;
+      .run-btn {
+        @apply border-green-400 bg-green-400;
+      }
+      .draw-btn {
+        @apply border-gray-300;
+      }
+    }
+  }
+}
