@@ -1,5 +1,8 @@
 <h1>編輯題目</h1>
 <div class="p-10">
+  <% if @question.errors.any? %>
+    <%= @question.errors.full_messages %>
+  <% end %>
   <%= form_with model:@question do |form| %>
     <div class="px-5 py-5" >
       <%= form.label :title,"標題:" %>
