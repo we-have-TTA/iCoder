@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :rooms, except: [:new]
     resources :members, controller: :teams, only: %i[index new create destroy]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
+    resources :questions
   end
   # 金流路徑
   resource :plans, only: [:show]
@@ -27,6 +28,6 @@ Rails.application.routes.draw do
       delete :cancel
     end
   end
-
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
