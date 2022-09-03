@@ -57,7 +57,6 @@ class QuestionsController < ApplicationController
   end
 
   def clean_params
-    params.require(:question).permit(:title,:language, :code,:candidate_instructions,:difficulty,:internal_description).merge(team: current_user.team)
+    params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description).merge(team: current_user.team)
   end
 end
-
