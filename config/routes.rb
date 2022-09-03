@@ -15,6 +15,15 @@ Rails.application.routes.draw do
     resources :rooms, except:[:new]
     resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
+    # 金流路徑
+  resource :plans, only: [:show]
+  resources :orders, except: [:edit, :update, :destroy] do
+    member do
+      get :pay
+      post :pay, action: "submit_payment"
+      delete :cancel
+    end
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
