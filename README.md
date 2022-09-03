@@ -10,6 +10,17 @@ $ yarn install
 $ ./bin/dev
 ```
 
+## docker command
+
+建立 pg container
+`docker run --name rails-db -e POSTGRES_PASSWORD=mysecretpassword -d postgres`
+
+migrate
+`docker run --rm -it --link rails-db -e DATABASE_URL=postgres://postgres:mysecretpassword@rails-db/postgres myapp bundle exec rake db:migrate`
+
+建立 rails
+`docker run --name myapp --rm -it --link rails-db -p 3000:3000 -e DATABASE_URL=postgres://postgres:mysecretpassword@rails-db/postgres myapp`
+
 - Ruby version
 
 `ruby '3.1.2'`

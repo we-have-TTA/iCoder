@@ -1,6 +1,5 @@
-<div class="p-20">
-    <h1>show</h1>
-    title: <%= @room.title %>
-    Language: <%= @room.language %>
-    <%= link_to "back to room",  rooms_path %>
-</div>
+<%= link_to "back to room",  rooms_path %>
+<%= render "room",
+  room: @room,
+  src: "http://#{ENV["HOST_IP"]}:#{ENV["WEB_CONSOLE_PORT"]}" %>
+<%= render "footer", room: @room %>

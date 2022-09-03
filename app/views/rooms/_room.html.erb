@@ -1,0 +1,32 @@
+<div class="room-container">
+  <div class="candidate-input" data-controller="editor">
+    <div class="control-panel">
+      <div>
+        <button class="run-btn"
+                data-editor-target="run"
+                data-action="click->editor#run">Run <span class="transform rotate-90 inline-block">▲</span></button>
+        <button class="draw-btn"><span class="pencil">✎</span></button>
+      </div>
+      <div>
+        <button>Question</button>
+      </div>
+      <div>
+        <button>Info</button>
+        <button>Packages</button>
+        <button>Ruby</button>
+      </div>
+    </div>
+    <%= render "editor" %>
+  </div>
+  <div
+    class="web-console"
+    id="web-console"
+    data-controller="webconsole"
+    data-user_id=<%= current_user.id %>
+    data-src=<%= src %>
+    >
+    <div class="border-4 border-red-500 h-full">
+      <%= render "webconsole", src: src %>
+    </div>
+  </div>
+</div>
