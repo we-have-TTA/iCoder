@@ -31,7 +31,7 @@ export default class extends Controller {
     const field = document.createElement("input")
     field.setAttribute("type", "hidden")
     field.setAttribute("name", "nonce")
-    field.setAttribute("value",nonce)
+    field.setAttribute("value", nonce)
 
     this.element.appendChild(field)
   }
