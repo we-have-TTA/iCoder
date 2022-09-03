@@ -4,8 +4,8 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="mb-5">
-          <%= f.label :email, class:"form-label" %>
-          <%= f.email_field :email, autofocus: true, class:"form-input",placeholder: "輸入您的電子郵件信箱"  %>
+          <%= f.label :email, "Email", class:"form-label" %>
+          <%= f.email_field :email, autofocus: true, class:"form-input",placeholder: "輸入您的電子郵件"  %>
         </div>
         <div class="mb-8">
           <%= f.label :password, class:"form-label" %>

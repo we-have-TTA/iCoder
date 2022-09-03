@@ -11,9 +11,10 @@
   <body>
     <%= render "shared/header" %>
     <% if notice %>
-      <%= render "shared/notice" %>
+      <p class="notice"><%= render "shared/notice" %></p>
+    <% else %>
+      <p class="alert"><%= alert %></p>
     <% end %>
-    <p class="alert"><%= alert %></p>
     <div class="flex h-screen">
       <div class="w-72 h-full bg-gray-200">
         <%= render "shared/sidebar" %>

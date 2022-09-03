@@ -14,15 +14,15 @@
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="mb-5">
           <%= f.label :email, "Email", class:"form-label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請填寫使用者信箱",class:"form-input" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請填寫電子郵件",class:"form-input" %>
         </div>
         <div class="mb-5">
           <%= f.label :username, class:"form-label" %>
-          <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "請填寫名稱",class:"form-input" %>
+          <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "請填寫使用者名稱",class:"form-input" %>
         </div>
         <div class="mb-5">
           <%= f.label :password, class:"form-label" %>
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: "至少6個字元",class:"form-input" %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "長度至少6個字元",class:"form-input" %>
         </div>
         <div class="mb-8">
           <%= f.label :password_confirmation, class:"form-label" %>
@@ -32,8 +32,7 @@
           <%= f.submit "註冊", class:"btn-summit" %>
         </div>
         <div class="text-center">
-          <%= link_to "已經註冊了? 進行登入", new_user_session_path, class:"link-hover" %>
-          <%#= render "devise/shared/links" %>
+          <%= link_to "已經註冊了? 前往登入", new_user_session_path, class:"link-hover" %>
         </div>
       <% end %>
     </div>

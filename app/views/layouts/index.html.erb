@@ -12,8 +12,9 @@
     <%= render "shared/header" %>
     <% if notice %>
       <p class="notice"><%= render "shared/notice" %></p>
+    <% else %>
+      <p class="alert"><%= alert %></p>
     <% end %>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>
