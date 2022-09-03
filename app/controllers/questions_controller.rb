@@ -2,6 +2,7 @@
 
 class QuestionsController < ApplicationController
   layout 'dashboard'
+  before_action :find_question, only: %i[show edit update destroy]
   def index
     @questions = Question.all
   end
@@ -19,16 +20,11 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show
-    find_question
-  end
+  def show; end
 
-  def edit
-    find_question
-  end
+  def edit; end
 
   def update
-    find_question
     if @question.update(clean_params)
       redirect_to '/dashboard/questions', notice: '更新完畢!!'
     else
@@ -37,7 +33,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    find_question
     @question.destroy
     redirect_to '/dashboard/questions', notice: '刪除完畢!!'
   end
