@@ -5,6 +5,11 @@
         <button class="run-btn"
                 data-editor-target="run"
                 data-action="click->editor#run">Run <span class="transform rotate-90 inline-block">▲</span></button>
+        <%= link_to "Run",
+            rooms_pushcode_path(language: session[:current_language]),
+            method: "post",
+            class: "run-btn" %>
+        <%= session[:current_language] %>
         <button class="draw-btn"><span class="pencil">✎</span></button>
       </div>
       <div>

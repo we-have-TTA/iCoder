@@ -39,12 +39,22 @@ class RoomsController < ApplicationController
       remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
       build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
       p("try build ...-- #{system build_room}")
-      sleep 3
+      sleep 1
       p("try remove ...-- #{system remove_room}")
       # FIXME: do some check if room remove and build success
       puts 'OK!!'
       session[:current_language] = language
     end
+  end
+
+  def push_code
+    # 目前需手動重整，待修正
+    code = "puts 'HI'"
+    File.write("/Users/rexkao/Project/iCoder_dev/123.rb", "#{code}")
+    puts code
+    push_code = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} -p 5000 'cat /Users/rexkao/Project/iCoder_dev/123.rb > /home/123.rb'"
+    p("try build ...-- #{system push_code}")
+    puts 'OK!!'
   end
 
   def edit; end
