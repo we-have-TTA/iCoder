@@ -2,13 +2,15 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room, only: %i[show update edit destroy]
+  before_action :find_room, only: %i[show edit update destroy]
 
   def index
     @rooms = Room.where(team: current_user.team)
   end
 
-  def show; end
+  def show
+    render layout: 'room'
+  end
 
   def create
     # FIXME: fix here after #51
@@ -26,8 +28,27 @@ class RoomsController < ApplicationController
     redirect_to room
   end
 
-  def edit
+  def create_runtime
+    # 離開room後刪除session
+
+    # FIXME: 暫時先用user_id，之後用hash_value取代
+    language = params[:language]
+
+    if session[:current_language] && session[:current_language] == language
+      nil
+    else
+      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
+      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
+      p("try build ...-- #{system build_room}")
+      sleep 3
+      p("try remove ...-- #{system remove_room}")
+      # FIXME: do some check if room remove and build success
+      puts 'OK!!'
+      session[:current_language] = language
+    end
   end
+
+  def edit; end
 
   def update
     if @room.update(rooms_params)

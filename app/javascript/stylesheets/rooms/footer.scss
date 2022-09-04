@@ -1,0 +1,10 @@
+.room-footer {
+  @apply bg-green-200 flex p-5;
+  ul {
+    @apply flex p-2;
+
+    li {
+      @apply p-2;
+    }
+  }
+}
