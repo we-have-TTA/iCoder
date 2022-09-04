@@ -15,6 +15,7 @@
           <td>標題</td>
           <td>模式</td>
           <td>語言</td>
+          <td>難易度</td>
           <td>建立者</td>
           <td>建立日期</td>
           <td>修改</td>
@@ -27,8 +28,9 @@
             <tr>
               <td><%= question.id %></td>
               <td><%= link_to question.title, question_path(question.id) %></td>
-              <td><%= form.select :Types, ["Live", "Take-Home"] %></td>
-              <td><%= form.select :language, ["Javascript", "Ruby"] %></td>
+              <td><%= question.types %></td>
+              <td><%= question.language %></td>
+              <td><%= question.difficulty %></td>
               <td><%= question.creator.username %></td>
               <td><%= question.created_at.to_s.split.first  %></td>
               <td><%= link_to "Edit", edit_question_path(question.id) %></td>
