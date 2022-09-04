@@ -1,14 +1,21 @@
-<section class="section-center">
-  <h2 class="h2-type">忘記密碼了嗎?</h2>
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="field">
-      <%= f.label :email, "Email" %><br />
-      <%= f.email_field :email, placeholder: "請輸入您的Email", autofocus: true, autocomplete: "email" %>
+<section class="section-session">
+  <div class="container">
+    <div class="box">
+      <h2 class="text-2xl mb-5 font-bold text-center">忘記密碼了嗎?</h2>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="mb-8">
+          <%= f.email_field :email, placeholder: "請輸入您的Email", autofocus: true, autocomplete: "email",class:"form-input" %>
+        </div>
+        <div class="actions  mb-8 flex justify-center">
+          <%= f.submit "寄出重設密碼指示",class:"btn-summit" %>
+        </div>
+        <div class="text-center">
+          <%= link_to "已經註冊了嗎? 前往登入", new_user_session_path, class:"link-hover" %><br />
+          <%= link_to "還不是會員嗎? 前往註冊", new_user_registration_path, class:"link-hover" %>
+          <%#= render "devise/shared/links" %>
+        </div>
+      <% end %>
     </div>
-    <div class="actions">
-      <%= f.submit "寄出重設密碼指示" %>
-    </div>
-  <% end %>
-  <%#= render "devise/shared/links" %>
+  </div>
 </section>
