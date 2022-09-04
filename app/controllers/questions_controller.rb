@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(clean_params)
     if @question.save
-      redirect_to '/dashboard/questions', notice: '新增成功'
+      redirect_to questions_path, notice: '新增成功'
     else
       render :new
     end
@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(clean_params)
-      redirect_to '/dashboard/questions', notice: '更新完畢!!'
+      redirect_to questions_path, notice: '更新完畢!!'
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to '/dashboard/questions', notice: '刪除完畢!!'
+    redirect_to questions_path, notice: '刪除完畢!!'
   end
 
   def search
