@@ -1,10 +1,14 @@
 <h1>編輯題目</h1>
 <div class="p-10">
+  <% if @question.errors.any? %>
+    <%= @question.errors.full_messages %>
+  <% end %>
   <%= form_with model:@question do |form| %>
     <div class="px-5 py-5" >
       <%= form.label :title,"標題:" %>
       <%= form.text_field :title %>
     </div>
+    <div class="px-5 py-5">類型: <%= form.select :types, ["Live", "Take-Home"] %></div>
     <div class="px-5 py-5">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
     <div class="px-5 py-5">難易度:<%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %></div>
     <div class="px-5">
@@ -27,4 +31,7 @@
     </div>
     <div class="px-5"><%= form.submit "確定" %></div>
   <% end %>
+</div>
+<div>
+  <%= link_to "返回",   questions_path %>
 </div>

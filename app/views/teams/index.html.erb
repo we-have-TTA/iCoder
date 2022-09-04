@@ -1,16 +1,16 @@
-<div class="flex justify-between">
-  <p> team.name </p>
-  <%= link_to "Invite Members", new_member_path, class:"createBtn bg-red-500"  %>
+<div class="flex justify-between mt-3">
+  <p class="font-bold text-2xl"><%= current_user.team.name %> 成員列表</p>
+  <%= link_to "成員邀請", "#", class:"px-3 py-1 border-2 text-white bg-blue-500 hover:bg-blue-800 font-bold rounded-md"  %>
 </div>
-<span>Manage the members in your organization. Invite new members, or search, promote, demote or remove existing ones.</span>
-<p class="p-5 mb-3 font-bold">Pending invites</p>
-<table class="room_table">
+<span class="block mb-10">管理您的組織成員，邀請新成員加入、進行查詢、調整職位及進行成員刪除。</span>
+<%# <p class="mb-3 font-bold text-2xl">邀請中的成員</p>
+<table class="room_table mb-8">
   <thead>
     <tr>
       <td>Email</td>
-      <td>Invite sent</td>
-      <td>Invite</td>
-      <td>Role</td>
+      <td>寄出時間</td>
+      <td>寄件者</td>
+      <td>寄件者職位</td>
     </tr>
   </thead>
   <tbody>
@@ -21,14 +21,14 @@
       <td></td>
     </tr>
   </tbody>
-</table>
-<p class=" p-5 mb-3 font-bold">Current Members</p>
+</table> %>
+<p class="mb-3 font-bold text-2xl">目前成員</p>
 <table class="room_table">
   <thead>
     <tr>
-      <td>Name</td>
+      <td>名稱</td>
       <td>Email</td>
-      <td>Role</td>
+      <td>職位</td>
     </tr>
   </thead>
   <tbody>

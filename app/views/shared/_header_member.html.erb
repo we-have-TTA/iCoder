@@ -1,20 +1,5 @@
-<header class="site-header">
-  <div class="nav_bar flex justify-between">
-    <% if user_signed_in? %>
-    <%= link_to "ICoder", rooms_path, class: "logo" %>
-    <% else %>
-    <%= link_to "Icoder", "/", class: "logo" %>
-    <% end %>
-    <nav>
-      <ul>
-        <% if user_signed_in? %>
-          <li> Hi! <%= current_user.display_name %> </li>
-          <li><%= link_to current_user.email, "#" %></li>
-          <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
-        <% else %>
-          <li class="bg-gray-300 p-3"><%= link_to "登入", new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </nav>
+<header class="border-2 border-gray-300">
+  <div>
+    <%= link_to "iCoder", "/", class: "block flex justify-center text-5xl py-4" %>
   </div>
 </header>

@@ -7,13 +7,15 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/e4b5a19f36.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <%= render "shared/header" %>
+    <%= render "shared/header_dashboard" %>
     <% if notice %>
-      <p class="notice"><%= notice %></p>
+      <p class="notice"><%= render "shared/notice" %></p>
+    <% else %>
+      <p class="alert"><%= alert %></p>
     <% end %>
-    <p class="alert"><%= alert %></p>
     <div class="flex h-screen">
       <div class="w-72 h-full bg-gray-200">
         <%= render "shared/sidebar" %>
