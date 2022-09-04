@@ -11,20 +11,22 @@ class RoomsController < ApplicationController
   def show; end
 
   def create
-    title = "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}"
-    status = 'Not Started'
-    category = 'Live'
-    language = 'JavaScript'
-    team_id = current_user.team_id
-    room = Room.new(title:, status:, category:, language:,
-                    creator: current_user,
-                    team_id:)
+    # FIXME: fix here after #51
+    rnd = SecureRandom.alphanumeric(6).upcase
+    room = Room.new(
+      uuid: rnd,
+      title: "未命名的會議室 - #{rnd}",
+      status: 'Not Started',
+      category: 'Live',
+      language: 'JavaScript',
+      creator: current_user,
+      team: current_user.team
+    )
     room.save
-    redirect_to edit_room_path(id: room.id)
+    redirect_to room
   end
 
   def edit
-    @room = Room.find(params[:id])
   end
 
   def update

@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
 
+  
   scope "dashboard" do
-    resources :rooms, except:[:new]
+    resources :rooms, except:[:new, :show]
     resources :members, controller: :teams, only:[:index, :new, :create, :destroy]
   end
-
+  
+  get '/:uuid', to: 'rooms#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
