@@ -1,5 +1,15 @@
 <h1 class="text-5xl">開始創立</h1>
 <div>
+  <% language_set = %w[Ruby JavaScript] %>
+  <% language_set.each do |language| %>
+    <%= link_to language,
+        # "javascript://disable",
+        rooms_createruntime_path(language: language),
+        method: 'post',
+        class: 'inline-block bg-red-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded m-2',
+        data: { action: "click->webconsole#createRuntime"}
+    %>
+  <% end %>
   <%= link_to "ruby",
       rooms_createruntime_path(language: "ruby"),
       method: "post",

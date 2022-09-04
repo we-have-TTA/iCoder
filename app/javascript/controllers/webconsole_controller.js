@@ -5,28 +5,17 @@ export default class extends Controller {
     console.log(this.element.dataset.roomUUID)
   }
 
-  createRubyRuntime() {
+  createRuntime(e) {
+    const language = e.target.textContent
+    const iframe = document.getElementById("iframe").contentWindow
+    const roomUUID = this.element.dataset.roomUUID
+    iframe.postMessage(`reload`, this.element.dataset.src)
+    console.log("清除！")
+
     // FIXME 之後callback改寫
-    const iframe = document.getElementById("iframe").contentWindow
-    const roomUUID = this.element.dataset.roomUUID
-    iframe.postMessage(`reload`, this.element.dataset.src)
-    console.log("清除！")
-
     setTimeout(() => {
-      iframe.postMessage(`${roomUUID}-ruby`, this.element.dataset.src)
-      console.log(`iCoder 發送訊息: ${roomUUID}-ruby`)
-    }, 400)
-  }
-
-  createJavaScriptRuntime() {
-    const iframe = document.getElementById("iframe").contentWindow
-    const roomUUID = this.element.dataset.roomUUID
-    iframe.postMessage(`reload`, this.element.dataset.src)
-    console.log("清除！")
-
-    setTimeout(() => {
-      iframe.postMessage(`${roomUUID}-javascript`, this.element.dataset.src)
-      console.log(`iCoder 發送訊息: ${roomUUID}-javascript`)
+      iframe.postMessage(`${roomUUID}-${language}`, this.element.dataset.src)
+      console.log(`iCoder 發送訊息: ${roomUUID}-${language}`)
     }, 400)
   }
 }
