@@ -1,44 +1,32 @@
-<section class="section-center">
-  <h2 class="h2-type">登入</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+<section class="section-session">
+  <div class="container">
+    <div class="box">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="mb-5">
+          <%= f.label :email, "Email", class:"form-label" %>
+          <%= f.email_field :email, autofocus: true, class:"form-input",placeholder: "輸入您的電子郵件"  %>
+        </div>
+        <div class="mb-8">
+          <%= f.label :password, class:"form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class:"form-input",placeholder: "******" %>
+        </div>
+        <div class="actions mb-8 flex justify-center">
+          <%= f.submit "登入", class:"btn-summit" %>
+        </div>
+        <button class="btn-third-party">
+          <img alt="google logo" src="https://img.icons8.com/color/24/FFFFFF/google-logo.png" class="mr-1"/>
+          <%= link_to "使用goole帳號登入", user_google_oauth2_omniauth_authorize_url, method: :post, class:"w-64"%>
+        </button>
+        <button class="btn-third-party">
+          <img alt="Github logo" src="https://img.icons8.com/ios-glyphs/24/000000/github.png" class="ml-1"/>
+          <%= link_to "使用github帳號登入", user_github_omniauth_authorize_url, method: :post, class:"w-64" %>
+        </button>
+        <div class="devise_link text-center">
+          <%= link_to "註冊", new_registration_path(resource_name), class:"link-hover"%><br />
+          <%= link_to "忘記密碼?", new_password_path(resource_name), class:"link-hover" %><br />
         </div>
       <% end %>
     </div>
-    
-    <div class="actions">
-      <%= f.submit "登入", class:"px-20 bg-white mb-5 hover:bg-red-200" %>
-    </div>
-  <% end %>
-  <button class="border border-gray-300 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-    <img alt="google logo" src="https://img.icons8.com/color/24/FFFFFF/google-logo.png" class="mr-1"/>
-    <%= link_to "使用goole帳號登入", user_google_oauth2_omniauth_authorize_url, method: :post %>
-  </button>
-
-   <button class="border border-gray-300 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-    <img alt="Github logo" src="https://img.icons8.com/ios-glyphs/24/000000/github.png" class="mr-1"/>
-    <%= link_to "使用github帳號登入", user_github_omniauth_authorize_url, method: :post %>
-  </button>
-  
-  <div class="devise_link">
-    <%= link_to "註冊", new_registration_path(resource_name) %><br />
-    <%= link_to "忘記密碼?", new_password_path(resource_name) %><br />  
   </div>
-
-  <%#= render "devise/shared/links" %>
 </section>
