@@ -37,9 +37,10 @@ class RoomsController < ApplicationController
     else
       remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
       build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
-      p("try build ...-- #{system build_room}")
-      sleep 3
-      p("try remove ...-- #{system remove_room}")
+      # TODO: resolve after PR #70
+      # p("try build ...-- #{system build_room}")
+      # sleep 3
+      # p("try remove ...-- #{system remove_room}")
       # FIXME: do some check if room remove and build success
       puts 'OK!!'
       session[:current_language] = language
