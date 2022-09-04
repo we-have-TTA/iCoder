@@ -2,6 +2,7 @@
 
 class QuestionsController < ApplicationController
   layout 'dashboard'
+  before_action :find_question, only: %i[show edit update destroy]
   def index
     @questions = Question.all
   end
@@ -13,33 +14,27 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(clean_params)
     if @question.save
-      redirect_to '/dashboard/questions', notice: '新增成功'
+      redirect_to questions_path, notice: '新增成功'
     else
       render :new
     end
   end
 
-  def show
-    find_question
-  end
+  def show; end
 
-  def edit
-    find_question
-  end
+  def edit; end
 
   def update
-    find_question
     if @question.update(clean_params)
-      redirect_to '/dashboard/questions', notice: '更新完畢!!'
+      redirect_to questions_path, notice: '更新完畢!!'
     else
       render :edit
     end
   end
 
   def destroy
-    find_question
     @question.destroy
-    redirect_to '/dashboard/questions', notice: '刪除完畢!!'
+    redirect_to questions_path, notice: '刪除完畢!!'
   end
 
   def search
@@ -57,6 +52,6 @@ class QuestionsController < ApplicationController
   end
 
   def clean_params
-    params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description).merge(team: current_user.team)
+    params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description, :types).merge(team: current_user.team)
   end
 end
