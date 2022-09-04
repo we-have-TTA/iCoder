@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    # FIXME: fix here after #51
+    # TODO: move to model
     rnd = SecureRandom.alphanumeric(6).upcase
     room = Room.new(
       uuid: rnd,
@@ -30,47 +30,33 @@ class RoomsController < ApplicationController
   end
 
   def create_runtime
-    # TODO 離開room後刪除session
+    # TODO: 離開room後刪除session
     language = params[:language]
     uuid = params[:uuid]
-    ssh_cmd = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)}"
+    host_ip = ENV.fetch('HOST_IP', nil)
+    username = ENV.fetch('SSH_USER_NAME', nil)
     new_container_name = "#{uuid}-#{language}"
-    
-    p uuid
-    def container_created?
-      ssh_cmd = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)}"
-      uuid = params[:uuid]
 
-      check_docker_container = "#{ssh_cmd} docker ps | grep #{uuid} | awk '{print $12}'"
-      
-      # check_docker_container = "#{ssh_cmd} docker exec #{new_container_name} /bin/sh"
-      system check_docker_container
+    Net::SSH.start(host_ip, username) do |ssh|
+      output = ssh.exec!("docker ps | grep #{uuid} | awk '{print $12}'")
+      previous_container_name = nil
+      previous_container_name = output.split('-').last.strip unless output.empty?
+      container_is_not_valid = (previous_container_name != language)
+      if container_is_not_valid
+        p '沒有可使用的 container...'
+        if previous_container_name
+          p '刪除前一次的 container...'
+          ssh.exec!("docker stop #{previous_container_name} && docker rm #{previous_container_name}")
+          p 'done.'
+        end
+        p "建立 #{language} 的 container..."
+        ssh.exec!("docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd")
+        p 'done.'
+      end
     end
 
-    p container_created?
-
-    # if container_created?
-    #   p 1
-    # else
-    #   previous_container_name = "#{uuid}-#{session[:current_language]}"
-    #   remove_room = "#{ssh_cmd} 'docker stop #{previous_container_name} && docker rm #{previous_container_name}'"
-    #   build_room = "#{ssh_cmd} 'docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd'"
-    #   p("try build ...-- #{system build_room}")
-    #   sleep 3
-    #   # fix to remove
-    #   p("try remove ...-- #{system remove_room}")
-    #   # FIXME: do some check if room remove and build success
-    #   puts 'OK!!'
-    #   session[:current_language] = language
-    #   p 2
-    # end
-    # render json: {container: new_container_name}
-
-
-    # if session[:current_language] && session[:current_language] == language
-    #   nil
-    # else
-    # end
+    p "連線至 #{language} 的 container..."
+    render json: { container: new_container_name }
   end
 
   def send_invitation
@@ -101,7 +87,6 @@ class RoomsController < ApplicationController
   end
 
   def find_room_by_uuid
-    p params
     @room = Room.find_by!(uuid: params[:uuid])
   end
 
