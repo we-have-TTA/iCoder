@@ -11,7 +11,7 @@
   <body>
     <%= render "shared/header_member" %>
     <% if notice %>
-      <p class="notice"><%= notice %></p>
+      <p class="notice"><%= render "shared/notice" %></p>
     <% else %>
       <p class="alert"><%= alert %></p>
     <% end %>
