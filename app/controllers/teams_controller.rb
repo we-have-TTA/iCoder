@@ -8,4 +8,8 @@ class TeamsController < ApplicationController
   def new; end
 
   def create; end
+
+  def invite
+    render html: params
+  end
 end

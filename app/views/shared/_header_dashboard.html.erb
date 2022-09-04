@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="nav_bar flex">
+    <nav id="main-navigation">
+      <%= link_to "ICoder", "/", class: "logo" %>
+      <ul>
+        <li> Hello! <%= current_user.display_name %> </li>
+        <li class="hover:text-red-600"><%= link_to "升級會員", plans_path %></li>
+        <li class="hover:text-red-600"><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
