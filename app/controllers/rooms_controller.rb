@@ -30,20 +30,21 @@ class RoomsController < ApplicationController
     # 離開room後刪除session
 
     # FIXME: 暫時先用user_id，之後用hash_value取代
-    language = params[:language]
+    # language = params[:language]
 
-    if session[:current_language] && session[:current_language] == language
-      nil
-    else
-      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
-      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
-      p("try build ...-- #{system build_room}")
-      sleep 3
-      p("try remove ...-- #{system remove_room}")
-      # FIXME: do some check if room remove and build success
-      puts 'OK!!'
-      session[:current_language] = language
-    end
+    # TODO: fix after#70
+    # if session[:current_language] && session[:current_language] == language
+    #   nil
+    # else
+    #   remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
+    #   build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
+    #   p("try build ...-- #{system build_room}")
+    #   sleep 3
+    #   p("try remove ...-- #{system remove_room}")
+    #   # FIXME: do some check if room remove and build success
+    #   puts 'OK!!'
+    #   session[:current_language] = language
+    # end
   end
 
   def edit; end
