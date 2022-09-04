@@ -11,9 +11,9 @@
   <body>
     <%= render "shared/header_member" %>
     <% if notice %>
-    <p class="notice"><%= notice %></p>
+      <p class="notice"><%= notice %></p>
     <% else %>
-    <p class="alert"><%= alert %></p>
+      <p class="alert"><%= alert %></p>
     <% end %>
     <%= yield %>
   </body>

@@ -1,13 +1,16 @@
 .site-header {
-  @apply top-0 sticky w-full border-b-4 bg-white;
+  @apply top-0 sticky w-full border-b bg-white;
+  z-index: 1;
   .logo {
-    @apply text-4xl border border-red-500;
+    @apply text-4xl;
     line-height: normal;
+    letter-spacing: 2px;
+    font-weight: 500;
   }
 }
 
 #main-navigation {
-  @apply flex flex-grow justify-between;
+  @apply flex flex-grow justify-end items-center py-2.5;
   ul {
     @apply flex;
     > li {
