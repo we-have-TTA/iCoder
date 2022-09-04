@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/canvas', to: 'pages#canvas'
 
   scope 'dashboard' do
-    resources :rooms, except: [:new, :show]
+    resources :rooms, except: %i[new show]
     resources :members, controller: :teams, only: %i[index new create destroy]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     resources :questions
@@ -28,7 +28,8 @@ Rails.application.routes.draw do
       delete :cancel
     end
   end
-  
-  get '/:uuid', to: 'rooms#show'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/:uuid', to: 'rooms#show', as: 'room_uuid'
+  get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
+  post '/:uuid/invite', to: 'rooms#send_invitation'
 end

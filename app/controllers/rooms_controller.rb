@@ -2,7 +2,8 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room, only: %i[show edit update destroy]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation]
+  before_action :find_room, only: %i[destroy]
 
   def index
     @rooms = Room.where(team: current_user.team)
@@ -25,7 +26,7 @@ class RoomsController < ApplicationController
       team: current_user.team
     )
     room.save
-    redirect_to room
+    redirect_to "/#{room.uuid}"
   end
 
   def create_runtime
@@ -48,7 +49,13 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit; end
+  def send_invitation
+    @user = User.new(
+      username: nil || params[:username],
+      email: params[:email]
+    )
+    RoomMailer.send_invitation_to(@user, @room).deliver_now if @user
+  end
 
   def update
     if @room.update(rooms_params)
@@ -67,6 +74,10 @@ class RoomsController < ApplicationController
 
   def find_room
     @room = Room.find(params[:id])
+  end
+
+  def find_room_by_uuid
+    @room = Room.find_by!(uuid: params[:uuid])
   end
 
   def rooms_params

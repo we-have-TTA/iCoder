@@ -1,0 +1,8 @@
+<h1 class="text-9xl">invite</h1>
+<%= form_with do |form| %>
+  <%= form.email_field :email,
+                        placeholder: "abc@gamil.com",
+                        class: "text-black p-3 rounded-full mr-2",
+                        required: true %>
+  <%= form.submit "寄出邀請信件", class: "p-3 rounded-full" %>
+<% end %>
