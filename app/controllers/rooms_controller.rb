@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room_by_uuid, only: %i[show update send_invitation]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
   before_action :find_room, only: %i[destroy]
 
   def index
@@ -30,21 +30,47 @@ class RoomsController < ApplicationController
   end
 
   def create_runtime
-    # 離開room後刪除session
+    # TODO 離開room後刪除session
     language = params[:language]
+    uuid = params[:uuid]
+    ssh_cmd = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)}"
+    new_container_name = "#{uuid}-#{language}"
+    
+    p uuid
+    def container_created?
+      ssh_cmd = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)}"
+      uuid = params[:uuid]
 
-    if session[:current_language] && session[:current_language] == language
-      nil
-    else
-      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{@room.uuid}-#{session[:current_language]} && docker rm #{@room.uuid}-#{session[:current_language]}'"
-      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{@room.uuid}-#{language} --network webssh #{language}_sshd'"
-      p("try build ...-- #{system build_room}")
-      sleep 3
-      p("try remove ...-- #{system remove_room}")
-      # FIXME: do some check if room remove and build success
-      puts 'OK!!'
-      session[:current_language] = language
+      check_docker_container = "#{ssh_cmd} docker ps | grep #{uuid} | awk '{print $12}'"
+      
+      # check_docker_container = "#{ssh_cmd} docker exec #{new_container_name} /bin/sh"
+      system check_docker_container
     end
+
+    p container_created?
+
+    # if container_created?
+    #   p 1
+    # else
+    #   previous_container_name = "#{uuid}-#{session[:current_language]}"
+    #   remove_room = "#{ssh_cmd} 'docker stop #{previous_container_name} && docker rm #{previous_container_name}'"
+    #   build_room = "#{ssh_cmd} 'docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd'"
+    #   p("try build ...-- #{system build_room}")
+    #   sleep 3
+    #   # fix to remove
+    #   p("try remove ...-- #{system remove_room}")
+    #   # FIXME: do some check if room remove and build success
+    #   puts 'OK!!'
+    #   session[:current_language] = language
+    #   p 2
+    # end
+    # render json: {container: new_container_name}
+
+
+    # if session[:current_language] && session[:current_language] == language
+    #   nil
+    # else
+    # end
   end
 
   def send_invitation
@@ -75,6 +101,7 @@ class RoomsController < ApplicationController
   end
 
   def find_room_by_uuid
+    p params
     @room = Room.find_by!(uuid: params[:uuid])
   end
 
