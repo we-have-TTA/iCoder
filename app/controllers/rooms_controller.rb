@@ -38,8 +38,8 @@ class RoomsController < ApplicationController
     if session[:current_language] && session[:current_language] == language
       nil
     else
-      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
-      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
+      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{room.uuid}-#{session[:current_language]} && docker rm #{room.uuid}-#{session[:current_language]}'"
+      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{room.uuid}-#{language} --network webssh #{language}_sshd'"
       p("try build ...-- #{system build_room}")
       sleep 3
       p("try remove ...-- #{system remove_room}")
