@@ -1,0 +1,33 @@
+<h1>新增題目</h1>
+<div class="p-10">
+  <% if @question.errors.any? %>
+    <%= @question.errors.full_messages %>
+  <% end %>
+  <%= form_with model:@question do |form| %>
+    <div class="px-5 py-5" >
+      <%= form.label :title,"標題:" %>
+      <%= form.text_field :title %>
+    </div>
+    <div class="px-5 py-5">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
+    <div class="px-5 py-5">難易度: <%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %></div>
+    <div class="px-5">
+      <%= form.label :internal_description ,"面試官資訊"%>
+    </div>
+    <div class="px-5">
+      <%= form.text_area :internal_description,:class => "border border-gray-900" %>
+    </div>
+    <div class="px-5 ">
+      <%= form.label :candidate_instructions ,"面試說明"%>
+    </div>
+    <div class="px-5">
+      <%= form.text_area :candidate_instructions,:class => "border border-gray-900" %>
+    </div>
+    <div class="px-5 ">
+      <%= form.label :code,"題目內容" %>
+    </div>
+    <div class="px-5">
+      <%= form.text_area :code, :class => "border border-gray-900" %>
+    </div>
+    <div class="px-5"><%= form.submit "建立題目" %></div>
+  <% end %>
+</div>
