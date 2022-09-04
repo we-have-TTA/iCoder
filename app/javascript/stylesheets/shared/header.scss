@@ -15,9 +15,6 @@
     @apply flex;
     > li {
       @apply mr-4 ;
-      > a {
-        @apply block px-10 py-2 bg-indigo-700 text-white rounded-full ;
-      }
     }
   }
 }

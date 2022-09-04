@@ -1,15 +1,17 @@
 <header class="site-header">
-  <div class="nav_bar flex items-center">
-    <%= link_to "{i}Coder", "/", class: "logo" %>
+  <div class="nav_bar flex items-center px-5">
+    <%= link_to  "/", class: "logo" do %>
+      {<b class="text-yellow-400">i</b>}Coder
+    <% end %>
     <nav id="main-navigation">
       <ul>
         <% if user_signed_in? %>
           <li> Hi! <%= current_user.display_name %> </li>
           <li><%= link_to current_user.email, "#" %></li>
-          <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+          <li><%= link_to "登出", destroy_user_session_path, method: "delete", class:"btnstyle" %></li>
         <% else %>
-          <li><%= link_to "註冊", new_user_registration_path %></li>
-          <li><%= link_to "登入", new_user_session_path %></li>
+          <li><%= link_to "註冊", new_user_registration_path , class:"btnstyle" %></li>
+          <li><%= link_to "登入", new_user_session_path , class:"btnstyle" %></li>
         <% end %>
       </ul>
     </nav>

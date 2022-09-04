@@ -7,6 +7,7 @@ section > section {
 
 .text{
   @apply overflow-hidden;
+  padding-bottom: 30px;
 
   h1 {
     @apply text-9xl;
@@ -23,12 +24,11 @@ section > section {
 
   p{
     @apply mb-5 text-2xl py-2.5;
-    animation: byBottom 1s 0.25s ease both;
+    animation: byBtn 1s ease both;
   }
 
   a{
-    @apply inline-block px-10 py-2 bg-indigo-700 text-white rounded-full ;
-    cursor:pointer;
+    animation: byBtn 1s 0.2s ease both;
   }
 
 }
@@ -37,6 +37,7 @@ section > section {
 .hero-block {
   @apply px-5 pt-10;
   padding-bottom:150px;
+  position: relative;
 
   .box {
     @apply rounded-3xl bg-gradient-to-tr from-green-400 to-blue-500;
@@ -55,6 +56,28 @@ section > section {
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
   }
+}
+
+.hero-block::before {
+  content: '';
+  width: 600px;
+  height: 620px;
+  left: -20px;
+  top: 20px;
+  background: #e9e8f6;
+  position: absolute;
+  box-shadow: rgb(181 175 175 / 25%) 7px 8px 6px 0px;
+}
+
+.hero-block::after {
+  content: '';
+  width: 602px;
+  height: 603px;
+  left: ß20px;
+  top: 75px;
+  z-index: -1;
+  background: #ffbf00;
+  position: absolute;
 }
 
 .flow-chart-items-block {
@@ -135,6 +158,15 @@ section > section {
 @keyframes byBottom {
   0% {
     transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes byBtn {
+  0% {
+    transform: translateY(200%);
   }
   100% {
     transform: translateY(0);
