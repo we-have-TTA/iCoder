@@ -27,8 +27,8 @@
             <tr>
               <td><%= question.id %></td>
               <td><%= link_to question.title, question_path(question.id) %></td>
-              <td><%= form.select :Types, ["Live", "Take-Home"] %></td>
-              <td><%= form.select :language, ["Javascript", "Ruby"] %></td>
+              <%# <td><%= form.select :Types, ["Live", "Take-Home"] %></td> %>
+              <td><%= question.language %></td>
               <td><%= question.creator.username %></td>
               <td><%= question.created_at.to_s.split.first  %></td>
               <td><%= link_to "Edit", edit_question_path(question.id) %></td>
