@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   def create
     order = current_user.orders.new(order_params)
-    order.price = 1000
+    order.price = 588
     order.team = current_user.team
     if order.save
       redirect_to pay_order_path(id: order.serial), notice: '訂單建立成功，準備刷卡'
