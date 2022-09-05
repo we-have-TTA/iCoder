@@ -21,14 +21,14 @@
 .room-container {
   @apply flex;
   .candidate-input {
-    @apply w-1/2 bg-red-200 p-2;
+    @apply w-1/2 bg-black p-2;
     .control-panel {
       button {
-        @apply border-2 bg-black text-white text-xs rounded px-5 py-2;
+        @apply border-2 bg-black text-white hover:bg-green-900 text-base rounded px-5 py-2;
       }
       @apply flex justify-between;
       .run-btn {
-        @apply border-green-400 bg-green-400;
+        @apply border-green-900 bg-green-700;
       }
       .draw-btn {
         @apply border-gray-300;
@@ -36,12 +36,12 @@
     }
   }
   .web-console {
-    height: 440px;
-    @apply w-1/2 bg-blue-200 p-2;
+    @apply w-1/2 bg-black p-2;
     > * {
       @apply p-2;
     }
     > div {
+      color: white;
       overflow-y: auto;
     }
   }
@@ -59,7 +59,7 @@
   font-family: "Source Code Pro", monospace;
   font-size: 14px;
   font-weight: 400;
-  height: 378px;
+  height: 560px;
   letter-spacing: normal;
   line-height: 20px;
   padding: 10px;
