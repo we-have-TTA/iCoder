@@ -57,8 +57,6 @@ class RoomsController < ApplicationController
     end
     p "連線至 #{language} 的 container..."
     render json: { container: new_container_name }
-
-   
   end
 
   def send_invitation
