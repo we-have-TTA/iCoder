@@ -33,7 +33,12 @@ export default class extends Controller {
       language: language,
       uuid: uuid
     }
+    
+    const resultText = document.getElementById("run_result")
     const resultBox = document.getElementById("result-box")
+    const runText = document.getElementById("run-text")
+    resultText.textContent = ""
+    runText.textContent = "執行中....."
     resultBox.style.cssText = "width: 600px;display: block"
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/run`,
@@ -41,10 +46,11 @@ export default class extends Controller {
       data: new URLSearchParams(data).toString(),
       success: ({ result }) => {
         console.log(result)
-        document.getElementById("run-text").textContent = "執行結果："
-        document.getElementById("run_result").textContent = result
+        runText.textContent = "執行結果："
+        resultText.textContent = result
         setTimeout(() => {
           resultBox.style.cssText = "width: 600px;display: none"
+
         }, 5000)
       },
       error: (err) => {
