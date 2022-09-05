@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    container_name:
+    image: postgres
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+    networks:
+      - webssh
+  app:
+    container_name: iCoder
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db/postgres
+      - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
+    networks:
+      - webssh
+    volumes:
+      - .:/app
+      - /home/docker/id_key:/root/.ssh/
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - db
+
+networks:
+  webssh:
+    name: webssh
