@@ -6,8 +6,8 @@ export default function () {
   const canvasOffsetX = canvas.offsetLeft
   const canvasOffsetY = canvas.offsetTop
 
-  canvas.width = window.innerWidth - canvasOffsetX
-  canvas.height = window.innerHeight - canvasOffsetY
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
 
   let isPainting = false
   let lineWidth = 5
@@ -39,7 +39,7 @@ export default function () {
     ctx.lineCap = "round"
     ctx.lineJoin = "round"
 
-    ctx.lineTo(e.clientX - canvasOffsetX, e.clientY)
+    ctx.lineTo(e.clientX - 51, e.clientY)
     ctx.stroke()
   }
 
