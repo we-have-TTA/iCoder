@@ -36,12 +36,11 @@ class RoomsController < ApplicationController
     host_ip = ENV.fetch('HOST_IP', nil)
     username = ENV.fetch('SSH_USER_NAME', nil)
     new_container = "#{uuid}-#{language}"
-
     # TODO: move to other place
     Net::SSH.start(host_ip, username) do |ssh|
       output = ssh.exec!("docker ps | grep #{uuid}")
                   .split("\n")
-                  .map{|e| e[/\b#{uuid}-.+\b/]}
+                  .map { |e| e[/\b#{uuid}-.+\b/] }
       unused_containers = output - [new_container]
       unless unused_containers.empty?
         p '找到未使用的 container...'
@@ -51,9 +50,7 @@ class RoomsController < ApplicationController
         end
         p 'done.'
       end
-      if new_container.in? output
-        p '有先前建立的 container...'
-      else
+      unless new_container.in? output
         p '沒有可使用的 container...'
         p "建立 #{language} 的 container..."
         ssh.exec!("docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd")
