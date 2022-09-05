@@ -1,37 +1,43 @@
-<h1>新增題目</h1>
-<div class="p-10">
+<div class="justify-between mt-3">
+  <h2 class="font-bold text-2xl mb-5">新增面試題</h2>
   <% if @question.errors.any? %>
     <%= @question.errors.full_messages %>
   <% end %>
   <%= form_with model:@question do |form| %>
-    <div class="px-5 py-5" >
+    <div class="font-bold mb-3">
       <%= form.label :title,"標題:" %>
       <%= form.text_field :title %>
     </div>
-    <div class="px-5 py-5">模式: <%= form.select :types, ["Live", "Take-Home"] %></div>
-    <div class="px-5 py-5">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
-    <div class="px-5 py-5">難易度: <%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %></div>
-    <div class="px-5">
-      <%= form.label :internal_description ,"面試官資訊"%>
+    <div class = "font-bold" >
+      <div class="mb-2">模式: <%= form.select :types, ["Live", "Take-Home"] %></div>
+      <div class="mb-2">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
+      <div class="mb-3">難易度: <%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %>
     </div>
-    <div class="px-5">
-      <%= form.text_area :internal_description,:class => "border border-gray-900" %>
+    <div>
+    <div class = "">
+        <div class = "mb-1">
+          <%= form.label :internal_description ,"面試官資訊"%>
+        </div>
+        <div class = "mb-2">
+          <%= form.text_area :internal_description,:class => "border border-gray-900" %>
+        </div>
+        <div class = "mb-1">
+          <%= form.label :candidate_instructions ,"面試說明"%>
+        </div>
+        <div class = "mb-2">
+          <%= form.text_area :candidate_instructions,:class => "border border-gray-900" %>
+        </div>
+        <div class = "mb-1">
+          <%= form.label :code,"題目內容" %>
+        </div>
+        <div  class = "mb-5">
+          <%= form.text_area :code, :class => "border border-gray-900" %>
+        </div>
+      </div>
+        <div>
+          <%= form.submit "建立題目",class: "btnstyle_dashboard"%>
+    <% end %>
+          <%= link_to "返回", questions_path,class: "btnstyle_dashboard pt-1.5 pb-1.5"%>
+        </div>
     </div>
-    <div class="px-5 ">
-      <%= form.label :candidate_instructions ,"面試說明"%>
-    </div>
-    <div class="px-5">
-      <%= form.text_area :candidate_instructions,:class => "border border-gray-900" %>
-    </div>
-    <div class="px-5 ">
-      <%= form.label :code,"題目內容" %>
-    </div>
-    <div class="px-5">
-      <%= form.text_area :code, :class => "border border-gray-900" %>
-    </div>
-    <div class="px-5"><%= form.submit "建立題目" %></div>
-  <% end %>
-</div>
-<div>
-  <%= link_to "返回",   questions_path %>
 </div>
