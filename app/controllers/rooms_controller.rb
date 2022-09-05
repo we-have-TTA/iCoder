@@ -63,10 +63,10 @@ class RoomsController < ApplicationController
 
   def send_invitation
     @user = User.new(
-      username: nil || params[:username],
+      username: params[:username] || params[:email].split('@').first,
       email: params[:email]
     )
-    RoomMailer.send_invitation_to(@user, @room).deliver_now if @user
+    RoomMailer.send_invitation_to(@user, @room).deliver_now
   end
 
   def update
