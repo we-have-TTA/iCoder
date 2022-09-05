@@ -1,9 +1,9 @@
 <section class="text-center">
   <h1>新增成員</h1>
-  <%= form_with model: @team, url: members_path do |f|%>
-    <div class="mb-3">
-      <%= f.label :eamil, "電子信箱:" %>
-      <%= f.text_field :email %>
-      <%= f.submit "邀請" %>
-    <% end %>
+  <div class="mb-3" data-controller="invite">
+    <form action="/dashboard/member/invite">
+      <label for="email">email</label>
+      <input id="email" type="text" data-invite-target="email">
+      <input type="submit" value="寄出">
+    </form>
   </section>

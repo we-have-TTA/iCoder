@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'iCoder <xxxx@xxx.com>'
+  config.mailer_sender = 'iCoder <support@iCoder.io>'
 
   # Configure the class responsible to send e-mails.
   # 由 devise 預設的 Mailer 寄信 (從 Devise::Mailer 作 deliver 調用 ActionMailer)

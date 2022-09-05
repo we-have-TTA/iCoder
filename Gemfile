@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'aasm', '~> 5.3'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'braintree', '~> 4.8.0'
 gem 'devise', '~> 4.8'
 gem 'kaminari', '~> 1.2'
 gem 'net-imap', '~> 0.2.3', require: false
@@ -45,6 +46,10 @@ gem 'stimulus-rails', '~> 1.1'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+
+gem 'bcrypt_pbkdf', '~> 1.1'
+gem 'ed25519', '~> 1.3'
+gem 'net-ssh', '~> 7.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

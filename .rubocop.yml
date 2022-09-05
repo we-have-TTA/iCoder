@@ -13,7 +13,7 @@ AllCops:
   SuggestExtensions: false
 
 Metrics/MethodLength:
-  Max: 25
+  Max: 30
 
 # Metrics/BlockLength:
 #   Enabled: false

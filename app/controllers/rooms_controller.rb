@@ -2,7 +2,8 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room, only: %i[show edit update destroy]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
+  before_action :find_room, only: %i[destroy]
 
   def index
     @rooms = Room.where(team: current_user.team)
@@ -13,9 +14,11 @@ class RoomsController < ApplicationController
   end
 
   def create
-    # FIXME: fix here after #51
+    # TODO: move to model
+    rnd = SecureRandom.alphanumeric(6).upcase
     room = Room.new(
-      title: "Untitled Room - #{SecureRandom.alphanumeric(6).upcase}",
+      uuid: rnd,
+      title: "未命名的會議室 - #{rnd}",
       status: 'Not Started',
       category: 'Live',
       language: 'JavaScript',
@@ -23,31 +26,48 @@ class RoomsController < ApplicationController
       team: current_user.team
     )
     room.save
-    redirect_to room
-    # redirect_to edit_room_path(id: room.id)
+    redirect_to "/#{room.uuid}"
   end
 
   def create_runtime
-    # 離開room後刪除session
-
-    # FIXME: 暫時先用user_id，之後用hash_value取代
+    # TODO: 離開room後刪除session
     language = params[:language]
-
-    if session[:current_language] && session[:current_language] == language
-      nil
-    else
-      remove_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker stop #{current_user.id}-#{session[:current_language]} && docker rm #{current_user.id}-#{session[:current_language]}'"
-      build_room = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} 'docker run -dit --name #{current_user.id}-#{language} --network webssh #{language}_sshd'"
-      p("try build ...-- #{system build_room}")
-      sleep 3
-      p("try remove ...-- #{system remove_room}")
-      # FIXME: do some check if room remove and build success
-      puts 'OK!!'
-      session[:current_language] = language
+    uuid = params[:uuid]
+    host_ip = ENV.fetch('HOST_IP', nil)
+    username = ENV.fetch('SSH_USER_NAME', nil)
+    new_container = "#{uuid}-#{language}"
+    # TODO: move to other place
+    Net::SSH.start(host_ip, username) do |ssh|
+      output = ssh.exec!("docker ps | grep #{uuid}")
+                  .split("\n")
+                  .map { |e| e[/\b#{uuid}-.+\b/] }
+      unused_containers = output - [new_container]
+      unless unused_containers.empty?
+        p '找到未使用的 container...'
+        unused_containers.each do |previous_container_name|
+          p "刪除 #{previous_container_name}"
+          ssh.exec!("docker stop #{previous_container_name} && docker rm #{previous_container_name}")
+        end
+        p 'done.'
+      end
+      unless new_container.in? output
+        p '沒有可使用的 container...'
+        p "建立 #{language} 的 container..."
+        ssh.exec!("docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd")
+        p 'done.'
+      end
     end
+    p "連線至 #{language} 的 container..."
+    render json: { container: new_container_name }
   end
 
-  def edit; end
+  def send_invitation
+    @user = User.new(
+      username: nil || params[:username],
+      email: params[:email]
+    )
+    RoomMailer.send_invitation_to(@user, @room).deliver_now if @user
+  end
 
   def update
     if @room.update(rooms_params)
@@ -66,6 +86,10 @@ class RoomsController < ApplicationController
 
   def find_room
     @room = Room.find(params[:id])
+  end
+
+  def find_room_by_uuid
+    @room = Room.find_by!(uuid: params[:uuid])
   end
 
   def rooms_params

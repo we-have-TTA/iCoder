@@ -1,0 +1,44 @@
+<div class="p-20">
+  <div class="py-3 text-left">Question Bank</div>
+  <div class="py-3 text-right"> <%= link_to "Create Question",  new_question_path , :class => "createBtn" %></div>
+  <div class="rounded">
+    <div>
+      <form action="./questions" method="get" class="mt-2">
+        Search:<input type="text" placeholder="關鍵字查詢" name="keyword" class="px-2 border border-black">
+        <button>送出</button>
+      </form>
+    </div>
+    <table class="question_table">
+      <thead>
+        <tr>
+          <td>題目編號</td>
+          <td>標題</td>
+          <td>模式</td>
+          <td>語言</td>
+          <td>難易度</td>
+          <td>建立者</td>
+          <td>建立日期</td>
+          <td>修改</td>
+          <td>刪除</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <%= form_with model: question do |form| %>
+            <tr>
+              <td><%= question.id %></td>
+              <td><%= link_to question.title, question_path(question.id) %></td>
+              <td><%= question.types %></td>
+              <td><%= question.language %></td>
+              <td><%= question.difficulty %></td>
+              <td><%= question.creator.username %></td>
+              <td><%= question.created_at.to_s.split.first  %></td>
+              <td><%= link_to "Edit", edit_question_path(question.id) %></td>
+              <td><%= link_to "delete", question_path(question.id) ,method:"delete", data:{confirm:"確定要刪除這題嗎?"}%></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

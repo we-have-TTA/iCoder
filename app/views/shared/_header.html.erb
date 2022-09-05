@@ -1,43 +1,26 @@
 <header class="site-header">
-  <div class="bg-yellow-100">
-    <p class="text-center">
-      <%= link_to "Call to Action", "#" %>
-    </p>
-  </div>
-  <div class="nav_bar flex">
-    <%= link_to "ICoder", "/", class: "logo" %>
+  <div class="nav_bar flex items-center px-5">
+    <%= link_to  "/", class: "logo" do %>
+      {<b class="text-yellow-400">i</b>}Coder
+    <% end %>
     <nav id="main-navigation">
-      <button class="md:hidden">close menu</button>
-      <ul>
-        <li data-controller="expandable">
-          <%= link_to "placeholder", "#" %>
-          <ul class="sub-nav">
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-            <li><%= link_to "placeholder", "#" %></li>
-          </ul>
-        </li>
-        <li><%= link_to "draw", "/canvas" %></li>
-        <li><%= link_to "placeholder", "#" %></li>
-        <li><%= link_to "placeholder", "#" %></li>
-      </ul>
-
       <ul>
         <% if user_signed_in? %>
-        <li> Hi! <%= current_user.display_name %> </li>
-        <li><%= link_to current_user.email, "#" %></li>
-        <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
-        <% else %>
-        <li><%= link_to "註冊", new_user_registration_path %></li>
-        <li><%= link_to "登入", new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </nav>
-    <div class="hamburger md:hidden">
-      <button class="toggler">
-        hamburger
-      </button>
-    </div>
-  </div>
-</header>
+          <li> Hi! <%= current_user.display_name %> </li>
+          <li><%= link_to current_user.email, "#" %></li>
+          <li><%= link_to "升級會員", plans_path %>
+            <li>
+              <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "註冊", new_user_registration_path , class:"btnstyle" %></li>
+              <li><%= link_to "登入", new_user_session_path , class:"btnstyle" %></li>
+            <% end %>
+          </ul>
+        </nav>
+        <div class="hamburger md:hidden">
+          <button class="toggler">
+            hamburger
+          </button>
+        </div>
+      </div>
+    </header>
