@@ -61,12 +61,15 @@ class RoomsController < ApplicationController
     render json: { container: new_container_name }
   end
 
+  def invite; end
+
   def send_invitation
     @user = User.new(
       username: params[:username] || params[:email].split('@').first,
       email: params[:email]
     )
     RoomMailer.send_invitation_to(@user, @room).deliver_now
+    redirect_to :invite, notice: "成功邀請 #{@user.username}(#{@user.email})"
   end
 
   def update
