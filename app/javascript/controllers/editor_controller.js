@@ -32,8 +32,9 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/run`,
       type: "post",
       data: new URLSearchParams(code).toString(),
-      success: (e) => {
-        console.log(e)
+      success: ({ result }) => {
+        console.log(result)
+        document.getElementById("run_result").textContent=result
       },
       error: (err) => {
         console.log(err)

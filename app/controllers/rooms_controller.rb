@@ -46,7 +46,8 @@ class RoomsController < ApplicationController
         p '沒有可使用的 container...'
         if previous_container_name
           p '刪除前一次的 container...'
-          ssh.exec!("docker stop #{previous_container_name} && docker rm #{previous_container_name}")
+          ssh.exec!("docker rm #{previous_container_name} -f")
+          p previous_container_name
           p 'done.'
         end
         p "建立 #{language} 的 container..."
@@ -54,6 +55,8 @@ class RoomsController < ApplicationController
         p 'done.'
       end
     end
+    p "連線至 #{language} 的 container..."
+    render json: { container: new_container_name }
 
    
   end

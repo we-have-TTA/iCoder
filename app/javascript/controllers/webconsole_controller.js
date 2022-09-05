@@ -23,7 +23,7 @@ export default class extends Controller {
       type: "post",
       data: new URLSearchParams(payload).toString(),
       success: ({ container }) => {
-        iframe.postMessage(`${container}`, this.element.dataset.src)
+        iframe.postMessage(`test-ruby`, this.element.dataset.src)
         console.log(`iCoder 發送訊息: ${container}`)
       },
       error: (err) => {
