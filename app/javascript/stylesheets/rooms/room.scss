@@ -20,6 +20,9 @@
 
 .room-container {
   @apply flex;
+  .choose-language-btn {
+    @apply inline-block bg-red-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded m-2;
+  }
   .candidate-input {
     @apply w-1/2 bg-red-200 p-2;
     .control-panel {

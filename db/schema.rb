@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_092530) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "team_id", null: false
     t.bigint "user_id", null: false
+    t.string "uuid"
     t.index ["team_id"], name: "index_rooms_on_team_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
