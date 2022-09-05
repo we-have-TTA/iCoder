@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   layout 'dashboard'
   before_action :find_question, only: %i[show edit update destroy]
   def index
-    @questions = Question.all
+    @questions = Question.where(team: current_user.team)
   end
 
   def new
