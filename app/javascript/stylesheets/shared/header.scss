@@ -14,11 +14,24 @@
   ul {
     @apply flex items-center;
     > li {
-      @apply mx-4 p-3  font-bold;
+      @apply p-3  font-bold;
     }
   }
 }
 
+#main-navigation-member {
+  @apply flex justify-center items-center py-5;
+}
+
+#main-navigation-dashboard {
+  @apply flex flex-grow justify-between items-center py-2.5;
+  ul {
+    @apply flex items-center;
+    > li {
+      @apply mx-4 p-3  font-bold;
+    }
+  }
+}
 .sub-nav {
   // FIXME temporary
   display: none !important;

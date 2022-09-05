@@ -1,27 +1,11 @@
 <footer class="room-footer">
-  <ul>
-    <li>
-      <%= link_to "Invite", "/#{@room.uuid}/invite" %>
-    </li>
-    <li>
-      <%= link_to "Start call", "#" %>
-    </li>
-    <li>
-      <input type="text" value="123">
-    </li>
-  </ul>
-  <ul>
-    <li>
-      <%= room.title %>
-    </li>
-    <li>
-      <%= link_to "Feedback", "#" %>
-    </li>
-    <li>
-      <%= link_to "Settings", "#" %>
-    </li>
-    <li>
-      <%= link_to "End Interview", rooms_path %>
-    </li>
-  </ul>
+  <div>
+    <%= link_to "邀請", "/#{@room.uuid}/invite" %>
+    <%= link_to "進行視訊通話", "#" %>
+  </div>
+  <div>
+    <span><%= room.title %></span>
+    <%= link_to "設定", "#" %>
+    <%= link_to "結束面試", rooms_path %>
+  </div>
 </footer>

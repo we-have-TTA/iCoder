@@ -5,21 +5,14 @@
     <% end %>
     <nav id="main-navigation">
       <ul>
-        <% if user_signed_in? %>
-          <li> Hi! <%= current_user.display_name %> </li>
-          <li><%= link_to current_user.email, "#" %></li>
-            <li><%= link_to "升級會員", plans_path %></li>
-              <li><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
-            <% else %>
-              <li><%= link_to "註冊", new_user_registration_path , class:"btnstyle" %></li>
-              <li><%= link_to "登入", new_user_session_path , class:"btnstyle" %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <div class="hamburger md:hidden">
-          <button class="toggler">
-            hamburger
-          </button>
-        </div>
-      </div>
-    </header>
+        <li><%= link_to "註冊", new_user_registration_path , class:"btnstyle" %></li>
+        <li><%= link_to "登入", new_user_session_path , class:"btnstyle" %></li>
+      </ul>
+    </nav>
+    <div class="hamburger md:hidden">
+      <button class="toggler">
+        hamburger
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,7 +1,9 @@
 <header class="site-header">
-  <div class="nav_bar flex">
-    <nav id="main-navigation">
-      <%= link_to "ICoder", "/", class: "logo" %>
+  <div class="nav_bar">
+    <nav id="main-navigation-dashboard">
+      <%= link_to  "/", class: "logo" do %>
+        {<b class="text-yellow-400">i</b>}Coder
+      <% end %>
       <ul>
         <li> Hello! <%= current_user.display_name %> </li>
         <%if current_user.team.plan == "normal"%>
