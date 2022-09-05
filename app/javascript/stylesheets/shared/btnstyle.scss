@@ -2,3 +2,6 @@
     @apply inline-block px-10 py-2 bg-indigo-700 text-white rounded-full;
     cursor: pointer;
 }
+.btnstyle_dashboard{
+    @apply px-3 py-1 border-2 text-white bg-blue-500 hover:bg-blue-800 font-bold rounded-md;
+}
