@@ -4,16 +4,13 @@
       <div>
         <button class="run-btn"
                 data-editor-target="run"
-                data-action="click->editor#run">Run <span class="transform rotate-90 inline-block">▲</span></button>
+                data-action="click->editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
         <button class="draw-btn"><span class="pencil">✎</span></button>
       </div>
       <div>
-        <button>Question</button>
-      </div>
-      <div>
-        <button>Info</button>
-        <button>Packages</button>
-        <button>Ruby</button>
+        <button>題庫</button>
+        <button>資訊</button>
+        <button>語言選擇</button>
       </div>
     </div>
     <%= render "editor" %>
@@ -22,10 +19,10 @@
     class="web-console"
     id="web-console"
     data-controller="webconsole"
-    data-user_id=<%= current_user.id %>
+    data-roomUUID=<%= room.uuid %>
     data-src=<%= src %>
     >
-    <div class="border-4 border-red-500 h-full">
+    <div class="border border-gray-500 h-full">
       <%= render "webconsole", src: src %>
     </div>
   </div>

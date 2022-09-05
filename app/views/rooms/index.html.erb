@@ -25,8 +25,8 @@
           <td><%= room.category %></td>
           <td><%= room.language %></td>
           <td><%= room.created_at.to_s.split.first %></td>
-          <td><%= link_to "view",room_path(room) %></td>
-          <td><%= link_to "delete", room_path(room), method:"delete", data:{confirm:"Delete Room? Are you sure?"} %></td>
+          <td><%= link_to "view", room_uuid_path(uuid: room.uuid) %></td>
+          <td><%= link_to "delete", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"} %></td>
         </tr>
       <% end %>
     </tbody>
