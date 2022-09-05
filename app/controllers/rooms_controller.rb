@@ -24,7 +24,6 @@ class RoomsController < ApplicationController
     )
     room.save
     redirect_to room
-    # redirect_to edit_room_path(id: room.id)
   end
 
   def create_runtime
