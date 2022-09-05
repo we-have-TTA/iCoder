@@ -18,6 +18,7 @@ export default class extends Controller {
     )
     const str = `puts 123`
     jar.updateCode(str)
+    console.log(document.getElementById("result-box"))
   }
 
   run() {
@@ -32,13 +33,19 @@ export default class extends Controller {
       language: language,
       uuid: uuid
     }
+    const resultBox = document.getElementById("result-box")
+    resultBox.style.cssText = "width: 600px;display: block"
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/run`,
       type: "post",
       data: new URLSearchParams(data).toString(),
       success: ({ result }) => {
         console.log(result)
-        document.getElementById("run_result").textContent=result
+        document.getElementById("run-text").textContent = "執行結果："
+        document.getElementById("run_result").textContent = result
+        setTimeout(() => {
+          resultBox.style.cssText = "width: 600px;display: none"
+        }, 5000)
       },
       error: (err) => {
         console.log(err)
