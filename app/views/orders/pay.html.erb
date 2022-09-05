@@ -1,9 +1,13 @@
-<h1>訂單編號 <%= @order.serial %></h1>
-<%= form_with url: pay_order_path(id: @order.serial),method: "post",
-              data: {
-                controller: "braintree",
-                token: @token
-                } do |form|%>
-  <span data-braintree-target="payment"></span>
-  <%= form.submit "付款" %>
-<% end %>
+<div>
+  <h1 class="flex justify-center">訂單編號 <%= @order.serial %></h1>
+  <%= form_with url: pay_order_path(id: @order.serial),method: "post",
+                data: {
+                  controller: "braintree",
+                  token: @token
+                  } do |form|%>
+    <span class="flex justify-center" data-braintree-target="payment"></span>
+    <div class="flex justify-center">
+      <%= form.submit "付款", class: "bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 text-white rounded-md py-1 px-3 border-none"%>
+    </div>
+  <% end %>
+</div>

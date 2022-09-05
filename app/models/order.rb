@@ -22,7 +22,7 @@ class Order < ApplicationRecord
     end
 
     event :fail do # 付款失敗
-      transitions from: :pending, to: :failed
+      transitions from: %i[pending paid], to: :failed
     end
 
     event :cancel do # 訂單取消
