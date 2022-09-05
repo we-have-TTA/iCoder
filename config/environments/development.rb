@@ -43,7 +43,7 @@ Rails.application.configure do
   # smtp 協定作寄信
   config.action_mailer.delivery_method = :smtp
 
-  #letter opener
+  # letter opener
   # config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.perform_deliveries = true
 

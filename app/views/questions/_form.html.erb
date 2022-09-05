@@ -1,0 +1,29 @@
+<% if @question.errors.any? %>
+  <%= @question.errors.full_messages %>
+<% end %>
+<%= form_with model: question do |form| %>
+  <div class="font-bold mb-3">
+    <%= form.label :title,"標題:" %>
+    <%= form.text_field :title %>
+  </div>
+  <div class = "font-bold" >
+    <div class="mb-2">類型: <%= form.select :question_type, ["Live", "Take-Home"] %></div>
+    <div class="mb-2">語言: <%= form.select :language, ["Javascript", "Ruby"] %></div>
+    <div class="mb-3">難易度: <%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %>
+    </div>
+    <div>
+      <div>
+        <%= form.label :internal_description, "面試官資訊", class: "mb-1 block" %>
+        <%= form.text_area :internal_description, class: "border border-gray-900 mb-2" %>
+        <%= form.label :candidate_instructions, "面試說明", class: "mb-1 block" %>
+        <%= form.text_area :candidate_instructions, class: "border border-gray-900 mb-2" %>
+        <%= form.label :code, "題目內容", class: "mb-1 block" %>
+        <%= form.text_area :code, class: "border border-gray-900 mb-5" %>
+      </div>
+      <div>
+        <%= form.submit "建立題目", class: "btnstyle_dashboard"%>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= link_to "返回", questions_path, class: "btnstyle_dashboard" %>

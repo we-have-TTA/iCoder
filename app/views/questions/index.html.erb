@@ -1,6 +1,7 @@
-<div class="p-20">
-  <div class="py-3 text-left">Question Bank</div>
-  <div class="py-3 text-right"> <%= link_to "Create Question",  new_question_path , :class => "createBtn" %></div>
+<div class="flex justify-between mt-3">
+  <h2 class="font-bold text-2xl">面試題庫目錄</h2>
+   <%= link_to "創建題目",  new_question_path , :class => "createBtn", class: "btnstyle_dashboard" %></div>
+   <span class="block mb-10">管理您的面試的題庫，創建題目、進行查詢、與調整及刪除。</span>
   <div class="rounded">
     <div>
       <form action="./questions" method="get" class="mt-2">
@@ -28,7 +29,7 @@
             <tr>
               <td><%= question.id %></td>
               <td><%= link_to question.title, question_path(question.id) %></td>
-              <td><%= question.types %></td>
+              <td><%= question.question_type %></td>
               <td><%= question.language %></td>
               <td><%= question.difficulty %></td>
               <td><%= question.creator.username %></td>
