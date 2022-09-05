@@ -1,14 +1,8 @@
 <h1 class="text-5xl">開始創立</h1>
 <div>
-  <%= link_to "ruby",
-      rooms_createruntime_path(language: "ruby"),
-      method: "post",
-      class: "inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2",
-      data: { "action": "click->webconsole#createRubyRuntime" } %>
-  <%= link_to "javascript",
-      rooms_createruntime_path(language: "javascript"),
-      method: "post",
-      class: "inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2",
-      data: { "action": "click->webconsole#createJavaScriptRuntime" } %>
+  <% language_set = %w[Ruby JavaScript] %>
+  <% language_set.each do |language| %>
+    <button class="choose-language-btn" data-action="click->webconsole#createRuntime"><%= language %></button>
+  <% end %>
 </div>
 <iframe id="iframe" src=<%= src %> style="height: 500px;" class="border-2 border-solid border-black w-full"></iframe>
