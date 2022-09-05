@@ -47,20 +47,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def push_code
-    # 目前需手動重整，待修正
-    code = "puts '你好'"
-    File.write("/Users/rexkao/Project/iCoder_dev/123.rb", "#{code}")
-    puts code
-    push_code = "cat /Users/rexkao/Project/iCoder_dev/123.rb | ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} -p 5000 '/bin/cat > /home/123.rb'"
-    run_code = "ssh #{ENV.fetch('SSH_USER_NAME', nil)}@#{ENV.fetch('HOST_IP', nil)} -p 5000 'ruby /home/123.rb'"
-    p("try build ...-- #{system push_code}")
-    p session[:current_language]
-    p("try build ...-- #{system run_code}")
-
-
-    puts 'OK!!'
-  end
+  
 
   def edit; end
 
