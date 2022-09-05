@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   layout 'dashboard'
   before_action :find_question, only: %i[show edit update destroy]
   def index
-    @questions = Question.where(team: current_user.team)
+    @questions = Question.all
   end
 
   def new
@@ -52,6 +52,6 @@ class QuestionsController < ApplicationController
   end
 
   def clean_params
-    params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description, :types).merge(team: current_user.team)
+    params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description, :question_type).merge(team: current_user.team)
   end
 end
