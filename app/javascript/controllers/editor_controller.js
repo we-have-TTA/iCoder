@@ -15,7 +15,7 @@ export default class extends Controller {
       this.panelTarget,
       withLineNumbers(hljs.highlightElement)
     )
-    const str = `puts "hello"\narr = [1, 2, 3]\np arr`
+    const str = `console.log("Hello, World!!")`
     jar.updateCode(str)
   }
 

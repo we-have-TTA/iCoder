@@ -1,50 +1,34 @@
 import { Controller } from "@hotwired/stimulus"
+import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  // static targets = ["ruby", "javascript"]
   connect() {
-    console.log(this.getUserId())
+    console.log(this.element.dataset.roomuuid)
   }
 
-  getUserId = () => {
-    return this.element.dataset.user_id
-  }
-
-  // createRubyRuntime() {
-  //   // 之後callback改寫
-  //   const iframe = document.getElementById("iframe").contentWindow
-  //   const userid = this.getUserId()
-  //   iframe.postMessage(`reload`, this.element.dataset.src)
-  //   console.log("清除！")
-
-  //   setTimeout(() => {
-  //     iframe.postMessage(`${userid}-ruby`, this.element.dataset.src)
-  //     console.log(`iCoder 發送訊息: ${userid}-ruby`)
-  //   }, 400)
-  // }
-
-  createRubyRuntime() {
-    // 之後callback改寫
+  createRuntime(e) {
+    const language = e.target.textContent
     const iframe = document.getElementById("iframe").contentWindow
-    const userid = this.getUserId()
+    const uuid = this.element.dataset.roomuuid
     iframe.postMessage(`reload`, this.element.dataset.src)
     console.log("清除！")
 
-    setTimeout(() => {
-      iframe.postMessage(`test-ruby`, this.element.dataset.src)
-      console.log(`iCoder 發送訊息: ${userid}-ruby`)
-    }, 400)
-  }
+    const payload = {
+      uuid: uuid,
+      language: language,
+    }
 
-  createJavaScriptRuntime() {
-    const iframe = document.getElementById("iframe").contentWindow
-    const userid = this.getUserId()
-    iframe.postMessage(`reload`, this.element.dataset.src)
-    console.log("清除！")
-
-    setTimeout(() => {
-      iframe.postMessage(`${userid}-javascript`, this.element.dataset.src)
-      console.log(`iCoder 發送訊息: ${userid}-javascript`)
-    }, 400)
+    Rails.ajax({
+      url: "/dashboard/rooms/createruntime",
+      type: "post",
+      data: new URLSearchParams(payload).toString(),
+      success: ({ container }) => {
+        iframe.postMessage(`${container}`, this.element.dataset.src)
+        console.log(`iCoder 發送訊息: ${container}`)
+      },
+      error: (err) => {
+        console.log("error" + err)
+      },
+    })
   }
 }

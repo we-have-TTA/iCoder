@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/canvas', to: 'pages#canvas'
 
   scope 'dashboard' do
-    resources :rooms, except: [:new]
+    resources :rooms, except: %i[new show]
     scope "member" do
       get :invite, controller: :teams, action: "invite"
     end
@@ -32,6 +32,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/:uuid', to: 'rooms#show', as: 'room_uuid'
+  get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
+  post '/:uuid/invite', to: 'rooms#send_invitation'
+
   namespace :api do
     namespace :v1 do
       resources :rooms, only: [] do
@@ -41,6 +45,4 @@ Rails.application.routes.draw do
       end
     end
   end
-  
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
