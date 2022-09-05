@@ -71,7 +71,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # 寄信位置
-  config.action_mailer.default_url_options = { ENV['HOST_IP'], port: 3000 }
+  config.action_mailer.default_url_options = { host: ENV['HOST_IP'], port: 3000 }
   # smtp 協定作寄信
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
