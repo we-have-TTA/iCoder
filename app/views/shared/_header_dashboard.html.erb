@@ -6,7 +6,9 @@
       <% end %>
       <ul>
         <li> Hello! <%= current_user.display_name %> </li>
-        <li class="hover:text-red-600"><%= link_to "升級會員", plans_path %></li>
+        <%if current_user.team.plan == "normal"%>
+          <li class="hover:text-red-600"><%= link_to "升級會員", plans_path %></li>
+        <%end%>
         <li class="hover:text-red-600"><%= link_to "登出", destroy_user_session_path, method: "delete" %></li>
       </ul>
     </nav>
