@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_03_162556) do
+ActiveRecord::Schema.define(version: 2022_09_05_092530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_09_03_162556) do
     t.text "internal_description"
     t.text "candidate_instructions"
     t.string "difficulty"
+    t.text "question_type"
     t.index ["team_id"], name: "index_questions_on_team_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2022_09_03_162556) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "team_id", null: false
     t.bigint "user_id", null: false
+    t.string "uuid"
     t.index ["team_id"], name: "index_rooms_on_team_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
