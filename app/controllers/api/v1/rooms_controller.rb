@@ -9,7 +9,6 @@ class Api::V1::RoomsController < ApplicationController
     p session[:current_language]
     p File.delete("/Users/rexkao/Project/iCoder_dev/#{current_user.id}-main.rb")
     p("try build ...-- #{system run_code}")
-
     puts 'OK!!'
   end
 end
