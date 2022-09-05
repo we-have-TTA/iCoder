@@ -15,9 +15,6 @@ Rails.application.routes.draw do
 
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
-    scope "member" do
-      get :invite, controller: :teams, action: "invite"
-    end
     resources :members, controller: :teams, only: %i[index new create destroy]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     resources :questions

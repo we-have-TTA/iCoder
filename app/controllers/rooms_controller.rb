@@ -35,26 +35,31 @@ class RoomsController < ApplicationController
     uuid = params[:uuid]
     host_ip = ENV.fetch('HOST_IP', nil)
     username = ENV.fetch('SSH_USER_NAME', nil)
-    new_container_name = "#{uuid}-#{language}"
+    new_container = "#{uuid}-#{language}"
 
+    # TODO: move to other place
     Net::SSH.start(host_ip, username) do |ssh|
-      output = ssh.exec!("docker ps | grep #{uuid} | awk '{print $12}'")
-      previous_container_name = nil
-      previous_container_name = output.split('-').last.strip unless output.empty?
-      container_is_not_valid = (previous_container_name != language)
-      if container_is_not_valid
-        p '沒有可使用的 container...'
-        if previous_container_name
-          p '刪除前一次的 container...'
+      output = ssh.exec!("docker ps | grep #{uuid}")
+                  .split("\n")
+                  .map{|e| e[/\b#{uuid}-.+\b/]}
+      unused_containers = output - [new_container]
+      unless unused_containers.empty?
+        p '找到未使用的 container...'
+        unused_containers.each do |previous_container_name|
+          p "刪除 #{previous_container_name}"
           ssh.exec!("docker stop #{previous_container_name} && docker rm #{previous_container_name}")
-          p 'done.'
         end
+        p 'done.'
+      end
+      if new_container.in? output
+        p '有先前建立的 container...'
+      else
+        p '沒有可使用的 container...'
         p "建立 #{language} 的 container..."
         ssh.exec!("docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd")
         p 'done.'
       end
     end
-
     p "連線至 #{language} 的 container..."
     render json: { container: new_container_name }
   end
