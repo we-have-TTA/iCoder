@@ -53,12 +53,12 @@ class RoomsController < ApplicationController
       unless new_container.in? output
         p '沒有可使用的 container...'
         p "建立 #{language} 的 container..."
-        ssh.exec!("docker run -dit --name #{new_container_name} --network webssh #{language.downcase}_sshd")
+        ssh.exec!("docker run -dit --name #{new_container} --network webssh #{language.downcase}_sshd")
         p 'done.'
       end
     end
     p "連線至 #{language} 的 container..."
-    render json: { container: new_container_name }
+    render json: { container: new_container }
   end
 
   def send_invitation
