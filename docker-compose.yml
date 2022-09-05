@@ -1,4 +1,4 @@
-version: '3.8.1'
+version: '3.8'
 
 services:
   db:
@@ -21,7 +21,6 @@ services:
       - .:/app
       - /home/docker/id_key:/root/.ssh/
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/docker/ENV/.env:/app/.env
     depends_on:
       - db
 
