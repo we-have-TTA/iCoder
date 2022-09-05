@@ -6,8 +6,8 @@ export default function () {
   const canvasOffsetX = canvas.offsetLeft
   const canvasOffsetY = canvas.offsetTop
 
-  canvas.width = window.innerWidth - canvasOffsetX
-  canvas.height = window.innerHeight - canvasOffsetY
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
 
   let isPainting = false
   let lineWidth = 5
