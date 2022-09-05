@@ -5,7 +5,7 @@ import hljs from "highlight.js"
 import { withLineNumbers } from "codejar/linenumbers"
 // Connects to data-controller="editor"
 export default class extends Controller {
-  static targets = ["panel", "run", "draw"]
+  static targets = ["panel", "draw"]
   connect() {
     this.panelTarget.className += " js"
     // Wrap highlighting function to show line numbers.
