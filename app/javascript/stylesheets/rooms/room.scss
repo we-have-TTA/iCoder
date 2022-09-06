@@ -39,7 +39,7 @@
         @apply border-gray-300;
       }
     }
-    .result-box{
+    .result-box {
       @apply  bg-gray-700 rounded-md p-2;
       width: calc(100% - 65px);
       position: absolute;
@@ -79,7 +79,7 @@
   tab-size: 2;
 }
 
-.codejar-wrap{
+.codejar-wrap {
   position: relative;
   height: calc(100vh - 165px);
   .editor{
