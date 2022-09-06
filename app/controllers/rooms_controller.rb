@@ -51,12 +51,12 @@ class RoomsController < ApplicationController
         p '找到未使用的 container...'
         unused_containers.each do |previous_container_name|
           p "刪除 #{previous_container_name}"
-          ssh.exec!("docker stop #{previous_container_name} && docker rm #{previous_container_name}")
+          ssh.exec!("docker rm #{previous_container_name} -f")
         end
         p 'done.'
       end
       unless new_container.in? output
-        p '沒有可使用的 container...'
+        p '目前沒有可使用的 container...'
         p "建立 #{language} 的 container..."
         ssh.exec!("docker run -dit --name #{new_container} --network webssh #{language.downcase}_sshd")
         p 'done.'
