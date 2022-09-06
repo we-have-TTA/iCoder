@@ -4,7 +4,8 @@ class QuestionsController < ApplicationController
   layout 'dashboard'
   before_action :find_question, only: %i[show edit update destroy]
   def index
-    @questions = Question.all
+    keyword = params[:keyword]
+    @questions = Question.where('title like ?', "%#{keyword}%")
   end
 
   def new
