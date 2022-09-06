@@ -3,7 +3,12 @@
 class RoomMailer < ApplicationMailer
   def send_invitation_to(user, room)
     @user = user
-    @room_url = Rails.application.routes.url_helpers.room_uuid_url(uuid: room.uuid, host: 'localhost', port: 3000)
+    host_ip = if ENV['RAILS_ENV'] == 'production'
+                ENV.fetch('HOST_IP', nil)
+              else
+                '127.0.0.1'
+              end
+    @room_url = Rails.application.routes.url_helpers.room_uuid_url(uuid: room.uuid, host: host_ip, port: 3000)
     mail to: @user.email, subject: '你好!!'
   end
 end

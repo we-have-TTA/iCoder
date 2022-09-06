@@ -20,10 +20,8 @@
         <%= form.label :code, "題目內容", class: "mb-1 block" %>
         <%= form.text_area :code, class: "border border-gray-900 mb-5" %>
       </div>
-      <div>
-        <%= form.submit "建立題目", class: "btnstyle_dashboard"%>
-      </div>
+      <%= form.submit "建立題目", class: "btn-dashboard-create mb-4"%>
     </div>
   </div>
 <% end %>
-<%= link_to "返回", questions_path, class: "btnstyle_dashboard" %>
+<%= link_to "返回", questions_path, class: "btn-dashboard-create" %>
