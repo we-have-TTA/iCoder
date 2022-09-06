@@ -1,5 +1,5 @@
 <div class="room-container">
-  <div class="candidate-input" data-controller="editor">
+  <div class="candidate-input" data-controller="editor" data-room_id="<%= room.id %>">
     <div class="control-panel">
       <div>
         <button class="run-btn"
@@ -10,10 +10,19 @@
       <div>
         <button>題庫</button>
         <button>資訊</button>
-        <button>語言選擇</button>
+        <button id="current_language">語言選擇</button>
       </div>
     </div>
+
     <%= render "editor" %>
+    <div id="result-box" class="absolute bottom-56 left-5 bg-gray-700 rounded-md p-2" style="width: 600px;display: none">
+      <br>
+      <div id = "run-text" class="text-xl text-white "></div>
+      <br>
+      <div class="text-base text-white " id="run_result"></div>
+      <br>
+    </div>
+    
   </div>
   <div
     class="web-console"
