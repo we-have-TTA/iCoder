@@ -25,6 +25,8 @@
   }
   .candidate-input {
     @apply w-1/2 bg-black p-2;
+    position: relative;
+
     .control-panel {
       button {
         @apply border-2 bg-black text-white hover:bg-green-900 text-base rounded px-5 py-2;
@@ -37,6 +39,13 @@
         @apply border-gray-300;
       }
     }
+    .result-box{
+      width: calc(100% - 65px)!important;
+      display: block;
+      position: absolute;
+      left: 50px;
+      bottom: 20px;
+    }    
   }
   .web-console {
     @apply w-1/2 bg-black p-2;
@@ -69,3 +78,14 @@
   margin-top: 10px;
   tab-size: 2;
 }
+
+.codejar-wrap{
+  position: relative;
+  height: calc(100vh - 165px);
+  .editor{
+    height: 100%;
+  }
+}
+
+
+
