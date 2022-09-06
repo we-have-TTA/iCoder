@@ -33,11 +33,11 @@ class RoomsController < ApplicationController
     # TODO: 離開room後刪除session
     language = params[:language]
     uuid = params[:uuid]
-    if ENV["RAILS_ENV"] == "production"
-      host_ip = "127.0.0.1"
-    else
-      host_ip = ENV.fetch('HOST_IP', nil)
-    end
+    host_ip = if ENV['RAILS_ENV'] == 'production'
+                '127.0.0.1'
+              else
+                ENV.fetch('HOST_IP', nil)
+              end
     p "host_ip: #{host_ip}"
     username = ENV.fetch('SSH_USER_NAME', nil)
     new_container = "#{uuid}-#{language}"
