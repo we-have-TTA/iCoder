@@ -39,7 +39,7 @@ export default class extends Controller {
     const runText = document.getElementById("run-text")
     resultText.textContent = ""
     runText.textContent = "執行中....."
-    resultBox.style.cssText = "width: 600px;display: block"
+    resultBox.style.cssText = "width: 47%;display: block"
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/run`,
       type: "post",
@@ -49,7 +49,7 @@ export default class extends Controller {
         runText.textContent = "執行結果："
         resultText.textContent = result
         setTimeout(() => {
-          resultBox.style.cssText = "width: 600px;display: none"
+          resultBox.style.cssText = "width: 47%;display: none"
 
         }, 5000)
       },
