@@ -1,10 +1,10 @@
 <div class="flex justify-between mt-3">
   <h2 class="font-bold text-2xl">面試題庫目錄</h2>
-  <%= link_to "創建題目",  new_question_path , :class => "createBtn", class: "btnstyle_dashboard" %></div>
+  <%= link_to "創建題目",  new_question_path ,class: "btn-dashboard-create" %></div>
 <span class="block mb-10">管理您的面試的題庫，創建題目、進行查詢、與調整及刪除。</span>
 <div class="rounded">
   <div>
-    <form action="./questions" method="get" class="mt-2">
+    <form action="./questions" method="get" class="mt-2 mb-4">
       搜尋：<input type="text" placeholder="關鍵字查詢" name="keyword" class="px-2 border border-black">
       <button>送出</button>
     </form>

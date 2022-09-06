@@ -26,20 +26,19 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const uuid = document.getElementById("web-console").dataset.roomuuid
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-    const strArray = jar
-      .toString()
+    const strArray = jar.toString()
     const data = {
       code: strArray,
       language: language,
-      uuid: uuid
+      uuid: uuid,
     }
-    
+
     const resultText = document.getElementById("run_result")
     const resultBox = document.getElementById("result-box")
     const runText = document.getElementById("run-text")
     resultText.textContent = ""
     runText.textContent = "執行中....."
-    resultBox.style.cssText = "width: 47%;display: block"
+    resultBox.style.cssText = "display: block"
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/run`,
       type: "post",
@@ -49,16 +48,12 @@ export default class extends Controller {
         runText.textContent = "執行結果："
         resultText.textContent = result
         setTimeout(() => {
-          resultBox.style.cssText = "width: 47%;display: none"
-
+          resultBox.style.cssText = "display: none"
         }, 5000)
       },
       error: (err) => {
         console.log(err)
       },
     })
-
-
-
   }
 }
