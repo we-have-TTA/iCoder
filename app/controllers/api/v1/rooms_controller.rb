@@ -19,8 +19,8 @@ module Api
           ruby: 'ruby',
           javascript: 'node'
         }
-        doc_type = doc_type_set[language.to_sym]
-        run_type = run_type_set[language.to_sym]
+        doc_type = doc_type_set[language.downcase.to_sym]
+        run_type = run_type_set[language.downcase.to_sym]
         doc_name = "#{new_container_name}-#{doc_type}"
         if ENV['RAILS_ENV'] == 'production'
           File.write("/home/#{doc_name}", code_content.to_s)
