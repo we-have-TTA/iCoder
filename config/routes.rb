@@ -32,4 +32,14 @@ Rails.application.routes.draw do
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
+
+  namespace :api do
+    namespace :v1 do
+      resources :rooms, only: [] do
+        member do
+          post :run
+        end
+      end
+    end
+  end
 end
