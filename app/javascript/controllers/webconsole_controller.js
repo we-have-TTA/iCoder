@@ -23,6 +23,7 @@ export default class extends Controller {
       type: "post",
       data: new URLSearchParams(payload).toString(),
       success: ({ container }) => {
+        document.getElementById("current_language").textContent = language
         iframe.postMessage(`${container}`, this.element.dataset.src)
         console.log(`iCoder 發送訊息: ${container}`)
       },
@@ -30,11 +31,5 @@ export default class extends Controller {
         console.log("error" + err)
       },
     })
-
-    // FIXME 之後callback改寫
-    // setTimeout(() => {
-    //   iframe.postMessage(`${roomUUID}-${language}`, this.element.dataset.src)
-    //   console.log(`iCoder 發送訊息: ${roomUUID}-${language}`)
-    // }, 400)
   }
 }
