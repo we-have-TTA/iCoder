@@ -13,3 +13,11 @@
 <div>
   <%= link_to "返回",   questions_path %>
 </div>
+留言區：
+<section>
+  <%= form_with model: @comment, url:question_comments_path(@question) do |form| %>
+    <%= form.label :content, "content" %>
+    <%= form.text_area :content %>
+    <%= form.submit "送出" %>
+  <% end %>
+</section>

@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :rooms, except: %i[new show]
     resources :members, controller: :teams, only: %i[index new create destroy]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
-    resources :questions
+    resources :questions do
+      resources :comments, shallow: true, only: %i[create update destroy]
+    end
   end
 
   resource :plans, only: [:show]
