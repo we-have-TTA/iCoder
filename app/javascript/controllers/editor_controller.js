@@ -26,14 +26,13 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const uuid = document.getElementById("web-console").dataset.roomuuid
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-    const strArray = jar
-      .toString()
+    const strArray = jar.toString()
     const data = {
       code: strArray,
       language: language,
-      uuid: uuid
+      uuid: uuid,
     }
-    
+
     const resultText = document.getElementById("run_result")
     const resultBox = document.getElementById("result-box")
     const runText = document.getElementById("run-text")
@@ -50,15 +49,11 @@ export default class extends Controller {
         resultText.textContent = result
         setTimeout(() => {
           resultBox.style.cssText = "width: 600px;display: none"
-
         }, 5000)
       },
       error: (err) => {
         console.log(err)
       },
     })
-
-
-
   }
 }
