@@ -25,7 +25,7 @@ module Api
           File.write("/home/#{doc_name}", code_content.to_s)
           result = ''
           Net::SSH.start(host_ip, username) do |ssh|
-            ssh.exec!("docker cp /home/code/#{doc_name} #{new_container_name}:/root/#{doc_type}")
+            ssh.exec!("docker cp /home/#{doc_name} #{new_container_name}:/root/#{doc_type}")
             result = ssh.exec!("docker exec #{new_container_name} #{run_type} root/#{doc_type}")
           end
           p File.delete("/home/#{doc_name}")
@@ -41,8 +41,6 @@ module Api
           end
           p File.delete("../#{doc_name}")
         end
-       
-        
         render json: { result: }
       end
     end
