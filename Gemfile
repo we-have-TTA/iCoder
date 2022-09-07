@@ -48,13 +48,13 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'bcrypt_pbkdf', '~> 1.1'
+gem 'dotenv-rails', '~> 2.8'
 gem 'ed25519', '~> 1.3'
 gem 'net-ssh', '~> 7.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails', '~> 2.8'
   gem 'faker', '~> 2.22'
   gem 'rubocop', '~> 1.35'
 end

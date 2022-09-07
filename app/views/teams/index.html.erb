@@ -1,27 +1,8 @@
 <div class="flex justify-between mt-3">
   <p class="font-bold text-2xl"><%= current_user.team.name %> 成員列表</p>
-  <%= link_to "成員邀請", "#", class:"px-3 py-1 border-2 text-white bg-blue-500 hover:bg-blue-800 font-bold rounded-md"  %>
+  <%= link_to "成員邀請", "#", class:"btn-dashboard-create"  %>
 </div>
 <span class="block mb-10">管理您的組織成員，邀請新成員加入、進行查詢、調整職位及進行成員刪除。</span>
-<%# <p class="mb-3 font-bold text-2xl">邀請中的成員</p>
-<table class="room_table mb-8">
-  <thead>
-    <tr>
-      <td>Email</td>
-      <td>寄出時間</td>
-      <td>寄件者</td>
-      <td>寄件者職位</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table> %>
 <p class="mb-3 font-bold text-2xl">目前成員</p>
 <table class="room_table">
   <thead>
@@ -32,10 +13,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td>admin</td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
