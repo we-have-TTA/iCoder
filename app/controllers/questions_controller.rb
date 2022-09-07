@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.new(clean_params)
+    @question = current_user.questions.new(question_params)
     if @question.save
       redirect_to questions_path, notice: '新增成功'
     else
@@ -21,12 +21,15 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @question.comments.order(id: :desc)
+  end
 
   def edit; end
 
   def update
-    if @question.update(clean_params)
+    if @question.update(question_params)
       redirect_to questions_path, notice: '更新完畢!!'
     else
       render :edit
@@ -38,21 +41,13 @@ class QuestionsController < ApplicationController
     redirect_to questions_path, notice: '刪除完畢!!'
   end
 
-  def search
-    render html: params
-  end
-
   private
 
   def find_question
     @question = Question.find(params[:id])
   end
 
-  def find_team
-    @team = current_user.team
-  end
-
-  def clean_params
+  def question_params
     params.require(:question).permit(:title, :language, :code, :candidate_instructions, :difficulty, :internal_description, :question_type).merge(team: current_user.team)
   end
 end

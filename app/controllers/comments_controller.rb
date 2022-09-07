@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :find_quesiton, only:[:create]
 
   def create
-    # render html: params
     @comment = @question.comments.new(comment_params)
    if @comment.save
     redirect_to @question, notice:"留言成功"
