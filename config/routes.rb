@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     post '/users', to: 'users/registrations#create'
     get '/users/password', to: 'devise/passwords#new'
+    get '/users', to: 'devise/registrations#new'
   end
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
