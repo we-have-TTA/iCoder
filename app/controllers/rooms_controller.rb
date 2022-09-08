@@ -67,7 +67,7 @@ class RoomsController < ApplicationController
   end
 
   def invite; end
-  
+
   def send_invitation
     @user = User.new(
       username: params[:username] || params[:email].split('@').first,
