@@ -1,15 +1,39 @@
 <div class="room-container">
-  <div class="candidate-input" data-controller="editor" data-room_id="<%= room.id %>">
+  <div class="candidate-input" 
+       data-controller="editor"
+       data-action="click->editor#closeMenu"
+       data-room_id="<%= room.id %>">
     <div class="control-panel">
       <div>
         <button class="run-btn"
                 data-action="click->editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
-        <a href="/canvas" target="_blank" class="draw-btn"><span class="pencil">✎</span></a>
+        <a href="/canvas" target="_blank" class="draw-btn">Drawing Mode<span class="pencil pr-2">✎</span></a>
       </div>
-      <div>
+      <div class="relative">
         <button>題庫</button>
         <button>資訊</button>
         <button id="current_language">語言選擇</button>
+        <button data-action="click->editor#displayMenu">▼</button>
+        <div
+          class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden"
+          data-editor-target="change_language"
+          id="web-console"
+          data-controller="webconsole"
+          data-roomUUID=<%= room.uuid %>
+          data-src=<%= src %>>
+          <div class="pl-10">
+            <% language_set = %w[Ruby JavaScript] %>
+            <% language_set.each do |language| %>
+              <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
+            <% end %>
+          </div>
+          <div class="pl-3">
+            <% language_set = %w[Python Elixir] %>
+            <% language_set.each do |language| %>
+              <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <%= render "editor" %>
@@ -21,14 +45,8 @@
       <br>
     </div>
   </div>
-  <div
-    class="web-console"
-    id="web-console"
-    data-controller="webconsole"
-    data-roomUUID=<%= room.uuid %>
-    data-src=<%= src %>
-    >
-    <div class="border border-gray-500 h-full">
+  <div class="web-console">
+    <div class="border border-gray-500 h-full rounded-md">
       <%= render "webconsole", src: src %>
     </div>
   </div>

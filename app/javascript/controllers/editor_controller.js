@@ -6,7 +6,7 @@ import hljs from "highlight.js"
 import { withLineNumbers } from "codejar/linenumbers"
 // Connects to data-controller="editor"
 export default class extends Controller {
-  static targets = ["panel", "draw"]
+  static targets = ["panel", "draw", "change_language"]
   connect() {
     console.log(this.element.dataset.room_id)
     // 目前編輯器語言
@@ -56,4 +56,15 @@ export default class extends Controller {
       },
     })
   }
+
+  displayMenu() {
+    if (this.change_languageTarget.className == "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden") {
+      this.change_languageTarget.className = "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md block"
+    }
+    else {
+      this.change_languageTarget.className = "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden"
+    }
+  }
+
+
 }
