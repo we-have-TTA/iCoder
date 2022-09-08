@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
   layout 'dashboard'
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
   before_action :find_room, only: %i[destroy]
+  before_action :authenticate_user!
 
   def index
     @rooms = Room.where(team: current_user.team)

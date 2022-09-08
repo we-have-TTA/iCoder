@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
+
   layout 'dashboard'
   before_action :find_question, only: %i[show edit update destroy]
   def index
