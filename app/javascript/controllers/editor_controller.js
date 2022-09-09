@@ -1,24 +1,65 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 import { CodeJar } from "codejar"
 import hljs from "highlight.js"
 // Import line numbers helper.
 import { withLineNumbers } from "codejar/linenumbers"
-// Connects to data-controller="editor"
+
 export default class extends Controller {
   static targets = ["panel", "run", "draw"]
   connect() {
-    console.log(this.element.dataset.room_id)
-    // 目前編輯器語言
-    this.panelTarget.className += " ruby"
-    // Wrap highlighting function to show line numbers.
-    const jar = CodeJar(
-      this.panelTarget,
-      withLineNumbers(hljs.highlightElement)
-    )
-    const str = `puts 123`
-    jar.updateCode(str)
-    console.log(document.getElementById("result-box"))
+    const questionId = this.element.dataset.questionId
+    if (questionId) {
+      Rails.ajax({
+        url: `/api/v1/questions/${questionId}.json`,
+        type: "get",
+        success: ({ language, code }) => {
+          this.panelTarget.className += ` ${language}`
+          const jar = CodeJar(
+            this.panelTarget,
+            withLineNumbers(hljs.highlightElement)
+          )
+          jar.updateCode(code)
+        },
+        error: () => {},
+      })
+    } else {
+      const LOAD_FROM_EXAMPLE = false
+      if (LOAD_FROM_EXAMPLE) {
+        Rails.ajax({
+          url: "/api/v1/questions/example/1",
+          type: "get",
+          success: ({ language, code }) => {
+            this.panelTarget.className += ` ${language}`
+            const jar = CodeJar(
+              this.panelTarget,
+              withLineNumbers(hljs.highlightElement)
+            )
+            jar.updateCode(code)
+          },
+          error: () => {},
+        })
+      } else {
+        console.log("no")
+        this.panelTarget.className += ` rb`
+        CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
+      }
+    }
+  }
+
+  transCode(e) {
+    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
+    const field = document.createElement("input")
+    field.setAttribute("type", "hidden")
+    field.setAttribute("name", "question[code]")
+    field.setAttribute("value", jar.toString())
+    this.element.appendChild(field)
+    this.element.submit()
+  }
+
+  changeLanguage(e) {
+    this.panelTarget.className = `editor ${e.target.value}`
+    CodeJar(this.panelTarget, hljs.highlightElement)
   }
 
   run() {
@@ -26,12 +67,11 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const uuid = document.getElementById("web-console").dataset.roomuuid
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-    const strArray = jar
-      .toString()
+    const strArray = jar.toString()
     const data = {
       code: strArray,
       language: language,
-      uuid: uuid
+      uuid: uuid,
     }
 
     const resultText = document.getElementById("run_result")
@@ -50,15 +90,11 @@ export default class extends Controller {
         resultText.textContent = result
         setTimeout(() => {
           resultBox.style.cssText = "display: none"
-
         }, 5000)
       },
       error: (err) => {
         console.log(err)
       },
     })
-
-
-
   }
 }
