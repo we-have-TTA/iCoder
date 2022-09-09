@@ -8,7 +8,6 @@ import { withLineNumbers } from "codejar/linenumbers"
 export default class extends Controller {
   static targets = ["panel", "draw", "change_language"]
   connect() {
-    console.log(this.element.dataset.room_id)
     // 目前編輯器語言
     this.panelTarget.className += " ruby"
     // Wrap highlighting function to show line numbers.
@@ -18,7 +17,6 @@ export default class extends Controller {
     )
     const str = `puts 123`
     jar.updateCode(str)
-    console.log(document.getElementById("result-box"))
   }
 
   run() {
@@ -44,7 +42,6 @@ export default class extends Controller {
       type: "post",
       data: new URLSearchParams(data).toString(),
       success: ({ result }) => {
-        console.log(result)
         runText.textContent = "執行結果："
         resultText.textContent = result
         setTimeout(() => {
@@ -58,13 +55,30 @@ export default class extends Controller {
   }
 
   displayMenu() {
-    if (this.change_languageTarget.className == "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden") {
-      this.change_languageTarget.className = "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md block"
-    }
-    else {
-      this.change_languageTarget.className = "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden"
+    const target = this.change_languageTarget
+    const strArray = target.className.split(" ")
+    console.log(target)
+    if (strArray.filter((e) => e === "hidden")[0] === "hidden") {
+      target.className = strArray.filter((e) => e !== "hidden").join(" ")
+    } else {
+      target.className = `${strArray.join(" ")} hidden`
     }
   }
 
-
+  catchQuestions() {
+    const roomID = this.element.dataset.room_id
+    Rails.ajax({
+      url: `/api/v1/rooms/${roomID}/catchQuestions`,
+      type: "get",
+      success: ( result ) => {
+        console.log(result)
+        result.forEach((question)=>{
+          console.log(question.title)
+        })
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
 }

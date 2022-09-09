@@ -44,6 +44,11 @@ module Api
         end
         render json: { result: }
       end
+
+      def catchQuestions
+
+        render json: Question.all
+      end
     end
   end
 end

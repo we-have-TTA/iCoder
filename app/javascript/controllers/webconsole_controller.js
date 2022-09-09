@@ -3,7 +3,7 @@ import Rails from "@rails/ujs"
 
 export default class extends Controller {
   connect() {
-    console.log(this.element.dataset.roomuuid)
+   
   }
 
   createRuntime(e) {
@@ -12,6 +12,7 @@ export default class extends Controller {
     const uuid = this.element.dataset.roomuuid
     iframe.postMessage(`reload`, this.element.dataset.src)
     console.log("清除！")
+    // 之後改成引用editor_controller.js 的 displayMenu()
     this.element.className = "mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden"
 
     const payload = {

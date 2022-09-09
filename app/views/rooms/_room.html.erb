@@ -1,16 +1,15 @@
 <div class="room-container">
   <div class="candidate-input" 
        data-controller="editor"
-       data-action="click->editor#closeMenu"
        data-room_id="<%= room.id %>">
     <div class="control-panel">
       <div>
         <button class="run-btn"
                 data-action="click->editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
-        <a href="/canvas" target="_blank" class="draw-btn">Drawing Mode<span class="pencil pr-2">✎</span></a>
+        <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
       </div>
       <div class="relative">
-        <button>題庫</button>
+        <button data-action="click->editor#catchQuestions">題庫</button>
         <button>資訊</button>
         <button id="current_language">語言選擇</button>
         <button data-action="click->editor#displayMenu">▼</button>
