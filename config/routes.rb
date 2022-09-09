@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       resources :rooms, only: [] do
         member do
           post :run
-          get :catchQuestions
+          get :catch_questions
         end
       end
     end
