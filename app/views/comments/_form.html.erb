@@ -1,0 +1,8 @@
+<%= form_with model: comment, url:question_comments_path(@question) do |form| %>
+  <% if !comment.parent_id.nil? %>
+  <% end %>
+  <%= form.hidden_field :parent_id%>
+  <%= form.label :content, "內容" %>
+  <%= form.text_area :content %>
+  <%= form.submit "送出" %>
+<% end %>

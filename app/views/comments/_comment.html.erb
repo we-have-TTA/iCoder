@@ -1,5 +1,13 @@
-  <li>
-    <%= comment.content %>
-    <%= link_to "編輯", comment_path(comment) %>
-    <%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} %>
-  </li>
+<li class=""  data-controller="reply">
+  <%= comment.content %>
+  by <%= comment.user.username %>
+  <%= link_to "編輯", comment_path(comment) %>
+  <%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} %><br/>
+  <%= link_to "回覆", "javascipt://false", data:{action:'click->reply#display'} %>
+  <div class="comment-form hidden" data-reply-target="form" >
+    <%= render "comments/form", comment: Comment.new(parent_id: comment.parent_id) %>
+  </div>
+</li>
+<div class= "sub-comment bg-red-300 ml-8 ">
+  <%= render comment.comments %>
+</div>

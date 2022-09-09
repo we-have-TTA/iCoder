@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
   before_action :find_quesiton, only: [:create]
   before_action :find_comment, only: [:destroy]
 
+
+
   def create
     @comment = @question.comments.new(comment_params)
     if @comment.save
@@ -16,14 +18,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def update
-    # @comment = current_user.comments.find(params[:id])
-    # if @comment.update(comment_params)
-    #   redirect_to @question, notice:"留言修改成功"
-    # else
-    #   redirect_to @question, notice:"留言修改失敗"
-    # end
-  end
+
 
   def destroy
     @comment.destroy
@@ -33,7 +28,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content).merge(user: current_user)
+    params.require(:comment).permit(:content, :parent_id).merge(user: current_user)
   end
 
   def find_quesiton

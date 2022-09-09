@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @question.comments.order(id: :desc)
+    @comments = @question.comments.where(parent_id: nil).order(id: :desc)
   end
 
   def edit; end
