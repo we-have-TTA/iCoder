@@ -5,12 +5,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-gem 'rails', '~> 6.1.7'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
+gem 'rails', '~> 6.1.7'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
+gem 'webpacker', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
