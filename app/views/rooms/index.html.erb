@@ -3,6 +3,10 @@
   <%= link_to "新增會議室", rooms_path, method: "post", target: "_blank" ,class: "btn-dashboard-create"%>
 </div>
 <span class="block mb-10">管理您的會議室，創建會議、進行查詢、與調整及刪除。</span>
+<div class="p-5 bg-gray-800 text-white">
+  <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
+                                             data-action="click->room#filter">Only search my pads</label>
+</div>
 <table class="room_table">
   <thead>
     <tr>
