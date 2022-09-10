@@ -82,7 +82,7 @@ export default function () {
   canvas.addEventListener("mousemove", draw)
 
   // 設計 回上一步 以及反悔 上一步
-  let undo = document.getElementById("undo")
+  // let undo = document.getElementById("undo")
   // let redo = document.getElementById("redo")
 
   // let canvasHistory = []
@@ -136,16 +136,16 @@ export default function () {
   //   canvasRedo()
   // }
 
-  let historyDeta = []
+  // let historyDeta = []
 
-  function saveData(data) {
-    historyDeta.length === 5 && historyDeta.shift() // 上限5步
-    historyDeta.push(data)
-  }
+  // function saveData(data) {
+  //   historyDeta.length === 5 && historyDeta.shift() // 上限5步
+  //   historyDeta.push(data)
+  // }
 
-  undo.onclick = function () {
-    if (historyDeta.length < 1) return false
-    ctx.putImageData(historyDeta[historyDeta.length - 1], 0, 0)
-    historyDeta.pop()
-  }
+  // undo.onclick = function () {
+  //   if (historyDeta.length < 1) return false
+  //   ctx.putImageData(historyDeta[historyDeta.length - 1], 0, 0)
+  //   historyDeta.pop()
+  // }
 }
