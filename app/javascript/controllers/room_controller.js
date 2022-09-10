@@ -10,9 +10,8 @@ export default class extends Controller {
     }
 
     filter() {
-        if (this.filterCurrentUserButtonTarget.checked) {
+        if (this.filterCurrentUserButton.checked) {
             //只show個人帳號開的room
-            console.log("ok")
             const currentUserId = this.element.dataset.currentuserid
             Rails.ajax({
                 url: `/api/v1/rooms/users/${currentUserId}`,
