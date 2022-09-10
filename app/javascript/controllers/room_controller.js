@@ -4,23 +4,28 @@ import Rails from "@rails/ujs"
 // Connects to data-controller="room"
 export default class extends Controller {
 
-    static targets = ["filterCurrentUserButton"]
+  static targets = ["filterCurrentUserButton"]
 
-    connect() {
-    }
+  connect() {
+  }
 
-    filter() {
-        if (this.filterCurrentUserButton.checked) {
-            //只show個人帳號開的room
-            const currentUserId = this.element.dataset.currentuserid
-            Rails.ajax({
-                url: `/api/v1/rooms/users/${currentUserId}`,
-                type: "post",
-                success: ({ rooms }) => {
-                    let html = ""
-                    var regexp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g;
-                    for (var i = 0; i < rooms.length; i++) {
-                        html += `<tr>
+  filter() {
+    if (this.filterCurrentUserButtonTarget.checked) {
+      //只show個人帳號開的room
+      const currentUserId = this.element.dataset.currentuserid
+      const data = {
+        userid: currentUserId,
+      }
+      Rails.ajax({
+        url: `/api/v1/users/rooms`,
+        type: "post",
+        data: new URLSearchParams(data).toString(),
+
+        success: ({ rooms }) => {
+          let html = ""
+          var regexp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g;
+          for (var i = 0; i < rooms.length; i++) {
+            html += `<tr>
               <td>person-${rooms[i].title}</td>
               <td>${rooms[i].user_id}</td>
               <td>${rooms[i].status}</td>
@@ -30,21 +35,20 @@ export default class extends Controller {
               <td><a href="/dashboard/rooms/${rooms[i].id}">view</a></td>
               <td><a data-confirm="Delete Room? Are you sure?" rel="nofollow" data-method="delete" href="/dashboard/rooms/${rooms[i].id}">delete</a></td>
             </tr > `
-                    }
-                    const tbody = document.querySelector(".room_table tbody")
-                    tbody.innerHTML = ""
-                    tbody.insertAdjacentHTML("afterbegin", html)
+          }
+          const tbody = document.querySelector(".room_table tbody")
+          tbody.innerHTML = ""
+          tbody.insertAdjacentHTML("afterbegin", html)
+        },
+        error: (err) => {
+          console.log(err)
+        },
+      })
 
-                },
-                error: (err) => {
-                    console.log(err)
-                },
-            })
-
-        } else {
-            //show出全部room
-        }
-
+    } else {
+      //show出全部room
     }
+
+  }
 
 }
