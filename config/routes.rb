@@ -38,6 +38,13 @@ Rails.application.routes.draw do
           post :run
         end
       end
+      namespace :rooms do
+        resources :users, only: [] do
+          member do
+            post '/', action: :find_rooms_by_user
+          end
+        end
+      end
     end
   end
 end
