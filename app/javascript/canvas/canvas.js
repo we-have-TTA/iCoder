@@ -22,14 +22,13 @@ export default function () {
       eraserEnabled = true
       eraser.classList.add("active")
       brush.classList.remove("active")
+      ctx.globalCompositeOperation = "destination-out"
     }
-  })
-
-  toolbar.addEventListener("click", (e) => {
     if (e.target.id === "brush") {
-      brushEnabled = false
+      eraserEnabled = false
       eraser.classList.remove("active")
       brush.classList.add("active")
+      ctx.globalCompositeOperation = "source-over"
     }
   })
 
@@ -54,23 +53,13 @@ export default function () {
     if (!isPainting) {
       return
     }
-    // 使用橡皮擦動作
-    if (eraserEnabled) {
-      ctx.save()
-      ctx.globalCompositeOperation = "destination-out"
-      ctx.stroke()
-      ctx.closePath()
-      ctx.clip()
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.restore()
-    } else {
-      ctx.lineWidth = lineWidth
-      ctx.lineCap = "round"
-      ctx.lineJoin = "round"
 
-      ctx.lineTo(e.clientX - brushstrokes, e.clientY)
-      ctx.stroke()
-    }
+    ctx.lineWidth = lineWidth
+    ctx.lineCap = "round"
+    ctx.lineJoin = "round"
+
+    ctx.lineTo(e.clientX - brushstrokes, e.clientY)
+    ctx.stroke()
   }
 
   canvas.addEventListener("mousedown", (e) => {
