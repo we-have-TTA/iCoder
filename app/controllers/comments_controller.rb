@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @question, notice: '留言成功'
     elsif @comment.content == ''
-      redirect_to @question, notice: '內容不可空白'
+      redirect_to @question, notice: '留言內容不可空白'
     else
       redirect_to @question, notice: '留言失敗'
     end

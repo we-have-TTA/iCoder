@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!
-
   layout 'dashboard'
+  
+  before_action :authenticate_user!
   before_action :find_question, only: %i[show edit update destroy]
   def index
     @questions = Question.where(team: current_user.team)
@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @question.comments.where(parent_id: nil).order(id: :desc)
+    @comments = @question.comments.where(parent_id: nil).includes(:user).order(id: :desc)
   end
 
   def edit; end
