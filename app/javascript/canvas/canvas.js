@@ -81,18 +81,14 @@ export default function () {
   })
   canvas.addEventListener("mousemove", draw)
 
-  // 滑鼠鬆開事件
-
-  // let undo = document.getElementById("undo")
+  // 設計 回上一步 以及反悔 上一步
+  let undo = document.getElementById("undo")
   // let redo = document.getElementById("redo")
-  // canvas.onmouseup = function () {
-  //   eraserEnabled = false
-  // }
 
   // let canvasHistory = []
   // let step = -1
   // // 繪製方法
-  // function canvasDraw() {
+  // function  draw() {
   //   step++
   //   if (step < canvasHistory.length) {
   //     canvasHistory.length = step // 截斷數組
@@ -105,7 +101,7 @@ export default function () {
   // function canvasUndo() {
   //   if (step > 0) {
   //     step--
-  //     // ctx.clearRect(0,0,canvas.width,canvas.height);
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height)
   //     let canvasPic = new Image()
   //     canvasPic.src = canvasHistory[step]
   //     canvasPic.onload = function () {
@@ -139,27 +135,17 @@ export default function () {
   // redo.onclick = function () {
   //   canvasRedo()
   // }
-  // eraser.onclick = function () {
-  //   clean = true
-  //   this.classList.add("active")
-  //   brush.classList.remove("active")
-  // }
 
-  // brush.onclick = function () {
-  //   clear = false
-  //   this.classList.add("active")
-  //   eraser.classList.remove("active")
-  // }
-  // let historyDeta = []
+  let historyDeta = []
 
-  // function saveData(data) {
-  //   historyDeta.length === 10 && historyDeta.shift() // 上限为储存10步，太多了怕挂掉
-  //   historyDeta.push(data)
-  // }
+  function saveData(data) {
+    historyDeta.length === 5 && historyDeta.shift() // 上限5步
+    historyDeta.push(data)
+  }
 
-  // undo.onclick = function () {
-  //   if (historyDeta.length < 1) return false
-  //   ctx.putImageData(historyDeta[historyDeta.length - 1], 0, 0)
-  //   historyDeta.pop()
-  // }
+  undo.onclick = function () {
+    if (historyDeta.length < 1) return false
+    ctx.putImageData(historyDeta[historyDeta.length - 1], 0, 0)
+    historyDeta.pop()
+  }
 }
