@@ -6,6 +6,7 @@ class Team < ApplicationRecord
   has_many :orders
   has_many :rooms
   has_many :homeworks
+  has_many :comments
 
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
 

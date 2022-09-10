@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   get '/chats', to: 'chats#index'
   resources :messages, only:[:new, :create]
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
   devise_scope :user do
-    get '/users', to: 'devise/registrations#new'
+    post '/users', to: 'users/registrations#create'
     get '/users/password', to: 'devise/passwords#new'
+    get '/users', to: 'devise/registrations#new'
   end
+  
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
@@ -18,7 +19,9 @@ Rails.application.routes.draw do
     resources :rooms, except: %i[new show]
     resources :members, controller: :teams, only: %i[index new create destroy]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
-    resources :questions
+    resources :questions do
+      resources :comments, shallow: true, only: %i[create update destroy]
+    end
   end
 
   resource :plans, only: [:show]
