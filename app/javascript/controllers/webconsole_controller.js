@@ -1,10 +1,8 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  connect() {
-    console.log(this.element.dataset.roomuuid)
-  }
+  connect() {}
 
   createRuntime(e) {
     const language = e.target.textContent
