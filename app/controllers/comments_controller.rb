@@ -5,8 +5,6 @@ class CommentsController < ApplicationController
   before_action :find_quesiton, only: [:create]
   before_action :find_comment, only: [:destroy]
 
-
-
   def create
     @comment = @question.comments.new(comment_params)
     if @comment.save
@@ -17,8 +15,6 @@ class CommentsController < ApplicationController
       redirect_to @question, notice: '留言失敗'
     end
   end
-
-
 
   def destroy
     @comment.destroy
