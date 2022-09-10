@@ -1,8 +1,8 @@
-<form action="<%= question_comments_path(@question) %>"  method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <% if !parent.nil? %>
-    <input type="hidden" name="comment[parent_id]" value="<%= parent.id %>">
+<%= form_with model: Comment.new, url:question_comments_path(question) do |form| %>
+  <% if parent_comment.present? %>
+    <%= form.hidden_field :parent_id, value: parent_comment.id %>
   <% end %>
-  <textarea name="comment[content]"  cols="20" rows="6"></textarea>
-  <input type="submit" value="送出">
-</form>
+  <%= form.label :content, "內容" %>
+  <%= form.text_area :content %>
+  <%= form.submit "送出" %>
+<% end %>

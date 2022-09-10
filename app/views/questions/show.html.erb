@@ -15,6 +15,6 @@
 </div>
 留言區：
 <section>
-  <%= render 'comments/form', comment: @comment, parent: nil%>
+  <%= render 'comments/form', question: @comment.question, parent_comment: @comment.parent%>
   <%= render @comments %>
 </section>
