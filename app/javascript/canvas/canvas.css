@@ -24,17 +24,21 @@ h1 {
 #toolbar {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 5px;
-  width: 70px;
+  width: auto;
   background-color: #202020;
+  left: 0;
+  /* bottom: 30px;
+  width: 100%; */
 }
 
 #toolbar * {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 #toolbar label {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #toolbar input {
@@ -46,7 +50,7 @@ h1 {
   border: none;
   border-radius: 4px;
   color: white;
-  padding: 2px;
+  padding: 1px;
 }
 #lineWidth {
   color: #000;

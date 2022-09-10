@@ -14,13 +14,19 @@
       <div id="toolbar">
         <h1>Draw</h1>
         <!-- 選色器 -->
-        <label for="stroke">Color</label>
+        <label for="stroke">顯示顏色</label>
         <input type="color" name="stroke" id="stroke" />
         <!--畫筆粗細-->
-        <label for="lineWidth" line Width> Width</label>
+        <label for="lineWidth">筆畫粗細</label>
         <input type="number" name="lineWidth" id="lineWidth" value="5" />
+        <!--畫筆鈕-->
+        <button id="brush" class="active">畫筆</button>
         <!-- 清除鈕 -->
-        <button id="clear">Clear</button>
+        <button id="clean">重置</button>
+        <!-- 橡皮擦 -->
+        <button id="eraser">橡皮擦</button>
+        <button class="undo" id="undo" title="撤銷">上一步</button>
+        <button class="redo" id="redo" title="再做">回去</button>
       </div>
       <div class="drawing-board">
         <canvas id="drawing-board"></canvas>
