@@ -5,33 +5,36 @@ export default function () {
   const canvasOffsetX = canvas.offsetLeft
   const canvasOffsetY = canvas.offsetTop
   const brush = document.getElementById("brush")
+  const eraser = document.getElementById("eraser")
 
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
   let isPainting = false
+  let eraserEnabled = false
   let lineWidth = 5
   let startX
   let startY
-
-  const eraser = document.getElementById("eraser")
-  let eraserEnabled = false
-
+  // 觸發橡皮擦
   toolbar.addEventListener("click", (e) => {
     if (e.target.id === "eraser") {
       eraserEnabled = true
+      // 透過 active 進行切換橡皮擦跟畫筆，使用橡皮擦->開，畫筆->關
       eraser.classList.add("active")
       brush.classList.remove("active")
+      // destination-out ->橡皮擦 覆蓋且去除 原來筆畫 = 新筆跡 去掉舊的
       ctx.globalCompositeOperation = "destination-out"
     }
+    // 橡皮擦改用畫筆時，觸發畫筆
     if (e.target.id === "brush") {
       eraserEnabled = false
       eraser.classList.remove("active")
       brush.classList.add("active")
+      // source-over -> 蓋掉舊筆跡
       ctx.globalCompositeOperation = "source-over"
     }
   })
-
+  // 觸發清除鈕
   toolbar.addEventListener("click", (e) => {
     if (e.target.id === "clean") {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -39,17 +42,20 @@ export default function () {
   })
 
   toolbar.addEventListener("change", (e) => {
+    // 選色
     if (e.target.id === "stroke") {
       ctx.strokeStyle = e.target.value
     }
-
+    // 畫筆粗細
     if (e.target.id === "lineWidth") {
       lineWidth = e.target.value
     }
   })
-  const brushstrokes = 51
+  // 校正筆觸差距
+  const brushstrokes = 70
+
+  // 畫的動作
   const draw = (e) => {
-    // 畫的動作
     if (!isPainting) {
       return
     }
@@ -74,33 +80,6 @@ export default function () {
     ctx.beginPath()
   })
   canvas.addEventListener("mousemove", draw)
-
-  // // 滑鼠按下事件
-  // canvas.onmousedown = function (e) {
-  //   eraserEnabled = true
-  //   if (eraserEnabled) {
-  //     //要使用eraser
-  //     context.clearRect(x - 5, y - 5, 10, 10)
-  //   } else {
-  //     lastPoint = { x: x, y: y }
-  //   }
-  // }
-
-  // 滑鼠移動事件
-  // canvas.onmousemove = function (e) {
-  //   let x = e.clientX
-  //   let y = e.clientY
-  //   if (!painting) {
-  //     return
-  //   }
-  //   if (eraserEnabled) {
-  //     context.clearRect(x - 5, y - 5, 10, 10)
-  //   } else {
-  //     var newPoint = { x: x, y: y }
-  //     drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-  //     lastPoint = newPoint
-  //   }
-  // }
 
   // 滑鼠鬆開事件
 

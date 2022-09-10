@@ -7,6 +7,7 @@
     <title>Document</title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
   </head>
   <body>
     <%# FIXME need remove class.container to get accuracy of pointer %>
@@ -20,13 +21,15 @@
         <label for="lineWidth">筆畫粗細</label>
         <input type="number" name="lineWidth" id="lineWidth" value="5" />
         <!--畫筆鈕-->
-        <button id="brush" class="active">畫筆</button>
+        <button id="brush" class="active"><i class="fi fi-rs-pencil"></i></button>
         <!-- 清除鈕 -->
-        <button id="clean">重置</button>
+        <button id="clean">清除</button>
         <!-- 橡皮擦 -->
         <button id="eraser">橡皮擦</button>
-        <button class="undo" id="undo" title="撤銷">上一步</button>
-        <button class="redo" id="redo" title="再做">回去</button>
+        <!-- 回上一步 -->
+        <button id="undo"><i class="fi fi-rs-undo"></i></button>
+        <!-- 折返 -->
+        <button id="redo"><i class="fi fi-rs-redo"></i></button>
       </div>
       <div class="drawing-board">
         <canvas id="drawing-board"></canvas>
