@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 import { CodeJar } from "codejar"
 import hljs from "highlight.js"
@@ -17,6 +17,8 @@ export default class extends Controller {
     )
     const str = `puts 123`
     jar.updateCode(str)
+
+    this.toggleLanguageMenu()
   }
 
   run() {
@@ -54,15 +56,10 @@ export default class extends Controller {
     })
   }
 
-  displayMenu() {
-    const target = this.change_languageTarget
-    const strArray = target.className.split(" ")
-    console.log(target)
-    if (strArray.filter((e) => e === "hidden").length) {
-      target.className = strArray.filter((e) => e !== "hidden").join(" ")
-    } else {
-      target.className = `${strArray.join(" ")} hidden`
-    }
+  toggleLanguageMenu() {
+    this.change_languageTarget.classList.contains("hidden")
+      ? this.change_languageTarget.classList.remove("hidden")
+      : this.change_languageTarget.classList.add("hidden")
   }
 
   catchQuestions() {
@@ -70,9 +67,9 @@ export default class extends Controller {
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
-      success: ( result ) => {
+      success: (result) => {
         console.log(result)
-        result.forEach((question)=>{
+        result.forEach((question) => {
           console.log(question.title)
         })
       },

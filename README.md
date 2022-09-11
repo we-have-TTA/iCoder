@@ -4,27 +4,29 @@
 
 :cloud:
 
+![](/app/assets/images/coderpic.jpg)
+
+<a href="https://github.com/we-have-TTA/iCoder/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=we-have-TTA/iCoder&max=6" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
+### [docker command](/wiki/%E9%83%A8%E5%B1%AC%E6%AD%A5%E9%A9%9F)
+
 ```
-$ bundle
+$ bundle install
 $ yarn install
+$ rails db:migrate
 $ ./bin/dev
 ```
 
-## docker command
-
-建立 pg container
-`docker run --name rails-db -e POSTGRES_PASSWORD=mysecretpassword -d postgres`
-
-migrate
-`docker run --rm -it --link rails-db -e DATABASE_URL=postgres://postgres:mysecretpassword@rails-db/postgres myapp bundle exec rake db:migrate`
-
-建立 rails
-`docker run --name myapp --rm -it --link rails-db -p 3000:3000 -e DATABASE_URL=postgres://postgres:mysecretpassword@rails-db/postgres myapp`
-
 - Ruby version
 
-`ruby '3.1.2'`
-`gem 'rails', '~> 6.1.6', '>= 6.1.6.1'`
+```
+ruby '3.1.2'
+gem 'rails', '~> 6.1.7'
+```
 
 - System dependencies
 
