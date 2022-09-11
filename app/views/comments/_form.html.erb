@@ -1,8 +1,9 @@
-<%= form_with model: Comment.new, url:question_comments_path(question) do |form| %>
-  <% if parent_comment.present? %>
-    <%= form.hidden_field :parent_id, value: parent_comment.id %>
+<div class="flex justify-center">
+  <%= form_with model: Comment.new, url:question_comments_path(question) do |form| %>
+    <% if parent_comment.present? %>
+      <%= form.hidden_field :parent_id, value: parent_comment.id %>
+    <% end %>
+    <%= form.text_area :content, cols: 100, rows: 2, class:"border-2 border-gray-300 rounded" %><br/>
+    <%= form.submit "送出", class:"px-3 py-1 bg-blue-100 border-2 border-black rounded font-bold text-l mb-4" %>
   <% end %>
-  <%= form.label :content, "內容" %>
-  <%= form.text_area :content %>
-  <%= form.submit "送出" %>
-<% end %>
+</div>
