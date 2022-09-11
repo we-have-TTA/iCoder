@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
   end
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
