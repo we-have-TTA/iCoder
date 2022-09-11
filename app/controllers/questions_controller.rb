@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.where(team: current_user.team)
     @questions = Question.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @questions = Question.order(id: :desc)
   end
 
   def new
