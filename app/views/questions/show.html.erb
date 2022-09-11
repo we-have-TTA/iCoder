@@ -13,3 +13,8 @@
 <div>
   <%= link_to "返回",   questions_path %>
 </div>
+留言區：
+<section>
+  <%= render 'comments/form', question: @comment.question, parent_comment: @comment.parent%>
+  <%= render @comments %>
+</section>

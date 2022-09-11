@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 import { CodeJar } from "codejar"
 import hljs from "highlight.js"
@@ -70,9 +70,9 @@ export default class extends Controller {
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catchQuestions`,
       type: "get",
-      success: ( result ) => {
+      success: (result) => {
         console.log(result)
-        result.forEach((question)=>{
+        result.forEach((question) => {
           console.log(question.title)
         })
       },
