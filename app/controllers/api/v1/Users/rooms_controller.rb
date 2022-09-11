@@ -5,9 +5,13 @@
       module Users
         class RoomsController < ApplicationController
           def find_rooms_by_user
-            rooms = Room.where(user_id: params[:userid])
-            p params[:format]
-            render json: { rooms: }
+            current_user = User.find(params[:userid])
+            if params[:allRoom] == 'true'
+              rooms = Room.where(team: current_user.team)
+            else
+              rooms = Room.where(creator: current_user)
+            end
+            render json: { rooms: } 
           end
         end
       end
