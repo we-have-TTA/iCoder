@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 import { CodeJar } from "codejar"
 import hljs from "highlight.js"
