@@ -10,19 +10,10 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @question, notice: '留言成功'
     elsif @comment.content == ''
-      redirect_to @question, notice: '內容不可空白'
+      redirect_to @question, notice: '留言內容不可空白'
     else
       redirect_to @question, notice: '留言失敗'
     end
-  end
-
-  def update
-    # @comment = current_user.comments.find(params[:id])
-    # if @comment.update(comment_params)
-    #   redirect_to @question, notice:"留言修改成功"
-    # else
-    #   redirect_to @question, notice:"留言修改失敗"
-    # end
   end
 
   def destroy
@@ -33,7 +24,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content).merge(user: current_user)
+    params.require(:comment).permit(:content, :parent_id).merge(user: current_user)
   end
 
   def find_quesiton

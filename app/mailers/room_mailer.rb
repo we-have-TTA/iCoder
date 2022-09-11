@@ -4,7 +4,7 @@ class RoomMailer < ApplicationMailer
   def send_invitation_to(user, room)
     @user = user
     host_ip = if ENV['RAILS_ENV'] == 'production'
-                ENV.fetch('HOST_IP', nil)
+                ENV.fetch('DOMAIN_NAME', nil)
               else
                 '127.0.0.1'
               end

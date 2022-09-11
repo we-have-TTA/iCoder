@@ -15,18 +15,6 @@
 </div>
 留言區：
 <section>
-  <%= form_with model: @comment, url:question_comments_path(@question) do |form| %>
-    <%= form.label :content, "content" %>
-    <%= form.text_area :content %>
-    <%= form.submit "送出" %>
-  <% end %>
-  <ul>
-    <% @comments.each do |comment| %>
-      <li>
-        <%= comment.content %>
-        <%= link_to "編輯", comment_path(comment) %>
-        <%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} %>
-      </li>
-    <% end %>
-  </ul>
+  <%= render 'comments/form', question: @comment.question, parent_comment: @comment.parent%>
+  <%= render @comments %>
 </section>

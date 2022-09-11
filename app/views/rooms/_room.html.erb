@@ -1,36 +1,52 @@
 <div class="room-container">
-  <div class="candidate-input" data-controller="editor" data-room_id="<%= room.id %>">
+  <div class="candidate-input" 
+    data-controller="editor"
+    data-room_id="<%= room.id %>">
     <div class="control-panel">
       <div>
         <button class="run-btn"
-                data-editor-target="run"
                 data-action="click->editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
-        <button class="draw-btn"><span class="pencil">✎</span></button>
+        <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
       </div>
-      <div>
-        <button>題庫</button>
+      <div class="relative">
+        <button data-action="click->editor#catchQuestions">題庫</button>
         <button>資訊</button>
         <button id="current_language">語言選擇</button>
-      </div>
+        <button data-action="editor#toggleLanguageMenu">▼</button>
+        <div
+          class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md"
+          data-editor-target="change_language"
+          id="web-console"
+          data-controller="webconsole"
+          data-roomUUID=<%= room.uuid %>
+          data-src=<%= src %>>
+          <div class="pl-10">
+            <% language_set = %w[Ruby JavaScript] %>
+            <% language_set.each do |language| %>
+              <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
+      <% end %>
     </div>
-    <%= render "editor" %>
-    <div id="result-box" class="result-box" style="display: none">
-      <br>
-      <div id = "run-text" class="text-xl text-white "></div>
-      <br>
-      <div class="text-base text-white " id="run_result"></div>
-      <br>
+    <div class="pl-3">
+      <% language_set = %w[Python Elixir] %>
+      <% language_set.each do |language| %>
+        <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
+      <% end %>
     </div>
   </div>
-  <div
-    class="web-console"
-    id="web-console"
-    data-controller="webconsole"
-    data-roomUUID=<%= room.uuid %>
-    data-src=<%= src %>
-    >
-    <div class="border border-gray-500 h-full">
-      <%= render "webconsole", src: src %>
-    </div>
+</div>
+</div>
+<%= render "editor" %>
+<div id="result-box" class="result-box" style="display: none">
+  <br>
+  <div id = "run-text" class="text-xl text-white "></div>
+  <br>
+  <div class="text-base text-white " id="run_result"></div>
+  <br>
+</div>
+</div>
+<div class="web-console">
+  <div class="border border-gray-500 h-full rounded-md">
+    <%= render "webconsole", src: src %>
   </div>
+</div>
 </div>
