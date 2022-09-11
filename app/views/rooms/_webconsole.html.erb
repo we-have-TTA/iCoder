@@ -5,10 +5,5 @@
   </ul>
   <button class="bg-red-700 border border-red-900 hover:bg-red-800 text-white text-sm rounded px-5 py-2">重啟</button> %>
 </div>
-<div>
-  <% language_set = %w[Ruby JavaScript] %>
-  <% language_set.each do |language| %>
-    <button class="choose-language-btn" data-action="click->webconsole#createRuntime"><%= language %></button>
-  <% end %>
-</div>
+
 <iframe id="iframe" src=<%= src %> style="height: 500px;" class="border-2 border-solid border-black w-full"></iframe>
