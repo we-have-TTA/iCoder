@@ -58,7 +58,7 @@ export default class extends Controller {
     const target = this.change_languageTarget
     const strArray = target.className.split(" ")
     console.log(target)
-    if (strArray.filter((e) => e === "hidden")[0] === "hidden") {
+    if (strArray.filter((e) => e === "hidden").length) {
       target.className = strArray.filter((e) => e !== "hidden").join(" ")
     } else {
       target.className = `${strArray.join(" ")} hidden`
@@ -68,7 +68,7 @@ export default class extends Controller {
   catchQuestions() {
     const roomID = this.element.dataset.room_id
     Rails.ajax({
-      url: `/api/v1/rooms/${roomID}/catchQuestions`,
+      url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: ( result ) => {
         console.log(result)
