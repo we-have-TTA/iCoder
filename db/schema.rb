@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_08_074655) do
+ActiveRecord::Schema.define(version: 2022_09_09_103733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "question_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_id"
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
+    t.index ["question_id"], name: "index_comments_on_question_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "homeworks", force: :cascade do |t|
     t.string "title"
@@ -101,6 +114,8 @@ ActiveRecord::Schema.define(version: 2022_09_08_074655) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "comments", "questions"
+  add_foreign_key "comments", "users"
   add_foreign_key "homeworks", "teams"
   add_foreign_key "homeworks", "users"
   add_foreign_key "orders", "teams"
