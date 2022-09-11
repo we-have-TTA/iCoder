@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get '/chats', to: 'chats#index'
   resources :messages, only:[:new, :create]
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
   devise_scope :user do
     post '/users', to: 'users/registrations#create'
     get '/users/password', to: 'devise/passwords#new'

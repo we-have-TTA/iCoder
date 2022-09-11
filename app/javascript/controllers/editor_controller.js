@@ -17,6 +17,8 @@ export default class extends Controller {
     )
     const str = `puts 123`
     jar.updateCode(str)
+
+    this.toggleLanguageMenu()
   }
 
   run() {
@@ -54,15 +56,10 @@ export default class extends Controller {
     })
   }
 
-  displayMenu() {
-    const target = this.change_languageTarget
-    const strArray = target.className.split(" ")
-    console.log(target)
-    if (strArray.filter((e) => e === "hidden")[0] === "hidden") {
-      target.className = strArray.filter((e) => e !== "hidden").join(" ")
-    } else {
-      target.className = `${strArray.join(" ")} hidden`
-    }
+  toggleLanguageMenu() {
+    this.change_languageTarget.classList.contains("hidden")
+      ? this.change_languageTarget.classList.remove("hidden")
+      : this.change_languageTarget.classList.add("hidden")
   }
 
   catchQuestions() {
