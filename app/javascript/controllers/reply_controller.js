@@ -7,7 +7,9 @@ export default class extends Controller {
     // console.log(123)
   }
   display() {
-    console.log(this)
     this.formTarget.className = "comment-form"
+  }
+  none() {
+    this.formTarget.className = "comment-form hidden"    
   }
 }
