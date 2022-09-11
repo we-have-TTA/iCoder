@@ -5,7 +5,9 @@ class TeamsController < ApplicationController
 
   layout 'dashboard'
 
-  def index; end
+  def index
+    @users = current_user.team.users
+  end
 
   def new; end
 

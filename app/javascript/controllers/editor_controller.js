@@ -6,7 +6,7 @@ import hljs from "highlight.js"
 import { withLineNumbers } from "codejar/linenumbers"
 
 export default class extends Controller {
-  static targets = ["panel", "run", "draw"]
+  static targets = ["panel", "draw", "change_language"]
   connect() {
     const questionId = this.element.dataset.questionId
     if (questionId) {
@@ -45,6 +45,8 @@ export default class extends Controller {
         CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
       }
     }
+
+    this.toggleLanguageMenu()
   }
 
   transCode(e) {
@@ -85,12 +87,34 @@ export default class extends Controller {
       type: "post",
       data: new URLSearchParams(data).toString(),
       success: ({ result }) => {
-        console.log(result)
         runText.textContent = "執行結果："
         resultText.textContent = result
         setTimeout(() => {
           resultBox.style.cssText = "display: none"
         }, 5000)
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
+  }
+
+  toggleLanguageMenu() {
+    this.change_languageTarget.classList.contains("hidden")
+      ? this.change_languageTarget.classList.remove("hidden")
+      : this.change_languageTarget.classList.add("hidden")
+  }
+
+  catchQuestions() {
+    const roomID = this.element.dataset.room_id
+    Rails.ajax({
+      url: `/api/v1/rooms/${roomID}/catchQuestions`,
+      type: "get",
+      success: (result) => {
+        console.log(result)
+        result.forEach((question) => {
+          console.log(question.title)
+        })
       },
       error: (err) => {
         console.log(err)

@@ -9,14 +9,11 @@ AllCops:
     - vendor/**/*
     - spec/**/*
   TargetRubyVersion: 3.1.2
-  # TargetRailsVersion: 7.0.3
   SuggestExtensions: false
 
+# FIXME
 Metrics/MethodLength:
-  Max: 30
-
-# Metrics/BlockLength:
-#   Enabled: false
+  Max: 40
 
 Style/Documentation:
   Enabled: false
@@ -26,5 +23,3 @@ Layout/LineLength:
 
 Metrics/AbcSize:
   Enabled: false
-# Metrics/CyclomaticComplexity:
-#   Max: 10
