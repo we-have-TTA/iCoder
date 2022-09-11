@@ -34,6 +34,7 @@ class RoomsController < ApplicationController
     # TODO: 離開room後刪除session
     language = params[:language]
     uuid = params[:uuid]
+    @room.update(language:)
     host_ip = if ENV['RAILS_ENV'] == 'production'
                 '127.0.0.1'
               else
