@@ -6,8 +6,9 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.create(msg_params)
-    ActionCable.server.broadcast('room_channel', { content: @message.content }) if @message.save
+    message = Message.create(msg_params)
+    name = current_user ? current_user.username : 'guest'
+    ActionCable.server.broadcast('room_channel', { content: message.content, name: }) if message.save
   end
 
   private
