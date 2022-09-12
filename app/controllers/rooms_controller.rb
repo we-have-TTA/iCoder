@@ -8,6 +8,8 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.where(team: current_user.team)
+    @rooms = Room.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @rooms = Room.order(id: :desc)
   end
 
   def show
