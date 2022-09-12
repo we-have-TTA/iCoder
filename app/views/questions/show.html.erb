@@ -1,20 +1,21 @@
-<div class="p-10"><%= @question.title %></div>
-<ul class="p-20">
-  <li>建立者: <%= @question.creator.username %></li>
-  <li>建立日期: <%= @question.created_at.to_s.split.first %></li>
-  <li>標題: <%= @question.title %></li>
-  <li>類型: <%= @question.question_type %></li>
-  <li>語言: <%= @question.language %></li>
-  <li>難易度:<%= @question.difficulty %></li>
-  <li>面試官資訊:<%= @question.internal_description %></li>
-  <li>面試說明:<%= @question.candidate_instructions %></li>
-  <li>題目內容:<%= @question.code %></li>
-</ul>
-<div>
-  <%= link_to "返回", questions_path %>
-</div>
-留言區：
+<section class="mb-10">
+  <div class="py-4 text-3xl font-bold">題目:<%= @question.title %></div>
+  <ul class="mb-3">
+    <li>建立者: <%= @question.creator.username %></li>
+    <li>建立日期: <%= @question.created_at.to_s.split.first %></li>
+    <li>類型: <%= @question.question_type %></li>
+    <li>語言: <%= @question.language %></li>
+    <li>難易度:<%= @question.difficulty %></li>
+    <li>面試官資訊:<%= @question.internal_description %></li>
+    <li>面試說明:<%= @question.candidate_instructions %></li>
+    <li>題目內容:<%= @question.code %></li>
+  </ul>
+  <div class="btnstyle_dashboard">
+    <%= link_to "返回",   questions_path %>
+  </div>
+</section>
 <section>
+  <p class="font-bold text-3xl mb-5">留言區：</p>
   <%= render 'comments/form', question: @comment.question, parent_comment: @comment.parent%>
   <%= render @comments %>
 </section>
