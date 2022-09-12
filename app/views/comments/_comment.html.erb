@@ -1,12 +1,26 @@
-<div class="comment"  data-controller="reply">
-  <%= comment.content %>
-  by <%= comment.user.username %>
-  <%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} %><br/>
-  <%= link_to "回覆", "javascipt://false", data:{action:'click->reply#display'} %>
-  <div class="comment-form hidden" data-reply-target="form" >
-    <%= render "comments/form", question: comment.question, parent_comment: comment %>
+<div class="comment" data-controller="reply">
+  <div class="flex-col w-full py-4 bg-white border-b-2 border-r-2 border-gray-200 sm:px-4 sm:py-4 md:px-4 sm:rounded-lg sm:shadow-sm md:w-2/3">
+    <div class="flex-col mt-1">
+      <div class="flex items-center flex-1 px-4 font-bold leading-tight">
+        <%= comment.user.username %>
+        <span class="ml-2 text-xs font-normal text-gray-500"> <%= comment.created_at.to_s.split[0]%> </span>
+        <span class="ml-2 text-xs font-normal text-gray-500"> <%= comment.created_at.to_s.split[1]%> </span>
+        <%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"}, class:"ml-2" if current_user.present? %>
+      </div>
+      <div class="flex-1 px-2 ml-2 text-sm font-medium leading-loose text-gray-600"><%= comment.content %>
+      </div>
+      <div class="flex">
+        <div class="mb-2 ml-4 font-bold hover:text-red-900">
+          <%= link_to "回覆", "javascipt://false", data:{action:'click->reply#display'} if comment.parent_id.nil? %>
+        </div>
+      </div>
+      <div class="comment-form hidden" data-reply-target="form" >
+        <%= render "comments/form", question: comment.question, parent_comment: comment %>
+      </div>
+    </div>
+    <hr class="my-2 border-gray-200">
   </div>
-</div>
-<div class= "sub-comment bg-red-300 ml-8 ">
-  <%= render comment.comments %>
+  <div class="sub-comment pl-10">
+    <%= render comment.comments %>
+  </div>
 </div>
