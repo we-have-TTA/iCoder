@@ -10,6 +10,9 @@ services:
       - webssh
   redis:
     image: redis
+    command: redis-server --save 20 1 --loglevel warning
+    ports:
+      - 6379:6379
     networks:
       - webssh
   app:
@@ -18,7 +21,7 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
-      - REDIS_URL=redis://6379/1
+      - REDIS_URL=redis://redis:6379
       - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
     networks:
       - webssh
