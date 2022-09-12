@@ -50,7 +50,7 @@ module Api
       end
 
       def catch_questions
-        render json: { question: Question.where(team: current_user.team), team: current_user.team, user: User.all}
+        render json: { question: Question.where(team: current_user.team), team: current_user.team, user: User.all }
       end
     end
   end
