@@ -12,7 +12,6 @@
   <table class="question_table">
     <thead>
       <tr>
-        <td>題目編號</td>
         <td>標題</td>
         <td>模式</td>
         <td>語言</td>
@@ -27,7 +26,6 @@
       <% @questions.each do |question| %>
         <%= form_with model: question do |form| %>
           <tr>
-            <td><%= question.id %></td>
             <td><%= link_to question.title, question_path(question.id) %></td>
             <td><%= question.question_type %></td>
             <td><%= question.language %></td>
