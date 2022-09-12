@@ -5,13 +5,13 @@
         <%= comment.user.username %>
         <span class="ml-2 text-xs font-normal text-gray-500"> <%= comment.created_at.to_s.split[0]%> </span>
         <span class="ml-2 text-xs font-normal text-gray-500"> <%= comment.created_at.to_s.split[1]%> </span>
-        <span class="ml-2"><%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} %></span>
+        <span class="ml-2"><%= link_to "刪除", comment_path(comment), method: "delete", data:{confirm:"確定刪除留言?"} if current_user.present? %></span>
       </div>
       <div class="flex-1 px-2 ml-2 text-sm font-medium leading-loose text-gray-600"><%= comment.content %>
       </div>
       <div class="flex">
         <div class="mb-2 ml-4 font-bold hover:text-red-900">
-          <%= link_to "回覆", "javascipt://false", data:{action:'click->reply#display'} %>
+          <%= link_to "回覆", "javascipt://false", data:{action:'click->reply#display'} if comment.parent_id.nil? %>
         </div>
       </div>
       <div class="comment-form hidden" data-reply-target="form" >
