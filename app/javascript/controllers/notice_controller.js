@@ -1,6 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 
-// Connects to data-controller="notice"
 export default class extends Controller {
   connect() {
     setTimeout(() => {
