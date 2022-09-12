@@ -45,6 +45,11 @@ Rails.application.routes.draw do
           get :catch_questions
         end
       end
+
+      scope 'questions/example', module: :questions do
+        get ':id', action: :example, as: :questions_example
+      end
+      resources :questions, only: [:show]
     end
   end
 end

@@ -4,21 +4,63 @@ import { CodeJar } from "codejar"
 import hljs from "highlight.js"
 // Import line numbers helper.
 import { withLineNumbers } from "codejar/linenumbers"
-// Connects to data-controller="editor"
+
 export default class extends Controller {
   static targets = ["panel", "draw", "change_language", "team_name", "questions_list", "questions_information"]
   connect() {
-    // 目前編輯器語言
-    this.panelTarget.className += " ruby"
-    // Wrap highlighting function to show line numbers.
-    const jar = CodeJar(
-      this.panelTarget,
-      withLineNumbers(hljs.highlightElement)
-    )
-    const str = `puts 123`
-    jar.updateCode(str)
+    const questionId = this.element.dataset.questionId
+    if (questionId) {
+      Rails.ajax({
+        url: `/api/v1/questions/${questionId}.json`,
+        type: "get",
+        success: ({ language, code }) => {
+          this.panelTarget.className += ` ${language}`
+          const jar = CodeJar(
+            this.panelTarget,
+            withLineNumbers(hljs.highlightElement)
+          )
+          jar.updateCode(code)
+        },
+        error: () => {},
+      })
+    } else {
+      const LOAD_FROM_EXAMPLE = false
+      if (LOAD_FROM_EXAMPLE) {
+        Rails.ajax({
+          url: "/api/v1/questions/example/1",
+          type: "get",
+          success: ({ language, code }) => {
+            this.panelTarget.className += ` ${language}`
+            const jar = CodeJar(
+              this.panelTarget,
+              withLineNumbers(hljs.highlightElement)
+            )
+            jar.updateCode(code)
+          },
+          error: () => {},
+        })
+      } else {
+        this.panelTarget.className += ` rb`
+        CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
+      }
+    }
 
     // this.toggleLanguageMenu()
+  }
+
+  transCode(e) {
+    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
+    const field = document.createElement("input")
+    field.setAttribute("type", "hidden")
+    field.setAttribute("name", "question[code]")
+    field.setAttribute("value", jar.toString())
+    this.element.appendChild(field)
+    this.element.submit()
+  }
+
+  changeLanguage(e) {
+    this.panelTarget.className = `editor ${e.target.value}`
+    CodeJar(this.panelTarget, hljs.highlightElement)
   }
 
   run() {
