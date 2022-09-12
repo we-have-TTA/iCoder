@@ -14,7 +14,7 @@
         <button id="current_language">語言選擇</button>
         <button data-action="editor#toggleLanguageMenu">▼</button>
         <div
-          class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md"
+          class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md hidden"
           data-editor-target="change_language"
           id="web-console"
           data-controller="webconsole"
@@ -24,29 +24,77 @@
             <% language_set = %w[Ruby JavaScript] %>
             <% language_set.each do |language| %>
               <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
-      <% end %>
+            <% end %>
+          </div>
+          <div class="pl-3">
+            <% language_set = %w[Python Elixir] %>
+            <% language_set.each do |language| %>
+              <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="pl-3">
-      <% language_set = %w[Python Elixir] %>
-      <% language_set.each do |language| %>
-        <button data-action="click->webconsole#createRuntime" class=" my-2"><%= language %></button>
-      <% end %>
+    <%= render "editor" %>
+    <div id="result-box" class="result-box" style="display: none">
+      <br>
+      <div id = "run-text" class="text-xl text-white "></div>
+      <br>
+      <div class="text-base text-white " id="run_result"></div>
+      <br>
+    </div>
+    <%# <div id="team_question" class="flex h-96 mx-auto fixed left-0 right-0 top-1/4 bg-white" style="width: 1024px">
+      <table class="question_table w-4/12">
+        <thead>
+          <tr>
+            <td>題庫列表</td>
+          </tr>
+          <tr>
+            <td data-editor-target="team_name">team questions</td>
+          </tr>
+        </thead>
+        <tbody id="list" data-editor-target="questions_list">
+          <tr>
+            <td>
+              <div>
+                題目
+              </div>
+              <div>
+                語言、作者
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div data-editor-target="questions_information" class=" w-8/12">
+        <div class=" border">
+          <div class=" font-bold px-5 py-3">
+            題目
+          </div>
+          <div class=" px-5">
+            給面試官的訊息
+          </div>
+          <div class=" px-5 pb-3">
+            創建日期
+          </div>
+        </div>
+        <div class=" border-l border-r">
+          <span class=" pl-5 pt-1 inline-block"><span class="border-b py-2 inline-block hover:border-gray-900">給面試者的訊息</span></span>
+          <span class=" pl-5 pt-1 inline-block"><span class="border-b py-2 inline-block hover:border-gray-900">Code</span></span>
+        </div>
+        <div class="px-5 py-8">
+          內容
+        </div>
+      </div>
+    </div> %>
+  </div>
+  <div class="web-console">
+    <div class="border border-gray-500 h-full rounded-md">
+      <%= render "webconsole", src: src %>
     </div>
   </div>
+  
 </div>
-</div>
-<%= render "editor" %>
-<div id="result-box" class="result-box" style="display: none">
-  <br>
-  <div id = "run-text" class="text-xl text-white "></div>
-  <br>
-  <div class="text-base text-white " id="run_result"></div>
-  <br>
-</div>
-</div>
-<div class="web-console">
-  <div class="border border-gray-500 h-full rounded-md">
-    <%= render "webconsole", src: src %>
-  </div>
-</div>
-</div>
+
+
+
