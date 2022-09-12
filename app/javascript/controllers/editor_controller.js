@@ -40,7 +40,6 @@ export default class extends Controller {
           error: () => {},
         })
       } else {
-        console.log("no")
         this.panelTarget.className += ` rb`
         CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
       }
