@@ -8,12 +8,17 @@ services:
       - "POSTGRES_PASSWORD=postgres"
     networks:
       - webssh
+  redis:
+    image: redis
+    networks:
+      - webssh
   app:
     build: .
     ports:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
+      - REDIS_URL=redis://6379/1
       - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
     networks:
       - webssh
@@ -23,6 +28,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - db
+      - redis
 
 networks:
   webssh:
