@@ -13,11 +13,15 @@ module Api
         new_container_name = "#{uuid}-#{language}"
         doc_type_set = {
           ruby: 'main.rb',
-          javascript: 'main.js'
+          javascript: 'main.js',
+          python: 'main.py',
+          elixir: 'main.ex'
         }
         run_type_set = {
           ruby: 'ruby',
-          javascript: 'node'
+          javascript: 'node',
+          python: 'python',
+          elixir: 'elixir'
         }
         doc_type = doc_type_set[language.downcase.to_sym]
         run_type = run_type_set[language.downcase.to_sym]
@@ -46,7 +50,7 @@ module Api
       end
 
       def catch_questions
-        render json: Question.all
+        render json: { question: Question.where(team: current_user.team), team: current_user.team, user: User.all }
       end
     end
   end
