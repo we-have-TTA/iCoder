@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      namespace :users do
+        post 'rooms', action: :find_rooms_by_user, controller: :rooms
+      end
       resources :rooms, only: [] do
         member do
           post :run
