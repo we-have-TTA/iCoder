@@ -42,19 +42,16 @@
       </div>
     </div>
     <%= render "editor" %>
-    <div id="result-box" class="result-box" style="display: none">
-      <br>
+    <div id="result-box" class="result-box whitespace-pre" style="display: none">
       <div id = "run-text" class="text-xl text-white "></div>
-      <br>
       <div class="text-base text-white " id="run_result"></div>
-      <br>
     </div>
     <div data-editor-target="team_question"
          class="flex w-2/3 mx-auto fixed left-0 right-0 top-36 bg-white border hidden" style="height: 50%">
       <div class=" w-4/12">
         <div class="p-3 text-center font-bold border" style="height: 10%">題庫列表</div>
         <div class="p-2 text-center font-bold border" style="height: 10%"data-editor-target="team_name"></div>
-        <div class="overflow-y-scroll"
+        <div class=" overflow-y-auto"
              style="height: 80%">
           <table class="question_table">
             <tbody data-editor-target="questions_list">
