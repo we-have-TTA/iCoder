@@ -142,20 +142,6 @@ export default class extends Controller {
 
         this.questions_listTarget.innerHTML = ""
         this.questions_listTarget.insertAdjacentHTML("afterbegin", html)
-        
-        
-        // this.panelTarget.className += " ruby"
-        // const jar = CodeJar(
-        //   this.panelTarget,
-        //   hljs.highlightElement
-        // )
-        // const str=`${result.question[0].code}`
-        // jar.updateCode(str)
-    
-
-        // console.log(this.connect().CodeJar)
-        
-
       },
       error: (err) => {
         console.log(err)
@@ -219,19 +205,6 @@ export default class extends Controller {
                               </div>`
         this.questions_informationTarget.innerHTML = ""
         this.questions_informationTarget.insertAdjacentHTML("afterbegin", informationHtml)
-        // // console.log(this)
-        // this.panelTarget.className += " ruby"
-        // const jar = CodeJar(
-        //   this.panelTarget,
-        //   hljs.highlightElement
-        // )
-        // const str=`${result.question[0].code}`
-        // jar.updateCode(str)
-    
-
-        // console.log(this.connect().CodeJar)
-        
-
       },
       error: (err) => {
         console.log(err)
@@ -284,12 +257,6 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-      //   const toLanguage = result.question[questionId].language
-      //   this.RubyTarget
-        
-      //  this.RubyTarget.click()
-      //   var x = window['toLanguage']
-        // console.log(x)
         const toLanguage = result.question[questionId].language
         const changeLanguage = {
           Ruby: this.RubyTarget,
@@ -298,7 +265,7 @@ export default class extends Controller {
           Elixir: this.ElixirTarget
         }
         changeLanguage[toLanguage].click()
-        this.panelTarget.className += ` ${toLanguage}`
+        this.panelTarget.className = `editor ${toLanguage}`
         const jar = CodeJar(
           this.panelTarget,
           hljs.highlightElement
@@ -307,7 +274,7 @@ export default class extends Controller {
         jar.updateCode(str)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent=`面試說明：${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent=`面試說明：\n\n        ${result.question[questionId].candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
