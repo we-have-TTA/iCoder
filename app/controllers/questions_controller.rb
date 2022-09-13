@@ -6,8 +6,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_question, only: %i[show edit update destroy]
   def index
-    @questions = Question.where(team: current_user.team)
-    @questions = Question.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @questions = Question.where(team: current_user.team).order(id: :desc)
+    @questions = @questions.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
   end
 
   def new
