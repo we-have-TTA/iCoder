@@ -1,5 +1,5 @@
 <div class="flex justify-between mt-3">
-  <h2 class="font-bold text-2xl">會議室目錄</h2>
+  <h2 class="text-2xl font-bold">會議室目錄</h2>
   <%= link_to "新增會議室", rooms_path, method: "post", target: "_blank", class: "btn-dashboard-create" %>
 </div>
 <span class="block mb-10">管理您的會議室，新增會議、進行查詢、調整及刪除。</span>
@@ -9,31 +9,37 @@
     <button>送出</button>
   </form>
 </div>
-<table class="room_table">
-  <thead>
-    <tr>
-      <td>標題</td>
-      <td>狀態</td>
-      <td>模式</td>
-      <td>程式語言</td>
-      <td>建立者</td>
-      <td>建立日期</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rooms.each do | room | %>
+<div data-controller="room" data-currentUserId=<%= current_user.id %> >
+  <div class="p-5 text-white bg-gray-800">
+    <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
+                                               data-action="click->room#filter">Only search my pads</label>
+  </div>
+  <table class="room_table">
+    <thead>
       <tr>
-        <td><%= room.title %></td>
-        <td><%= room.status %></td>
-        <td><%= room.category %></td>
-        <td><%= room.language %></td>
-        <td><%= room.creator.username %></td>
-        <td><%= room.created_at.to_s.split.first %></td>
-        <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid), class: "btn-dashboard-create" %></td>
-        <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
+        <td>標題</td>
+        <td>狀態</td>
+        <td>模式</td>
+        <td>程式語言</td>
+        <td>建立者</td>
+        <td>建立日期</td>
+        <td></td>
+        <td></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody data-room-target="roomTable">
+      <% @rooms.each do | room | %>
+        <tr>
+          <td><%= room.title %></td>
+          <td><%= room.status %></td>
+          <td><%= room.category %></td>
+          <td><%= room.language %></td>
+          <td><%= room.creator.username %></td>
+          <td><%= room.created_at.to_s.split.first %></td>
+          <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid), class: "btn-dashboard-create" %></td>
+          <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
