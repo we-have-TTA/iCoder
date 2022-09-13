@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   get '/chats', to: 'chats#index'
   resources :messages, only:[:new, :create]
 
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   devise_scope :user do
     post '/users', to: 'users/registrations#create'
     get '/users/password', to: 'devise/passwords#new'
     get '/users', to: 'devise/registrations#new'
   end
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   get '/', to: 'pages#home'
   get '/canvas', to: 'pages#canvas'
@@ -48,6 +49,11 @@ Rails.application.routes.draw do
           get :catch_questions
         end
       end
+
+      scope 'questions/example', module: :questions do
+        get ':id', action: :example, as: :questions_example
+      end
+      resources :questions, only: [:show]
     end
   end
 end
