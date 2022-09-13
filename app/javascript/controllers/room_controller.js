@@ -1,14 +1,14 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["filterCurrentUserButton"]
+  static targets = ["filterCurrentUserButton", "roomTable"]
 
-  filter() {
+  filter(e) {
     const data = {
       userid: this.element.dataset.currentuserid,
     }
-    if (this.filterCurrentUserButtonTarget.checked) {
+    if (e.target.checked) {
       data["allRoom"] = false
     } else {
       data["allRoom"] = true
@@ -35,9 +35,8 @@ export default class extends Controller {
               }">delete</a></td>
             </tr > `
         }
-        const tbody = document.querySelector(".room_table tbody")
-        tbody.innerHTML = ""
-        tbody.insertAdjacentHTML("afterbegin", html)
+        this.roomTableTarget.innerHTML = ""
+        this.roomTableTarget.insertAdjacentHTML("afterbegin", html)
       },
       error: (err) => {
         console.log(err)
