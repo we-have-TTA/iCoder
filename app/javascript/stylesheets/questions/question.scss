@@ -36,3 +36,23 @@
     }
   }
 }
+.questions-text {
+  > * {
+    @apply my-3 mr-8;
+  }
+  label {
+    @apply font-bold;
+  }
+  input,
+  select {
+    @apply py-2 px-5 rounded-full;
+  }
+  textarea {
+    @apply py-2 px-5 border border-gray-900;
+  }
+}
+.questions-editor-area {
+  .codejar-wrap {
+    height: 60vh;
+  }
+}
