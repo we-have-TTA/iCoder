@@ -13,7 +13,25 @@ class TeamsController < ApplicationController
 
   def create; end
 
+    def edit
+    @team = current_user.team    
+  end
+
+  def update
+    @team = current_user.team    
+    if @team.update(team_params)
+    redirect_to members_path
+    else
+    render :edit
+    end
+  end
+
   def invite
     render html: params
+  end
+
+  private
+  def team_params
+    params.require(:team).permit(:name)
   end
 end
