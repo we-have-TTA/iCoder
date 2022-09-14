@@ -1,3 +1,6 @@
+.btn-dashboard-delete {
+  @apply px-3 py-1 border-2 text-white bg-red-500 hover:bg-purple-800 font-bold rounded-md;
+}
 .btn-dashboard-create {
   @apply px-3 py-1 border-2 text-white bg-purple-500 hover:bg-purple-800 font-bold rounded-md;
 }

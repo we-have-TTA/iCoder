@@ -7,7 +7,8 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @rooms = Room.where(team: current_user.team)
+    @rooms = Room.where(team: current_user.team).order(id: :desc)
+    @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
   end
 
   def show
