@@ -1,0 +1,10 @@
+<%= form_with model: participator,
+              url: api_v1_users_path,
+              method: 'patch',
+              data: { controller: 'participator-name',
+                      action: 'participator-name#changeName:prevent',
+                      id: participator.id } do |f| %>
+  <%= f.text_field :username,
+                    required: true,
+                    data: { 'participator-name-target': 'username' } %>
+<% end %>

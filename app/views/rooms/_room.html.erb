@@ -1,20 +1,21 @@
 <div class="room-container">
   <div class="candidate-input" 
     data-controller="editor"
-    data-room_id="<%= room.id %>">
+    data-room_id=<%= room.id %>>
     <div class="control-panel">
       <div>
         <button class="run-btn"
-                data-action="click->editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
+                data-action="editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
         <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
       </div>
       <div class="relative">
-        <button data-action="click->editor#catchQuestions">題庫</button>
+        <button data-action="editor#catchQuestions">題庫</button>
         <button data-action="editor#toggleInformation">資訊</button>
         <button id="current_language">語言選擇</button>
         <button data-action="editor#toggleLanguageMenu">▼</button>
-        <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre"
-             data-editor-target="questions_instruction">請先選擇題目</div>
+        <div
+          class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre"
+          data-editor-target="questions_instruction">請先選擇題目</div>
         <div
           class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md"
           data-editor-target="change_language"
@@ -22,76 +23,50 @@
           data-controller="webconsole"
           data-roomUUID=<%= room.uuid %>
           data-src=<%= src %>>
-          <div class="pl-10">
-            <% language_set = %w[Ruby Javascript] %>
-            <% language_set.each do |language| %>
-              <button data-action="click->webconsole#createRuntime"
-                      class=" my-2"
-                      data-editor-target=<%= language %>><%= language %></button>
-            <% end %>
-          </div>
-          <div class="pl-3">
-            <% language_set = %w[Python Elixir] %>
-            <% language_set.each do |language| %>
-              <button data-action="click->webconsole#createRuntime"
-                      class=" my-2"
-                      data-editor-target=<%= language %>><%= language %></button>
-            <% end %>
+          <%= render "select_language", language_set: %>
+        </div>
+        </div>
+      </div>
+      <%= render "editor" %>
+      <div id="result-box" class="result-box whitespace-pre" style="display: none;">
+        <div id="run-text" class="text-xl text-white"></div>
+        <div id="run_result" class="text-base text-white"></div>
+      </div>
+      <div
+      data-editor-target="team_question"
+      class="flex w-2/3 mx-auto fixed left-0 right-0 top-36 bg-white border hidden"
+      style="height: 50%;">
+        <div class="w-4/12">
+          <div class="p-3 text-center font-bold border" style="height: 10%;">題庫列表</div>
+          <div class="p-2 text-center font-bold border" style="height: 10%;" data-editor-target="team_name"></div>
+          <div class=" overflow-y-auto" style="height: 80%;">
+            <table class="question_table">
+              <thead>
+              </thead>
+              <tbody data-editor-target="questions_list">
+                <tr>
+                  <td>
+                    <div>題目</div>
+                    <div>語言、作者</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div data-editor-target="questions_information" class="w-8/12 border relative">
+          <div class="w-2/3 h-1/2 absolute top-0 bottom-0 left-0 right-0 m-auto text-center">
+            <div class="text-3xl">歡迎使用題庫！！</div>
+            <div class="text-xl mt-5">請選擇所需要的面試題目，選擇後即可更新編輯器內容</div>
+          </div>
+        </div>
+        <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md bg-gray-100"
+      data-action="editor#close">關閉</button>
       </div>
     </div>
-    <%= render "editor" %>
-    <div id="result-box" class="result-box whitespace-pre" style="display: none">
-      <div id = "run-text" class="text-xl text-white "></div>
-      <div class="text-base text-white " id="run_result"></div>
-    </div>
-    <div data-editor-target="team_question"
-         class="flex w-2/3 mx-auto fixed left-0 right-0 top-36 bg-white border hidden" style="height: 50%">
-      <div class=" w-4/12">
-        <div class="p-3 text-center font-bold border" style="height: 10%">題庫列表</div>
-        <div class="p-2 text-center font-bold border" style="height: 10%"data-editor-target="team_name"></div>
-        <div class=" overflow-y-auto"
-             style="height: 80%">
-          <table class="question_table">
-            <tbody data-editor-target="questions_list">
-              <tr>
-                <td>
-                  <div>
-                    題目
-                  </div>
-                  <div>
-                    語言、作者
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="web-console">
+      <div class="border border-gray-500 h-full rounded-md">
+        <%= render "webconsole", src: %>
       </div>
-      <div data-editor-target="questions_information" class=" w-8/12 border relative">
-        <div class=" w-2/3 h-1/2 absolute top-0 bottom-0 left-0 right-0 m-auto text-center">
-          <div class=" text-3xl">
-            歡迎使用題庫！！
-          </div>
-          <div class=" text-xl mt-5">
-            請選擇所需要的面試題目，選擇後即可更新編輯器內容
-          </div>
-        </div>
-      </div>
-      <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md bg-gray-100"
-              data-action="editor#close">
-        關閉
-      </button>
     </div>
   </div>
-  <div class="web-console">
-    <div class="border border-gray-500 h-full rounded-md">
-      <%= render "webconsole", src: src %>
-    </div>
-  </div>
-  
-</div>
-
-
-

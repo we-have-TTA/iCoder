@@ -8,7 +8,14 @@ class MessagesController < ApplicationController
   def create
     message = Message.create(msg_params)
     name = current_user ? current_user.username : 'guest'
-    ActionCable.server.broadcast('room_channel', { content: message.content, name: }) if message.save
+    return unless message.save
+
+    ActionCable.server.broadcast(
+      'room_channel',
+      { content: message.content,
+        name:,
+        time: Time.now.strftime('%y / %m / %d %T') }
+    )
   end
 
   private

@@ -6,6 +6,8 @@ class RoomsController < ApplicationController
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!
 
+  helper_method :current_participator
+
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
@@ -105,5 +107,9 @@ class RoomsController < ApplicationController
 
   def rooms_params
     params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
+  end
+
+  def current_participator
+    current_user
   end
 end

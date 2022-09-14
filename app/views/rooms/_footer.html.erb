@@ -2,6 +2,7 @@
   <div>
     <%= link_to "邀請", "/#{@room.uuid}/invite" %>
     <%= link_to "進行視訊通話", "#" %>
+    <%= render "participator_name", participator: current_participator %>
   </div>
   <div>
     <span><%= room.title %></span>
@@ -9,3 +10,4 @@
     <%= link_to "結束面試", rooms_path %>
   </div>
 </footer>
+<% console %>

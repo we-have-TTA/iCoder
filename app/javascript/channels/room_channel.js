@@ -7,8 +7,9 @@ consumer.subscriptions.create("RoomChannel", {
 
   disconnected() {},
 
-  received({ content, name }) {
+  received({ content, name, time }) {
     const msg = document.querySelector("#msg")
-    msg.innerHTML += `<div class="message">${name} says: ${content}</div>`
+    const message = `<div class="message">${name} says: ${content} -- ${time}</div>`
+    msg.insertAdjacentHTML("afterbegin", message)
   },
 })

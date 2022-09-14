@@ -1,7 +1,7 @@
 <div class="py-5 px-5">
   <div id="msg"></div>
-  <%= form_for @message, remote: true do |f|, data: { controller: 'textchat', action: 'textchat#clear'} %>
-  <%= f.text_field :content , class: "border px-1.5", data: {'textchat-target': 'input'} %>
-  <%= f.submit class: "border px-1.5" %>
-<% end %>
+  <%= form_for @message, remote: true do |f| %>
+    <%= f.text_field :content , class: "border px-1.5" %>
+    <%= f.submit class: "border px-1.5" %>
+  <% end %>
 </div>

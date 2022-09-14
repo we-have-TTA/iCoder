@@ -3,6 +3,19 @@
 module Api
   module V1
     class RoomsController < ApplicationController
+      DOC_TYPE_SET = {
+        ruby: 'main.rb',
+        javascript: 'main.js',
+        python: 'main.py',
+        elixir: 'main.ex'
+      }.freeze
+      RUN_TYPE_SET = {
+        ruby: 'ruby',
+        javascript: 'node',
+        python: 'python',
+        elixir: 'elixir'
+      }.freeze
+
       def run
         language = params[:language]
         code_content = params[:code]
@@ -11,20 +24,8 @@ module Api
         host_ip = '127.0.0.1' if ENV['RAILS_ENV'] == 'production'
         username = ENV.fetch('SSH_USER_NAME', nil)
         new_container_name = "#{uuid}-#{language}"
-        doc_type_set = {
-          ruby: 'main.rb',
-          javascript: 'main.js',
-          python: 'main.py',
-          elixir: 'main.ex'
-        }
-        run_type_set = {
-          ruby: 'ruby',
-          javascript: 'node',
-          python: 'python',
-          elixir: 'elixir'
-        }
-        doc_type = doc_type_set[language.downcase.to_sym]
-        run_type = run_type_set[language.downcase.to_sym]
+        doc_type = DOC_TYPE_SET[language.downcase.to_sym]
+        run_type = RUN_TYPE_SET[language.downcase.to_sym]
         doc_name = "#{new_container_name}-#{doc_type}"
         if ENV['RAILS_ENV'] == 'production'
           File.write("/home/#{doc_name}", code_content.to_s)

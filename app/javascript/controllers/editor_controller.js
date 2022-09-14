@@ -6,7 +6,24 @@ import hljs from "highlight.js"
 import { withLineNumbers } from "codejar/linenumbers"
 
 export default class extends Controller {
-  static targets = ["panel", "draw", "change_language", "team_question", "team_name", "questions_list", "questions_information", "questions_code","questions_item", "Ruby", "Javascript", "Python", "Elixir", "instruction_choice", "code_choice", "questions_instruction"]
+  static targets = [
+    "panel",
+    "draw",
+    "change_language",
+    "team_question",
+    "team_name",
+    "questions_list",
+    "questions_information",
+    "questions_code",
+    "questions_item",
+    "Ruby",
+    "Javascript",
+    "Python",
+    "Elixir",
+    "instruction_choice",
+    "code_choice",
+    "questions_instruction",
+  ]
   connect() {
     const questionId = this.element.dataset.questionId
     if (questionId) {
@@ -111,16 +128,17 @@ export default class extends Controller {
   }
 
   catchQuestions() {
+    console.log(this.team_questionTarget)
     this.team_questionTarget.classList.contains("hidden")
-    ? this.team_questionTarget.classList.remove("hidden")
-    : this.team_questionTarget.classList.add("hidden")
+      ? this.team_questionTarget.classList.remove("hidden")
+      : this.team_questionTarget.classList.add("hidden")
     const roomID = this.element.dataset.room_id
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
         let html = ""
-        this.team_nameTarget.textContent=`${result.team.name} questions`
+        this.team_nameTarget.textContent = `${result.team.name} questions`
         result.question.forEach((question) => {
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
@@ -134,10 +152,12 @@ export default class extends Controller {
                          ${question.internal_description}
                        </div>
                        <div class="text-left text-gray-600">
-                         ${question.language}・By ${result.user[question.user_id-1].username}
+                         ${question.language}・By ${
+            result.user[question.user_id - 1].username
+          }
                        </div>
                      </td>
-                   </tr>`          
+                   </tr>`
         })
 
         this.questions_listTarget.innerHTML = ""
@@ -153,7 +173,7 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     const questionItem = this.questions_itemTargets
-    for (let i = 0; i<questionItem.length; i++) {
+    for (let i = 0; i < questionItem.length; i++) {
       questionItem[i].classList.remove("bg-gray-200")
     }
     e.currentTarget.classList.add("bg-gray-200")
@@ -161,18 +181,24 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-        const questionIdArr = result.question.map((question)=>question.id)
+        const questionIdArr = result.question.map((question) => question.id)
         const questionFind = questionIdArr.indexOf(Number(questionId))
         let informationHtml = `<div class=" border-b">
                                 <div class=" font-bold text-lg px-5 py-3">
                                   ${result.question[questionFind].title}
                                 </div>
                                 <div class=" px-5 text-gray-600">
-                                  ${result.question[questionFind].internal_description
+                                  ${
+                                    result.question[questionFind]
+                                      .internal_description
                                   }
                                 </div>
                                 <div class=" px-5 pb-3 text-gray-600">
-                                  Create At ${result.question[questionFind].created_at.split("T")[0]}
+                                  Create At ${
+                                    result.question[
+                                      questionFind
+                                    ].created_at.split("T")[0]
+                                  }
                                 </div>
                               </div>
                               <div class=" border-t">
@@ -204,7 +230,10 @@ export default class extends Controller {
                                 <button class=" mr-3 px-4 py-1 border rounded-md">加入</button>
                               </div>`
         this.questions_informationTarget.innerHTML = ""
-        this.questions_informationTarget.insertAdjacentHTML("afterbegin", informationHtml)
+        this.questions_informationTarget.insertAdjacentHTML(
+          "afterbegin",
+          informationHtml
+        )
       },
       error: (err) => {
         console.log(err)
@@ -212,11 +241,14 @@ export default class extends Controller {
     })
   }
 
-  displayCode (e) {
+  displayCode(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
-    this.code_choiceTarget.classList.add("text-blue-700","border-gray-900")
-    this.instruction_choiceTarget.classList.remove("text-blue-700","border-gray-900")
+    this.code_choiceTarget.classList.add("text-blue-700", "border-gray-900")
+    this.instruction_choiceTarget.classList.remove(
+      "text-blue-700",
+      "border-gray-900"
+    )
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
@@ -231,18 +263,24 @@ export default class extends Controller {
     })
   }
 
-  displayInstruction (e) {
+  displayInstruction(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
-    this.instruction_choiceTarget.classList.add("text-blue-700","border-gray-900")
-    this.code_choiceTarget.classList.remove("text-blue-700","border-gray-900")
+    this.instruction_choiceTarget.classList.add(
+      "text-blue-700",
+      "border-gray-900"
+    )
+    this.code_choiceTarget.classList.remove("text-blue-700", "border-gray-900")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
         let instructionHtml = `${result.question[questionId].candidate_instructions}`
         this.questions_codeTarget.innerHTML = ""
-        this.questions_codeTarget.insertAdjacentHTML("afterbegin", instructionHtml)
+        this.questions_codeTarget.insertAdjacentHTML(
+          "afterbegin",
+          instructionHtml
+        )
       },
       error: (err) => {
         console.log(err)
@@ -250,7 +288,7 @@ export default class extends Controller {
     })
   }
 
-  addQuestion (e) {
+  addQuestion(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     Rails.ajax({
@@ -262,19 +300,16 @@ export default class extends Controller {
           Ruby: this.RubyTarget,
           Javascript: this.JavascriptTarget,
           Python: this.PythonTarget,
-          Elixir: this.ElixirTarget
+          Elixir: this.ElixirTarget,
         }
         changeLanguage[toLanguage].click()
         this.panelTarget.className = `editor ${toLanguage}`
-        const jar = CodeJar(
-          this.panelTarget,
-          hljs.highlightElement
-        )
-        const str=`${result.question[questionId].code}`
+        const jar = CodeJar(this.panelTarget, hljs.highlightElement)
+        const str = `${result.question[questionId].code}`
         jar.updateCode(str)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent=`面試說明：\n\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n\n        ${result.question[questionId].candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
@@ -282,7 +317,7 @@ export default class extends Controller {
     })
   }
 
-  close () {
+  close() {
     this.team_questionTarget.classList.add("hidden")
   }
 }
