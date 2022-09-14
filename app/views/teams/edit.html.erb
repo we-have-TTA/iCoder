@@ -5,6 +5,12 @@
       <%= form.label :name, "組織名稱" %>
       <%= form.text_field :name %><br/>
     </div>
+    <div class="mb-3">
+      <%= form.label :avatar, "團隊圖示" %>
+      <%= form.file_field :avatar %><br/>
+    </div>
+    <span>目前圖示：</span>
+    <%= image_tag @team.avatar, width: "100px" if @team.avatar.attached? %>
     <%= form.submit "更新", class:"btn-dashboard-create" %>
   <% end %>
 </div>
