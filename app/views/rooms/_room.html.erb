@@ -47,15 +47,18 @@
       <div class="text-base text-white " id="run_result"></div>
     </div>
     <div data-editor-target="team_question"
-         class="transition duration-700 w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 rounded-md hidden">
-      <div class="flex w-2/3 mx-auto relative left-0 right-0 top-36 bg-white border opacity-100 h-1/2">
-        <div class=" w-4/12">
-          <div class="p-3 text-center font-bold border" style="height: 10%">題庫列表</div>
-          <div class="p-2 text-center font-bold border" style="height: 10%"data-editor-target="team_name"></div>
-          <div class=" overflow-y-auto"
+         data-action="click->editor#close"
+         class="w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 hidden">
+      <div data-editor-target="questions_display"
+           class="flex w-3/4 mx-auto relative left-0 right-0 top-0 bg-white border h-2/3 rounded-md opacity-0 transition duration-700 transform">
+        <div class=" w-4/12 rounded-md">
+          <div class="p-3 text-center font-bold border rounded-tl-md" style="height: 10%">題庫列表</div>
+          <div class="p-3 text-center font-bold border text-2xl" style="height: 10%"data-editor-target="team_name"></div>
+          <div class=" overflow-y-auto rounded-bl-md"
                style="height: 80%">
             <table class="question_table">
-              <tbody data-editor-target="questions_list">
+              <tbody data-editor-target="questions_list"
+                     class="pt-5 block">
                 <tr>
                   <td>
                     <div>
@@ -70,8 +73,8 @@
             </table>
           </div>
         </div>
-        <div data-editor-target="questions_information" class=" w-8/12 border relative">
-          <div class=" w-2/3 h-1/2 absolute top-0 bottom-0 left-0 right-0 m-auto text-center">
+        <div data-editor-target="questions_information" class=" w-8/12 border relative rounded-tr-md rounded-br-md">
+          <div class=" w-2/3 h-1/2 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-tr-md rounded-br-md">
             <div class=" text-3xl">
               歡迎使用題庫！！
             </div>
@@ -80,8 +83,8 @@
             </div>
           </div>
         </div>
-        <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md bg-gray-100"
-                data-action="editor#close">
+        <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md rounded-tr-md bg-gray-100"
+                data-action="click->editor#close">
           關閉
         </button>
       </div>
