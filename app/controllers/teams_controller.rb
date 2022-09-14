@@ -13,16 +13,16 @@ class TeamsController < ApplicationController
 
   def create; end
 
-    def edit
-    @team = current_user.team    
+  def edit
+    @team = current_user.team
   end
 
   def update
-    @team = current_user.team    
+    @team = current_user.team
     if @team.update(team_params)
-    redirect_to members_path
+      redirect_to members_path
     else
-    render :edit
+      render :edit
     end
   end
 
@@ -31,6 +31,7 @@ class TeamsController < ApplicationController
   end
 
   private
+
   def team_params
     params.require(:team).permit(:name, :avatar)
   end
