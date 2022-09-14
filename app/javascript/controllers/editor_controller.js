@@ -124,7 +124,7 @@ export default class extends Controller {
         result.question.forEach((question) => {
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
-                       class="cursor-pointer"
+                       class="transition duration-300 cursor-pointer hover:bg-gray-100"
                        data-editor-target="questions_item">
                      <td>
                        <div class="text-left font-bold">
@@ -151,11 +151,14 @@ export default class extends Controller {
 
   displayQuestionsItem(e) {
     const roomID = this.element.dataset.room_id
+    console.log(e.currentTarget.id)
     const questionId = e.currentTarget.id
     const questionItem = this.questions_itemTargets
     for (let i = 0; i<questionItem.length; i++) {
       questionItem[i].classList.remove("bg-gray-200")
+      questionItem[i].classList.add("hover:bg-gray-100")
     }
+    e.currentTarget.classList.remove("hover:bg-gray-100")
     e.currentTarget.classList.add("bg-gray-200")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
@@ -163,46 +166,51 @@ export default class extends Controller {
       success: (result) => {
         const questionIdArr = result.question.map((question)=>question.id)
         const questionFind = questionIdArr.indexOf(Number(questionId))
+        // const questionFind = result.question.filter((x) => x.id == questionId)
+        // console.log(questionFind)
         let informationHtml = `<div class=" border-b">
-                                <div class=" font-bold text-lg px-5 py-3">
-                                  ${result.question[questionFind].title}
-                                </div>
-                                <div class=" px-5 text-gray-600">
-                                  ${result.question[questionFind].internal_description
-                                  }
-                                </div>
-                                <div class=" px-5 pb-3 text-gray-600">
-                                  Create At ${result.question[questionFind].created_at.split("T")[0]}
-                                </div>
-                              </div>
-                              <div class=" border-t">
-                                <span class=" pl-5 pt-1 inline-block">
-                                  <span class="border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
-                                        data-action="click->editor#displayCode"
-                                        id=${questionFind}
-                                        data-editor-target="code_choice">
-                                    Code
-                                  </span>
-                                </span>
-                                <span class=" pl-5 pt-1 inline-block">
-                                  <span class="border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
-                                        data-action="click->editor#displayInstruction"
-                                        id=${questionFind}
-                                        data-editor-target="instruction_choice">
-                                    面試說明
-                                  </span>
-                                </span>
-                              </div>
-                              <div data-editor-target="questions_code"
-                                   class="px-5 py-8 h-1/2 overflow-scroll">
-                                ${result.question[questionFind].code}
-                              </div>
-                              <div class=" absolute bottom-2 w-full text-center"
-                                   id=${questionFind}
-                                   data-action="click->editor#addQuestion">
-                                <button class=" mr-3 px-4 py-1 border rounded-md">編輯</button>
-                                <button class=" mr-3 px-4 py-1 border rounded-md">加入</button>
-                              </div>`
+                                 <div class=" font-bold text-lg px-5 py-3">
+                                   ${result.question[questionFind].title}
+                                 </div>
+                                 <div class=" px-5 text-gray-600">
+                                   ${result.question[questionFind].internal_description
+                                   }
+                                 </div>
+                                 <div class=" px-5 pb-3 text-gray-600">
+                                   Create At ${result.question[questionFind].created_at.split("T")[0]}
+                                 </div>
+                               </div>
+                               <div class=" border-t">
+                                 <span class=" pl-5 pt-1 inline-block">
+                                   <span class="transition duration-700 border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
+                                         data-action="click->editor#displayCode"
+                                         id=${questionFind}
+                                         data-editor-target="code_choice">
+                                     Code
+                                   </span>
+                                 </span>
+                                 <span class=" pl-5 pt-1 inline-block">
+                                   <span class="transition duration-700 border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
+                                         data-action="click->editor#displayInstruction"
+                                         id=${questionFind}
+                                         data-editor-target="instruction_choice">
+                                     面試說明
+                                   </span>
+                                 </span>
+                               </div>
+                               <div data-editor-target="questions_code"
+                                    class="px-5 py-8 h-1/2 overflow-y-auto ">
+                                 ${result.question[questionFind].code}
+                               </div>
+                               <div class=" absolute bottom-2 w-full text-center"
+                                    id=${questionFind}>
+                                 <button class=" mr-3 px-4 py-1 border rounded-md">編輯</button>
+                                 <button class=" mr-3 px-4 py-1 border rounded-md"
+                                         data-action="click->editor#addQuestion"
+                                         id=${questionFind}>
+                                   加入
+                                 </button>
+                               </div>`
         this.questions_informationTarget.innerHTML = ""
         this.questions_informationTarget.insertAdjacentHTML("afterbegin", informationHtml)
       },
@@ -215,8 +223,10 @@ export default class extends Controller {
   displayCode (e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
-    this.code_choiceTarget.classList.add("text-blue-700","border-gray-900")
-    this.instruction_choiceTarget.classList.remove("text-blue-700","border-gray-900")
+    this.code_choiceTarget.classList.remove("border-b")
+    this.code_choiceTarget.classList.add("text-blue-700","border-gray-900","border-b-2")
+    this.instruction_choiceTarget.classList.remove("text-blue-700","border-gray-900","border-b-2")
+    this.instruction_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
@@ -234,8 +244,10 @@ export default class extends Controller {
   displayInstruction (e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
-    this.instruction_choiceTarget.classList.add("text-blue-700","border-gray-900")
-    this.code_choiceTarget.classList.remove("text-blue-700","border-gray-900")
+    this.instruction_choiceTarget.classList.remove("border-b")
+    this.instruction_choiceTarget.classList.add("text-blue-700","border-gray-900","border-b-2")
+    this.code_choiceTarget.classList.remove("text-blue-700","border-gray-900","border-b-2")
+    this.code_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
@@ -274,7 +286,7 @@ export default class extends Controller {
         jar.updateCode(str)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent=`面試說明：\n\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent=`面試說明：\n        ${result.question[questionId].candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
