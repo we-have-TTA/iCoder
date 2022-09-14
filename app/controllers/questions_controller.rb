@@ -43,6 +43,11 @@ class QuestionsController < ApplicationController
     redirect_to questions_path, notice: '刪除完畢!!'
   end
 
+  def index 
+    @pagy, @questions = Question.where(team: current_user.team).order(id: :desc)
+    # pagy(Question.all)
+  end
+
   private
 
   def find_question
