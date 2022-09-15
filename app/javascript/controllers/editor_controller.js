@@ -61,7 +61,6 @@ export default class extends Controller {
         CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
       }
     }
-
     this.toggleLanguageMenu()
   }
 
@@ -91,7 +90,6 @@ export default class extends Controller {
       language: language,
       uuid: uuid,
     }
-
     const resultText = document.getElementById("run_result")
     const resultBox = document.getElementById("result-box")
     const runText = document.getElementById("run-text")
@@ -128,38 +126,42 @@ export default class extends Controller {
   }
 
   catchQuestions() {
-    console.log(this.team_questionTarget)
-    this.team_questionTarget.classList.contains("hidden")
-      ? this.team_questionTarget.classList.remove("hidden")
-      : this.team_questionTarget.classList.add("hidden")
+    this.team_questionTarget.classList.remove("hidden")
+    setTimeout(() => {
+      this.questions_displayTarget.classList.add("translate-y-36")
+      this.questions_displayTarget.classList.remove("opacity-0")
+    }, 100)
     const roomID = this.element.dataset.room_id
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
         let html = ""
-        this.team_nameTarget.textContent = `${result.team.name} questions`
+        let cardMove = -30
+        this.team_nameTarget.textContent = `${result.team.name} 的題庫`
         result.question.forEach((question) => {
+          cardMove += 30
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
-                       class="cursor-pointer"
+                       class="transition duration-300 cursor-pointer bg-white hover:bg-gray-100 transform hover:-translate-y-5 hover:translate-x-2 hover:scale-105 mx-4 block relative right-2 rounded-md rounded-tr-2xl"
+                       style="box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 14%), 0 0 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%); bottom:${cardMove}px"
                        data-editor-target="questions_item">
-                     <td>
+                     <td class=" border-white">
                        <div class="text-left font-bold">
                          ${question.title}
                        </div>
-                       <div class="text-left">
+                       <div class="text-left text-gray-600">
                          ${question.internal_description}
                        </div>
                        <div class="text-left text-gray-600">
-                         ${question.language}・By ${
-            result.user[question.user_id - 1].username
-          }
+                         ${question.language}
+                       </div>
+                       <div class="text-left text-gray-600">
+                         By ${result.user[question.user_id - 1].username}
                        </div>
                      </td>
                    </tr>`
         })
-
         this.questions_listTarget.innerHTML = ""
         this.questions_listTarget.insertAdjacentHTML("afterbegin", html)
       },
@@ -174,66 +176,96 @@ export default class extends Controller {
     const questionId = e.currentTarget.id
     const questionItem = this.questions_itemTargets
     for (let i = 0; i < questionItem.length; i++) {
-      questionItem[i].classList.remove("bg-gray-200")
+      questionItem[i].classList.remove(
+        "bg-gray-200",
+        "-translate-y-5",
+        "translate-x-3",
+        "scale-105"
+      )
+      questionItem[i].classList.add("hover:bg-gray-100", "hover:translate-x-2")
     }
-    e.currentTarget.classList.add("bg-gray-200")
+    e.currentTarget.classList.remove("hover:bg-gray-100", "hover:translate-x-2")
+    e.currentTarget.classList.add(
+      "bg-gray-200",
+      "-translate-y-5",
+      "translate-x-3",
+      "scale-105"
+    )
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
         const questionIdArr = result.question.map((question) => question.id)
         const questionFind = questionIdArr.indexOf(Number(questionId))
-        let informationHtml = `<div class=" border-b">
-                                <div class=" font-bold text-lg px-5 py-3">
-                                  ${result.question[questionFind].title}
-                                </div>
-                                <div class=" px-5 text-gray-600">
-                                  ${
-                                    result.question[questionFind]
-                                      .internal_description
-                                  }
-                                </div>
-                                <div class=" px-5 pb-3 text-gray-600">
-                                  Create At ${
-                                    result.question[
-                                      questionFind
-                                    ].created_at.split("T")[0]
-                                  }
-                                </div>
-                              </div>
-                              <div class=" border-t">
-                                <span class=" pl-5 pt-1 inline-block">
-                                  <span class="border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
-                                        data-action="click->editor#displayCode"
-                                        id=${questionFind}
-                                        data-editor-target="code_choice">
-                                    Code
-                                  </span>
-                                </span>
-                                <span class=" pl-5 pt-1 inline-block">
-                                  <span class="border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
-                                        data-action="click->editor#displayInstruction"
-                                        id=${questionFind}
-                                        data-editor-target="instruction_choice">
-                                    面試說明
-                                  </span>
-                                </span>
-                              </div>
-                              <div data-editor-target="questions_code"
-                                   class="px-5 py-8 h-1/2 overflow-scroll">
-                                ${result.question[questionFind].code}
-                              </div>
-                              <div class=" absolute bottom-2 w-full text-center"
-                                   id=${questionFind}
-                                   data-action="click->editor#addQuestion">
-                                <button class=" mr-3 px-4 py-1 border rounded-md">編輯</button>
-                                <button class=" mr-3 px-4 py-1 border rounded-md">加入</button>
-                              </div>`
+        let informationHtml = `<div class=" border-b" style="height: 20%">
+                                 <div class=" font-bold text-lg px-5 py-3">
+                                   ${result.question[questionFind].title}
+                                 </div>
+                                 <div class=" px-5 text-gray-600">
+                                   ${
+                                     result.question[questionFind]
+                                       .internal_description
+                                   }
+                                 </div>
+                                 <div class=" px-5 pb-3 text-gray-600">
+                                   Create At ${
+                                     result.question[
+                                       questionFind
+                                     ].created_at.split("T")[0]
+                                   }
+                                 </div>
+                               </div>
+                               <div class=" border-t" style="height: 10%">
+                                 <span class=" pl-5 pt-1 inline-block">
+                                   <span class="transition duration-700 border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
+                                         data-action="click->editor#displayCode"
+                                         id=${questionFind}
+                                         data-editor-target="code_choice">
+                                     Code
+                                   </span>
+                                 </span>
+                                 <span class=" pl-5 pt-1 inline-block">
+                                   <span class="transition duration-700 border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
+                                         data-action="click->editor#displayInstruction"
+                                         id=${questionFind}
+                                         data-editor-target="instruction_choice">
+                                     面試說明
+                                   </span>
+                                 </span>
+                               </div>
+                               <div class="question-codejar-wrap p-2 pl-4" style="height:55%">
+                                 <div data-editor-target="questions_code">
+                                   ${result.question[questionFind].code}
+                                 </div>
+                               </div>
+                               <div class=" w-full text-center relative"
+                                    style="height: 15%"
+                                    id=${questionFind}>
+                                 <div class=" absolute h-1/2 top-0 bottom-0 left-0 right-0 m-auto">
+                                 <a href="/dashboard/questions/${
+                                   result.question[questionFind].id
+                                 }/edit" target="_blank">
+                                   <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100">
+                                     編輯
+                                   </button>
+                                 </a>
+                                 <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100"
+                                         data-action="click->editor#addQuestion"
+                                         id=${questionFind}>
+                                   加入
+                                 </button>
+                                 </div>
+                               </div>`
         this.questions_informationTarget.innerHTML = ""
         this.questions_informationTarget.insertAdjacentHTML(
           "afterbegin",
           informationHtml
         )
+        this.questions_codeTarget.className = `editor ${result.question[questionFind].language}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionFind].code}`
+        jar.updateCode(str)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -244,18 +276,27 @@ export default class extends Controller {
   displayCode(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
-    this.code_choiceTarget.classList.add("text-blue-700", "border-gray-900")
+    this.code_choiceTarget.classList.remove("border-b")
+    this.code_choiceTarget.classList.add(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
     this.instruction_choiceTarget.classList.remove(
       "text-blue-700",
-      "border-gray-900"
+      "border-gray-900",
+      "border-b-2"
     )
+    this.instruction_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-        let codeHtml = `${result.question[questionId].code}`
-        this.questions_codeTarget.innerHTML = ""
-        this.questions_codeTarget.insertAdjacentHTML("afterbegin", codeHtml)
+        this.questions_codeTarget.className = `editor ${result.question[questionId].language}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionId].code}`
+        jar.updateCode(str)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -266,21 +307,27 @@ export default class extends Controller {
   displayInstruction(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
+    this.instruction_choiceTarget.classList.remove("border-b")
     this.instruction_choiceTarget.classList.add(
       "text-blue-700",
-      "border-gray-900"
+      "border-gray-900",
+      "border-b-2"
     )
-    this.code_choiceTarget.classList.remove("text-blue-700", "border-gray-900")
+    this.code_choiceTarget.classList.remove(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
+    this.code_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-        let instructionHtml = `${result.question[questionId].candidate_instructions}`
-        this.questions_codeTarget.innerHTML = ""
-        this.questions_codeTarget.insertAdjacentHTML(
-          "afterbegin",
-          instructionHtml
-        )
+        this.questions_codeTarget.className = `editor ${result.question[questionId].language}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionId].candidate_instructions}`
+        jar.updateCode(str)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -309,7 +356,7 @@ export default class extends Controller {
         jar.updateCode(str)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent = `面試說明：\n\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n        ${result.question[questionId].candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
@@ -317,7 +364,14 @@ export default class extends Controller {
     })
   }
 
-  close() {
-    this.team_questionTarget.classList.add("hidden")
+  close(e) {
+    console.log(e.target.dataset.action)
+    if (e.target.dataset.action === "click->editor#close") {
+      this.questions_displayTarget.classList.remove("translate-y-36")
+      this.questions_displayTarget.classList.add("opacity-0")
+      setTimeout(() => {
+        this.team_questionTarget.classList.add("hidden")
+      }, 500)
+    }
   }
 }

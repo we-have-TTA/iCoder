@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
     resources :members, controller: :teams, only: %i[index new create destroy]
+    resource :teams, only:[:edit, :update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     resources :questions do
       resources :comments, shallow: true, only: %i[create update destroy]
