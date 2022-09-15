@@ -13,7 +13,7 @@
         <button data-action="editor#toggleInformation">資訊</button>
         <button id="current_language">語言選擇</button>
         <button data-action="editor#toggleLanguageMenu">▼</button>
-        <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre"
+        <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
              data-editor-target="questions_instruction">請先選擇題目</div>
         <div
           class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md"
@@ -47,42 +47,50 @@
       <div class="text-base text-white " id="run_result"></div>
     </div>
     <div data-editor-target="team_question"
-         class="flex w-2/3 mx-auto fixed left-0 right-0 top-36 bg-white border hidden" style="height: 50%">
-      <div class=" w-4/12">
-        <div class="p-3 text-center font-bold border" style="height: 10%">題庫列表</div>
-        <div class="p-2 text-center font-bold border" style="height: 10%"data-editor-target="team_name"></div>
-        <div class=" overflow-y-auto"
-             style="height: 80%">
-          <table class="question_table">
-            <tbody data-editor-target="questions_list">
-              <tr>
-                <td>
-                  <div>
-                    題目
-                  </div>
-                  <div>
-                    語言、作者
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div data-editor-target="questions_information" class=" w-8/12 border relative">
-        <div class=" w-2/3 h-1/2 absolute top-0 bottom-0 left-0 right-0 m-auto text-center">
-          <div class=" text-3xl">
-            歡迎使用題庫！！
+         data-action="click->editor#close"
+         class="w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 hidden">
+      <div data-editor-target="questions_display"
+           class="flex w-3/4 mx-auto relative left-0 right-0 top-0 bg-white border h-2/3 rounded-md opacity-0 transition duration-700 transform">
+        <div class=" w-4/12 rounded-md pt-2">
+          <div class="ml-2 text-center font-bold text-2xl box-shadow absolute z-10 bg-gray-50 rounded-md" 
+               style="height: 10%; width: 30%">
+             <div data-editor-target="team_name"
+                  class="shiny block w-full h-full p-3 rounded-md">
+             </div>
           </div>
-          <div class=" text-xl mt-5">
-            請選擇所需要的面試題目，選擇後即可更新編輯器內容
+          <div class=" overflow-y-auto rounded-bl-md pt-16 border-white"
+               style="height: 100%">
+            <table class="question_table">
+              <tbody data-editor-target="questions_list"
+                     class="pt-5 block">
+                <tr>
+                  <td>
+                    <div>
+                      題目
+                    </div>
+                    <div>
+                      語言、作者
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div data-editor-target="questions_information" class=" w-8/12 border relative rounded-tr-md rounded-br-md flex flex-col">
+          <div class=" w-3/4 h-1/2 p-3 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-lg bg-gray-50 box-shadow shiny">
+            <div class=" text-3xl">
+              歡迎使用題庫！！
+            </div>
+            <div class=" text-xl mt-5 text-left whitespace-pre-wrap">        請選擇所需要的面試題目，選擇後即可更新編輯器內容
+            </div>
+          </div>
+        </div>
+        <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md rounded-tr-md bg-gray-100"
+                data-action="click->editor#close">
+          關閉
+        </button>
       </div>
-      <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md bg-gray-100"
-              data-action="editor#close">
-        關閉
-      </button>
     </div>
   </div>
   <div class="web-console">
