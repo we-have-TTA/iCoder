@@ -33,10 +33,10 @@
             <td><%= question.difficulty %></td>
             <td><%= question.creator.username %></td>
             <td><%= question.created_at.to_s.split.first %></td>
-            <td><%= link_to "創建會議", rooms_path, method: "post", target: "_blank", class: "btn-dashboard-create" %></td>
-            <td><%= link_to "檢視", question_path(question.id), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "修改", edit_question_path(question.id), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "刪除", question_path(question.id), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
+            <td><%= link_to "創建會議", rooms_path(question: question.id), method: "post", target: "_blank", class: "btn-dashboard-create" %></td>
+            <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
+            <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
+            <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
           </tr>
         <% end %>
       <% end %>
