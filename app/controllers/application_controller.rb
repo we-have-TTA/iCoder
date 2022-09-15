@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pagy::Backend
-  
+
   private
 
   def after_sign_in_path_for(_resource)

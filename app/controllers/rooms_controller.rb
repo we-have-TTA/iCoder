@@ -5,10 +5,11 @@ class RoomsController < ApplicationController
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!
-  
+
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @pagy, @rooms = pagy(Room.all, items: 5)
   end
 
   def show
