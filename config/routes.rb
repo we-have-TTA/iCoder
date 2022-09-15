@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
   get '/:team_id/team_invite', to: 'teams#invite', as: 'invite_to_team'
   post '/:team_id/team_invite', to: 'teams#send_invitation'
+  get '/:team_id/team_join', to: 'teams#join_team', as: 'join_to_team'
+  post '/:team_id/team_join', to: 'teams#update'
 
   namespace :api do
     namespace :v1 do

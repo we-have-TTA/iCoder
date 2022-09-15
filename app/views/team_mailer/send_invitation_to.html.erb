@@ -1,6 +1,8 @@
 <p>親愛的 <%= @user.username %>，您好：</p>
 <p>我們是 We-have-tta</p>
-<p>誠摯的邀請您加入<%= @team_id %>團隊，請您透過以下連結進入</p>
-<p><%= link_to "加入團隊", @team_url, target: '_blank' %> </p>
+<p>誠摯的邀請您加入團隊<%= @team_id %>，請您透過以下連結進入</p>
+<p>
+  <%= link_to "加入團隊", @team_url  %>
+</p>
 <br>
 <p>We-have-tta 團隊敬上</p>
