@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.where(team: current_user.team).order(id: :desc)
     @questions = @questions.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
-    @pagy, @questions = pagy(Question.all, items: 5)
+    @pagy, @questions = pagy(@questions, items: 5)
   end
 
   def new
