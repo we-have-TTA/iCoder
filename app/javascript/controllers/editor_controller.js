@@ -23,6 +23,7 @@ export default class extends Controller {
     "instruction_choice",
     "code_choice",
     "questions_instruction",
+    "questions_display",
   ]
   connect() {
     const questionId = this.element.dataset.questionId

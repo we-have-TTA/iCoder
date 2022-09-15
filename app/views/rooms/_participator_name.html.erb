@@ -1,10 +1,8 @@
-<%= form_with model: participator,
-              url: api_v1_users_path,
-              method: 'patch',
-              data: { controller: 'participator-name',
-                      id: participator.id } do |f| %>
+<%= form_with model: current_participator,
+  url: '',
+  data: { controller: 'participator-name' } do |f| %>
   <%= f.text_field :username,
-                    required: true,
-                    data: { 'participator-name-target': 'username',
-                            action: 'focusout->participator-name#changeName' } %>
+    required: true,
+    data: { 'participator-name-target': 'username',
+    action: 'focusout->participator-name#changeName' } %>
 <% end %>

@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   layout 'dashboard'
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
   before_action :find_room, only: %i[destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[ show ] 
 
   helper_method :current_participator
 
@@ -110,6 +110,6 @@ class RoomsController < ApplicationController
   end
 
   def current_participator
-    current_user
+    current_user if user_signed_in?
   end
 end
