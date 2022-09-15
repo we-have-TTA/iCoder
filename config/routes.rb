@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
-    resources :members, controller: :teams, only: %i[index new create destroy]
+    resources :members, controller: :teams, only: %i[index new create destroy update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     resources :questions do
       resources :comments, shallow: true, only: %i[create update destroy]
@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
+
+  get '/:team_id/team_invite', to: 'teams#invite', as: 'invite_to_team'
+  post '/:team_id/team_invite', to: 'teams#send_invitation'
 
   namespace :api do
     namespace :v1 do
