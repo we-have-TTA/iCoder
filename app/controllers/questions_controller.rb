@@ -5,9 +5,13 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_question, only: %i[show edit update destroy]
+  
   def index
     @questions = Question.where(team: current_user.team).order(id: :desc)
     @questions = @questions.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @pagy, @questions = pagy(Question.all, items: 5)
+    puts pagy(Question.all, items: 5)
+ 
   end
 
   def new
@@ -41,11 +45,6 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     redirect_to questions_path, notice: '刪除完畢!!'
-  end
-
-  def index 
-    @pagy, @questions = Question.where(team: current_user.team).order(id: :desc)
-    # pagy(Question.all)
   end
 
   private
