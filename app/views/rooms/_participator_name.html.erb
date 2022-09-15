@@ -2,9 +2,9 @@
               url: api_v1_users_path,
               method: 'patch',
               data: { controller: 'participator-name',
-                      action: 'participator-name#changeName:prevent',
                       id: participator.id } do |f| %>
   <%= f.text_field :username,
                     required: true,
-                    data: { 'participator-name-target': 'username' } %>
+                    data: { 'participator-name-target': 'username',
+                            action: 'focusout->participator-name#changeName' } %>
 <% end %>

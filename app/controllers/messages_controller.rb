@@ -7,13 +7,12 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.create(msg_params)
-    name = current_user ? current_user.username : 'guest'
     return unless message.save
 
     ActionCable.server.broadcast(
       'room_channel',
       { content: message.content,
-        name:,
+        name: params.require(:message)[:username],
         time: Time.now.strftime('%y / %m / %d %T') }
     )
   end

@@ -1,9 +1,13 @@
 <div class="textchat">
   <header class="flex items-center">
     <p>text chat</p>
-    <%= form_for Message.new, html: { class: "inline-block m-1.5 p-3" }, data: { controller: 'textchat', remote: true } do |f| %>
+    <%= form_with model: Message.new,
+      html: { class: "inline-block m-1.5 p-3" },
+      data: { controller: 'textchat',
+              action: 'textchat#readName:prevent' } do |f| %>
       <%= f.text_field :content, class: "border px-1.5 text-black", data: { 'textchat-target': 'input' } %>
-      <%= f.submit class: "disabled:opacity-50 cursor-pointer p-1 border border-red-300 bg-black text-red-300" %>
+      <%= f.submit class: "disabled:opacity-50 cursor-pointer p-1 border border-red-300 bg-black text-red-300",
+        data: { disable_with: false } %>
     <% end %>
   </header>
   <hr>
