@@ -26,8 +26,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new(question_id: @question.id)
-    @comments = @question.comments.where(parent_id: nil).includes(:user).order(id: :desc)
+    @comment = @question.comments.new
+    @comments = @question.comments.where(parent_id: nil).order(id: :desc)
   end
 
   def edit; end
