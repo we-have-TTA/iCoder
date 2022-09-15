@@ -113,7 +113,7 @@ export default class extends Controller {
     setTimeout(() => {
       this.questions_displayTarget.classList.add("translate-y-36")
       this.questions_displayTarget.classList.remove("opacity-0")
-    },200);
+    },100);
     const roomID = this.element.dataset.room_id
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
@@ -121,7 +121,7 @@ export default class extends Controller {
       success: (result) => {
         let html = ""
         let cardMove = -30
-        this.team_nameTarget.textContent=`${result.team.name} questions`
+        this.team_nameTarget.textContent=`${result.team.name} 的題庫`
         result.question.forEach((question) => {
           cardMove += 30
           html += `<tr data-action="click->editor#displayQuestionsItem"
@@ -156,7 +156,6 @@ export default class extends Controller {
 
   displayQuestionsItem(e) {
     const roomID = this.element.dataset.room_id
-    console.log(e.currentTarget.id)
     const questionId = e.currentTarget.id
     const questionItem = this.questions_itemTargets
     for (let i = 0; i<questionItem.length; i++) {
@@ -171,7 +170,7 @@ export default class extends Controller {
       success: (result) => {
         const questionIdArr = result.question.map((question)=>question.id)
         const questionFind = questionIdArr.indexOf(Number(questionId))
-        let informationHtml = `<div class=" border-b">
+        let informationHtml = `<div class=" border-b" style="height: 20%">
                                  <div class=" font-bold text-lg px-5 py-3">
                                    ${result.question[questionFind].title}
                                  </div>
@@ -183,7 +182,7 @@ export default class extends Controller {
                                    Create At ${result.question[questionFind].created_at.split("T")[0]}
                                  </div>
                                </div>
-                               <div class=" border-t">
+                               <div class=" border-t" style="height: 10%">
                                  <span class=" pl-5 pt-1 inline-block">
                                    <span class="transition duration-700 border-b py-2 inline-block text-gray-600 hover:border-gray-900 cursor-pointer"
                                          data-action="click->editor#displayCode"
@@ -201,13 +200,15 @@ export default class extends Controller {
                                    </span>
                                  </span>
                                </div>
-                               <div class="question-codejar-wrap">
-                               <div data-editor-target="questions_code">
-                                 ${result.question[questionFind].code}
+                               <div class="question-codejar-wrap p-2 pl-4" style="height:55%">
+                                 <div data-editor-target="questions_code">
+                                   ${result.question[questionFind].code}
+                                 </div>
                                </div>
-                               </div>
-                               <div class=" w-full text-center mt-5"
+                               <div class=" w-full text-center relative"
+                                    style="height: 15%"
                                     id=${questionFind}>
+                                 <div class=" absolute h-1/2 top-0 bottom-0 left-0 right-0 m-auto">
                                  <a href="/dashboard/questions/${result.question[questionFind].id}/edit" target="_blank">
                                    <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100">
                                      編輯
@@ -218,6 +219,7 @@ export default class extends Controller {
                                          id=${questionFind}>
                                    加入
                                  </button>
+                                 </div>
                                </div>`
         this.questions_informationTarget.innerHTML = ""
         this.questions_informationTarget.insertAdjacentHTML("afterbegin", informationHtml)
