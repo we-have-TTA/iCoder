@@ -4,9 +4,10 @@
     <%= link_to "進行視訊通話", "#" %>
   </div>
   <div>
-    <div data-controller = "roomtitle">
+    <div data-controller = "roomtitle"s
+         data-room_id="<%= room.id %>">
       <button data-action="click->roomtitle#changeTitle"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg"class="h-7 w-7"></button>
-      <span data-roomtitle-target="title"><%= room.title %></span>
+      <span data-roomtitle-target="title" ><%= room.title %></span>
     </div>
     <%= link_to "設定", "#" %>
     <%= link_to "結束面試", rooms_path %>
