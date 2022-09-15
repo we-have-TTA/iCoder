@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["certain", "nocertain", "title", "input"]
   changeTitle() {
     sessionStorage["roomTitle"] = this.titleTarget.textContent
-    this.element.innerHTML = `<input data-roomtitle-target="input" class="text-black" type="text">
+    this.element.innerHTML = `<input data-roomtitle-target="input" class="text-black" type="text" maxlength="12">
                               <button data-action="click->roomtitle#no_revise_roomtitle">取消</button>
                               <button data-action="click->roomtitle#revise_roomtitle">確認</button>`
   }
