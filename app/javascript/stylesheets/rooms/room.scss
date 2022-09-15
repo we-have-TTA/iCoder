@@ -104,3 +104,11 @@
 .shiny {
   @apply animate-pulse bg-gray-300
 }
+
+.black-cover-bg {
+  @apply w-full h-full fixed top-0 left-0 bg-black bg-opacity-50
+}
+
+.white-card {
+  @apply w-3/4 mx-auto relative left-0 right-0 bg-white border h-2/3 rounded-md transition duration-700 transform
+}

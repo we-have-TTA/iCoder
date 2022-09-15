@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @rooms_count = current_user.team.rooms.where(status: "Not Started").size
   end
 
   def show
@@ -17,8 +18,12 @@ class RoomsController < ApplicationController
 
   def create
     # TODO: move to model
-    rnd = SecureRandom.alphanumeric(6).upcase
-    room = Room.new(
+    rooms_count = params[:rooms_count].to_i
+    if (rooms_count > 1)
+      return
+    else
+      rnd = SecureRandom.alphanumeric(6).upcase
+      room = Room.new(
       uuid: rnd,
       title: "未命名的會議室 - #{rnd}",
       status: 'Not Started',
@@ -29,6 +34,8 @@ class RoomsController < ApplicationController
     )
     room.save
     redirect_to "/#{room.uuid}"
+    end
+    
   end
 
   def create_runtime
@@ -91,6 +98,11 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     redirect_to rooms_path
+  end
+
+  def rooms_count
+    rooms_count = current_user.team.rooms.where(status: "Not Started").size
+    render json: { rooms_count: rooms_count }
   end
 
   private

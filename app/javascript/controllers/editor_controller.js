@@ -324,13 +324,12 @@ export default class extends Controller {
   }
 
   close (e) {
-    console.log(e.target.dataset.action)
     if (e.target.dataset.action === "click->editor#close") {
       this.questions_displayTarget.classList.remove("translate-y-36")
       this.questions_displayTarget.classList.add("opacity-0")
-    setTimeout(() => {
+      setTimeout(() => {
       this.team_questionTarget.classList.add("hidden")
-    }, 500);
+      }, 500);
     }
   }
 }

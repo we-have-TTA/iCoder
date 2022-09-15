@@ -1,6 +1,8 @@
-<div class="flex justify-between mt-3">
+<div class="flex justify-between mt-3"
+     data-controller="permission">
   <h2 class="text-2xl font-bold">會議室目錄</h2>
-  <%= link_to "新增會議室", rooms_path, method: "post", target: "_blank", class: "btn-dashboard-create" %>
+  <%= link_to "新增會議室", rooms_path(rooms_count: @rooms_count), method: "post", target: "_blank", class: "btn-dashboard-create",data: {action: "permission#checkPermission", "permission-target": "control_button","create-permission": "enable"}%>
+  
 </div>
 <span class="block mb-10">管理您的會議室，新增會議、進行查詢、調整及刪除。</span>
 <div>
