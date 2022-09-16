@@ -41,13 +41,14 @@
       }
     }
     .result-box {
-      @apply  bg-gray-700 rounded-md p-2;
+      @apply bg-gray-700 rounded-md p-2;
       width: calc(100% - 65px);
       position: absolute;
       left: 50px;
       bottom: 20px;
-      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
-    }    
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%),
+        0 3px 1px -2px rgb(0 0 0 / 20%);
+    }
   }
   .web-console {
     @apply w-1/2 bg-black p-2;
@@ -79,28 +80,29 @@
   padding: 10px;
   margin-top: 10px;
   tab-size: 2;
-  @apply bg-gray-200
+  @apply bg-gray-200;
 }
 
 .codejar-wrap {
   position: relative;
   height: calc(100vh - 170px);
-  .editor{
+  .editor {
     height: 100%;
   }
 }
 
 .question-codejar-wrap {
-  .editor{
+  .editor {
     height: 100%;
-    @apply bg-gray-50
+    @apply bg-gray-50;
   }
 }
 
 .box-shadow {
-  box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 14%), 0 0 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+  box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 14%), 0 0 5px 0 rgb(0 0 0 / 12%),
+    0 3px 1px -2px rgb(0 0 0 / 20%);
 }
 
 .shiny {
-  @apply animate-pulse bg-gray-300
+  @apply animate-pulse bg-gray-300;
 }

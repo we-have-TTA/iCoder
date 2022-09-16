@@ -8,8 +8,10 @@
     <li>難易度:<%= @question.difficulty %></li>
     <li>面試官資訊:<%= @question.internal_description %></li>
     <li>面試說明:<%= @question.candidate_instructions %></li>
-    <li>題目內容:<%= @question.code %></li>
   </ul>
+  <div class="mb-5" data-controller="editor" data-question-id="<%= @question.id %>">
+    <div class="editor" data-editor-target="panel" data-edit="false"></div>
+  </div>
   <div class="btnstyle_dashboard">
     <%= link_to "返回",   questions_path %>
   </div>
