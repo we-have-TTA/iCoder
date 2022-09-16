@@ -5,6 +5,7 @@ import hljs from "highlight.js"
 // Import line numbers helper.
 import { withLineNumbers } from "codejar/linenumbers"
 import consumer from "../channels/consumer"
+import { v4 as uuidv4 } from "uuid"
 
 export default class extends Controller {
   static targets = [
@@ -38,7 +39,7 @@ export default class extends Controller {
   }
 
   getSessionID() {
-    return (sessionStorage["sessionID"] ||= self.crypto.randomUUID())
+    return (sessionStorage["sessionID"] ||= uuidv4())
   }
 
   _cableConnected() {
