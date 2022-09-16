@@ -1,6 +1,7 @@
 <%= form_with model: current_participator,
   url: '',
-  data: { controller: 'participator-name' } do |f| %>
+  data: { controller: 'participator-name',
+          action: 'participator-name#stop:prevent' } do |f| %>
   <%= f.text_field :username,
     required: true,
     data: { 'participator-name-target': 'username',

@@ -30,8 +30,8 @@ export default class extends Controller {
         "afterbegin",
         `<div class="box">
           <form action="" data-action="participator-name#changeName:prevent">
-            <input class="text-black" type="text" placeholder="你的名字" required="true">
-            <p class="text-black">${previousName}</p> <button class="btnstyle_dashboard" data-action="participator-name#usePreviousName">使用之前名字</button>
+            <input class="text-black" type="text" placeholder="你的名字" required="true" value=${previousName}>
+            <input type="submit">
           </form>
         </div>`
       )
@@ -41,6 +41,7 @@ export default class extends Controller {
         `<div class="box">
           <form action="" data-action="participator-name#changeName:prevent">
             <input class="text-black" type="text" placeholder="你的名字" required="true">
+            <input type="submit">
           </form>
         </div>`
       )
@@ -48,7 +49,7 @@ export default class extends Controller {
 
     this.element.append(myModal)
   }
-  usePreviousName() {
-    this.modalTarget.remove()
+  stop() {
+    document.querySelector("#message_content").focus()
   }
 }
