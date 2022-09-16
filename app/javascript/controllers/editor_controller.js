@@ -28,9 +28,11 @@ export default class extends Controller {
     "questions_display",
   ]
 
-  getuuid() {
-    return (sessionStorage["room-uuid"] ||=
-      document.getElementById("web-console").dataset.roomuuid)
+  getRoomUUID() {
+    return (sessionStorage["room-uuid"] ||= document.location.pathname.replace(
+      "/",
+      ""
+    ))
   }
 
   getLanguage() {
@@ -44,31 +46,31 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
-    console.log("stimulus connected")
   }
 
   _cableDisconnected() {
     // Called when the subscription has been terminated by the server
   }
 
-  _cableReceived({ sessionID, type, body }) {
+  _cableReceived({ sessionID, code }) {
     // Called when there's incoming data on the websocket for this channel
-    console.log("stimulus received data")
-    if (sessionStorage["sessionID"] === sessionID) {
-      return
-    }
-
-    if (type === "code") {
-      CodeJar(this.panelTarget, hljs.highlightElement).updateCode(body.code)
+    if (sessionStorage["sessionID"] !== sessionID) {
+      CodeJar(this.panelTarget, hljs.highlightElement).updateCode(code.content)
     }
   }
 
   connect() {
-    this.channel = consumer.subscriptions.create("RoomChannel", {
-      connected: this._cableConnected.bind(this),
-      disconnected: this._cableDisconnected.bind(this),
-      received: this._cableReceived.bind(this),
-    })
+    this.channel = consumer.subscriptions.create(
+      {
+        channel: "RoomEditorChannel",
+        uuid: this.getRoomUUID(),
+      },
+      {
+        connected: this._cableConnected.bind(this),
+        disconnected: this._cableDisconnected.bind(this),
+        received: this._cableReceived.bind(this),
+      }
+    )
 
     const questionId = this.element.dataset.questionId
     if (questionId) {
@@ -108,7 +110,7 @@ export default class extends Controller {
     }
 
     CodeJar(this.panelTarget, hljs.highlightElement).onUpdate((code) => {
-      const uuid = this.getuuid()
+      const uuid = this.getRoomUUID()
       const data = {
         code: code,
         language: this.getLanguage(),
@@ -119,18 +121,14 @@ export default class extends Controller {
         url: `/api/v1/rooms/${uuid}/code`,
         type: "post",
         data: new URLSearchParams(data).toString(),
-        success: () => {
-          console.log("ok")
-        },
-        error: () => {
-          console.log("no")
-        },
+        success: () => {},
+        error: () => {},
       })
     })
     this.toggleLanguageMenu()
   }
 
-  transCode(e) {
+  transCode() {
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
     const field = document.createElement("input")
     field.setAttribute("type", "hidden")
@@ -148,7 +146,7 @@ export default class extends Controller {
   run() {
     const language = getLanguage()
     const roomID = this.element.dataset.room_id
-    const uuid = getuuid()
+    const uuid = getRoomUUID()
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
     const strArray = jar.toString()
     const data = {

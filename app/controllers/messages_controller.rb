@@ -6,23 +6,16 @@ class MessagesController < ApplicationController
   end
 
   def create
-    message = Message.create(msg_params)
-    return unless message.save
+    @room = Room.find_by!(uuid: params[:uuid])
+    @message = Message.new(msg_params)
+    return unless @message.save
 
-    ActionCable.server.broadcast(
-      'room_channel',
-      { type: 'message',
-        body: {
-          content: message.content,
-          name: params.require(:message)[:username],
-          time: Time.now.strftime('%y / %m / %d %T')
-        } }
-    )
+    RoomChatChannel.broadcast_to(@room, @message)
   end
 
   private
 
   def msg_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :username)
   end
 end

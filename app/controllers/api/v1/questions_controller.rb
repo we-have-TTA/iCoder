@@ -17,24 +17,15 @@ module Api
       end
 
       def send_code
-        code = Code.create(
-          content: codes_params[:code],
-          room: Room.find_by(uuid: codes_params[:uuid]),
-          language: codes_params[:language]
+        @room = Room.find_by!(uuid: params[:uuid])
+        code = Code.new(
+          content: params[:code],
+          room: @room,
+          language: params[:language]
         )
+        code.save if Time.now - @room.codes.last.created_at > 5.seconds
 
-        ActionCable.server.broadcast(
-          'room_channel',
-          {
-            type: 'code',
-            sessionID: params[:sessionID],
-            body: {
-              code: code.content,
-              language: code.language,
-              time: Time.now.strftime('%y / %m / %d %T')
-            }
-          }
-        )
+        RoomEditorChannel.broadcast_to(@room, { sessionID: params[:sessionID], code: })
       end
       # when user type in editor, raise request to server,
       # url: post /api/v1/rooms/id/code
@@ -45,12 +36,6 @@ module Api
       #     create code
       #   end
       # ActionCable.server.broadcast
-
-      private
-
-      def codes_params
-        params.permit(:code, :language, :uuid)
-      end
     end
   end
 end
