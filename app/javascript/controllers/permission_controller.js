@@ -9,7 +9,6 @@ export default class extends Controller {
       url: "/dashboard/rooms/team_plan",
       type: "get",
       success: ({ permission, rooms_count }) => {
-        console.log(permission)
         if (!permission && rooms_count >= 2) {
           this.control_buttonTarget.disabled=true
           this.control_buttonTarget.setAttribute("data-create-permission","disable")

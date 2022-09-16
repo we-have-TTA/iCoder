@@ -105,6 +105,13 @@ class RoomsController < ApplicationController
     render json: { permission: current_user.team.plan == "vip", rooms_count:  }
   end
 
+  def countdown
+    rooms = current_user.team.rooms.select("uuid","created_at")
+    rooms_duration = rooms.map do |room| {uuid: room[:uuid],existTime: (Time.now - room[:created_at]).to_i}
+                              end
+    render json: { rooms_duration: }
+  end
+
   private
 
   def find_room

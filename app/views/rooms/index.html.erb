@@ -11,7 +11,8 @@
     <button>送出</button>
   </form>
 </div>
-<div data-controller="room" data-currentUserId=<%= current_user.id %> >
+<div data-controller="room"
+     data-currentUserId=<%= current_user.id %>>
   <div class="p-5 text-white bg-gray-800">
     <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
                                                data-action="click->room#filter">Only search my pads</label>
@@ -39,7 +40,14 @@
           <td><%= room.creator.username %></td>
           <td><%= room.created_at.to_s.split.first %></td>
           <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid), class: "btn-dashboard-create" %></td>
-          <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
+          <%# TODO 要更改plan ＝ vip  %>
+          <% if (Time.now-room.created_at)/3600 > 24 || current_user.team.plan == ""%>
+            <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
+          <% else %>
+            <td data-room-target="countdown"
+                data-room_uuid=<%= room.uuid %>
+                class="whitespace-pre"><svg class="animate-spin mx-4 h-8 w-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
