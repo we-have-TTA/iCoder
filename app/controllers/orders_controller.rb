@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
 
     if result.success?
       @order.pay!
-      redirect_to '/', notice: '恭喜升級為寶石團隊'
+      redirect_to '/', notice: '感謝贊助！'
     else
       @order.fail!
       redirect_to '/', notice: '交易失敗請重新提交訂單'

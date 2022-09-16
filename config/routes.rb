@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :members, controller: :teams, only: %i[index new create destroy]
     resource :teams, only:[:edit, :update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
-    get 'rooms/rooms_count', action: 'rooms_count', controller: :rooms
+    get 'rooms/team_plan', action: 'team_plan', controller: :rooms
     resources :questions do
       resources :comments, shallow: true, only: %i[create update destroy]
     end

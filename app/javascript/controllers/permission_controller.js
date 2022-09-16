@@ -6,11 +6,11 @@ export default class extends Controller {
 
   connect() {
     Rails.ajax({
-      url: "/dashboard/rooms/rooms_count",
+      url: "/dashboard/rooms/team_plan",
       type: "get",
-      success: ({ rooms_count }) => {
-        console.log(rooms_count)
-        if (rooms_count > 1) {
+      success: ({ permission, rooms_count }) => {
+        console.log(permission)
+        if (!permission && rooms_count >= 2) {
           this.control_buttonTarget.disabled=true
           this.control_buttonTarget.setAttribute("data-create-permission","disable")
           }
