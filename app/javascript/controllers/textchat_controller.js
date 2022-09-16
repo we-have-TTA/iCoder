@@ -6,7 +6,6 @@ export default class extends Controller {
     field.setAttribute("type", "hidden")
     field.setAttribute("name", "message[username]")
     const name = localStorage["username"]
-    console.log(name)
     if (name) {
       field.setAttribute("value", name)
     } else {

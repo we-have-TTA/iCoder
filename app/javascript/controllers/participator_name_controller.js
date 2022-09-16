@@ -21,7 +21,6 @@ export default class extends Controller {
     }
   }
   modal(previousName) {
-    console.log(previousName)
     const myModal = document.createElement("div")
     myModal.classList.add("my-modal")
     myModal.setAttribute("data-participator-name-target", "modal")

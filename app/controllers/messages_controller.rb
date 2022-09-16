@@ -11,9 +11,12 @@ class MessagesController < ApplicationController
 
     ActionCable.server.broadcast(
       'room_channel',
-      { content: message.content,
-        name: params.require(:message)[:username],
-        time: Time.now.strftime('%y / %m / %d %T') }
+      { type: 'message',
+        body: {
+          content: message.content,
+          name: params.require(:message)[:username],
+          time: Time.now.strftime('%y / %m / %d %T')
+        } }
     )
   end
 

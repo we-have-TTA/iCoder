@@ -45,6 +45,9 @@ Rails.application.routes.draw do
         post 'rooms', action: :find_rooms_by_user, controller: :rooms
         patch '/', action: :update
       end
+      scope 'rooms' do
+        post '/:uuid/code', action: :send_code, controller: :questions, as: :send_code
+      end
       resources :rooms, only: [] do
         member do
           post :run

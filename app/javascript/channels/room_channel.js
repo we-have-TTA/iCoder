@@ -2,14 +2,19 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create("RoomChannel", {
   connected() {
-    console.log("im connected")
+    console.log("connect to RoomChannel")
   },
 
-  disconnected() {},
+  received({ sessionID, type, body }) {
+    if (sessionStorage["sessionID"] === sessionID) {
+      return
+    }
 
-  received({ content, name, time }) {
-    const msg = document.querySelector("#msg")
-    const message = `<div class="message">${name} says: ${content} -- ${time}</div>`
-    msg.insertAdjacentHTML("afterbegin", message)
+    if (type === "message") {
+      const { content, name, time } = body
+      const msg = document.querySelector("#msg")
+      const message = `<div class="message">${name} says: ${content} -- ${time}</div>`
+      msg.insertAdjacentHTML("afterbegin", message)
+    }
   },
 })

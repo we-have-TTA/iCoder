@@ -4,6 +4,7 @@ import { CodeJar } from "codejar"
 import hljs from "highlight.js"
 // Import line numbers helper.
 import { withLineNumbers } from "codejar/linenumbers"
+import consumer from "../channels/consumer"
 
 export default class extends Controller {
   static targets = [
@@ -25,7 +26,49 @@ export default class extends Controller {
     "questions_instruction",
     "questions_display",
   ]
+
+  getuuid() {
+    return (sessionStorage["room-uuid"] ||=
+      document.getElementById("web-console").dataset.roomuuid)
+  }
+
+  getLanguage() {
+    return (sessionStorage["room-language"] ||=
+      document.getElementById("current_language").textContent)
+  }
+
+  getSessionID() {
+    return (sessionStorage["sessionID"] ||= self.crypto.randomUUID())
+  }
+
+  _cableConnected() {
+    // Called when the subscription is ready for use on the server
+    console.log("stimulus connected")
+  }
+
+  _cableDisconnected() {
+    // Called when the subscription has been terminated by the server
+  }
+
+  _cableReceived({ sessionID, type, body }) {
+    // Called when there's incoming data on the websocket for this channel
+    console.log("stimulus received data")
+    if (sessionStorage["sessionID"] === sessionID) {
+      return
+    }
+
+    if (type === "code") {
+      CodeJar(this.panelTarget, hljs.highlightElement).updateCode(body.code)
+    }
+  }
+
   connect() {
+    this.channel = consumer.subscriptions.create("RoomChannel", {
+      connected: this._cableConnected.bind(this),
+      disconnected: this._cableDisconnected.bind(this),
+      received: this._cableReceived.bind(this),
+    })
+
     const questionId = this.element.dataset.questionId
     if (questionId) {
       Rails.ajax({
@@ -62,6 +105,27 @@ export default class extends Controller {
         CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
       }
     }
+
+    CodeJar(this.panelTarget, hljs.highlightElement).onUpdate((code) => {
+      const uuid = this.getuuid()
+      const data = {
+        code: code,
+        language: this.getLanguage(),
+        uuid: uuid,
+        sessionID: this.getSessionID(),
+      }
+      Rails.ajax({
+        url: `/api/v1/rooms/${uuid}/code`,
+        type: "post",
+        data: new URLSearchParams(data).toString(),
+        success: () => {
+          console.log("ok")
+        },
+        error: () => {
+          console.log("no")
+        },
+      })
+    })
     this.toggleLanguageMenu()
   }
 
@@ -81,9 +145,9 @@ export default class extends Controller {
   }
 
   run() {
-    const language = document.getElementById("current_language").textContent
+    const language = getLanguage()
     const roomID = this.element.dataset.room_id
-    const uuid = document.getElementById("web-console").dataset.roomuuid
+    const uuid = getuuid()
     const jar = CodeJar(this.panelTarget, hljs.highlightElement)
     const strArray = jar.toString()
     const data = {
