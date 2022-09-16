@@ -12,9 +12,8 @@
   <div class="mb-5" data-controller="editor" data-question-id="<%= @question.id %>">
     <div class="editor" data-editor-target="panel" data-edit="false"></div>
   </div>
-  <div class="btnstyle_dashboard">
-    <%= link_to "返回",   questions_path %>
-  </div>
+  <%= link_to "返回", questions_path, class:"btnstyle_dashboard" %>
+  <%= link_to "創建會議", rooms_path(question: @question.id), method: "post", target: "_blank", class:"btnstyle_dashboard"%>
 </section>
 <section>
   <p class="font-bold text-3xl mb-5">留言區：</p>
