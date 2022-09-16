@@ -23,7 +23,7 @@ module Api
           room: @room,
           language: params[:language]
         )
-        code.save if Time.now - @room.codes.last.created_at > 5.seconds
+        code.save if ((@room.codes.empty?) || (Time.now - @room.codes.last.created_at > 5.seconds))
 
         RoomEditorChannel.broadcast_to(@room, { sessionID: params[:sessionID], code: })
       end
