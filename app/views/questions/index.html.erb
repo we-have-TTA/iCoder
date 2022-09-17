@@ -1,6 +1,7 @@
 <div class="flex justify-between mt-3">
   <h2 class="font-bold text-2xl">面試題庫目錄</h2>
-  <%= link_to "新增題目", new_question_path, class: "btn-dashboard-create" %></div>
+  <%= link_to "新增題目", new_question_path, class: "btn-dashboard-create" %>
+</div>
 <span class="block mb-10">管理您的面試題庫，新增題目、進行查詢、調整及刪除。</span>
 <div class="rounded">
   <div>
@@ -40,7 +41,9 @@
           </tr>
         <% end %>
       <% end %>
+      <div>
+        <%== pagy_nav(@pagy) %>
+      </div>
     </tbody>
   </table>
-</div>
 </div>
