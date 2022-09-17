@@ -1,6 +1,7 @@
 <div class="flex justify-between mt-3">
   <h2 class="font-bold text-2xl">面試題庫目錄</h2>
-  <%= link_to "新增題目", new_question_path, class: "btn-dashboard-create" %></div>
+  <%= link_to "新增題目", new_question_path, class: "btn-dashboard-create" %>
+</div>
 <span class="block mb-10">管理您的面試題庫，新增題目、進行查詢、調整及刪除。</span>
 <div class="rounded">
   <div>
@@ -33,13 +34,16 @@
             <td><%= question.difficulty %></td>
             <td><%= question.creator.username %></td>
             <td><%= question.created_at.to_s.split.first %></td>
-            <td><%= link_to "檢視", question_path(question.id), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "修改", edit_question_path(question.id), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "刪除", question_path(question.id), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
+            <td><%= link_to "創建會議", rooms_path(question: question.id), method: "post", target: "_blank", class: "btn-dashboard-create" %></td>
+            <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
+            <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
+            <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
           </tr>
         <% end %>
       <% end %>
+      <div>
+        <%== pagy_nav(@pagy) %>
+      </div>
     </tbody>
   </table>
-</div>
 </div>
