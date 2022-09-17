@@ -12,7 +12,8 @@
   </form>
 </div>
 <div data-controller="room"
-     data-currentUserId=<%= current_user.id %>>
+     data-currentUserId=<%= current_user.id %>
+     data-countdown_standard=<%= @countdown_standard%>>
   <div class="p-5 text-white bg-gray-800">
     <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
                                                data-action="click->room#filter">Only search my pads</label>
@@ -41,7 +42,7 @@
           <td><%= room.created_at.to_s.split.first %></td>
           <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid), class: "btn-dashboard-create" %></td>
           <%# TODO 要更改plan ＝ vip  %>
-          <% if (Time.now-room.created_at)/3600 > 24 || current_user.team.plan == ""%>
+          <% if (Time.now-room.created_at)/3600 > @countdown_standard || current_user.team.plan == "vip"%>
             <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
           <% else %>
             <td data-room-target="countdown"

@@ -10,11 +10,11 @@ export default class extends Controller {
       type: "get",
       success: ( {rooms_duration} ) => {
         const deleteButton = this.countdownTargets
-        const permission = this.element.dataset.permission
+        const countdownStandard = (this.element.dataset.countdown_standard*60*60)
         deleteButton.forEach((target)=> {
           rooms_duration.forEach((room) => {
             if (target.dataset.room_uuid == room.uuid) {
-              let offsetTime = Number(86400-room.existTime)
+              let offsetTime = Number(countdownStandard-room.existTime)
               setInterval(()=> {
                 offsetTime -= 1
                 let sec = String(parseInt(offsetTime % 60)).padStart(2,'0')
