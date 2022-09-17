@@ -18,10 +18,6 @@ class RoomsController < ApplicationController
 
   def create
     # TODO: move to model
-    # rooms_count = params[:rooms_count].to_i
-    # if (rooms_count > 1)
-    #   return
-    # else
     rnd = SecureRandom.alphanumeric(6).upcase
     room = Room.new(
       uuid: rnd,
@@ -35,8 +31,6 @@ class RoomsController < ApplicationController
     authorize room
     room.save
     redirect_to "/#{room.uuid}"
-    # end
-    
   end
 
   def create_runtime
@@ -102,14 +96,15 @@ class RoomsController < ApplicationController
   end
 
   def team_plan
-    rooms_count = current_user.team.rooms.where(status: "Not Started").size
-    render json: { permission: current_user.team.plan == "vip", rooms_count:  }
+    rooms_count = current_user.team.rooms.where(status: 'Not Started').size
+    render json: { permission: current_user.team.plan == 'vip', rooms_count: }
   end
 
   def countdown
-    rooms = current_user.team.rooms.select("uuid","created_at")
-    rooms_duration = rooms.map do |room| {uuid: room[:uuid],existTime: (Time.now - room[:created_at]).to_i}
-                              end
+    rooms = current_user.team.rooms.select('uuid', 'created_at')
+    rooms_duration = rooms.map do |room|
+      { uuid: room[:uuid], existTime: (Time.now - room[:created_at]).to_i }
+    end
     render json: { rooms_duration: }
   end
 
