@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
   def no_permission
-    redirect_to "/", notice: "無此操作權限"
+    redirect_to '/', notice: '無此操作權限'
   end
 end
