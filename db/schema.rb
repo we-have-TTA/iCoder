@@ -125,6 +125,8 @@ ActiveRecord::Schema.define(version: 2022_09_16_175914) do
     t.bigint "team_id", null: false
     t.bigint "user_id", null: false
     t.string "uuid"
+    t.bigint "question_id"
+    t.index ["question_id"], name: "index_rooms_on_question_id"
     t.index ["team_id"], name: "index_rooms_on_team_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
