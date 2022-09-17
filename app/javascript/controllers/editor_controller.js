@@ -54,8 +54,19 @@ export default class extends Controller {
 
   _cableReceived({ sessionID, code }) {
     // Called when there's incoming data on the websocket for this channel
-    if (sessionStorage["sessionID"] !== sessionID) {
-      CodeJar(this.panelTarget, hljs.highlightElement).updateCode(code.content)
+    // 自己發出的訊息不處理
+    if (sessionStorage["sessionID"] === sessionID) {
+      return
+    }
+
+    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
+
+    // 編輯器更新資料
+    jar.updateCode(code.content)
+
+    // 回復游標位置
+    if (sessionStorage["cursor_position"]) {
+      jar.restore(JSON.parse(sessionStorage["cursor_position"]))
     }
   }
 
@@ -123,7 +134,8 @@ export default class extends Controller {
     //             1. sessionID
     //             2. code 物件
     //                前端接收到廣播訊息後渲染至編輯器上（別人打的 code 同步在自己畫面上）
-    CodeJar(this.panelTarget, hljs.highlightElement).onUpdate((code) => {
+    const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
+    _jar.onUpdate((code) => {
       const uuid = this.getRoomUUID()
       const data = {
         code: code,
@@ -138,6 +150,7 @@ export default class extends Controller {
         success: () => {},
         error: () => {},
       })
+      sessionStorage["cursor_position"] = JSON.stringify(_jar.save())
     })
     this.toggleLanguageMenu()
   }
