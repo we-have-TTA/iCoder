@@ -52,6 +52,22 @@ module Api
       def catch_questions
         render json: { question: Question.where(team: current_user.team), team: current_user.team, user: User.all }
       end
+
+      def change_roomtitle
+        # params.input.update(params_input)
+        room = Room.find(params[:id])
+        if room.update(title: params_input[:input])
+          render json: { messages: 'ok' }
+        else
+          render json: { messages: 'notok' }
+        end
+      end
+
+      private
+
+      def params_input
+        params.permit(:input, :id)
+      end
     end
   end
 end
