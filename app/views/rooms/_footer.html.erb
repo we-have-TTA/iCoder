@@ -1,7 +1,11 @@
-<footer class="room-footer">
+<footer class="room-footer"
+        data-controller="footer">
   <div>
     <%= link_to "邀請", "/#{@room.uuid}/invite" %>
     <%= link_to "進行視訊通話", "#" %>
+  </div>
+  <div data-footer-target="timer">
+    <span class = " text-lg font-bold">00:00:01</span>
   </div>
   <div>
     <span><%= room.title %></span>
