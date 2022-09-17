@@ -40,6 +40,9 @@
           <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
         </tr>
       <% end %>
+      <div>
+        <%== pagy_nav(@pagy) %>
+      </div>
     </tbody>
   </table>
 </div>

@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @pagy, @rooms = pagy(@rooms, items: 5)
   end
 
   def show
@@ -16,7 +17,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    # TODO: move to model
+    # TODO: move to
     rnd = SecureRandom.alphanumeric(6).upcase
     room = Room.new(
       uuid: rnd,
@@ -25,7 +26,8 @@ class RoomsController < ApplicationController
       category: 'Live',
       language: 'JavaScript',
       creator: current_user,
-      team: current_user.team
+      team: current_user.team,
+      question_id: params[:question]
     )
     room.save
     redirect_to "/#{room.uuid}"
@@ -104,6 +106,6 @@ class RoomsController < ApplicationController
   end
 
   def rooms_params
-    params.require(:room).permit(:title, :language, :category, :status).merge(team: current_user.team)
+    params.require(:room).permit(:title, :language, :category, :status, :question).merge(team: current_user.team)
   end
 end
