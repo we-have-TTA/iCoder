@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @pagy, @rooms = pagy(@rooms, items: 5)
   end
 
   def show
