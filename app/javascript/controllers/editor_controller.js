@@ -29,10 +29,21 @@ export default class extends Controller {
   ]
 
   getRoomUUID() {
-    return (sessionStorage["room-uuid"] ||= document.location.pathname.replace(
-      "/",
-      ""
-    ))
+    // 如果 sessionStorage 沒有 room-uuid, 就將目前網址送去後端驗證是否存在, 通過後儲存在 sessionStorage
+    if (
+      document.location.pathname.replace("/", "") !==
+      sessionStorage["room-uuid"]
+    ) {
+      const roomUUID = document.location.pathname.replace("/", "")
+
+      Rails.ajax({
+        url: `/api/v1/room/check?uuid=${roomUUID}`,
+        type: "get",
+        success: () => sessionStorage.setItem("room-uuid", roomUUID),
+        error: () => sessionStorage.removeItem("room-uuid"),
+      })
+    }
+    return sessionStorage["room-uuid"]
   }
 
   getLanguage() {
@@ -96,12 +107,12 @@ export default class extends Controller {
           )
           jar.updateCode(code)
           const changeLanguage = {
-          Ruby: this.RubyTarget,
-          Javascript: this.JavascriptTarget,
-          Python: this.PythonTarget,
-          Elixir: this.ElixirTarget
-        }
-        changeLanguage[language].click()
+            Ruby: this.RubyTarget,
+            Javascript: this.JavascriptTarget,
+            Python: this.PythonTarget,
+            Elixir: this.ElixirTarget,
+          }
+          changeLanguage[language].click()
         },
         error: () => {},
       })

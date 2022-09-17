@@ -64,6 +64,10 @@ module Api
         end
       end
 
+      def check
+        Room.find_by(uuid: params[:uuid]) ? (head :ok) : (head :bad_request)
+      end
+
       private
 
       def params_input
