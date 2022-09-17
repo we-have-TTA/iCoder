@@ -109,6 +109,20 @@ export default class extends Controller {
       }
     }
 
+    // 當使用者更動了編輯器的內容時，發出一個請求，內容包括
+    //   1. 更動後的內容
+    //   2. 目前所在的 room
+    //   3. 目前所使用的程式語言（之後會在model:room 上開欄位紀錄）
+    //   4. sessionID 識別哪個瀏覽器分頁發出的請求（稍後接受到廣播訊息時可以忽略自己發出的訊息）
+    //   5. 請求送往 api::v1::questions#send_code
+    //      內容有
+    //        1. 嘗試紀錄接收內容於資料庫 Code.new
+    //        2.   如果最近一筆資料在五秒內建立的話，不紀錄於資料庫
+    //        3. 對該房間的頻道訂閱者廣播訊息
+    //           內容有
+    //             1. sessionID
+    //             2. code 物件
+    //                前端接收到廣播訊息後渲染至編輯器上（別人打的 code 同步在自己畫面上）
     CodeJar(this.panelTarget, hljs.highlightElement).onUpdate((code) => {
       const uuid = this.getRoomUUID()
       const data = {
