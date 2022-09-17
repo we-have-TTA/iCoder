@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
+  patch '/api/v1/rooms/change_roomtitle',to: 'api/v1/rooms#change_roomtitle'
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
