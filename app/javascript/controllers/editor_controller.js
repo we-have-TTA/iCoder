@@ -20,6 +20,13 @@ export default class extends Controller {
             withLineNumbers(hljs.highlightElement)
           )
           jar.updateCode(code)
+          const changeLanguage = {
+          Ruby: this.RubyTarget,
+          Javascript: this.JavascriptTarget,
+          Python: this.PythonTarget,
+          Elixir: this.ElixirTarget
+        }
+        changeLanguage[language].click()
         },
         error: () => {},
       })

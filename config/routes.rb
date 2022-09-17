@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/chats', to: 'chats#index'
   resources :messages, only:[:new, :create]
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',registrations: 'users/registrations'  }
 
   devise_scope :user do
     post '/users', to: 'users/registrations#create'
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
   end
 
+  patch '/api/v1/rooms/change_roomtitle',to: 'api/v1/rooms#change_roomtitle'
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
