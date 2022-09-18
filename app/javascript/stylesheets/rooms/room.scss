@@ -47,7 +47,16 @@
       left: 50px;
       bottom: 20px;
       box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
-    }    
+    }
+    .facetime {
+      @apply  bg-gray-300 rounded-md px-0.5 pb-4;
+      width: calc(40%);
+      height: calc(30%);
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    }       
   }
   .web-console {
     @apply w-1/2 bg-black p-2;
@@ -111,4 +120,8 @@
 
 .white-card {
   @apply w-3/4 mx-auto relative left-0 right-0 bg-white border h-2/3 rounded-md transition duration-700 transform
+}
+
+.animation {
+  @apply transition duration-1000 transform
 }
