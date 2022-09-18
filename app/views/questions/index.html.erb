@@ -38,7 +38,7 @@
             <td><%= question.created_at.to_s.split.first %></td>
             <td>
               <% if question.last_used %>
-                <%= question.last_used %>
+                <%= question.last_used.to_s.split.first %>
               <% else %>
                 尚未使用
               <% end %>
