@@ -11,7 +11,6 @@ export default class extends Controller {
   }
 
   displayCamera(){
-    console.log(this.cameraTarget.dataset.connected)
     if (this.cameraTarget.classList.contains("hidden")) {
       if (this.cameraTarget.dataset.connected == "false"){
         this.cameraTarget.children[0].children[0].children[0].children[1].children[0].click()
