@@ -36,7 +36,7 @@
             <td><%= question.difficulty %></td>
             <td><%= question.creator.username %></td>
             <td><%= question.created_at.to_s.split.first %></td>
-            <td><%= question.created_at.to_s.split.first %></td>
+            <td><%= question.last_used %></td>
             <td><%= link_to "創建會議", rooms_path(question: question.id), method: "post", target: "_blank", class: "btn-dashboard-create" %></td>
             <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
             <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
