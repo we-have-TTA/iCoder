@@ -6,6 +6,8 @@ class RoomsController < ApplicationController
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!
 
+
+
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
@@ -22,7 +24,7 @@ class RoomsController < ApplicationController
     room = Room.new(
       uuid: rnd,
       title: "未命名的會議室 - #{rnd}",
-      status: 'Not Started',
+      status: params[:status],
       category: 'Live',
       language: 'JavaScript',
       creator: current_user,
