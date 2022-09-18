@@ -6,7 +6,25 @@ import hljs from "highlight.js"
 import { withLineNumbers } from "codejar/linenumbers"
 
 export default class extends Controller {
-  static targets = ["panel", "draw", "change_language", "team_question", "team_name", "questions_list", "questions_information", "questions_code","questions_item", "Ruby", "Javascript", "Python", "Elixir", "instruction_choice", "code_choice", "questions_instruction","questions_display"]
+  static targets = [
+    "panel",
+    "draw",
+    "change_language",
+    "team_question",
+    "team_name",
+    "questions_list",
+    "questions_information",
+    "questions_code",
+    "questions_item",
+    "Ruby",
+    "Javascript",
+    "Python",
+    "Elixir",
+    "instruction_choice",
+    "code_choice",
+    "questions_instruction",
+    "questions_display",
+  ]
   connect() {
     const questionId = this.element.dataset.questionId
     if (questionId) {
@@ -21,12 +39,12 @@ export default class extends Controller {
           )
           jar.updateCode(code)
           const changeLanguage = {
-          Ruby: this.RubyTarget,
-          Javascript: this.JavascriptTarget,
-          Python: this.PythonTarget,
-          Elixir: this.ElixirTarget
-        }
-        changeLanguage[language].click()
+            Ruby: this.RubyTarget,
+            Javascript: this.JavascriptTarget,
+            Python: this.PythonTarget,
+            Elixir: this.ElixirTarget,
+          }
+          changeLanguage[language].click()
         },
         error: () => {},
       })
@@ -120,7 +138,7 @@ export default class extends Controller {
     setTimeout(() => {
       this.questions_displayTarget.classList.add("translate-y-36")
       this.questions_displayTarget.classList.remove("opacity-0")
-    },100);
+    }, 100)
     const roomID = this.element.dataset.room_id
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
@@ -128,7 +146,7 @@ export default class extends Controller {
       success: (result) => {
         let html = ""
         let cardMove = -30
-        this.team_nameTarget.textContent=`${result.team.name} 的題庫`
+        this.team_nameTarget.textContent = `${result.team.name} 的題庫`
         result.question.forEach((question) => {
           cardMove += 30
           html += `<tr data-action="click->editor#displayQuestionsItem"
@@ -147,10 +165,10 @@ export default class extends Controller {
                          ${question.language}
                        </div>
                        <div class="text-left text-gray-600">
-                         By ${result.user[question.user_id-1].username}
+                         By ${result.user[question.user_id - 1].username}
                        </div>
                      </td>
-                   </tr>`          
+                   </tr>`
         })
         this.questions_listTarget.innerHTML = ""
         this.questions_listTarget.insertAdjacentHTML("afterbegin", html)
@@ -165,28 +183,44 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     const questionItem = this.questions_itemTargets
-    for (let i = 0; i<questionItem.length; i++) {
-      questionItem[i].classList.remove("bg-gray-200","-translate-y-5","translate-x-3","scale-105")
-      questionItem[i].classList.add("hover:bg-gray-100","hover:translate-x-2")
+    for (let i = 0; i < questionItem.length; i++) {
+      questionItem[i].classList.remove(
+        "bg-gray-200",
+        "-translate-y-5",
+        "translate-x-3",
+        "scale-105"
+      )
+      questionItem[i].classList.add("hover:bg-gray-100", "hover:translate-x-2")
     }
-    e.currentTarget.classList.remove("hover:bg-gray-100","hover:translate-x-2")
-    e.currentTarget.classList.add("bg-gray-200","-translate-y-5","translate-x-3","scale-105")
+    e.currentTarget.classList.remove("hover:bg-gray-100", "hover:translate-x-2")
+    e.currentTarget.classList.add(
+      "bg-gray-200",
+      "-translate-y-5",
+      "translate-x-3",
+      "scale-105"
+    )
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-        const questionIdArr = result.question.map((question)=>question.id)
+        const questionIdArr = result.question.map((question) => question.id)
         const questionFind = questionIdArr.indexOf(Number(questionId))
         let informationHtml = `<div class=" border-b" style="height: 20%">
                                  <div class=" font-bold text-lg px-5 py-3">
                                    ${result.question[questionFind].title}
                                  </div>
                                  <div class=" px-5 text-gray-600">
-                                   ${result.question[questionFind].internal_description
+                                   ${
+                                     result.question[questionFind]
+                                       .internal_description
                                    }
                                  </div>
                                  <div class=" px-5 pb-3 text-gray-600">
-                                   Create At ${result.question[questionFind].created_at.split("T")[0]}
+                                   Create At ${
+                                     result.question[
+                                       questionFind
+                                     ].created_at.split("T")[0]
+                                   }
                                  </div>
                                </div>
                                <div class=" border-t" style="height: 10%">
@@ -216,7 +250,9 @@ export default class extends Controller {
                                     style="height: 15%"
                                     id=${questionFind}>
                                  <div class=" absolute h-1/2 top-0 bottom-0 left-0 right-0 m-auto">
-                                 <a href="/dashboard/questions/${result.question[questionFind].id}/edit" target="_blank">
+                                 <a href="/dashboard/questions/${
+                                   result.question[questionFind].id
+                                 }/edit" target="_blank">
                                    <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100">
                                      編輯
                                    </button>
@@ -229,15 +265,15 @@ export default class extends Controller {
                                  </div>
                                </div>`
         this.questions_informationTarget.innerHTML = ""
-        this.questions_informationTarget.insertAdjacentHTML("afterbegin", informationHtml)
-        this.questions_codeTarget.className = `editor ${result.question[questionFind].language}`
-        const jar = CodeJar(
-          this.questions_codeTarget,
-          hljs.highlightElement
+        this.questions_informationTarget.insertAdjacentHTML(
+          "afterbegin",
+          informationHtml
         )
-        const str=`${result.question[questionFind].code}`
+        this.questions_codeTarget.className = `editor ${result.question[questionFind].language}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionFind].code}`
         jar.updateCode(str)
-        this.questions_codeTarget.setAttribute("contenteditable",false)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -245,25 +281,30 @@ export default class extends Controller {
     })
   }
 
-  displayCode (e) {
+  displayCode(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     this.code_choiceTarget.classList.remove("border-b")
-    this.code_choiceTarget.classList.add("text-blue-700","border-gray-900","border-b-2")
-    this.instruction_choiceTarget.classList.remove("text-blue-700","border-gray-900","border-b-2")
+    this.code_choiceTarget.classList.add(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
+    this.instruction_choiceTarget.classList.remove(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
     this.instruction_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
         this.questions_codeTarget.className = `editor ${result.question[questionId].language}`
-        const jar = CodeJar(
-          this.questions_codeTarget,
-          hljs.highlightElement
-        )
-        const str=`${result.question[questionId].code}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionId].code}`
         jar.updateCode(str)
-        this.questions_codeTarget.setAttribute("contenteditable",false)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -271,26 +312,30 @@ export default class extends Controller {
     })
   }
 
-  displayInstruction (e) {
+  displayInstruction(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     this.instruction_choiceTarget.classList.remove("border-b")
-    this.instruction_choiceTarget.classList.add("text-blue-700","border-gray-900","border-b-2")
-    this.code_choiceTarget.classList.remove("text-blue-700","border-gray-900","border-b-2")
+    this.instruction_choiceTarget.classList.add(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
+    this.code_choiceTarget.classList.remove(
+      "text-blue-700",
+      "border-gray-900",
+      "border-b-2"
+    )
     this.code_choiceTarget.classList.add("border-b")
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/catch_questions`,
       type: "get",
       success: (result) => {
-        
         this.questions_codeTarget.className = `editor ${result.question[questionId].language}`
-        const jar = CodeJar(
-          this.questions_codeTarget,
-          hljs.highlightElement
-        )
-        const str=`${result.question[questionId].candidate_instructions}`
+        const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
+        const str = `${result.question[questionId].candidate_instructions}`
         jar.updateCode(str)
-        this.questions_codeTarget.setAttribute("contenteditable",false)
+        this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
         console.log(err)
@@ -298,31 +343,27 @@ export default class extends Controller {
     })
   }
 
-  addQuestion (e) {
+  addQuestion(e) {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     Rails.ajax({
-      url: `/api/v1/rooms/${roomID}/catch_questions`,
+      url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
-      success: (result) => {
-        const toLanguage = result.question[questionId].language
+      success: ({ language, code, candidate_instructions }) => {
+        const toLanguage = language
         const changeLanguage = {
           Ruby: this.RubyTarget,
           Javascript: this.JavascriptTarget,
           Python: this.PythonTarget,
-          Elixir: this.ElixirTarget
+          Elixir: this.ElixirTarget,
         }
         changeLanguage[toLanguage].click()
         this.panelTarget.className = `editor ${toLanguage}`
-        const jar = CodeJar(
-          this.panelTarget,
-          hljs.highlightElement
-        )
-        const str=`${result.question[questionId].code}`
-        jar.updateCode(str)
+        const jar = CodeJar(this.panelTarget, hljs.highlightElement)
+        jar.updateCode(code)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent=`面試說明：\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n${candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
@@ -330,14 +371,14 @@ export default class extends Controller {
     })
   }
 
-  close (e) {
+  close(e) {
     console.log(e.target.dataset.action)
     if (e.target.dataset.action === "click->editor#close") {
       this.questions_displayTarget.classList.remove("translate-y-36")
       this.questions_displayTarget.classList.add("opacity-0")
-    setTimeout(() => {
-      this.team_questionTarget.classList.add("hidden")
-    }, 500);
+      setTimeout(() => {
+        this.team_questionTarget.classList.add("hidden")
+      }, 500)
     }
   }
 }
