@@ -5,4 +5,5 @@ class Room < ApplicationRecord
   belongs_to :team
   has_one :question
   has_many :codes
+  has_many :room_participators
 end
