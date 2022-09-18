@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.where(team: current_user.team).order(id: :desc)
     @questions = @questions.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
-    @pagy, @questions = pagy(@questions, items: 5)
+    @pagy, @questions = pagy(@questions, items: 10)
   end
 
   def new
@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to questions_path, notice: '新增成功'
     else
-      render :new
+      render :new, notice:"新增失敗"
     end
   end
 
