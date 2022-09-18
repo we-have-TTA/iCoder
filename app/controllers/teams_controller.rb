@@ -20,24 +20,21 @@ class TeamsController < ApplicationController
     p User.find_by(email: params[:email])
     if User.find_by(email: params[:email]) #判斷email是否存在在資料庫
       # 用戶已註冊 寄信 -> 加入到Team
-      @register = 'true' 
-      @user = User.new(
-        username: params[:username] || params[:email].split('@').first,
-        email: params[:email]
-      )
-      @team_id = current_user.team_id
-      TeamMailer.send_invitation_to(@user, @team_id, @register).deliver_now
-      redirect_to :invite_to_team, notice: "成功邀請 #{@user.username}(#{@user.email})"
+      register = 'true' 
+      user = User.find_by(email: params[:email]) #user已存在資料庫
+      team_id = current_user.team_id
+      TeamMailer.send_invitation_to(user, team_id, register).deliver_now
+      redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
     else
       # 用戶未註冊  寄信 -> 連結放註冊畫面
-      @register = 'false' 
-      @user = User.new(
+      register = 'false' 
+      user = User.new(
         username: params[:username] || params[:email].split('@').first,
         email: params[:email]
       )
-      @team_id = current_user.team_id
-      TeamMailer.send_invitation_to(@user, @team_id, @register).deliver_now
-      redirect_to :invite_to_team, notice: "成功邀請 #{@user.username}(#{@user.email})"
+      team_id = current_user.team_id
+      TeamMailer.send_invitation_to(user, team_id, register).deliver_now
+      redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
     end
   end
 
