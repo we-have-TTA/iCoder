@@ -29,26 +29,11 @@ export default class extends Controller {
   ]
 
   getRoomUUID() {
-    // 如果 sessionStorage 沒有 room-uuid, 就將目前網址送去後端驗證是否存在, 通過後儲存在 sessionStorage
-    if (
-      document.location.pathname.replace("/", "") !==
-      sessionStorage["room-uuid"]
-    ) {
-      const roomUUID = document.location.pathname.replace("/", "")
-
-      Rails.ajax({
-        url: `/api/v1/room/check?uuid=${roomUUID}`,
-        type: "get",
-        success: () => sessionStorage.setItem("room-uuid", roomUUID),
-        error: () => sessionStorage.removeItem("room-uuid"),
-      })
-    }
-    return sessionStorage["room-uuid"]
+    return (sessionStorage["room-uuid"] ||= this.element.dataset.roomuuid)
   }
 
   getLanguage() {
-    return (sessionStorage["room-language"] ||=
-      document.getElementById("current_language").textContent)
+    return document.getElementById("current_language").textContent
   }
 
   getSessionID() {
@@ -57,6 +42,7 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
+    console.log(`cable connected`)
   }
 
   _cableDisconnected() {
@@ -66,6 +52,8 @@ export default class extends Controller {
   _cableReceived({ sessionID, code }) {
     // Called when there's incoming data on the websocket for this channel
     // 自己發出的訊息不處理
+    console.log("receive")
+    console.log(sessionID)
     if (sessionStorage["sessionID"] === sessionID) {
       return
     }
@@ -79,6 +67,8 @@ export default class extends Controller {
     if (sessionStorage["cursor_position"]) {
       jar.restore(JSON.parse(sessionStorage["cursor_position"]))
     }
+
+    jar.destroy()
   }
 
   connect() {
@@ -86,6 +76,7 @@ export default class extends Controller {
       {
         channel: "RoomEditorChannel",
         uuid: this.getRoomUUID(),
+        sessionID: this.getSessionID(),
       },
       {
         connected: this._cableConnected.bind(this),
@@ -100,19 +91,14 @@ export default class extends Controller {
         url: `/api/v1/questions/${questionId}.json`,
         type: "get",
         success: ({ language, code }) => {
-          this.panelTarget.className += ` ${language}`
+          this.panelTarget.className = `editor ${language}`
           const jar = CodeJar(
             this.panelTarget,
             withLineNumbers(hljs.highlightElement)
           )
           jar.updateCode(code)
-          const changeLanguage = {
-            Ruby: this.RubyTarget,
-            Javascript: this.JavascriptTarget,
-            Python: this.PythonTarget,
-            Elixir: this.ElixirTarget,
-          }
-          changeLanguage[language].click()
+          jar.destroy()
+          this.webConsoleChangeLanguage(language)
         },
         error: () => {},
       })
@@ -129,12 +115,17 @@ export default class extends Controller {
               withLineNumbers(hljs.highlightElement)
             )
             jar.updateCode(code)
+            this.webConsoleChangeLanguage("Ruby")
           },
           error: () => {},
         })
       } else {
-        this.panelTarget.className += ` rb`
-        CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
+        setTimeout(() => {
+          this.webConsoleChangeLanguage("Ruby")
+          this.panelTarget.className = "editor rb"
+          console.log("ME")
+          CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
+        }, 0)
       }
     }
 
@@ -170,30 +161,52 @@ export default class extends Controller {
       })
       sessionStorage["cursor_position"] = JSON.stringify(_jar.save())
     })
+
     this.toggleLanguageMenu()
   }
 
   transCode() {
-    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
     const field = document.createElement("input")
     field.setAttribute("type", "hidden")
     field.setAttribute("name", "question[code]")
+
+    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
     field.setAttribute("value", jar.toString())
+    jar.destroy()
+
     this.element.appendChild(field)
     this.element.submit()
   }
 
-  changeLanguage(e) {
-    this.panelTarget.className = `editor ${e.target.value}`
-    CodeJar(this.panelTarget, hljs.highlightElement)
+  questionFormSelectLanguage(e) {
+    this.changeLanguage(e.target.value)
+  }
+
+  changeLanguage(language) {
+    this.panelTarget.className = `editor ${language}`
+    const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
+    _jar.destroy()
+  }
+
+  webConsoleChangeLanguage(language) {
+    const changeLanguageDict = {
+      Ruby: this.RubyTarget,
+      Javascript: this.JavascriptTarget,
+      Python: this.PythonTarget,
+      Elixir: this.ElixirTarget,
+    }
+    changeLanguageDict[language].click()
   }
 
   run() {
-    const language = getLanguage()
+    const language = this.getLanguage()
     const roomID = this.element.dataset.room_id
-    const uuid = getRoomUUID()
-    const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-    const strArray = jar.toString()
+    const uuid = this.getRoomUUID()
+
+    const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
+    const strArray = _jar.toString()
+    _jar.destroy()
+
     const data = {
       code: strArray,
       language: language,
@@ -374,6 +387,7 @@ export default class extends Controller {
         const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
         const str = `${result.question[questionFind].code}`
         jar.updateCode(str)
+        jar.destroy()
         this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
@@ -405,6 +419,7 @@ export default class extends Controller {
         const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
         const str = `${result.question[questionId].code}`
         jar.updateCode(str)
+        jar.destroy()
         this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
@@ -436,6 +451,7 @@ export default class extends Controller {
         const jar = CodeJar(this.questions_codeTarget, hljs.highlightElement)
         const str = `${result.question[questionId].candidate_instructions}`
         jar.updateCode(str)
+        jar.destroy()
         this.questions_codeTarget.setAttribute("contenteditable", false)
       },
       error: (err) => {
@@ -452,20 +468,15 @@ export default class extends Controller {
       type: "get",
       success: (result) => {
         const toLanguage = result.question[questionId].language
-        const changeLanguage = {
-          Ruby: this.RubyTarget,
-          Javascript: this.JavascriptTarget,
-          Python: this.PythonTarget,
-          Elixir: this.ElixirTarget,
-        }
-        changeLanguage[toLanguage].click()
+        this.webConsoleChangeLanguage(toLanguage)
         this.panelTarget.className = `editor ${toLanguage}`
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)
         const str = `${result.question[questionId].code}`
         jar.updateCode(str)
+        jar.destroy()
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent = `面試說明：\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n${result.question[questionId].candidate_instructions}`
       },
       error: (err) => {
         console.log(err)

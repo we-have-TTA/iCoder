@@ -2,6 +2,7 @@
   <div class="candidate-input" 
     data-controller="editor"
     data-room_id="<%= room.id %>"
+    data-roomUUID="<%= room.uuid %>"
     data-question-id="<%= room.question_id %>"
     >
     <div class="control-panel">
@@ -13,7 +14,7 @@
       <div class="relative">
         <button data-action="editor#catchQuestions">題庫</button>
         <button data-action="editor#toggleInformation">資訊</button>
-        <button id="current_language">語言選擇</button>
+        <button data-action="editor#toggleLanguageMenu" id="current_language">語言選擇</button>
         <button data-action="editor#toggleLanguageMenu">▼</button>
         <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
              data-editor-target="questions_instruction">請先選擇題目</div>

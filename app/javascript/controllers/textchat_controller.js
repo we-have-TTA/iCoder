@@ -1,7 +1,12 @@
 import { Controller } from "stimulus"
 import consumer from "../channels/consumer"
+import { v4 as uuidv4 } from "uuid"
 
 export default class extends Controller {
+  getSessionID() {
+    return (localStorage["sessionID"] ||= uuidv4())
+  }
+
   _cableConnected() {
     // Called when the subscription is ready for use on the server
     // can add welcome msg like 'user_xx is join the room!'
@@ -28,6 +33,7 @@ export default class extends Controller {
       {
         channel: "RoomChatChannel",
         uuid: this.getRoomUUID(),
+        sessionID: this.getSessionID(),
       },
       {
         connected: this._cableConnected.bind(this),

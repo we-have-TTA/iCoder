@@ -1,9 +1,10 @@
 .textchat {
-  @apply text-white;
-  position: absolute;
-  top: 200px;
-  right: 15px;
-  width: 600px;
+  @apply text-white bg-black;
+  position: relative;
+  // top: 200px;
+  // right: 15px;
+  left: 5%;
+  width: 90%;
   height: 300px;
   outline: 5px #fa0 solid;
   padding: 10px;
