@@ -1,13 +1,13 @@
 <section class="section-session">
   <div class="container">
     <div class="box">
-      <h2 class="text-2xl mb-5 font-bold text-center">忘記密碼了嗎?</h2>
+      <h2 class="mb-5 text-2xl font-bold text-center">忘記密碼了嗎?</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="mb-8">
           <%= f.email_field :email, placeholder: "請輸入您的Email", autofocus: true, autocomplete: "email",class:"form-input" %>
         </div>
-        <div class="actions  mb-8 flex justify-center">
+        <div class="flex justify-center mb-8 actions">
           <%= f.submit "寄出重設密碼指示",class:"btn-summit" %>
         </div>
         <div class="text-center">
