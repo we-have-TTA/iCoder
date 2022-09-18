@@ -32,6 +32,7 @@ class RoomsController < ApplicationController
     )
     authorize room
     room.save
+    room.question&.update(last_used: Time.now)
     redirect_to "/#{room.uuid}"
   end
 
