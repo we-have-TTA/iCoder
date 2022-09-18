@@ -49,7 +49,7 @@ Rails.application.routes.draw do
         member do
           post :run
           get :catch_questions
-          get 'question/:question_id', action: :get_question
+          get 'question/:question_id', action: :show
         end
       end
 

@@ -63,7 +63,7 @@ module Api
         end
       end
 
-      def get_question
+      def show
         questions = Question.where(team: current_user.team)
         question = questions[params[:question_id].to_i]
         question.update(last_used: Time.now)
