@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :authenticate_user! , except: %i[join_team] 
+  before_action :authenticate_user!, except: %i[join_team]
 
   layout 'dashboard'
 
@@ -17,38 +17,26 @@ class TeamsController < ApplicationController
   def invite; end
 
   def send_invitation
-    p User.find_by(email: params[:email])
-    if User.find_by(email: params[:email]) #判斷email是否存在在資料庫
-      # 用戶已註冊 寄信 -> 加入到Team
-      register = 'true' 
-      user = User.find_by(email: params[:email]) #user已存在資料庫
-      team_id = current_user.team_id
-      TeamMailer.send_invitation_to(user, team_id, register).deliver_now
-      redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
+    if User.find_by(email: params[:email])
+      register = 'true'
+      user = User.find_by(email: params[:email])
     else
-      # 用戶未註冊  寄信 -> 連結放註冊畫面
-      register = 'false' 
+      register = 'false'
       user = User.new(
         username: params[:username] || params[:email].split('@').first,
         email: params[:email]
       )
-      team_id = current_user.team_id
-      TeamMailer.send_invitation_to(user, team_id, register).deliver_now
-      redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
     end
+    team_id = current_user.team_id
+    TeamMailer.send_invitation_to(user, team_id, register).deliver_now
+    redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
   end
 
-  def join_team
-    # @team_id = Team.find_by(id: params[:id])
-    # @user = User.find_by(username: params[:username])
-  end
+  def join_team; end
 
   def update
     @team = Team.find(params[:team_id])
-    @team.users << current_user 
-    # render html: params
+    @team.users << current_user
     redirect_to members_path
   end
-
-
 end
