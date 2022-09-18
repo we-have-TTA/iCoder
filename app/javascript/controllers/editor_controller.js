@@ -347,13 +347,10 @@ export default class extends Controller {
     const roomID = this.element.dataset.room_id
     const questionId = e.currentTarget.id
     Rails.ajax({
-      // url: `/api/v1/rooms/${roomID}/catch_questions`,
       url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
-      success: (result) => {
-        console.log(result)
-        return
-        const toLanguage = result.question[questionId].language
+      success: ({ language, code, candidate_instructions }) => {
+        const toLanguage = language
         const changeLanguage = {
           Ruby: this.RubyTarget,
           Javascript: this.JavascriptTarget,
@@ -363,11 +360,10 @@ export default class extends Controller {
         changeLanguage[toLanguage].click()
         this.panelTarget.className = `editor ${toLanguage}`
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-        const str = `${result.question[questionId].code}`
-        jar.updateCode(str)
+        jar.updateCode(code)
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent = `面試說明：\n        ${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n${candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
