@@ -4,7 +4,9 @@ class RoomsController < ApplicationController
   layout 'dashboard'
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[show]
+
+  helper_method :current_participator
 
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
@@ -134,5 +136,9 @@ class RoomsController < ApplicationController
 
   def rooms_params
     params.require(:room).permit(:title, :language, :category, :status, :question).merge(team: current_user.team)
+  end
+
+  def current_participator
+    current_user if user_signed_in?
   end
 end

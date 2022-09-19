@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   end
 
   patch '/api/v1/rooms/change_roomtitle',to: 'api/v1/rooms#change_roomtitle'
+  get '/api/v1/room/check', to: 'api/v1/rooms#check'
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
@@ -48,6 +49,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :users do
         post 'rooms', action: :find_rooms_by_user, controller: :rooms
+        patch '/', action: :update
+      end
+      scope 'rooms' do
+        post '/:uuid/code', action: :send_code, controller: :questions, as: :send_code
       end
       resources :rooms, only: [] do
         member do
