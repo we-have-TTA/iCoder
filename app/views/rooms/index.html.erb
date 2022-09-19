@@ -31,7 +31,7 @@
       <% @rooms.each do | room | %>
         <tr>
           <td><%= room.title %></td>
-          <td><%= room.status %></td>
+          <td><%= t("room.#{room.status}") %></td>
           <td><%= room.category %></td>
           <td><%= room.language %></td>
           <td><%= room.creator.username %></td>
