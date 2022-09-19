@@ -20,9 +20,9 @@ class TeamsController < ApplicationController
   def update
     @team = current_user.team
     if @team.update(team_params)
-      redirect_to members_path
+      redirect_to members_path, notice: '組織名稱更新成功'
     else
-      render :edit
+      render :edit, notice: '組織名稱更新失敗'
     end
   end
 
