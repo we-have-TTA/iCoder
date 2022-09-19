@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2022_09_18_082255) do
     t.text "candidate_instructions"
     t.string "difficulty"
     t.text "question_type"
+    t.datetime "last_used"
     t.index ["team_id"], name: "index_questions_on_team_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end

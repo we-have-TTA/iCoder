@@ -19,12 +19,14 @@
         <td>難易度</td>
         <td>建立者</td>
         <td>建立日期</td>
+        <td>上次使用</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
     </thead>
-    <tbody>
+    <tbody data-controller="permission">
       <% @questions.each do |question| %>
         <%= form_with model: question do |form| %>
           <tr>
@@ -34,7 +36,18 @@
             <td><%= question.difficulty %></td>
             <td><%= question.creator.username %></td>
             <td><%= question.created_at.to_s.split.first %></td>
-            <td><%= link_to "創建會議", rooms_path(question: question.id), method: "post", target: "_blank", class: "btn-dashboard-create" %></td>
+            <td>
+              <% if question.last_used %>
+                <%= question.last_used.to_s.split.first %>
+              <% else %>
+                尚未使用
+              <% end %>
+            </td>
+            <td><%= link_to "創建會議", rooms_path(question: question.id),
+                                       method: "post", 
+                                       target: "_blank", 
+                                       class: "btn-dashboard-create",
+                                       data: {action: "permission#checkPermission", "permission-target": "control_button","create-permission": "enable"}%></td>
             <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
             <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
             <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>

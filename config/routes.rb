@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :members, controller: :teams, only: %i[index new create destroy]
     resource :teams, only:[:edit, :update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
+    get 'rooms/team_plan', action: 'team_plan', controller: :rooms
+    get 'rooms/countdown', action: 'countdown', controller: :rooms
     resources :questions do
       resources :comments, shallow: true, only: %i[create update destroy]
     end
@@ -40,6 +42,8 @@ Rails.application.routes.draw do
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
+  patch '/:uuid/startroom', to: 'rooms#start_room', as:'start_room'
+  patch '/:uuid/endroom', to: 'rooms#end_room', as:'end_room'
 
   namespace :api do
     namespace :v1 do
@@ -54,6 +58,7 @@ Rails.application.routes.draw do
         member do
           post :run
           get :catch_questions
+          get 'question/:question_id', action: :show
         end
       end
 

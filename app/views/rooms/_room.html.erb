@@ -34,11 +34,13 @@
         <div id = "run-text" class="text-xl text-white "></div>
         <div class="text-base text-white " id="run_result"></div>
       </div>
+      <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-facetime-target="camera" data-connected="false"></div>
+      <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=e138caba-c5da-46db-9562-889ec6530c22&room=<%=params[:uuid]%>" defer></script>
       <div data-editor-target="team_question"
          data-action="click->editor#close"
-        class="w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 hidden">
+        class="black-cover-bg hidden">
         <div data-editor-target="questions_display"
-           class="flex w-3/4 mx-auto relative left-0 right-0 top-0 bg-white border h-2/3 rounded-md opacity-0 transition duration-700 transform">
+           class="flex white-card top-0 opacity-0">
           <div class=" w-4/12 rounded-md pt-2">
             <div class="ml-2 text-center font-bold text-2xl box-shadow absolute z-10 bg-gray-50 rounded-md" 
                style="height: 10%; width: 30%">
