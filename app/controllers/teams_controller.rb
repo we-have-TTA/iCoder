@@ -41,13 +41,14 @@ class TeamsController < ApplicationController
       )
     end
     team_id = current_user.team_id
-    TeamMailer.send_invitation_to(user, team_id, register).deliver_now
+    team_name = current_user.team.name
+    TeamMailer.send_invitation_to(user, team_id, register, team_name).deliver_now
     redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
   end
 
   def join_team; end
 
-  def update
+  def update_member
     @team = Team.find(params[:team_id])
     @team.users << current_user
     redirect_to members_path
