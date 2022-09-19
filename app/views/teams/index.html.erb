@@ -1,9 +1,10 @@
 <div class="flex justify-between mt-3">
-  <p class="font-bold text-2xl"><%= current_user.team.name %> 成員列表</p>
-  <%= link_to "成員邀請", "#", class:"btn-dashboard-create"  %>
+  <p class="text-2xl font-bold"><%= current_user.team.name %> 成員列表</p>
+  <%= link_to "成員邀請", "/#{@team}/team_invite", class:"btn-dashboard-create"  %>
+  <%= %>
 </div>
 <span class="block mb-10">管理您的組織成員，邀請新成員加入、進行查詢、調整職位及進行成員刪除。</span>
-<p class="mb-3 font-bold text-2xl">目前成員</p>
+<p class="mb-3 text-2xl font-bold">目前成員</p>
 <table class="room_table">
   <thead>
     <tr>
