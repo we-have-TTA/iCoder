@@ -34,7 +34,7 @@
         <div id = "run-text" class="text-xl text-white "></div>
         <div class="text-base text-white " id="run_result"></div>
       </div>
-      <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-facetime-target="camera" data-connected="false"></div>
+      <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-allRoom-target="camera" data-connected="false"></div>
       <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=e138caba-c5da-46db-9562-889ec6530c22&room=<%=params[:uuid]%>" defer></script>
       <div data-editor-target="team_question"
          data-action="click->editor#close"
@@ -87,5 +87,6 @@
       <div class="border border-gray-500 h-full rounded-md">
         <%= render "webconsole", src: src %>
       </div>
+      <%= render "textchat", room: @room %>
     </div>
   </div>
