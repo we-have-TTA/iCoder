@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   get '/:uuid', to: 'rooms#show', as: 'room_uuid'
   get '/:uuid/invite', to: 'rooms#invite', as: 'invite'
   post '/:uuid/invite', to: 'rooms#send_invitation'
+  patch '/:uuid/startroom', to: 'rooms#start_room', as:'start_room'
+  patch '/:uuid/endroom', to: 'rooms#end_room', as:'end_room'
 
   namespace :api do
     namespace :v1 do

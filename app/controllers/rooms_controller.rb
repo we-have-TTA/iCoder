@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!
 
@@ -23,7 +23,7 @@ class RoomsController < ApplicationController
     room = Room.new(
       uuid: rnd,
       title: "未命名的會議室 - #{rnd}",
-      status: 'Not Started',
+      status: params[:status],
       category: 'Live',
       language: 'JavaScript',
       creator: current_user,
@@ -109,6 +109,17 @@ class RoomsController < ApplicationController
       { uuid: room[:uuid], existTime: (Time.now - room[:created_at]).to_i }
     end
     render json: { rooms_duration: }
+  end
+
+  def start_room
+    @room.interview! if @room.may_interview?
+  end
+
+  def end_room
+    return unless @room.may_endinterview?
+
+    @room.endinterview!
+    redirect_to rooms_path
   end
 
   private

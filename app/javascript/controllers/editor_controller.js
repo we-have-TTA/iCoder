@@ -38,12 +38,17 @@ export default class extends Controller {
             withLineNumbers(hljs.highlightElement)
           )
           jar.updateCode(code)
+          if (this.panelTarget.dataset.edit === "false") {
+            this.panelTarget.setAttribute("contenteditable", false)
+          }
+          // To Do 題庫部分用不到language會噴錯
           const changeLanguage = {
             Ruby: this.RubyTarget,
             Javascript: this.JavascriptTarget,
             Python: this.PythonTarget,
             Elixir: this.ElixirTarget,
           }
+
           changeLanguage[language].click()
         },
         error: () => {},
