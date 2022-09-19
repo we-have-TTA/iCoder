@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!, except: %i[show]
 
@@ -12,6 +12,7 @@ class RoomsController < ApplicationController
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
     @pagy, @rooms = pagy(@rooms, items: 5)
+    @countdown_standard = ENV.fetch('COUNTDOWN_STANDARD', 24).to_i
   end
 
   def show
@@ -24,13 +25,14 @@ class RoomsController < ApplicationController
     room = Room.new(
       uuid: rnd,
       title: "未命名的會議室 - #{rnd}",
-      status: 'Not Started',
+      status: params[:status],
       category: 'Live',
       language: 'JavaScript',
       creator: current_user,
       team: current_user.team,
       question_id: params[:question]
     )
+    authorize room
     room.save
     room.question&.update(last_used: Time.now)
     redirect_to "/#{room.uuid}"
@@ -95,6 +97,30 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
+    redirect_to rooms_path
+  end
+
+  def team_plan
+    rooms_count = current_user.team.rooms.where(status: %i[notstarted started]).size
+    render json: { permission: current_user.team.plan == 'vip', rooms_count: }
+  end
+
+  def countdown
+    rooms = current_user.team.rooms.select('uuid', 'created_at')
+    rooms_duration = rooms.map do |room|
+      { uuid: room[:uuid], existTime: (Time.now - room[:created_at]).to_i }
+    end
+    render json: { rooms_duration: }
+  end
+
+  def start_room
+    @room.interview! if @room.may_interview?
+  end
+
+  def end_room
+    return unless @room.may_endinterview?
+
+    @room.endinterview!
     redirect_to rooms_path
   end
 

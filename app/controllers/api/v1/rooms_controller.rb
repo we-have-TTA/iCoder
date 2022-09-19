@@ -64,15 +64,15 @@ module Api
         end
       end
 
+      def check
+        Room.find_by(uuid: params[:uuid]) ? (head :ok) : (head :bad_request)
+      end
+
       def show
         questions = Question.where(team: current_user.team)
         question = questions[params[:question_id].to_i]
         question.update(last_used: Time.now)
         render json: question
-      end
-
-      def check
-        Room.find_by(uuid: params[:uuid]) ? (head :ok) : (head :bad_request)
       end
 
       private
