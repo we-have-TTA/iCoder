@@ -3,7 +3,7 @@
 }
 
 .question_table {
-  @apply table-auto w-full border;
+  @apply table-auto w-full border bg-white;
 
   thead {
     td {

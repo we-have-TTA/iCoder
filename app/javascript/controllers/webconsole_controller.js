@@ -2,8 +2,6 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  connect() {}
-
   createRuntime(e) {
     const language = e.target.textContent
     const iframe = document.getElementById("iframe").contentWindow
