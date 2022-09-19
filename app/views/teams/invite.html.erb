@@ -1,1 +1,11 @@
-<h1>寄給??信箱</h1>
+<h1 class="p-2 mb-6 text-3xl font-bold">邀請加入團隊</h1>
+<%= form_with do |form| %>
+  <%= form.email_field :email,
+                        placeholder: "請填入收件者信箱",
+                        class: "text-black p-3 rounded-full mr-2",
+                        required: true %>
+  <%= form.text_field :username,
+                      placeholder: "請填入收件者名稱",
+                      class: "text-black p-3 rounded-full mr-2" %>
+  <%= form.submit "寄出邀請信件", class: "p-3 rounded-full bg-red-200 hover:bg-red-400 font-bold border border-gray-400" %>
+<% end %>
