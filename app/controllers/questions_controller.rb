@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to questions_path, notice: '新增成功'
     else
-      render :new, notice:"新增失敗"
+      render :new, notice: '新增失敗'
     end
   end
 
