@@ -150,14 +150,14 @@ export default class extends Controller {
       type: "get",
       success: (result) => {
         let html = ""
-        let cardMove = -30
-        this.team_nameTarget.textContent = `${result.team.name} 的題庫`
+        let cardMove = -32
+        this.team_nameTarget.textContent=`${result.team.name} 的題庫`
         result.question.forEach((question) => {
-          cardMove += 30
+          cardMove += 32
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
-                       class="transition duration-300 cursor-pointer bg-white hover:bg-gray-100 transform hover:-translate-y-5 hover:translate-x-2 hover:scale-105 mx-4 block relative right-2 rounded-md rounded-tr-2xl"
-                       style="box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 14%), 0 0 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%); bottom:${cardMove}px"
+                       class="transition duration-300 cursor-pointer bg-white hover:bg-gray-100 transform hover:-translate-y-5 hover:translate-x-2 hover:scale-105 mx-4 block relative right-2 rounded-md rounded-tr-2xl box-shadow"
+                       style="bottom:${cardMove}px"
                        data-editor-target="questions_item">
                      <td class=" border-white">
                        <div class="text-left font-bold">
@@ -377,7 +377,6 @@ export default class extends Controller {
   }
 
   close(e) {
-    console.log(e.target.dataset.action)
     if (e.target.dataset.action === "click->editor#close") {
       this.questions_displayTarget.classList.remove("translate-y-36")
       this.questions_displayTarget.classList.add("opacity-0")
