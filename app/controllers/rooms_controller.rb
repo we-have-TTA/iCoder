@@ -2,10 +2,9 @@
 
 class RoomsController < ApplicationController
   layout 'dashboard'
-  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime]
+  before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
   before_action :authenticate_user!
-
 
 
   def index
@@ -95,6 +94,21 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     redirect_to rooms_path
+  end
+
+  def start_room
+    if @room.may_interview?
+      @room.interview!
+    else
+    end
+  end
+
+  def end_room
+    if @room.may_endinterview?
+      @room.endinterview!
+      redirect_to rooms_path
+    else
+    end
   end
 
   private

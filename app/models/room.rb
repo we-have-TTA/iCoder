@@ -10,13 +10,13 @@ class Room < ApplicationRecord
   aasm column: :status do
     state :notstarted, initial: true
     state :started, :ended
-    
+  
     event :interview do
       transitions from: :notstarted, to: :started
     end
   
     event :endinterview do
-      transitions from: :started, to: :ended
+      transitions from: [:started, :notstarted], to: :ended
     end
 
   end
