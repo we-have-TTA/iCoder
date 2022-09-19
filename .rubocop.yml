@@ -13,7 +13,10 @@ AllCops:
 
 # FIXME
 Metrics/MethodLength:
-  Max: 40
+  Max: 50
+
+Metrics/ClassLength:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
