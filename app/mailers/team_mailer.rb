@@ -3,7 +3,6 @@
 class TeamMailer < ApplicationMailer
   def send_invitation_to(user, team_id, register, team_name)
     @team_name = team_name
-    @team_id = team_id
     @user = user
     host_ip = if ENV['RAILS_ENV'] == 'production'
                 ENV.fetch('DOMAIN_NAME', nil)
