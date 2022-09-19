@@ -466,17 +466,15 @@ export default class extends Controller {
     Rails.ajax({
       url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
-      success: (result) => {
-        const toLanguage = result.language
-        this.webConsoleChangeLanguage(toLanguage)
-        this.panelTarget.className = `editor ${toLanguage}`
+      success: ({ language, code, candidate_instructions }) => {
+        this.webConsoleChangeLanguage(language)
+        this.panelTarget.classList.add(language)
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-        const str = `${result.code}`
-        jar.updateCode(str)
+        jar.updateCode(code)
         jar.destroy()
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent = `面試說明：\n${result.candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n${candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
