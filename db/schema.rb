@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_15_095455) do
+ActiveRecord::Schema.define(version: 2022_09_18_082255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2022_09_15_095455) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "codes", force: :cascade do |t|
+    t.text "content"
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "refresh"
+    t.string "language"
+    t.index ["room_id"], name: "index_codes_on_room_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.bigint "question_id", null: false
@@ -72,6 +82,7 @@ ActiveRecord::Schema.define(version: 2022_09_15_095455) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -100,8 +111,19 @@ ActiveRecord::Schema.define(version: 2022_09_15_095455) do
     t.text "candidate_instructions"
     t.string "difficulty"
     t.text "question_type"
+    t.datetime "last_used"
     t.index ["team_id"], name: "index_questions_on_team_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "room_participators", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.string "session_id"
+    t.string "name"
+    t.datetime "leave_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_room_participators_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -146,6 +168,7 @@ ActiveRecord::Schema.define(version: 2022_09_15_095455) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "codes", "rooms"
   add_foreign_key "comments", "questions"
   add_foreign_key "comments", "users"
   add_foreign_key "homeworks", "teams"
@@ -154,4 +177,5 @@ ActiveRecord::Schema.define(version: 2022_09_15_095455) do
   add_foreign_key "orders", "users"
   add_foreign_key "questions", "teams"
   add_foreign_key "questions", "users"
+  add_foreign_key "room_participators", "rooms"
 end

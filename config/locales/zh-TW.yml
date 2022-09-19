@@ -1,4 +1,8 @@
 zh-TW:
+  room:
+    notstarted: 會議未開始
+    started: 會議開始
+    ended: 會議結束
   activerecord:
     attributes:
       user:

@@ -1,7 +1,7 @@
 <section class="section-session">
   <div class="container">
     <div class="box">
-      <h2 class="text-2xl font-bold text-center mb-3" >帳號註冊</h2>
+      <h2 class="mb-3 text-2xl font-bold text-center" >帳號註冊</h2>
       <button class="btn-third-party">
         <img alt="google logo" src="https://img.icons8.com/color/24/FFFFFF/google-logo.png" class="mr-1"/>
         <%= link_to "使用goole帳號註冊", user_google_oauth2_omniauth_authorize_url, method: :post, class:"w-64" %>
@@ -28,12 +28,13 @@
           <%= f.label :password_confirmation, class:"form-label" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "再次輸入密碼",class:"form-input"  %>
         </div>
-        <div class="actions mb-8 flex justify-center">
+        <div class="flex justify-center mb-8 actions">
           <%= f.submit "註冊", class:"btn-summit" %>
         </div>
         <div class="text-center">
           <%= link_to "已經註冊了? 前往登入", new_user_session_path, class:"link-hover" %>
         </div>
+        <%= f.hidden_field :team_id, value: params[:team_id] %>
       <% end %>
     </div>
   </div>

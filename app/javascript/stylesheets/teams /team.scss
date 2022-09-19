@@ -1,0 +1,108 @@
+.createBtn {
+  @apply px-3 py-1 border-2;
+}
+
+.room_table {
+  @apply table-auto w-full border bg-white;
+
+  thead {
+    td {
+      @apply font-bold p-3 border-b text-center;
+    }
+  }
+
+  tbody {
+    td {
+      @apply p-3 border-b text-center;
+    }
+  }
+}
+
+.room-container {
+  @apply flex;
+  .choose-language-btn {
+    @apply inline-block bg-red-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded m-2;
+  }
+  .candidate-input {
+    @apply w-1/2 bg-black p-2;
+    position: relative;
+
+    .control-panel {
+      button,
+      a {
+        @apply border-2 bg-black text-white hover:bg-green-900 text-base rounded px-5 py-2;
+      }
+      @apply flex justify-between;
+      .run-btn {
+        @apply border-green-900 bg-green-700;
+      }
+      .draw-btn {
+        @apply border-gray-300;
+      }
+    }
+    .result-box {
+      @apply bg-gray-700 rounded-md p-2;
+      width: calc(100% - 65px);
+      position: absolute;
+      left: 50px;
+      bottom: 20px;
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%),
+        0 3px 1px -2px rgb(0 0 0 / 20%);
+    }
+  }
+  .web-console {
+    @apply w-1/2 bg-black p-2;
+    > * {
+      @apply p-2;
+    }
+    > div {
+      color: white;
+      overflow-y: auto;
+    }
+  }
+}
+
+.pencil {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+.editor {
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  font-family: "Source Code Pro", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100vh;
+  letter-spacing: normal;
+  line-height: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  tab-size: 2;
+  @apply bg-gray-200;
+}
+
+.codejar-wrap {
+  position: relative;
+  height: calc(100vh - 170px);
+  .editor {
+    height: 100%;
+  }
+}
+
+.question-codejar-wrap {
+  .editor {
+    height: 100%;
+    @apply bg-gray-50;
+  }
+}
+
+.box-shadow {
+  box-shadow: 2px 3px 2px 0 rgb(0 0 0 / 14%), 0 0 5px 0 rgb(0 0 0 / 12%),
+    0 3px 1px -2px rgb(0 0 0 / 20%);
+}
+
+.shiny {
+  @apply animate-pulse bg-gray-300;
+}
