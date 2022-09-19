@@ -101,10 +101,10 @@ class RoomsController < ApplicationController
   end
 
   def end_room
-    if @room.may_endinterview?
-      @room.endinterview!
-      redirect_to rooms_path
-    end
+    return unless @room.may_endinterview?
+
+    @room.endinterview!
+    redirect_to rooms_path
   end
 
   private
