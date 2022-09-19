@@ -467,16 +467,16 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
       success: (result) => {
-        const toLanguage = result.question[questionId].language
+        const toLanguage = result.language
         this.webConsoleChangeLanguage(toLanguage)
         this.panelTarget.className = `editor ${toLanguage}`
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)
-        const str = `${result.question[questionId].code}`
+        const str = `${result.code}`
         jar.updateCode(str)
         jar.destroy()
         this.team_questionTarget.classList.add("hidden")
         this.questions_instructionTarget.classList.remove("hidden")
-        this.questions_instructionTarget.textContent = `面試說明：\n${result.question[questionId].candidate_instructions}`
+        this.questions_instructionTarget.textContent = `面試說明：\n${result.candidate_instructions}`
       },
       error: (err) => {
         console.log(err)
