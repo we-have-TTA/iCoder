@@ -2,8 +2,6 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-<<<<<<< HEAD
-=======
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :no_permission
@@ -13,5 +11,4 @@ class ApplicationController < ActionController::Base
   def no_permission
     redirect_to '/', notice: '無此操作權限'
   end
->>>>>>> origin/main
 end
