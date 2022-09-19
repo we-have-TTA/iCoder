@@ -32,6 +32,7 @@ class RoomsController < ApplicationController
       question_id: params[:question]
     )
     room.save
+    room.question&.update(last_used: Time.now)
     redirect_to "/#{room.uuid}"
   end
 
