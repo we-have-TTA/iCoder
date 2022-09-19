@@ -5,7 +5,7 @@ class RoomPolicy < ApplicationPolicy
     if user.team.plan == 'vip'
       true
     else
-      user.team.rooms.where(status: 'Not Started').size < 2
+      user.team.rooms.where(status: %i[notstarted started]).size < 2
     end
   end
 

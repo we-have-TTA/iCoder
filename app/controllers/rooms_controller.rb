@@ -99,7 +99,7 @@ class RoomsController < ApplicationController
   end
 
   def team_plan
-    rooms_count = current_user.team.rooms.where(status: 'Not Started').size
+    rooms_count = current_user.team.rooms.where(status: %i[notstarted started]).size
     render json: { permission: current_user.team.plan == 'vip', rooms_count: }
   end
 
