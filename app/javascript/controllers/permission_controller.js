@@ -24,9 +24,8 @@ export default class extends Controller {
                               data-action="click->permission#close"
                               class="black-cover-bg z-30 hidden">
                            <div data-permission-target="alert_display"
-                                class="white-card text-9xl text-center box-shadow top-0 opacity-0">
-                              <div class="w-3/4 h-1/2 p-20 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-lg bg-gray-100 box-shadow shiny">
-                                付錢
+                                class="white-card text-5xl text-center box-shadow top-0 opacity-0">
+                              <div class="w-3/4 h-1/2 p-20 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-lg bg-gray-100 box-shadow shiny whitespace-pre-wrap">嘿嘿，想要無限制的方案嗎？\n動動手指贊助吧！
                                 <a class=" block mt-3 py-3 px-7 w-full text-green-50 font-medium text-center bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-lg box-shadow text-3xl" href="/plans">馬上升級</a>
                               </div>
                            </div>
