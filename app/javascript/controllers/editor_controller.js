@@ -98,6 +98,10 @@ export default class extends Controller {
           )
           jar.updateCode(code)
           jar.destroy()
+          if (this.panelTarget.dataset.edit == "false") {
+            console.log(this.panelTarget)
+            this.panelTarget.setAttribute("contenteditable", false)
+          }
           this.webConsoleChangeLanguage(language)
         },
         error: () => {},
@@ -129,10 +133,6 @@ export default class extends Controller {
       }
     }
 
-    if (this.panelTarget.dataset.edit === "false") {
-      console.log(123)
-      this.panelTarget.setAttribute("contenteditable", false)
-    }
     // 當使用者更動了編輯器的內容時，發出一個請求，內容包括
     //   1. 更動後的內容
     //   2. 目前所在的 room
