@@ -32,7 +32,7 @@ export default class extends Controller {
         this.chatTarget.classList.remove("opacity-0")
         this.chatTarget.classList.add("scale-x-100")
         this.chatTarget.classList.add("scale-y-100")
-        this.chatTarget.classList.remove("-translate-x-20")
+        this.chatTarget.classList.remove("-translate-x-12")
         this.chatTarget.classList.remove("translate-y-48")
       });
     } else {
@@ -40,7 +40,7 @@ export default class extends Controller {
       this.chatTarget.classList.remove("scale-y-100")
       this.chatTarget.classList.remove("scale-x-100")
       this.chatTarget.classList.add("scale-x-0")
-      this.chatTarget.classList.add("-translate-x-20")
+      this.chatTarget.classList.add("-translate-x-12")
       this.chatTarget.classList.add("translate-y-48")
       setTimeout(() => {
         this.chatTarget.classList.add("hidden")
