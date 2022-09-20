@@ -1,7 +1,7 @@
 .room-footer {
   @apply bg-gray-700 flex justify-between p-5 text-white border-4 border-gray-900;
   div {
-    @apply flex;
+    @apply flex items-center;
     span {
       @apply px-3 py-1 mr-5;
     }
