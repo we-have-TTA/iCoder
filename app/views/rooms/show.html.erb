@@ -1,4 +1,5 @@
 <%= render "room",
   room: @room,
+  language_set: %w[Ruby Javascript Python Elixir],
   src: "http://#{ENV["HOST_IP"]}:#{ENV["WEB_CONSOLE_PORT"]}" %>
 <%= render "footer", room: @room %>

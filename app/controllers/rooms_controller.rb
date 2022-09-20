@@ -4,12 +4,15 @@ class RoomsController < ApplicationController
   layout 'dashboard'
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[show]
+
+  helper_method :current_participator
 
   def index
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
-    @pagy, @rooms = pagy(@rooms, items: 10)
+    @pagy, @rooms = pagy(@rooms, items: 5)
+    @countdown_standard = ENV.fetch('COUNTDOWN_STANDARD', 24).to_i
   end
 
   def show
@@ -29,6 +32,7 @@ class RoomsController < ApplicationController
       team: current_user.team,
       question_id: params[:question]
     )
+    authorize room
     room.save
     room.question&.update(last_used: Time.now)
     redirect_to "/#{room.uuid}"
@@ -96,6 +100,19 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
+  def team_plan
+    rooms_count = current_user.team.rooms.where(status: %i[notstarted started]).size
+    render json: { permission: current_user.team.plan == 'vip', rooms_count: }
+  end
+
+  def countdown
+    rooms = current_user.team.rooms.select('uuid', 'created_at')
+    rooms_duration = rooms.map do |room|
+      { uuid: room[:uuid], existTime: (Time.now - room[:created_at]).to_i }
+    end
+    render json: { rooms_duration: }
+  end
+
   def start_room
     @room.interview! if @room.may_interview?
   end
@@ -119,5 +136,9 @@ class RoomsController < ApplicationController
 
   def rooms_params
     params.require(:room).permit(:title, :language, :category, :status, :question).merge(team: current_user.team)
+  end
+
+  def current_participator
+    current_user if user_signed_in?
   end
 end

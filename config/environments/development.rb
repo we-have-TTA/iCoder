@@ -41,11 +41,11 @@ Rails.application.configure do
   # 寄信位置
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # smtp 協定作寄信
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
 
   # letter opener
-  # config.action_mailer.delivery_method = :letter_opener
-  # config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
