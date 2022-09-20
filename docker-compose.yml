@@ -19,6 +19,7 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik/traefik.toml:/traefik.toml"
     networks:
       - webssh
   whoami:
@@ -54,7 +55,11 @@ services:
       - REDIS_URL=redis://redis:6379
       - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
     labels:
-      - "traefik.http.routers.app-icoder.rule=Host(`icoder.tw`)"
+      - "traefik.backend=app"
+      - "traefik.docker.network=webssh"
+      - "traefik.frontend.rule=Host:icoder.tw"
+      - "traefik.enable=true"
+      - "traefik.default.protocol=http"
     networks:
       - webssh
     volumes:
