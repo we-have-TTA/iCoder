@@ -21,6 +21,7 @@ export default class extends Controller {
             this.element.submit()
           })
         })
+        this.element.children[2].classList.remove("opacity-0")
       })
       .catch((err) => {
         console.log(err)

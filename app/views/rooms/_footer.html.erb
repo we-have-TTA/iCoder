@@ -1,7 +1,12 @@
-<footer class="room-footer">
+<footer class="room-footer"
+        data-controller="footer">
   <div>
     <%= link_to "邀請", "/#{@room.uuid}/invite" %>
-    <%= link_to "進行視訊通話", "#" %>
+    <button class="facetime" data-action="facetime#displayCamera">視訊通話</button>
+  </div>
+  <div data-footer-target="timer">
+    <span class = " text-lg font-bold">00:00:01</span>
+    <%= render "participator_name", participator: current_participator %>
   </div>
   <div>
     <div data-controller = "roomtitle"
@@ -10,6 +15,7 @@
       <span data-roomtitle-target="title" ><%= room.title %></span>
     </div>
     <%= link_to "設定", "#" %>
-    <%= link_to "結束面試", rooms_path %>
+    <%= link_to "開始面試", start_room_path, method: 'patch' %>
+    <%= link_to "結束面試", end_room_path, method: 'patch' %>
   </div>
 </footer>
