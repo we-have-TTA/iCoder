@@ -5,7 +5,6 @@ class RoomChatChannel < ApplicationCable::Channel
     @room = Room.find_by!(uuid: params[:uuid])
     stream_for @room
 
-    
     name = params[:sessionID]
 
     @message = Message.new(username: 'system', content: "#{name} join the chat.")
