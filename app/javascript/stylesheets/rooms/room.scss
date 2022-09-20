@@ -61,14 +61,14 @@
     }
   }
   .web-console {
-    @apply w-1/2 bg-black p-2;
+    @apply w-1/2 bg-black p-2 relative;
     > * {
-      @apply p-2;
+      @apply p-3;
     }
-    > div {
-      color: white;
-      overflow-y: auto;
-    }
+    // > div {
+    //   color: white;
+    //   overflow-y: auto;
+    // }
   }
 }
 

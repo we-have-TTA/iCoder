@@ -6,10 +6,10 @@
       @apply px-3 py-1 mr-5;
     }
     a {
-      @apply block px-3 py-1 border rounded mr-5 bg-gray-800 hover:bg-blue-900;
+      @apply block px-3 py-1 border rounded ml-5 bg-gray-800 hover:bg-blue-900;
     }
-    .facetime {
-      @apply block px-3 py-1 border rounded mr-5 bg-gray-800 hover:bg-blue-900;
+    .button {
+      @apply block px-3 py-1 border rounded ml-5 bg-gray-800 hover:bg-blue-900;
     }
   }
   input[data-participator-name-target="username"] {
@@ -26,10 +26,10 @@
   display: flex;
   z-index: 10;
   .box {
-    width: 300px;
-    height: 200px;
+    @apply bg-gray-300 rounded-md text-black flex justify-around;
+    width: 400px;
+    height: 100px;
     border: 2px solid #000;
-    background-color: lightcyan;
     margin: auto;
     align-self: center;
   }
