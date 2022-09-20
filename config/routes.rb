@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
-    resources :members, controller: :teams, only: %i[index new create destroy]
+    resources :members, controller: :teams, only: %i[index new create destroy update]
     resource :teams, only:[:edit, :update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     get 'rooms/team_plan', action: 'team_plan', controller: :rooms
@@ -44,6 +44,11 @@ Rails.application.routes.draw do
   post '/:uuid/invite', to: 'rooms#send_invitation'
   patch '/:uuid/startroom', to: 'rooms#start_room', as:'start_room'
   patch '/:uuid/endroom', to: 'rooms#end_room', as:'end_room'
+
+  get '/:team_id/team_invite', to: 'teams#invite', as: 'invite_to_team'
+  post '/:team_id/team_invite', to: 'teams#send_invitation'
+  get '/:team_id/team_join', to: 'teams#join_team', as: 'join_to_team'
+  post '/:team_id/team_join', to: 'teams#update_member'
 
   namespace :api do
     namespace :v1 do
