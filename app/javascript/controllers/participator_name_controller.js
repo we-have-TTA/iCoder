@@ -30,20 +30,21 @@ export default class extends Controller {
     if (previousName !== "") {
       myModal.insertAdjacentHTML(
         "afterbegin",
-        `<div class="box">
+        `<div class="box p-4 rounded-md items-center">
+          <div>輸入名字：</div>
           <form action="" data-action="participator-name#changeName:prevent">
-            <input id="participatorName" class="text-black" type="text" placeholder="你的名字" required="true" value=${previousName}>
-            <input type="submit">
+            <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true" value=${previousName}>
+            <input type="submit" class=" bg-gray-400 rounded-lg px-2 ml-2  cursor-pointer ">
           </form>
         </div>`
       )
     } else {
       myModal.insertAdjacentHTML(
         "afterbegin",
-        `<div class="box">
+        `<div class="box p-4 rounded-md items-center">
           <form action="" data-action="participator-name#changeName:prevent">
-            <input id="participatorName" class="text-black" type="text" placeholder="你的名字" required="true">
-            <input type="submit">
+            <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true">
+            <input type="submit" class="bg-gray-400 rounded-lg px-2 ml-2 cursor-pointer ">
           </form>
         </div>`
       )
