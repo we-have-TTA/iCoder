@@ -13,7 +13,7 @@ services:
       - "--entrypoints.web.address=:80"
     ports:
       # The HTTP port
-      - "80:80"
+      - "80:3000"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
