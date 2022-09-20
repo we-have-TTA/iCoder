@@ -1,5 +1,11 @@
 <% if @question.errors.any? %>
-  <%= @question.errors.full_messages %>
+  <div id="error_explanation">
+    <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 <%= form_with model: question,
               data: { controller: "editor",

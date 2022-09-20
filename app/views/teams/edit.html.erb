@@ -1,5 +1,14 @@
 <div class="mt-3">
   <h1 class="text-2xl font-bold mb-5">組織修改</h1>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= form_with model: @team, url: teams_path do |form| %>
     <div class="mb-3">
       <%= form.label :name, "組織名稱", class:"form-label inline-block mb-2 text-gray-700" %><br/>

@@ -44,10 +44,10 @@
             <td><%= link_to "創建會議", rooms_path(question: question.id),
                                        method: "post", 
                                        target: "_blank", 
-                                       class: "btn-dashboard-create",
+                                       class: "btn-dashboard-border",
                                        data: {action: "permission#checkPermission", "permission-target": "control_button","create-permission": "enable"}%></td>
-            <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
+            <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-border" %></td>
+            <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-border" %></td>
             <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
           </tr>
         <% end %>
