@@ -1,21 +1,28 @@
 <div class="room-container">
   <div class="candidate-input" 
-    data-controller="editor"
+    data-controller="editor runCode"
     data-room_id="<%= room.id %>"
     data-roomUUID="<%= room.uuid %>"
     data-question-id="<%= room.question_id %>"
+    data-src=<%= src %>
+    data-signed=<%= user_signed_in?%>
     >
     <div class="control-panel">
       <div>
         <button class="run-btn"
-                data-action="editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
+                data-action="runCode#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
+                
         <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
       </div>
       <div class="relative">
-        <button data-action="editor#catchQuestions">題庫</button>
+        <% if current_user %>
+          <button data-action="editor#catchQuestions">題庫</button>
+        <% end %>
         <button data-action="editor#toggleInformation">資訊</button>
-        <button data-action="editor#toggleLanguageMenu" id="current_language">語言選擇</button>
-        <button data-action="editor#toggleLanguageMenu">▼</button>
+        <button id="current_language">語言選擇</button>
+        <% if current_user %>
+          <button data-action="editor#toggleLanguageMenu">▼</button>
+        <% end %>
         <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
              data-editor-target="questions_instruction">請先選擇題目</div>
         <div
@@ -66,6 +73,7 @@
                 </tbody>
               </table>
             </div>
+            
           </div>
           <div data-editor-target="questions_information" class=" w-8/12 border relative rounded-tr-md rounded-br-md flex flex-col">
             <div class=" w-3/4 h-1/2 p-3 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-lg bg-gray-50 box-shadow shiny">

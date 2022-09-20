@@ -47,6 +47,8 @@ module Api
           end
           p File.delete("../#{doc_name}")
         end
+        @room = Room.find_by!(uuid: params[:uuid])
+        RoomRunChannel.broadcast_to(@room, { result: })
         render json: { result: }
       end
 

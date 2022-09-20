@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   layout 'dashboard'
   before_action :find_room_by_uuid, only: %i[show update send_invitation create_runtime start_room end_room]
   before_action :find_room, only: %i[destroy]
-  before_action :authenticate_user!, except: %i[show]
+  before_action :authenticate_user!, except: %i[show create_runtime]
 
   helper_method :current_participator
 
@@ -73,6 +73,8 @@ class RoomsController < ApplicationController
       end
     end
     p "連線至 #{language} 的 container..."
+    @room = Room.find_by!(uuid:)
+    RoomRunChannel.broadcast_to(@room, { action: "selectLanguage",language: ,new_container: ,signed: user_signed_in?})
     render json: { container: new_container }
   end
 
