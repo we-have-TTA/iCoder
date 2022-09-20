@@ -3,6 +3,8 @@ import consumer from "../channels/consumer"
 import { v4 as uuidv4 } from "uuid"
 
 export default class extends Controller {
+  static targets = ["input","button"]
+
   getSessionID() {
     return (localStorage["sessionID"] ||= uuidv4())
   }
@@ -19,9 +21,12 @@ export default class extends Controller {
 
   _cableReceived({ content, created_at, username }) {
     // Called when there's incoming data on the websocket for this channel
+    this.inputTarget.focus()
     const time = created_at.match(/T(?<time>.+)\./).groups.time
-    const message = `<div class="message">${username} says: ${content} -- ${time}</div>`
-    document.querySelector("#msg").insertAdjacentHTML("afterbegin", message)
+    const message = `<div class="flex justify-between"><div>${username}：<span class="message bg-white rounded-full px-1.5 mt-1"> ${content}</span></div><div class="flex items-end">${time}</div></div>`
+    document.querySelector("#msg").insertAdjacentHTML("beforeend", message)
+    this.inputTarget.value = ""
+    document.querySelector("#msg_scroll").scrollTop=document.querySelector("#msg_scroll").scrollHeight
   }
 
   getRoomUUID() {
