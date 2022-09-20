@@ -1,16 +1,38 @@
 <section class="mb-10">
-  <div class="py-4 text-3xl font-bold">標題:<%= @question.title %></div>
-  <ul class="mb-3">
-    <li>建立者: <%= @question.creator.username %></li>
-    <li>建立日期: <%= @question.created_at.to_s.split.first %></li>
-    <li>模式: <%= @question.question_type %></li>
-    <li>程式語言: <%= @question.language %></li>
-    <li>難易度:<%= @question.difficulty %></li>
-    <li>面試官資訊:<%= @question.internal_description %></li>
-    <li>面試說明:<%= @question.candidate_instructions %></li>
-  </ul>
-  <div class="mb-5" data-controller="editor" data-question-id="<%= @question.id %>">
-    <div class="editor" data-editor-target="panel" data-edit="false"></div>
+  <div class="py-4 text-3xl font-bold">
+    <span class="mr-5">題目:</span>
+    <%= @question.title %>
+  </div>
+  <div class="grid grid-cols-2">
+    <ul class="questions-show-text flex flex-col">
+      <span> 建立者:</span>
+      <li>
+        <%= @question.creator.username %>
+      </li>
+      <span>建立日期: </span>
+      <li>
+        <%= @question.created_at.to_s.split.first %>
+      </li>
+      <span>程式語言: </span>
+      <li>
+        <%= @question.language %>
+      </li>
+      <span>難易度:</span>
+      <li>
+        <%= @question.difficulty %>
+      </li>
+      <span>面試官資訊:</span>
+      <li class="text-area">
+        <%= @question.internal_description %>
+      </li>
+      <span>面試說明:</span>
+      <li class="text-area">
+        <%= @question.candidate_instructions %>
+      </li>
+    </ul>
+    <div class="mb-5" data-controller="editor" data-question-id="<%= @question.id %>">
+      <div class="editor" data-editor-target="panel" data-edit="false"></div>
+    </div>
   </div>
   <%= link_to "返回", questions_path, class:"btnstyle_dashboard" %>
   <%= link_to "創建會議", rooms_path(question: @question.id), method: "post", target: "_blank", class:"btnstyle_dashboard"%>

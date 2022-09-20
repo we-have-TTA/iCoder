@@ -9,8 +9,6 @@
     <div class="questions-text flex flex-col">
       <%= form.label :title,"標題" %>
       <%= form.text_field :title, required: true %>
-      <%= form.label :question_type,"類型" %>
-      <%= form.select :question_type, ["Live", "Take-Home"] %>
       <%= form.label :language,"語言" %>
       <%= form.select :language,
                       ["Javascript", "Ruby"],

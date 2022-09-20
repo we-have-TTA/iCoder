@@ -2,12 +2,28 @@
   <h1 class="text-2xl font-bold mb-5">組織修改</h1>
   <%= form_with model: @team, url: teams_path do |form| %>
     <div class="mb-3">
-      <%= form.label :name, "組織名稱" %>
-      <%= form.text_field :name %><br/>
+      <%= form.label :name, "組織名稱", class:"form-label inline-block mb-2 text-gray-700" %><br/>
+      <%= form.text_field :name %>
     </div>
     <div class="mb-3">
-      <%= form.label :avatar, "團隊圖示" %>
-      <%= form.file_field :avatar %><br/>
+      <div class="mb-3 w-96">
+        <%= form.label :avatar, "團隊圖示", class:"form-label inline-block mb-2 text-gray-700" %>
+        <%= form.file_field :avatar, class:"form-control
+    block
+    w-full
+    px-2
+    py-1
+    text-sm
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%><br/>
+      </div>
     </div>
     <span>目前圖示：</span>
     <% if @team.avatar.attached? %>

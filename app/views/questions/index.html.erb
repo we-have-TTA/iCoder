@@ -14,7 +14,6 @@
     <thead>
       <tr>
         <td>標題</td>
-        <td>模式</td>
         <td>程式語言</td>
         <td>難易度</td>
         <td>建立者</td>
@@ -31,7 +30,6 @@
         <%= form_with model: question do |form| %>
           <tr>
             <td><%= question.title %></td>
-            <td><%= question.question_type %></td>
             <td><%= question.language %></td>
             <td><%= question.difficulty %></td>
             <td><%= question.creator.username %></td>
