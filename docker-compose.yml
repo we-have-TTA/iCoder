@@ -1,37 +1,6 @@
 version: '3.8'
 
 services:
-  reverse-proxy:
-    # The official v2 Traefik docker image
-    image: traefik:v2.8
-    container_name: "traefik"
-    command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    ports:
-      # The HTTP port
-      - "80:3000"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
-    volumes:
-      # So that Traefik can listen to the Docker events
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik/traefik.toml:/traefik.toml"
-    networks:
-      - webssh
-  whoami:
-    # A container that exposes an API to show its IP address
-    image: traefik/whoami
-    container_name: "simple-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-    networks:
-      - webssh
   db:
     image: postgres
     environment:
@@ -49,17 +18,22 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+    - "3000:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
       - REDIS_URL=redis://redis:6379
       - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
     labels:
-      - "traefik.backend=app"
-      - "traefik.docker.network=webssh"
-      - "traefik.frontend.rule=Host:icoder.tw"
       - "traefik.enable=true"
-      - "traefik.default.protocol=http"
+      # Hosts
+      - "traefik.http.services.icoder_app.loadbalancer.server.port=3000"
+      - "traefik.http.routers.icoder_app-http.rule=Host(`icoder.tw`)"
+      - "traefik.http.routers.icoder_app-http.entrypoints=web"
+      # - "traefik.http.routers.icoder_app-http.middlewares=https-redirect@docker"
+      - "traefik.http.routers.icoder_app-https.rule=Host(`icoder.tw`)"
+      - "traefik.http.routers.icoder_app-https.entrypoints=websecure"
+      - "traefik.http.routers.icoder_app-https.tls=true"
+      - "traefik.http.routers.icoder_app-https.tls.certresolver=letsencrypt"
     networks:
       - webssh
     volumes:
