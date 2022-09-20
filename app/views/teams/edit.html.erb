@@ -13,7 +13,7 @@
     <% if @team.avatar.attached? %>
       <%= image_tag @team.avatar, width: "150px" if @team.avatar.attached? %>
     <% else %>
-      <%= image_tag("/default_profile.png", width: "150px")%>
+      <%= image_tag("/default_profile.PNG", width: "150px")%>
     <% end %>
     <%= form.submit "更新", class:"btn-dashboard-create" %>
   <% end %>
