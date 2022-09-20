@@ -11,8 +11,9 @@
       <div>
         <button class="run-btn"
                 data-action="runCode#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
-                
-        <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
+        <%= link_to canvas_path(uuid: room.uuid), target: "_blank" do %>
+          畫板<span class="pencil pr-2">✎</span>
+        <% end %>
       </div>
       <div class="relative">
         <% if current_user %>
@@ -69,7 +70,6 @@
                 </tbody>
               </table>
             </div>
-            
           </div>
           <div data-editor-target="questions_information" class=" w-8/12 border relative rounded-tr-md rounded-br-md flex flex-col">
             <div class=" w-3/4 h-1/2 p-3 absolute top-0 bottom-0 left-0 right-0 m-auto text-center rounded-lg bg-gray-50 box-shadow shiny">
