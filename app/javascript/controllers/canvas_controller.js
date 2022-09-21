@@ -1,9 +1,46 @@
 import { Controller } from "stimulus"
-import("../canvas")
+import consumer from "../channels/consumer"
 
 export default class extends Controller {
   static targets = ["color", "brush", "eraser", "canvas"]
+
+  _cableConnected() {
+    console.log("cable DONE")
+    // Called when the subscription is ready for use on the server
+    // can add welcome msg like 'user_xx is join the room!'
+  }
+
+  _cableDisconnected() {
+    // Called when the subscription has been terminated by the server
+    // can add leave msg otherwise
+  }
+
+  _cableReceived({ content, created_at, username }) {
+    // Called when there's incoming data on the websocket for this channel
+  }
+  // https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname
+  // document.location.pathname ＝ /en-US/docs/Web/API/Location/pathname
+  getRoomUUID() {
+    return document.location.pathname.replace("/canvas/", "")
+  }
+  getSessionID() {
+    return (localStorage["sessionID"] ||= uuidv4())
+  }
+
   connect() {
+    import("../canvas")
+    this.channel = consumer.subscriptions.create(
+      {
+        channel: "CanvasChannel",
+        uuid: this.getRoomUUID(),
+        sessionID: this.getSessionID(),
+      },
+      {
+        connected: this._cableConnected.bind(this),
+        disconnected: this._cableDisconnected.bind(this),
+        received: this._cableReceived.bind(this),
+      }
+    )
     this.lineWidth = 5
     this.isPainting = false
     this.eraserEnabled = false

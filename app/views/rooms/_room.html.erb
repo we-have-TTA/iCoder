@@ -9,7 +9,9 @@
       <div>
         <button class="run-btn"
                 data-action="editor#run">執行 <span class="transform rotate-90 inline-block">▲</span></button>
-        <a href="/canvas" target="_blank" class="draw-btn">畫板<span class="pencil pr-2">✎</span></a>
+        <%= link_to canvas_path(uuid: room.uuid), target: "_blank" do %>
+          畫板<span class="pencil pr-2">✎</span>
+        <% end %>
       </div>
       <div class="relative">
         <button data-action="editor#catchQuestions">題庫</button>

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   
 
   get '/', to: 'pages#home'
-  get '/canvas', to: 'pages#canvas'
+  # get '/canvas', to: 'pages#canvas'
+  get '/canvas/:uuid', to: 'pages#canvas' , as: :canvas
 
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
