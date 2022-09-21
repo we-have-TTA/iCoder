@@ -48,12 +48,15 @@
     @apply py-2 px-5 rounded-full;
   }
   textarea {
-    @apply py-2 px-5 border border-gray-900;
+    @apply py-2 px-5 border border-gray-900 rounded;
   }
 }
 .questions-editor-area {
   .codejar-wrap {
     height: 60vh;
+  }
+  select {
+    @apply rounded;
   }
 }
 
