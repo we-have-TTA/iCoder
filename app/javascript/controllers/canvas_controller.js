@@ -49,6 +49,7 @@ export default class extends Controller {
     this.canvasTarget.height = window.innerHeight
     this.startX = 0
     this.startY = 0
+    this.canvasObject = [["beginPath"]]
   }
 
   toggleCursor(cursorType) {
@@ -93,13 +94,26 @@ export default class extends Controller {
   }
   mouseup() {
     this.isPainting = false
+    this.canvasObject.push(["stroke"])
+    // this.ctx.stroke()
     // console.log(this.ctx)
     // this.ctx.stroke()
-    this.ctx.stroke()
-    let url = this.getDrawingAsString()
+    // this.ctx.stroke()
+    // let url = this.getDrawingAsString()
     // console.log(url)
+
+    console.log(this.canvasObject)
     this.clean()
-    this.reuseCanvasString(url)
+
+    this.canvasObject.forEach((elem) => {
+      // loop through instructions
+      this.ctx[elem[0]].apply(this.ctx, elem.slice(1))
+    })
+
+    this.ctx.beginPath()
+    this.canvasObject = [["beginPath"]]
+
+    // this.reuseCanvasString(url)
     // this.ctx.beginPath()
     // setTimeout(() => {
     //   this.ctx.restore()
@@ -107,17 +121,22 @@ export default class extends Controller {
     //   this.ctx.beginPath()
     // }, 500)
   }
+  getDrawingAsString() {
+    return this.canvasTarget.toDataURL()
+  }
   draw(e) {
     this.ctx.lineWidth = this.lineWidth
     this.ctx.lineCap = "round"
     this.ctx.lineJoin = "round"
 
     // 校正筆觸差距 70
-    this.ctx.lineTo(e.clientX - 70, e.clientY)
-    // this.ctx.stroke()
-  }
-  getDrawingAsString() {
-    return this.canvasTarget.toDataURL()
+    const x = e.clientX - 70
+    const y = e.clientY
+
+    this.ctx.lineTo(x, y)
+    this.ctx.stroke()
+
+    this.canvasObject.push(["lineTo", x, y])
   }
 
   reuseCanvasString(url) {
