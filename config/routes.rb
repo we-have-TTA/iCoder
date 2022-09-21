@@ -53,6 +53,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      scope 'canvas' do
+        post ':uuid', action: :send_canvas_message, controller: :canvas, as: :send_canvas_message
+      end
       namespace :users do
         post 'rooms', action: :find_rooms_by_user, controller: :rooms
         patch '/', action: :update
