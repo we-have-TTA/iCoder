@@ -2,7 +2,7 @@
 
 section > section {
   max-width: 1200px;
-  margin: 15px auto;
+  margin: 0px auto;
 }
 
 .text{
@@ -10,7 +10,7 @@ section > section {
   padding-bottom: 30px;
 
   h1 {
-    @apply text-9xl;
+    @apply sm:text-9xl text-6xl leading-tight ;
     animation: byBottom 1s ease both;
     font-family: yantramanav;
     padding-bottom:20px;
@@ -23,7 +23,7 @@ section > section {
   }
 
   p{
-    @apply mb-5 text-2xl py-2.5;
+    @apply mb-5 text-xl leading-10 py-2.5;
     animation: byBtn 1s ease both;
   }
 
@@ -60,7 +60,8 @@ section > section {
 
 .hero-block::before {
   content: '';
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   height: 620px;
   left: -20px;
   top: 20px;
@@ -69,9 +70,21 @@ section > section {
   box-shadow: rgb(181 175 175 / 25%) 7px 8px 6px 0px;
 }
 
+@media screen and (max-width:640px) { 
+  .hero-block::before{
+    left: 0px;
+    top: 0px;
+    box-shadow: none;
+  }
+  .hero-block::after{
+    display: none;
+  }
+}
+
 .hero-block::after {
   content: '';
-  width: 602px;
+  max-width: 602px;
+  width: 100%;
   height: 603px;
   left: 20px;
   top: 75px;
