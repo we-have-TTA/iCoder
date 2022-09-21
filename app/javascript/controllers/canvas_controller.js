@@ -16,8 +16,22 @@ export default class extends Controller {
     // can add leave msg otherwise
   }
 
-  _cableReceived({ content, created_at, username }) {
+  _cableReceived({ sessionID, msg }) {
     // Called when there's incoming data on the websocket for this channel
+    if (sessionID === localStorage["sessionID"]) {
+      return
+    }
+    // FIXME 處理同步衝突 自己正在畫畫時 不同步其他人訊息
+    // FIXME 傳遞其他訊息
+    this.ctx.save()
+    this.ctx.beginPath()
+
+    JSON.parse(msg.content).forEach((elem) => {
+      // loop through instructions
+      this.ctx[elem[0]].apply(this.ctx, elem.slice(1))
+    })
+
+    this.ctx.restore()
   }
   // https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname
   // document.location.pathname ＝ /en-US/docs/Web/API/Location/pathname
@@ -107,36 +121,11 @@ export default class extends Controller {
       url: `/api/v1/canvas/${data.uuid}/`,
       type: "post",
       data: new URLSearchParams(data).toString(),
-      success: (resp) => {
-        console.log(resp)
-      },
+      success: () => {},
       error: () => {},
     })
-    // this.ctx.stroke()
-    // console.log(this.ctx)
-    // this.ctx.stroke()
-    // this.ctx.stroke()
-    // let url = this.getDrawingAsString()
-    // console.log(url)
-
-    // console.log(this.canvasObject)
-    this.clean()
-
-    this.canvasObject.forEach((elem) => {
-      // loop through instructions
-      this.ctx[elem[0]].apply(this.ctx, elem.slice(1))
-    })
-
     this.ctx.beginPath()
     this.canvasObject = [["beginPath"]]
-
-    // this.reuseCanvasString(url)
-    // this.ctx.beginPath()
-    // setTimeout(() => {
-    //   this.ctx.restore()
-    //   this.ctx.stroke()
-    //   this.ctx.beginPath()
-    // }, 500)
   }
   getDrawingAsString() {
     return this.canvasTarget.toDataURL()
