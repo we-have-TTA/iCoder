@@ -74,9 +74,11 @@ export default function () {
   // _ => I don't care
   canvas.addEventListener("mouseup", (_) => {
     isPainting = false
+    ctx.stroke()
+    ctx.beginPath()
   })
 
-  canvas.addEventListener("mousemove", () => {
+  canvas.addEventListener("mousemove", (e) => {
     if (isPainting) {
       draw(e)
     }
