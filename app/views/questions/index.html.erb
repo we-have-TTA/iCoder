@@ -4,59 +4,61 @@
 </div>
 <span class="block mb-10">管理您的面試題庫，新增題目、進行查詢、調整及刪除。</span>
 <div class="rounded">
-  <div>
-    <form action="./questions" method="get" class="mt-2 mb-4">
-      搜尋：<input type="text" placeholder="關鍵字查詢" name="keyword" class="px-2 border border-black">
-      <button>送出</button>
-    </form>
-  </div>
-  <table class="question_table">
-    <thead>
-      <tr>
-        <td>標題</td>
-        <td>模式</td>
-        <td>程式語言</td>
-        <td>難易度</td>
-        <td>建立者</td>
-        <td>建立日期</td>
-        <td>上次使用</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody data-controller="permission">
-      <% @questions.each do |question| %>
-        <%= form_with model: question do |form| %>
+  <form action="./questions" method="get" class="mt-2 mb-4">
+    <div class="relative">
+      <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+      </div>
+      <input type="text" placeholder="標題關鍵字查詢" name="keyword" class="block p-2.5 w-full z-20 rounded-lg text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search" required="">
+      <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+      <table class="question_table">
+        <thead>
           <tr>
-            <td><%= question.title %></td>
-            <td><%= question.question_type %></td>
-            <td><%= question.language %></td>
-            <td><%= question.difficulty %></td>
-            <td><%= question.creator.username %></td>
-            <td><%= question.created_at.to_s.split.first %></td>
-            <td>
-              <% if question.last_used %>
-                <%= question.last_used.to_s.split.first %>
-              <% else %>
-                尚未使用
-              <% end %>
-            </td>
-            <td><%= link_to "創建會議", rooms_path(question: question.id),
+            <td>標題</td>
+            <td>模式</td>
+            <td>程式語言</td>
+            <td>難易度</td>
+            <td>建立者</td>
+            <td>建立日期</td>
+            <td>上次使用</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody data-controller="permission">
+          <% @questions.each do |question| %>
+            <%= form_with model: question do |form| %>
+              <tr>
+                <td><%= question.title %></td>
+                <td><%= question.question_type %></td>
+                <td><%= question.language %></td>
+                <td><%= question.difficulty %></td>
+                <td><%= question.creator.username %></td>
+                <td><%= question.created_at.to_s.split.first %></td>
+                <td>
+                  <% if question.last_used %>
+                    <%= question.last_used.to_s.split.first %>
+                  <% else %>
+                    尚未使用
+                  <% end %>
+                </td>
+                <td><%= link_to "創建會議", rooms_path(question: question.id),
                                        method: "post", 
                                        target: "_blank", 
                                        class: "btn-dashboard-create",
                                        data: {action: "permission#checkPermission", "permission-target": "control_button","create-permission": "enable"}%></td>
-            <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
-            <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
-          </tr>
-        <% end %>
-      <% end %>
-      <div>
-        <%== pagy_nav(@pagy) %>
-      </div>
-    </tbody>
-  </table>
+                <td><%= link_to "檢視", question_path(question), class: "btn-dashboard-create" %></td>
+                <td><%= link_to "修改", edit_question_path(question), class: "btn-dashboard-create" %></td>
+                <td><%= link_to "刪除", question_path(question), method:"delete", data:{confirm:"確定要刪除這題嗎?"}, class: "btn-dashboard-delete" %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          <div>
+            <%== pagy_nav(@pagy) %>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </form>
 </div>
