@@ -1,8 +1,34 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
+  static targets = ["color","brush", "eraser","drawing-board"]
   connect() {
     import("../canvas")
+  }
+
+  color() {
+   
+  }
+  lineWidth() {
+   
+  }
+  togglebrush() {
+   
+  }
+  clean() {
+   
+  }
+  toggleEraser() {
+   
+  }
+  mousedown() {
+   
+  }
+  mousemove() {
+   
+  } 
+  mouseup() {
+   
   }
 
   export default function () {
