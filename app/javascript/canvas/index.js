@@ -1,3 +1,3 @@
 import("./canvas.css")
-import canvasLoad from "./canvas.js"
-canvasLoad()
+import initCanvas from "./canvas.js"
+initCanvas()
