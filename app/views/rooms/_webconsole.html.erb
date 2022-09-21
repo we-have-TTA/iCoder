@@ -1,9 +1,27 @@
-<div class="flex justify-between">
-  <%# <ul class="right-header flex">
-    <li class="text-xl text-white hover:underline mr-5">執行結果</li>
-    <li class="text-xl text-white hover:underline">指示</li>
-  </ul>
-  <button class="bg-red-700 border border-red-900 hover:bg-red-800 text-white text-sm rounded px-5 py-2">重啟</button> %>
+<div class="inline-flex mt-2 justify-between">
+    <div class="inline-flex">
+      <button class="flex items-center h-12 px-4 py-1 text-sm text-center text-white border-gray-400 border-2 border-b-0 rounded-tl-md rounded-tr-xl"
+              data-allRoom-target="RUN"
+              data-action="allRoom#displayRUN">
+          執行結果
+      </button>
+      <button class="flex items-center h-12 px-4 py-1 text-sm text-center text-gray-400 border-b border-gray-500 hover:border-gray-200 rounded-tl-md rounded-tr-xl"
+              data-allRoom-target="terminal"
+              data-action="allRoom#displayTerminal">
+          終端機
+      </button>
+    </div>
+    <div class="mr-6 flex items-center font-bold text-lg text-white"
+         id="timer">
+      00:00:01
+    </div>
+</div>
+<div class="h-full mb-2 relative">
+  <div class=" absolute text-white  bg-gray-800 border-2 border-t-0 border-gray-400 rounded-bl-md rounded-br-md w-full h-full p-3 z-10 whitespace-pre-line break-all overflow-y-auto"
+       id="result"></div>
+  <iframe id="iframe"
+          src=<%= src %>
+          class="relative mb-3 pt-1 w-full h-full p-1 border-2 border-t-0 rounded-bl-md rounded-br-md  border-gray-400"
+          data-allRoom-target="iframe"></iframe>
 </div>
 
-<iframe id="iframe" src=<%= src %> class="border-2 border-solid border-black w-full h-full"></iframe>

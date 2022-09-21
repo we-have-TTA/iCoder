@@ -57,16 +57,51 @@ export default class extends Controller {
   }
 
   runCode({result, nickname}){
-    const resultText = document.getElementById("run_result")
-    const runText = document.getElementById("run-text")
-    const resultBox = document.getElementById("result-box")
-    resultText.textContent = ""
-    runText.textContent = `${nickname} 執行了程式碼：`
-    resultBox.style.cssText = "display: block"
-    resultText.textContent = result
-    setTimeout(() => {
-      resultBox.style.cssText = "display: none"
-    }, 5000)
+
+    const resultBox = document.getElementById("result")
+    console.log(result)
+    let color = "gold"
+    if( localStorage["username"] === nickname){
+      color = "cyan"
+    }
+    let answer = "text-gray-200"
+    let answerBg = "bg-gray-700"
+
+
+    // const container = document.getElementById('message0')
+    // const data = '與 setTimeout 相比，requestAnimationFrame 最大的優勢是 由系統來決定回撥函式的執行時機。具體一點講就是，系統每次繪製之前會主動呼叫 requestAnimationFrame 中的回撥函式，如果系統繪製率是 60Hz，那麼回撥函式就每16.7ms 被執行一次，如果繪製頻率是75Hz，那麼這個間隔時間就變成了 1000/75=13.3ms。換句話說就是，requestAnimationFrame 的執行步伐跟著系統的繪製頻率走。它能保證回撥函式在螢幕每一次的繪製間隔中只被執行一次，這樣就不會引起丟幀現象，也不會導致動畫出現卡頓的問題。'.split('')
+    
+    
+    console.log(color)
+    if (result == "") {
+      resultBox.insertAdjacentHTML("beforeend", `<br><div class=" bg-gray-700 border-2 text-gray-400 border-gray-400 ring-2 ring-gray-300 p-2 ml-2 block">空的回傳值</div>`)
+      document.getElementById("result").scrollTop=document.getElementById("result").scrollHeight
+      return
+    } else if (result !== undefined) {
+      if ( result.split("/")[0] === "root" || result.split("/")[1] === "root" || result.split(" ")[0] === "Traceback" || result.split(" ")[0] === "warning:") {
+        answer = "text-red-600"
+        answerBg = "bg-gray-300"
+      }
+      resultBox.insertAdjacentHTML("beforeend", `<br><div class="${answerBg} border-2 ${answer} border-gray-400 ring-2 ring-gray-300 p-2 ml-2 block">${result}</div>`)
+      document.getElementById("result").scrollTop=document.getElementById("result").scrollHeight
+      return
+    }
+    const rndId = Math.ceil(Math.random()*2000)
+    resultBox.insertAdjacentHTML("beforeend", `<br><div id="${rndId}" style="color: ${color}"></div>`)
+    let index = 0
+    const data = `${nickname} 執行了程式碼`
+    function writing() {
+      if (index < data.length) {
+        document.getElementById(`${rndId}`).innerHTML += data[index ++]
+        setTimeout(() => {
+          requestAnimationFrame(writing)
+        }, 1000/50);
+      }
+    }
+    writing()
+    
+    document.getElementById("result").scrollTop=document.getElementById("result").scrollHeight
+
   }
 
   

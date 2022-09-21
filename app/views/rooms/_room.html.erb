@@ -26,7 +26,7 @@
         <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
              data-editor-target="questions_instruction">請先選擇題目</div>
         <div
-          class="mt-2.5 py-3 flex justify-evenly w-full bg-gray-800 absolute z-10 rounded-md"
+          class="mt-2.5 py-3 flex justify-end w-1/2 right-0 absolute z-10 rounded-md"
           data-editor-target="change_language"
           id="web-console"
           data-controller="webconsole"
@@ -37,10 +37,6 @@
         </div>
       </div>
       <%= render "editor" %>
-      <div id="result-box" class="result-box whitespace-pre" style="display: none">
-        <div id = "run-text" class="text-xl text-white "></div>
-        <div class="text-base text-white " id="run_result"></div>
-      </div>
       <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-allRoom-target="camera" data-connected="false"></div>
       <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=e138caba-c5da-46db-9562-889ec6530c22&room=<%=params[:uuid]%>" defer></script>
       <div data-editor-target="team_question"
@@ -92,7 +88,7 @@
       </div>
     </div>
     <div class="web-console">
-      <div class="border border-gray-500 h-full rounded-md">
+      <div class=" border-gray-500 h-full flex flex-col">
         <%= render "webconsole", src: src %>
       </div>
       <%= render "textchat", room: @room %>
