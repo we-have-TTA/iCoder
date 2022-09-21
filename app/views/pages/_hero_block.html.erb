@@ -1,16 +1,22 @@
 <section class="hero-block">
-  <div class="flex">
+  <div class="flex flex-col md:flex-row">
     <div class="text">
       <h1>
-        <p>Hi,<br>
-          we are</p>
-        {<b class="text-yellow-400">i</b>}Coder</h1>
-      <p>Developers trust {<b class="text-yellow-400">i</b>}Coder to help hire the right candidates because
-        it’s simple – and just works</p>
-      <a href="/users" class="btn-index">免費註冊</a>
+        嗨,<br>
+        我們是
+        <br>
+        {<b class="text-yellow-400">i</b>}Coder
+      </h1>
+      <p class="md:pr-48">招募軟體人才的面試管理平台，我們提供良好的求職面試管道，幫助您找到優良的軟體工程師。</p>
+      <a href="/users" class="hidden btn-index md:inline-block">免費註冊</a>
     </div>
     <div class="img">
       <%= image_tag("coderpic.jpg") %>
+    </div>
+    <div class="gotoGithub">
+      最佳體驗為電腦版-網頁
+      <br>
+      逛逛 iCoder GitHub <a href="https://github.com/we-have-TTA"><img class="inline w-5 h-5 mr-2 " src="/github_black.png">we-have-TTA</a>
     </div>
   </div>
 </section>
