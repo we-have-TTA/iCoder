@@ -1,5 +1,6 @@
 import { Controller } from "stimulus"
 import consumer from "../channels/consumer"
+import Rails from "@rails/ujs"
 
 export default class extends Controller {
   static targets = ["color", "brush", "eraser", "canvas"]
@@ -95,6 +96,22 @@ export default class extends Controller {
   mouseup() {
     this.isPainting = false
     this.canvasObject.push(["stroke"])
+
+    const data = {
+      content: JSON.stringify(this.canvasObject),
+      uuid: this.getRoomUUID(),
+      sessionID: this.getSessionID(),
+    }
+
+    Rails.ajax({
+      url: `/api/v1/canvas/${data.uuid}/`,
+      type: "post",
+      data: new URLSearchParams(data).toString(),
+      success: (resp) => {
+        console.log(resp)
+      },
+      error: () => {},
+    })
     // this.ctx.stroke()
     // console.log(this.ctx)
     // this.ctx.stroke()
@@ -102,7 +119,7 @@ export default class extends Controller {
     // let url = this.getDrawingAsString()
     // console.log(url)
 
-    console.log(this.canvasObject)
+    // console.log(this.canvasObject)
     this.clean()
 
     this.canvasObject.forEach((elem) => {
