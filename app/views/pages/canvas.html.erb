@@ -16,19 +16,19 @@
         <h1>Draw</h1>
         <!-- 選色器 -->
         <label for="stroke">顯示顏色</label>
-        <input type="color" name="stroke" id="stroke" />
+        <input type="color" name="stroke" id="stroke" data-action="change->canvas#color" data-canvas-target="color" />
         <!--畫筆粗細-->
         <label for="lineWidth">筆畫粗細</label>
-        <input type="number" name="lineWidth" id="lineWidth" value="5" />
+        <input type="number" name="lineWidth" id="lineWidth" data-action="change->canvas#lineWidth"  value="5" />
         <!--畫筆鈕-->
-        <button id="brush" class="active"><i class="fi fi-rs-pencil"></i></button>
+        <button id="brush" data-action="canvas#togglebrush" class="active" data-canvas-target="brush"><i class="fi fi-rs-pencil"></i></button>
         <!-- 清除鈕 -->
-        <button id="clean">清除</button>
+        <button id="clean" data-action="canvas#clean">清除</button>
         <!-- 橡皮擦 -->
-        <button id="eraser">橡皮擦</button>
+        <button id="eraser" data-action="canvas#toggleEraser" data-canvas-target="eraser">橡皮擦</button>
       </div>
       <div class="drawing-board">
-        <canvas id="drawing-board"></canvas>
+        <canvas id="drawing-board" data-action="mousedown->canvas#mousedown mouseup->canvas#mouseup mousemove->canvas#mousemove" data-canvas-target="drawing-board" ></canvas>
       </div>
     </section>
   </body>
