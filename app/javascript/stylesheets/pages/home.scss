@@ -6,14 +6,14 @@ section > section {
 }
 
 .text{
-  @apply overflow-hidden;
-  padding-bottom: 30px;
+  @apply overflow-hidden md:pb-14;
 
   h1 {
-    @apply sm:text-9xl text-6xl leading-tight ;
+    @apply md:text-8xl text-6xl leading-tight md:leading-5;
     animation: byBottom 1s ease both;
     font-family: yantramanav;
     padding-bottom:20px;
+    line-height:1.2;
 
     p{
       @apply text-9xl;
@@ -31,6 +31,15 @@ section > section {
     animation: byBtn 1s 0.2s ease both;
   }
 
+}
+
+
+.gotoGithub{
+  @apply text-xl relative md:hidden;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-sizing: border-box
 }
 
 
@@ -70,11 +79,16 @@ section > section {
   box-shadow: rgb(181 175 175 / 25%) 7px 8px 6px 0px;
 }
 
-@media screen and (max-width:640px) { 
+@media screen and (max-width:768px) { 
+  .hero-block .img{
+    display: none;
+  }
   .hero-block::before{
     left: 0px;
     top: 0px;
     box-shadow: none;
+    max-width: 100%;
+    height: 100%;
   }
   .hero-block::after{
     display: none;

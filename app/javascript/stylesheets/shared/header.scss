@@ -7,14 +7,14 @@
     font-weight: 500;
     img{
       height: auto;
-      max-width: 100%;
-      width: 50%;
+      max-width: 170px;
+      width: 100%;
     }
   }
 }
 
 #main-navigation {
-  @apply hidden sm:flex flex-grow justify-end items-center py-2.5;
+  @apply hidden md:flex flex-grow justify-end items-center py-2.5;
   ul {
     @apply flex items-center;
     > li {

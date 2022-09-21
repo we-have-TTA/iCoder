@@ -1,5 +1,5 @@
-<header class="py-2.5 site-header">
-  <div class="flex items-center sm:px-5 nav_bar">
+<header class="site-header">
+  <div class="flex items-center justify-center md:px-5 nav_bar md:justify-start">
     <%= link_to  "/", class: "logo" do %>
       <img src="/icoder_logo.png" >
     <% end %>
@@ -9,20 +9,6 @@
         <li><%= link_to "登入", new_user_session_path , class:"btn-index" %></li>
       </ul>
     </nav>
-    <div class="text-right pr-7 hamburger md:hidden">
-      <div id="menuToggle">
-        <input type="checkbox">
-        <span></span>
-        <span></span>
-        <span></span>
-        <ul id="menu">
-          <li><%= link_to "註冊", new_user_registration_path , class:"btn-index" %></li>
-          <li><%= link_to "登入", new_user_session_path , class:"btn-index" %></li>
-        </ul>
-      </div>
-      <%# <button class="w-1/4 menu_icon">
-        <%= image_tag("menu_icon.svg") %>
-      <%# </button> %>
-    </div>
   </div>
+</div>
 </header>
