@@ -4,7 +4,7 @@
     <%= @question.title %>
   </div>
   <div class="grid grid-cols-2">
-    <ul class="questions-show-text flex flex-col">
+    <ul class="questions-show-text flex flex-col mb-3">
       <span> 建立者:</span>
       <li>
         <%= @question.creator.username %>
@@ -22,15 +22,15 @@
         <%= @question.difficulty %>
       </li>
       <span>面試官資訊:</span>
-      <li class="text-area">
+      <li class="text-area whitespace-pre-line">
         <%= @question.internal_description %>
       </li>
       <span>面試說明:</span>
-      <li class="text-area">
+      <li class="text-area whitespace-pre-line">
         <%= @question.candidate_instructions %>
       </li>
     </ul>
-    <div class="mb-5" data-controller="editor" data-question-id="<%= @question.id %>">
+    <div data-controller="editor" data-question-id="<%= @question.id %>">
       <div class="editor" data-editor-target="panel" data-edit="false"></div>
     </div>
   </div>
