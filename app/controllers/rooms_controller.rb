@@ -74,7 +74,7 @@ class RoomsController < ApplicationController
     end
     p "連線至 #{language} 的 container..."
     @room = Room.find_by!(uuid:)
-    RoomRunChannel.broadcast_to(@room, { action: 'selectLanguage', language:, new_container:, signed: user_signed_in? })
+    RoomRunChannel.broadcast_to(@room, { action: 'selectLanguage', language:, new_container: })
     render json: { container: new_container }
   end
 

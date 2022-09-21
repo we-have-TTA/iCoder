@@ -24,7 +24,7 @@ export default class extends Controller {
       this.selectLanguage(data)
       return
     }
-      this.runCode(data.result)
+      this.runCode(data)
     
   }
 
@@ -32,6 +32,7 @@ export default class extends Controller {
     const language = this.getLanguage()
     const roomID = this.element.dataset.room_id
     const uuid = this.getRoomUUID()
+    const username = localStorage["username"]
     const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
     const strArray = _jar.toString()
     _jar.destroy()
@@ -40,6 +41,7 @@ export default class extends Controller {
       code: strArray,
       language: language,
       uuid: uuid,
+      username: username
     }
 
     Rails.ajax({
@@ -54,12 +56,12 @@ export default class extends Controller {
     })
   }
 
-  runCode(result){
+  runCode({result, nickname}){
     const resultText = document.getElementById("run_result")
     const runText = document.getElementById("run-text")
     const resultBox = document.getElementById("result-box")
     resultText.textContent = ""
-    runText.textContent = `${localStorage["username"]} 執行了程式碼：`
+    runText.textContent = `${nickname} 執行了程式碼：`
     resultBox.style.cssText = "display: block"
     resultText.textContent = result
     setTimeout(() => {
@@ -68,19 +70,17 @@ export default class extends Controller {
   }
 
   
-  selectLanguage(data) {
-    const language = data.language
+  selectLanguage({language,new_container}) {
     const iframe = document.getElementById("iframe").contentWindow
     iframe.postMessage(`reload`, this.element.dataset.src)
     document.getElementById("current_language").textContent = language
-    console.log(sessionStorage["admin"])
     if (sessionStorage["admin"] === "true"){
       setTimeout(() => {
-        iframe.postMessage(`${data.new_container}`, this.element.dataset.src)
+        iframe.postMessage(`${new_container}`, this.element.dataset.src)
       }, 500);
     } else {
       setTimeout(() => {
-        iframe.postMessage(`${data.new_container}`, this.element.dataset.src)
+        iframe.postMessage(`${new_container}`, this.element.dataset.src)
       }, 1500);
     }
   }
