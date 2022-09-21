@@ -47,6 +47,8 @@ export default class extends Controller {
     this.ctx = this.canvasTarget.getContext("2d")
     this.canvasTarget.width = window.innerWidth
     this.canvasTarget.height = window.innerHeight
+    this.startX = 0
+    this.startY = 0
   }
 
   toggleCursor(cursorType) {
@@ -91,8 +93,19 @@ export default class extends Controller {
   }
   mouseup() {
     this.isPainting = false
+    // console.log(this.ctx)
+    // this.ctx.stroke()
     this.ctx.stroke()
-    this.ctx.beginPath()
+    let url = this.getDrawingAsString()
+    // console.log(url)
+    this.clean()
+    this.reuseCanvasString(url)
+    // this.ctx.beginPath()
+    // setTimeout(() => {
+    //   this.ctx.restore()
+    //   this.ctx.stroke()
+    //   this.ctx.beginPath()
+    // }, 500)
   }
   draw(e) {
     this.ctx.lineWidth = this.lineWidth
@@ -101,6 +114,18 @@ export default class extends Controller {
 
     // 校正筆觸差距 70
     this.ctx.lineTo(e.clientX - 70, e.clientY)
-    this.ctx.stroke()
+    // this.ctx.stroke()
+  }
+  getDrawingAsString() {
+    return this.canvasTarget.toDataURL()
+  }
+
+  reuseCanvasString(url) {
+    let img = new Image()
+    img.onload = () => {
+      // Note: here img.naturalHeight & img.naturalWidth will be your original canvas size
+      this.ctx.drawImage(img, 0, 0)
+    }
+    img.src = url
   }
 }
