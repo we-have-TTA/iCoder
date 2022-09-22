@@ -5,7 +5,7 @@
 </div>
 <span class="block mb-10">管理您的會議室，新增會議、進行查詢、調整及刪除。</span>
 <div class="rounded">
-  <form action="./rooms" method="get" class="mt-2 mb-4">
+  <form action="./rooms" method="get" class="mt-2 mb-4" , data-room-target="filter" >
     <div class="relative">
       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
       </div>
@@ -14,12 +14,20 @@
     </div>
   </form>
 </div>
-<div data-controller="room"
+<div data-controller="room filter"
      data-currentUserId=<%= current_user.id %>
      data-countdown_standard=<%= @countdown_standard%>>
-  <div class="p-2 text-white bg-gray-800">
-    <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
-                                               data-action="click->room#filter">只顯示自己的會議</label>
+  <div class="p-2">
+    <form action="./rooms" method="get" class="text-black", data-filter-target="filter" >
+      <label>
+        <% if params[:creator] %>
+          <input type="checkbox" name="creator" value="me" data-action="click->filter#checkout" checked >
+        <% else %>
+          <input type="checkbox" name="creator" value="me" data-action="click->filter#checkout">
+        <% end %>
+        filter something
+      </label>
+    </form>
   </div>
   <table class="room_table">
     <thead>
@@ -41,4 +49,3 @@
       </div>
     </tbody>
   </table>
-</div>

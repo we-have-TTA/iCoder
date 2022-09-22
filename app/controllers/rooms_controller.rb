@@ -9,10 +9,12 @@ class RoomsController < ApplicationController
   helper_method :current_participator
 
   def index
+    @countdown_standard = ENV.fetch('COUNTDOWN_STANDARD', 24).to_i
     @rooms = Room.where(team: current_user.team).order(id: :desc)
     @rooms = @rooms.where('title like ?', "%#{params[:keyword]}%") if params[:keyword]
+    @rooms = @rooms.where(creator: current_user) if params[:creator]
+
     @pagy, @rooms = pagy(@rooms, items: 5)
-    @countdown_standard = ENV.fetch('COUNTDOWN_STANDARD', 24).to_i
   end
 
   def show
