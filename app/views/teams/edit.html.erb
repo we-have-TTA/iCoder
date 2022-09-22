@@ -1,19 +1,28 @@
 <div class="mt-3">
-  <h1 class="text-2xl font-bold mb-5">組織修改</h1>
+  <h1 class="text-2xl font-bold mb-5">組織設定</h1>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= form_with model: @team, url: teams_path do |form| %>
     <div class="mb-3">
-      <%= form.label :name, "組織名稱" %>
-      <%= form.text_field :name %><br/>
+      <%= form.label :name, "組織名稱", class:"form-label inline-block mb-2" %><br/>
+      <%= form.text_field :name, class:"px-2 border-solid bg-clip-padding border border-gray-300 rounded " %>
     </div>
     <div class="mb-3">
-      <%= form.label :avatar, "團隊圖示" %>
-      <%= form.file_field :avatar %><br/>
+      <%= form.label :avatar, "團隊圖示", class:"form-label inline-block mb-2" %><br/>
+      <%= form.file_field :avatar, class:"px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-black focus:outline-none"%><br/>
     </div>
-    <span>目前圖示：</span>
+    <span class="form-label mb-3">目前圖示：</span>
     <% if @team.avatar.attached? %>
-      <%= image_tag @team.avatar, width: "150px" if @team.avatar.attached? %>
+      <%= image_tag @team.avatar, width: "150px", class:"p-5 bg-red-500" if @team.avatar.attached? %>
     <% else %>
-      <%= image_tag("/default_profile.png", width: "150px")%>
+      <%= image_tag("/default_profile.PNG", width: "150px", class:"mb-3")%>
     <% end %>
     <%= form.submit "更新", class:"btn-dashboard-create" %>
   <% end %>
