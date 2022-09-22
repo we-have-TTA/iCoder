@@ -61,18 +61,12 @@ export default class extends Controller {
     const resultBox = document.getElementById("result")
     console.log(result)
     let color = "gold"
+    let answer = "text-gray-200"
+    let answerBg = "bg-gray-700"
+    
     if( localStorage["username"] === nickname){
       color = "cyan"
     }
-    let answer = "text-gray-200"
-    let answerBg = "bg-gray-700"
-
-
-    // const container = document.getElementById('message0')
-    // const data = '與 setTimeout 相比，requestAnimationFrame 最大的優勢是 由系統來決定回撥函式的執行時機。具體一點講就是，系統每次繪製之前會主動呼叫 requestAnimationFrame 中的回撥函式，如果系統繪製率是 60Hz，那麼回撥函式就每16.7ms 被執行一次，如果繪製頻率是75Hz，那麼這個間隔時間就變成了 1000/75=13.3ms。換句話說就是，requestAnimationFrame 的執行步伐跟著系統的繪製頻率走。它能保證回撥函式在螢幕每一次的繪製間隔中只被執行一次，這樣就不會引起丟幀現象，也不會導致動畫出現卡頓的問題。'.split('')
-    
-    
-    console.log(color)
     if (result == "") {
       resultBox.insertAdjacentHTML("beforeend", `<br><div class=" bg-gray-700 border-2 text-gray-400 border-gray-400 ring-2 ring-gray-300 p-2 ml-2 block">空的回傳值</div>`)
       document.getElementById("result").scrollTop=document.getElementById("result").scrollHeight
