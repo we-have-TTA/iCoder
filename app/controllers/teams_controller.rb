@@ -30,19 +30,12 @@ class TeamsController < ApplicationController
   def invite; end
 
   def send_invitation
-    if User.find_by(email: params[:email])
-      register = 'true'
-      user = User.find_by(email: params[:email])
-    else
-      register = 'false'
-      user = User.new(
-        username: params[:username] || params[:email].split('@').first,
-        email: params[:email]
-      )
-    end
-    team_id = current_user.team_id
-    team_name = current_user.team.name
-    TeamMailer.send_invitation_to(user, team_id, register, team_name).deliver_now
+    user = User.find_by(email: params[:email]) || User.new(
+      username: params[:username] || params[:email].split('@').first,
+      email: params[:email]
+    )
+    team = current_user.team
+    TeamMailer.send_invitation_to(user, team).deliver_now
     redirect_to :invite_to_team, notice: "成功邀請 #{user.username}(#{user.email})"
   end
 
