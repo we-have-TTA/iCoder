@@ -1,50 +1,74 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  reverse-proxy:
+    image: traefik:v2.8
+    restart: unless-stopped
+    container_name: traefik
+    networks:
+      - webssh
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./acme.json:/acme.json:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./tr-config:/etc/traefik/config
+
   db:
     image: postgres
+    container_name: db
     environment:
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=postgres"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
     networks:
       - webssh
+
   redis:
     image: redis
-    command: redis-server --save 20 1 --loglevel warning
-    ports:
-      - 6379:6379
+    container_name: redis
+    volumes:
+      - redis-data:/usr/local/etc/redis
     networks:
       - webssh
+
   app:
     build: .
-    ports:
-    - "3000:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
       - REDIS_URL=redis://redis:6379
       - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
     labels:
-      - "traefik.enable=true"
-      # Hosts
-      - "traefik.http.services.icoder_app.loadbalancer.server.port=3000"
-      - "traefik.http.routers.icoder_app-http.rule=Host(`icoder.tw`)"
-      - "traefik.http.routers.icoder_app-http.entrypoints=web"
-      # - "traefik.http.routers.icoder_app-http.middlewares=https-redirect@docker"
-      - "traefik.http.routers.icoder_app-https.rule=Host(`icoder.tw`)"
-      - "traefik.http.routers.icoder_app-https.entrypoints=websecure"
-      - "traefik.http.routers.icoder_app-https.tls=true"
-      - "traefik.http.routers.icoder_app-https.tls.certresolver=letsencrypt"
+      - traefik.enable=true
+      - traefik.http.routers.app-http.entrypoints=web
+      - traefik.http.routers.app-http.rule=Host(`icoder.tw`)
+      - traefik.http.routers.app-https.entrypoints=websecure
+      - traefik.http.routers.app-https.rule=Host(`icoder.tw`)
+      - traefik.http.routers.app-http.middlewares=https-only@file
+      - traefik.http.routers.app-https.tls=true
+      - traefik.http.routers.app-https.tls.certresolver=letencrypt
+      - traefik.http.routers.app-https.service=app
+      - traefik.http.services.app.loadbalancer.server.port=3000
+      - traefik.docker.network=webssh
     networks:
       - webssh
     volumes:
       - .:/app
       - /home/docker/id_key:/root/.ssh/
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/database/data:/var/lib/postgresql/data
     depends_on:
       - db
       - redis
 
+volumes:
+  pg-data:
+    external: true
+  redis-data:
+    external: true
+
 networks:
   webssh:
-    name: webssh
+    external: true
