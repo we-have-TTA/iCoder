@@ -1,18 +1,14 @@
 <header class="site-header">
-  <div class="nav_bar flex items-center px-5">
+  <div class="flex items-center justify-center md:px-5 nav_bar md:justify-start">
     <%= link_to  "/", class: "logo" do %>
-      <img src="/icoder_logo.png" class="w-1/4 h-1/4">
+      <img src="/icoder_logo.png" >
     <% end %>
-    <nav id="main-navigation">
+    <nav id="main-navigation" >
       <ul>
         <li><%= link_to "註冊", new_user_registration_path , class:"btn-index" %></li>
         <li><%= link_to "登入", new_user_session_path , class:"btn-index" %></li>
       </ul>
     </nav>
-    <div class="hamburger md:hidden">
-      <button class="toggler">
-        hamburger
-      </button>
-    </div>
   </div>
+</div>
 </header>

@@ -19,6 +19,9 @@ module Api
       def run
         language = params[:language]
         code_content = params[:code]
+        nickname = params[:username]
+        @room = Room.find_by!(uuid: params[:uuid])
+        RoomRunChannel.broadcast_to(@room, { nickname: })
         uuid = params[:uuid]
         host_ip = ENV.fetch('HOST_IP', nil)
         host_ip = '127.0.0.1' if ENV['RAILS_ENV'] == 'production'
@@ -47,6 +50,7 @@ module Api
           end
           p File.delete("../#{doc_name}")
         end
+        RoomRunChannel.broadcast_to(@room, { result: })
         render json: { result: }
       end
 
