@@ -1,8 +1,8 @@
-<div class="pl-10">
+<div class=" flex flex-col m-auto btn-dashboard-border ring ring-inset ring-gray-300">
   <% language_set.each do |language| %>
     <button
       data-action="webconsole#createRuntime"
-      class="my-2"
+      class="my-2 btn-dashboard-border"
       id=<%= language%>
       data-editor-target=<%= language %>><%= language %></button>
     <% end %>

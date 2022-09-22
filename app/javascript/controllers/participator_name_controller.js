@@ -34,7 +34,7 @@ export default class extends Controller {
           <div>輸入名字：</div>
           <form action="" data-action="participator-name#changeName:prevent">
             <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true" value=${previousName}>
-            <input type="submit" class=" bg-gray-400 rounded-lg px-2 ml-2  cursor-pointer ">
+            <input type="submit" class="btn-dashboard-border">
           </form>
         </div>`
       )
@@ -44,7 +44,7 @@ export default class extends Controller {
         `<div class="box p-4 rounded-md items-center">
           <form action="" data-action="participator-name#changeName:prevent">
             <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true">
-            <input type="submit" class="bg-gray-400 rounded-lg px-2 ml-2 cursor-pointer ">
+            <input type="submit" class="btn-dashboard-border">
           </form>
         </div>`
       )

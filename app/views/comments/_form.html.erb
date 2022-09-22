@@ -1,8 +1,8 @@
 <div class="mb-5">
   <%= form_with model: Comment.new, url:question_comments_path(question) do |form| %>
     <%= form.hidden_field :parent_id, value: parent_comment.id if parent_comment.present?  %>
-    <%= form.text_area :content, placeholder:"請輸入留言", cols: 100, rows: 2, class:"border-2 border-gray-300 rounded h-24" %><br/>
-    <%= form.submit "送出", class:"btnstyle_dashboard" %>
+    <%= form.text_area :content, placeholder:"請輸入留言", cols: 100, rows: 2, class:"border-2 border-gray-300 rounded h-24 resize-none" %><br/>
+    <%= form.submit "送出", class:"btn-dashboard-border" %>
     <%= link_to "取消", "javascipt://false", data:{action:'click->reply#none'}, class:"btnstyle_dashboard" if parent_comment.present? %>
   <% end %>
 </div>
