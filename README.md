@@ -1,16 +1,26 @@
-# README
+# i Coder
+![](/public/icoder_logo.png)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/we-have-tta/icoder/badge)](https://www.codefactor.io/repository/github/we-have-tta/icoder)
+Link to [i Coder](http://icoder.tw/)
 
-:cloud:
-
-![](/app/assets/images/coderpic.jpg)
+This is a bootcamp project inspired by CoderPad and cloned by we-have-TTA.
+We would like to strengthen our skills, being familiar with what we learned and there is no benefit financially.
 
 <a href="https://github.com/we-have-TTA/iCoder/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=we-have-TTA/iCoder&max=6" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
+## Index
+[Installation instructions](#installation-instructions)
+
+[Features](#features)
+
+[Credits](#credits)
+
+[License](#license)
+
+
+## Installation instructions
 
 ### [docker command](/wiki/%E9%83%A8%E5%B1%AC%E6%AD%A5%E9%A9%9F)
 
@@ -32,16 +42,9 @@ gem 'rails', '~> 6.1.7'
 
 `tailwind css v2.2.17 for compatibility with rails 6`
 
-- Configuration
+## Features
 
-- Database creation
 
-- Database initialization
+## Credits
 
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+## License
