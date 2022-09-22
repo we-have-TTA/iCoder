@@ -1,18 +1,20 @@
-<footer class="room-footer"
-        data-controller="footer">
+<footer class="room-footer">
   <div>
-    <%= link_to "邀請", "/#{@room.uuid}/invite" %>
+    <% if current_user %>
+      <%= link_to "邀請", "/#{@room.uuid}/invite" %>
+    <% end %>
     <button class="button" data-action="allRoom#displayCamera">視訊通話</button>
   </div>
-  <div data-footer-target="timer">
-    <span class = " text-lg font-bold">00:00:01</span>
+  <div>
     <%= render "participator_name", participator: current_participator %>
   </div>
   <div>
     <div data-controller = "roomtitle"
-         data-room_id="<%= room.id %>">
-      <button data-action="click->roomtitle#editMode"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg"class="h-7 w-7"></button>
-      <span data-roomtitle-target="title" ><%= room.title %></span>
+          data-room_id="<%= room.id %>">
+      <% if current_user %>
+        <button data-action="click->roomtitle#editMode"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg"class="h-7 w-7"></button>
+      <% end %>
+        <span data-roomtitle-target="title" ><%= room.title %></span>
     </div>
     <div class="relative">
       <button class="button" data-action="allRoom#displayChat">即時聊天</button>
@@ -21,7 +23,9 @@
         <div class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></div>
       </div>
     </div>
-    <%= link_to "開始面試", start_room_path, method: 'patch' %>
-    <%= link_to "結束面試", end_room_path, method: 'patch' %>
+    <% if current_user %>
+      <%= link_to "開始面試", start_room_path, method: 'patch' %>
+      <%= link_to "結束面試", end_room_path, method: 'patch' %>
+    <% end %>
   </div>
 </footer>
