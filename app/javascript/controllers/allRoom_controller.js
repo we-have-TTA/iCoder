@@ -3,9 +3,16 @@ import e from "trix"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets =["camera", "chat", "RUN", "terminal", "iframe"]
+  static targets =["camera", "chat", "RUN", "terminal", "iframe", "timer"]
   connect() {
-    
+    let duration_Time = 1
+    setInterval(()=> {
+      duration_Time += 1
+      let sec = String(parseInt(duration_Time % 60)).padStart(2,'0')
+      let min = String(parseInt((duration_Time / 60) % 60)).padStart(2,'0')
+      let hr = String(parseInt(duration_Time / 60 / 60)).padStart(2,'0')
+      this.timerTarget.textContent = `${hr}:${min}:${sec}`
+    }, 1000);
   }
 
   displayCamera(){
