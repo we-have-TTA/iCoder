@@ -1,10 +1,18 @@
 import { Controller } from "stimulus"
+import e from "trix"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets =["camera", "chat"]
+  static targets =["camera", "chat", "RUN", "terminal", "iframe", "timer"]
   connect() {
-    
+    let duration_Time = 1
+    setInterval(()=> {
+      duration_Time += 1
+      let sec = String(parseInt(duration_Time % 60)).padStart(2,'0')
+      let min = String(parseInt((duration_Time / 60) % 60)).padStart(2,'0')
+      let hr = String(parseInt(duration_Time / 60 / 60)).padStart(2,'0')
+      this.timerTarget.textContent = `${hr}:${min}:${sec}`
+    }, 1000);
   }
 
   displayCamera(){
@@ -47,4 +55,21 @@ export default class extends Controller {
       }, 800);
     }
   }
+
+  displayRUN(e) {
+    this.terminalTarget.classList.remove("text-white","border-2","border-b-0","border-gray-300")
+    this.terminalTarget.classList.add("text-gray-400","border-b","border-gray-500","hover:border-gray-200")
+    e.target.classList.remove("text-gray-400","border-b","border-gray-500","hover:border-gray-200")
+    e.target.classList.add("text-white","border-2","border-b-0","border-gray-400")
+    this.iframeTarget.classList.remove("z-10")
+  }
+
+  displayTerminal(e) {
+    this.RUNTarget.classList.remove("text-white","border-2","border-b-0","border-gray-400")
+    this.RUNTarget.classList.add("text-gray-400","border-b","border-gray-500","hover:border-gray-200")
+    e.target.classList.remove("text-gray-400","border-b","border-gray-500","hover:border-gray-200")
+    e.target.classList.add("text-white","border-2","border-b-0","border-gray-400")
+    this.iframeTarget.classList.add("z-10")
+  }
+
 }
