@@ -7,7 +7,7 @@ export default class extends Controller {
     sessionStorage["roomTitle"] = this.titleTarget.textContent
     this.element.innerHTML = `<input data-roomtitle-target="input" class="text-black" type="text" maxlength="50">
                               <button data-action="click->roomtitle#no_revise_roomtitle" class="text-sm block px-1 py-1 border rounded ml-5 bg-gray-800 hover:bg-blue-900">取消 </button>
-                              <button data-action="click->roomtitle#revise_roomtitle" class="text-sm block px-1 py-1 border rounded ml-2 bg-gray-800 hover:bg-blue-900">確認</button>
+                              <button data-action="click->roomtitle#revise_roomtitle" class="text-sm block px-1 py-1 border rounded ml-2 bg-gray-800 hover:bg-blue-900">確認</button>`
   }
   revise_roomtitle() {
     const input = this.inputTarget.value
