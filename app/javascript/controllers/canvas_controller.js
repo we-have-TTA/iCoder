@@ -127,9 +127,7 @@ export default class extends Controller {
     this.ctx.beginPath()
     this.canvasObject = [["beginPath"]]
   }
-  getDrawingAsString() {
-    return this.canvasTarget.toDataURL()
-  }
+
   draw(e) {
     this.ctx.lineWidth = this.lineWidth
     this.ctx.lineCap = "round"
@@ -143,14 +141,5 @@ export default class extends Controller {
     this.ctx.stroke()
 
     this.canvasObject.push(["lineTo", x, y])
-  }
-
-  reuseCanvasString(url) {
-    let img = new Image()
-    img.onload = () => {
-      // Note: here img.naturalHeight & img.naturalWidth will be your original canvas size
-      this.ctx.drawImage(img, 0, 0)
-    }
-    img.src = url
   }
 }
