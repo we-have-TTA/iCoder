@@ -38,7 +38,7 @@
         </div>
       </div>
       <%= render "editor" %>
-      <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-allRoom-target="camera" data-connected="false"></div>
+      <div id="otEmbedContainer" class="facetime animation" data-allRoom-target="camera" data-connected="false"></div>
       <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=f043a3cc-c635-4760-b099-926c4d019fa6&room=<%=params[:uuid]%>"></script>
       <div data-editor-target="team_question"
          data-action="click->editor#close"
