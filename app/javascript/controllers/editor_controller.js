@@ -98,6 +98,10 @@ export default class extends Controller {
           )
           jar.updateCode(code)
           jar.destroy()
+          if (this.panelTarget.dataset.edit == "false") {
+            console.log(this.panelTarget)
+            this.panelTarget.setAttribute("contenteditable", false)
+          }
           this.webConsoleChangeLanguage(language)
         },
         error: () => {},
