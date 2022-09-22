@@ -6,6 +6,7 @@ class Room < ApplicationRecord
   belongs_to :question, optional: true
   has_many :codes
   has_many :room_participators
+  has_many :canvas_messages
 
   include AASM
 
