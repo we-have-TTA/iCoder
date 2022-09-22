@@ -4,7 +4,7 @@
 
 Link to [i Coder](http://icoder.tw/)
 
-We are we-have-TTA. This is a bootcamp project inspired by CoderPad
+We are we-have-TTA. This is a bootcamp project inspired by [CoderPad](https://coderpad.io/)
 We would like to strengthen our skills, being familiar with what we learned and there is no benefit financially.
 
 ## Index
@@ -14,8 +14,6 @@ We would like to strengthen our skills, being familiar with what we learned and 
 [Features](#features)
 
 [Credits](#credits)
-
-[License](#license)
 
 ## Installation instructions
 
