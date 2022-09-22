@@ -40,6 +40,10 @@ export default class extends Controller {
     return (sessionStorage["sessionID"] ||= uuidv4())
   }
 
+  getSignedStatus() {
+    return (sessionStorage["admin"]) ||= this.element.dataset.signed
+  }
+
   _cableConnected() {
     // Called when the subscription is ready for use on the server
     console.log(`cable connected`)
@@ -72,6 +76,7 @@ export default class extends Controller {
   }
 
   connect() {
+    this.getSignedStatus()
     this.channel = consumer.subscriptions.create(
       {
         channel: "RoomEditorChannel",
@@ -127,7 +132,6 @@ export default class extends Controller {
         setTimeout(() => {
           this.webConsoleChangeLanguage("Ruby")
           this.panelTarget.className = "editor rb"
-          console.log("ME")
           CodeJar(this.panelTarget, withLineNumbers(hljs.highlightElement))
         }, 0)
       }
@@ -193,51 +197,23 @@ export default class extends Controller {
   }
 
   webConsoleChangeLanguage(language) {
+    
     const changeLanguageDict = {
       Ruby: this.RubyTarget,
       Javascript: this.JavascriptTarget,
       Python: this.PythonTarget,
       Elixir: this.ElixirTarget,
     }
-    changeLanguageDict[language].click()
-  }
-
-  run() {
-    const language = this.getLanguage()
-    const roomID = this.element.dataset.room_id
-    const uuid = this.getRoomUUID()
-
-    const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
-    const strArray = _jar.toString()
-    _jar.destroy()
-
-    const data = {
-      code: strArray,
-      language: language,
-      uuid: uuid,
+    if (sessionStorage["admin"] === "true") {
+      changeLanguageDict[language].click()
+      return
     }
-    const resultText = document.getElementById("run_result")
-    const resultBox = document.getElementById("result-box")
-    const runText = document.getElementById("run-text")
-    resultText.textContent = ""
-    runText.textContent = "執行中....."
-    resultBox.style.cssText = "display: block"
-    Rails.ajax({
-      url: `/api/v1/rooms/${roomID}/run`,
-      type: "post",
-      data: new URLSearchParams(data).toString(),
-      success: ({ result }) => {
-        runText.textContent = "執行結果："
-        resultText.textContent = result
-        setTimeout(() => {
-          resultBox.style.cssText = "display: none"
-        }, 5000)
-      },
-      error: (err) => {
-        console.log(err)
-      },
-    })
+    const iframe = document.getElementById("iframe").contentWindow
+    iframe.postMessage(`${this.element.dataset.roomuuid}-${language}`, this.element.dataset.src)
+    document.getElementById("current_language").textContent = language
   }
+
+  
 
   toggleLanguageMenu() {
     this.change_languageTarget.classList.contains("hidden")
