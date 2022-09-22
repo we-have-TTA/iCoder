@@ -17,7 +17,7 @@
 <div data-controller="room"
      data-currentUserId=<%= current_user.id %>
      data-countdown_standard=<%= @countdown_standard%>>
-  <div class="p-5 text-white bg-gray-800">
+  <div class="p-2 text-white bg-gray-800">
     <label><input type="checkbox" class="mx-5" data-room-target="filterCurrentUserButton" 
                                                data-action="click->room#filter">只顯示自己的會議</label>
   </div>
@@ -43,7 +43,11 @@
           <td><%= room.language %></td>
           <td><%= room.creator.username %></td>
           <td><%= room.created_at.to_s.split.first %></td>
-          <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid),target: "_blank", class: "btn-dashboard-create" %></td>
+          <td>
+            <% if room.status == "notstarted" || room.status == "started" %>
+              <%= link_to "檢視", room_uuid_path(uuid: room.uuid),target: "_blank", class: "btn-dashboard-border" %>
+            <% end %>
+          </td>
           <% if (Time.now-room.created_at)/3600 > @countdown_standard || current_user.team.plan == "vip"%>
             <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
           <% else %>
