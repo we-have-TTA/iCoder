@@ -30,6 +30,11 @@ zh-TW:
         unconfirmed_email: 電子信箱未確認
         unlock_token: 解鎖令牌
         updated_at: 更新於
+      team:
+        name: 組織名稱
+      question:
+        question: 題目
+        code: 程式碼
     models:
       user: 使用者
   devise:
