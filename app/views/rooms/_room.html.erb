@@ -26,7 +26,7 @@
         <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
              data-editor-target="questions_instruction">請先選擇題目</div>
         <div
-          class="mt-2.5 py-3 flex justify-end w-1/2 right-0 absolute z-10 rounded-md"
+          class="py-3 flex justify-end w-1/2 right-0 absolute z-10 rounded-md"
           data-editor-target="change_language"
           id="web-console"
           data-controller="webconsole"
@@ -38,7 +38,7 @@
       </div>
       <%= render "editor" %>
       <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-allRoom-target="camera" data-connected="false"></div>
-      <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=e138caba-c5da-46db-9562-889ec6530c22&room=<%=params[:uuid]%>" defer></script>
+      <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=f043a3cc-c635-4760-b099-926c4d019fa6&room=<%=params[:uuid]%>"></script>
       <div data-editor-target="team_question"
          data-action="click->editor#close"
         class="black-cover-bg hidden z-20">
@@ -80,7 +80,7 @@
               </div>
             </div>
           </div>
-          <button class="p-1 px-4 absolute top-0 right-0 border rounded-bl-md rounded-tr-md bg-gray-100"
+          <button class="absolute top-0 right-0 btn-dashboard-border"
                 data-action="click->editor#close">
             關閉
           </button>

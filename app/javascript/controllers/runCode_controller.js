@@ -72,7 +72,7 @@ export default class extends Controller {
       document.getElementById("result").scrollTop=document.getElementById("result").scrollHeight
       return
     } else if (result !== undefined) {
-      if ( result.split("/")[0] === "root" || result.split("/")[1] === "root" || result.split(" ")[0] === "Traceback" || result.split(" ")[0] === "warning:") {
+      if ( result.split("/")[0] === "root" || result.split("/")[1] === "root" || result.split(" ")[0] === "Traceback" || result.split(" ")[0] === "warning:" || result.split(" ")[0] === "File" || result.split(" ")[0] === "**") {
         answer = "text-red-600"
         answerBg = "bg-gray-300"
       }

@@ -48,15 +48,23 @@
     @apply py-2 px-5 rounded-full;
   }
   textarea {
-    @apply py-2 px-5 border border-gray-900 rounded h-56;
+    @apply py-2 px-5 border border-gray-900 rounded resize-none h-full;
   }
 }
 .questions-editor-area {
   .codejar-wrap {
-    height: 60vh;
+    height: 70vh;
   }
   select {
     @apply rounded;
+  }
+  .edit {
+    @apply bg-gray-200
+  }
+}
+#showQuestion {
+  .codejar-wrap {
+    height: 60vh;
   }
 }
 
@@ -68,6 +76,6 @@
     @apply py-1 px-5 rounded-full bg-white break-all;
   }
   .text-area {
-    @apply rounded-xl overflow-auto h-56;
+    @apply rounded-xl overflow-auto h-full p-3;
   }
 }

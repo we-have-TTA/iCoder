@@ -186,10 +186,6 @@ export default class extends Controller {
     this.element.submit()
   }
 
-  questionFormSelectLanguage(e) {
-    this.changeLanguage(e.target.value)
-  }
-
   changeLanguage(language) {
     this.panelTarget.className = `editor ${language}`
     const _jar = CodeJar(this.panelTarget, hljs.highlightElement)
@@ -347,11 +343,11 @@ export default class extends Controller {
                                  <a href="/dashboard/questions/${
                                    result.question[questionFind].id
                                  }/edit" target="_blank">
-                                   <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100">
+                                   <button class="btn-dashboard-border">
                                      編輯
                                    </button>
                                  </a>
-                                 <button class=" mr-3 px-4 py-1 border rounded-md hover:bg-gray-100"
+                                 <button class="btn-dashboard-border"
                                          data-action="click->editor#addQuestion"
                                          id=${questionFind}>
                                    加入
