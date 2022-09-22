@@ -1,5 +1,5 @@
 <div>
-  <h1 class="flex justify-center">訂單編號 <%= @order.serial %></h1>
+  <h1 class="flex justify-center ">訂單編號: <%= @order.serial %></h1>
   <%= form_with url: pay_order_path(id: @order.serial),method: "post",
                 data: {
                   controller: "braintree",
