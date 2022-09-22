@@ -1,5 +1,11 @@
 <% if @question.errors.any? %>
-  <%= @question.errors.full_messages %>
+  <div id="error_explanation">
+    <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 <%= form_with model: question,
               data: { controller: "editor",
@@ -9,11 +15,9 @@
     <div class="questions-text flex flex-col">
       <%= form.label :title,"標題" %>
       <%= form.text_field :title, required: true %>
-      <%= form.label :question_type,"類型" %>
-      <%= form.select :question_type, ["Live", "Take-Home"] %>
       <%= form.label :language,"語言" %>
       <%= form.select :language,
-                      ["Javascript", "Ruby"],
+                      ["Javascript", "Ruby", "Python", "Elixer"],
                       {},
                       data: { action: "editor#questionFormSelectLanguage" } %>
       <%= form.label :difficulty,"難易度" %>
@@ -25,10 +29,14 @@
     </div>
     <div class="questions-editor-area">
       <%= form.label :code, "題目內容", class: "mb-1 font-bold" %>
-      <%= form.select :example, ["使用範例", ["Candy 01", "1"], ["Candy 02", "2"]], selected: "1" %>
       <%= render "rooms/editor" %>
     </div>
   </div>
-  <%= form.submit class: "btn-dashboard-create mb-4" %>
+  <% if @question.persisted?%>
+    <% question_status = "更新" %>
+  <% else %>
+    <% question_status = "新增" %>
+  <% end %>
+  <%= form.submit "#{question_status}", class: "btn-dashboard-create mb-4" %>
   <%= link_to "返回", questions_path, class: "btn-dashboard-create" %>
 <% end %>

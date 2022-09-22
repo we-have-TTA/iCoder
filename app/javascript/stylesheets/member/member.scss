@@ -24,14 +24,3 @@
 .link-hover {
   @apply font-bold hover:text-red-600;
 }
-
-.field_with_errors {
-  display: block;
-}
-.field_with_errors input {
-  @apply border-2 border-red-600;
-}
-
-#error_explanation {
-  @apply text-red-600 font-bold;
-}
