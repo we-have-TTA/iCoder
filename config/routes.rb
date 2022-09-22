@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   
 
   get '/', to: 'pages#home'
-  get '/canvas', to: 'pages#canvas'
+  # get '/canvas', to: 'pages#canvas'
+  get '/canvas/:uuid', to: 'pages#canvas' , as: :canvas
 
   scope 'dashboard' do
     resources :rooms, except: %i[new show]
@@ -52,6 +53,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      scope 'canvas' do
+        post ':uuid', action: :send_canvas_message, controller: :canvas, as: :send_canvas_message
+      end
       namespace :users do
         post 'rooms', action: :find_rooms_by_user, controller: :rooms
         patch '/', action: :update
