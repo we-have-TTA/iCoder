@@ -1,10 +1,10 @@
 <div class="textchat box-shadow hidden animation opacity-0 scale-y-0 scale-x-0 -translate-x-12 translate-y-48 z-10"
      data-allRoom-target="chat">
-  <div class=" bg-gray-300 p-3 w-full">聊天室</div>
-  <div class=" overflow-y-auto h-3/4" id="msg_scroll">
+  <div class=" bg-gray-300 p-3 w-full absolute top-0 right-0 left-0 border-r-2 border-l-2 border-t-2 rounded-tr-2xl rounded-tl-2xl border-gray-600">聊天室</div>
+  <div class=" overflow-y-auto h-3/4 absolute" id="msg_scroll" style="top: 17%">
     <div id="msg"></div>
   </div>
-  <header class="flex items-center absolute bottom-0 right-0 left-0 bg-gray-300 w-full">
+  <header class="flex items-center absolute bottom-0 right-0 left-0 bg-gray-300 w-full border-r-2 border-l-2 border-b-2 rounded-br-2xl rounded-bl-2xl border-gray-600">
     <%= form_with model: Message.new,
       html: { class: "inline-block p-2 flex justify-between w-full" },
       data: { controller: 'textchat',
