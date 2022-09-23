@@ -17,7 +17,7 @@
       <%= form.text_field :title, required: true %>
       <%= form.label :language,"語言" %>
       <%= form.select :language,
-                      ["Javascript", "Ruby", "Python", "Elixer"],
+                      ["Javascript", "Ruby", "Python", "Elixir"],
                       {},
                       data: { action: "allQuestion#questionFormSelectLanguage" } %>
       <%= form.label :difficulty,"難易度" %>

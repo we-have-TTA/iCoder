@@ -46,7 +46,7 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
-    console.log(`cable connected`)
+
   }
 
   _cableDisconnected() {
@@ -56,8 +56,7 @@ export default class extends Controller {
   _cableReceived({ sessionID, code }) {
     // Called when there's incoming data on the websocket for this channel
     // 自己發出的訊息不處理
-    console.log("receive")
-    console.log(sessionID)
+
     if (sessionStorage["sessionID"] === sessionID) {
       return
     }
@@ -104,7 +103,6 @@ export default class extends Controller {
           jar.updateCode(code)
           jar.destroy()
           if (this.panelTarget.dataset.edit == "false") {
-            console.log(this.panelTarget)
             this.panelTarget.setAttribute("contenteditable", false)
           }
           this.webConsoleChangeLanguage(language)
@@ -193,12 +191,12 @@ export default class extends Controller {
   }
 
   webConsoleChangeLanguage(language) {
-    
     const changeLanguageDict = {
       Ruby: this.RubyTarget,
       Javascript: this.JavascriptTarget,
       Python: this.PythonTarget,
       Elixir: this.ElixirTarget,
+      kk: 1,
     }
     if (sessionStorage["admin"] === "true") {
       changeLanguageDict[language].click()
@@ -443,6 +441,7 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
       success: ({ language, code, candidate_instructions }) => {
+
         this.webConsoleChangeLanguage(language)
         this.panelTarget.classList.add(language)
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)
