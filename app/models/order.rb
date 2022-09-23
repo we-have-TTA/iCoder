@@ -15,7 +15,6 @@ class Order < ApplicationRecord
 
     event :pay do # 付款成功
       transitions from: %i[pending failed], to: :paid
-
       after do
         team.update(plan: 'vip')
       end
