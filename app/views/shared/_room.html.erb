@@ -5,7 +5,7 @@
   <td><%= room.language %></td>
   <td><%= room.creator.username %></td>
   <td><%= room.created_at.to_s.split.first %></td>
-  <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid),target: "_blank", class: "btn-dashboard-create" %></td>
+  <td><%= link_to "檢視", room_uuid_path(uuid: room.uuid),target: "_blank", class: "btn-dashboard-border" %></td>
   <% if (Time.now-room.created_at)/3600 > @countdown_standard || current_user.team.plan == "vip"%>
     <td><%= link_to "刪除", room, method:"delete", data:{confirm:"Delete Room? Are you sure?"}, class: "btn-dashboard-delete" %></td>
   <% else %>
