@@ -37,6 +37,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def back_to_normal
+    @order = Order.where(team: current_user.team).last
+    @order.back_to_normal!
+    redirect_to '/plans', notice: '降級成功'
+  end
+
   private
 
   def find_order
