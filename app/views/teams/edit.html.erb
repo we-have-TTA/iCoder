@@ -20,7 +20,7 @@
     </div>
     <span class="form-label mb-3">目前圖示：</span>
     <% if @team.avatar.attached? %>
-      <%= image_tag @team.avatar, width: "150px", class:"p-5 bg-red-500" if @team.avatar.attached? %>
+      <%= image_tag @team.avatar, width: "150px", class:"p-5" if @team.avatar.attached? %>
     <% else %>
       <%= image_tag("/default_profile.PNG", width: "150px", class:"mb-3")%>
     <% end %>
