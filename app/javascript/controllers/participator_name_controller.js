@@ -6,7 +6,12 @@ export default class extends Controller {
 
   connect() {
     if (!localStorage["username"]) {
-      localStorage["username"] = this.usernameTarget.value
+      if (this.usernameTarget.value === "") {
+        localStorage["username"] = "面試者"
+        this.usernameTarget.value = "面試者"
+      } else {
+        localStorage["username"] = this.usernameTarget.value
+      }
     } else {
       this.usernameTarget.value = localStorage["username"]
     }
