@@ -65,6 +65,7 @@ export default class extends Controller {
     this.startX = 0
     this.startY = 0
     this.canvasObject = [["beginPath"]]
+    this.toggleBrush()
   }
 
   toggleCursor(cursorType) {
@@ -74,11 +75,15 @@ export default class extends Controller {
       this.eraserTarget.classList.add("active")
       this.brushTarget.classList.remove("active")
       this.ctx.globalCompositeOperation = "destination-out"
+      this.canvasTarget.classList.add("eraser_cursor")
+      this.canvasTarget.classList.remove("pencil_cursor")
     }
     if (cursorType === "brush") {
       this.eraserTarget.classList.remove("active")
       this.brushTarget.classList.add("active")
       this.ctx.globalCompositeOperation = "source-over"
+      this.canvasTarget.classList.remove("eraser_cursor")
+      this.canvasTarget.classList.add("pencil_cursor")
     }
   }
   toggleEraser() {
