@@ -7,10 +7,10 @@ class RoomChatChannel < ApplicationCable::Channel
 
     name = params[:sessionID]
 
-    @message = Message.new(username: 'system', content: "#{name} join the chat.")
+    # @message = Message.new(username: 'system', content: "#{name} join the chat.")
     return unless @message.save
 
-    RoomChatChannel.broadcast_to(@room, @message)
+    # RoomChatChannel.broadcast_to(@room, @message)
   end
 
   def unsubscribed

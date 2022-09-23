@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import Rails from "@rails/ujs"
 
 export default class extends Controller {
   static targets = ["modal", "username"]
@@ -11,9 +12,44 @@ export default class extends Controller {
     }
     this.modal(localStorage["username"])
     document.querySelector("#participatorName").focus()
+    this.broadcastName(localStorage["username"])
+  }
+
+  broadcastName(previousName, newName = null) {
+    let data = {
+      "message[username]": "system",
+      "message[content]": `${previousName} changes name to ${localStorage["username"]}`,
+      uuid: document.location.pathname.replace("/", ""),
+    }
+
+    if (newName) {
+      if (newName === previousName) {
+        return
+      }
+      data = {
+        "message[username]": "system",
+        "message[content]": `${previousName} changes name to ${localStorage["username"]}`,
+        uuid: document.location.pathname.replace("/", ""),
+      }
+    } else {
+      data = {
+        "message[username]": "system",
+        "message[content]": `${previousName} join the room`,
+        uuid: document.location.pathname.replace("/", ""),
+      }
+    }
+
+    Rails.ajax({
+      url: "/messages",
+      type: "post",
+      data: new URLSearchParams(data).toString(),
+      success: () => {},
+      error: () => {},
+    })
   }
 
   changeName(e) {
+    const previousName = localStorage["username"]
     if (e.target.nodeName === "INPUT") {
       localStorage["username"] = this.usernameTarget.value
     } else {
@@ -21,6 +57,7 @@ export default class extends Controller {
       this.usernameTarget.value = localStorage["username"]
       this.modalTarget.remove()
     }
+    this.broadcastName(previousName, localStorage["username"])
   }
 
   modal(previousName) {
