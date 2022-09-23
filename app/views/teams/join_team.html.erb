@@ -1,3 +1,4 @@
-<%= form_with do |f| %>
+<%= form_with class: "hidden", data: { controller: :auto } do |f| %>
   <%= f.submit "加入團隊" %>
-<% end%>
+<% end %>
+<h1 class="text-5xl">加入團隊...</h1>
