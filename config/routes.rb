@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resource :teams, only:[:edit, :update]
     post 'rooms/createruntime', action: 'create_runtime', controller: :rooms
     get 'rooms/team_plan', action: 'team_plan', controller: :rooms
+    get '/plan/back_to_normal', action: 'back_to_normal', controller: :orders
     get 'rooms/countdown', action: 'countdown', controller: :rooms
     resources :questions do
       resources :comments, shallow: true, only: %i[create update destroy]

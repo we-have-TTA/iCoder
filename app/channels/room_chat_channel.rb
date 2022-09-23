@@ -5,12 +5,12 @@ class RoomChatChannel < ApplicationCable::Channel
     @room = Room.find_by!(uuid: params[:uuid])
     stream_for @room
 
-    name = params[:sessionID]
+    # name = params[:sessionID]
 
-    @message = Message.new(username: 'system', content: "#{name} join the chat.")
+    # @message = Message.new(username: 'system', content: "#{name} join the chat.")
     return unless @message.save
 
-    RoomChatChannel.broadcast_to(@room, @message)
+    # RoomChatChannel.broadcast_to(@room, @message)
   end
 
   def unsubscribed
