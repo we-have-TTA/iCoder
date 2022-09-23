@@ -1,7 +1,7 @@
 <footer class="room-footer">
   <div>
     <% if current_user %>
-      <%= link_to "邀請", "/#{@room.uuid}/invite" %>
+      <%= link_to "邀請", "/#{@room.uuid}/invite", target: "_blank" %>
     <% end %>
     <button class="button" data-action="allRoom#displayCamera">視訊通話</button>
   </div>
