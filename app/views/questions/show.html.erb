@@ -22,16 +22,12 @@
         <%= @question.difficulty %>
       </li>
       <span>面試官資訊:</span>
-      <li class="text-area whitespace-pre-line">
-        <%= @question.internal_description %>
-      </li>
+      <li class="text-area whitespace-pre-line"><%= @question.internal_description %></li>
       <span>面試說明:</span>
-      <li class="text-area whitespace-pre-line">
-        <%= @question.candidate_instructions %>
-      </li>
+      <li class="text-area whitespace-pre-line"><%= @question.candidate_instructions %></li>
     </ul>
-    <div data-controller="editor" data-question-id="<%= @question.id %>">
-      <div class="editor" data-editor-target="panel" data-edit="false"></div>
+    <div data-controller="allQuestion" data-question-id="<%= @question.id %>" id="showQuestion">
+      <div class="editor" data-allQuestion-target="panel" data-edit="false"></div>
     </div>
   </div>
   <%= link_to "返回", questions_path, class:"btn-dashboard-border" %>
