@@ -1,5 +1,5 @@
 .textchat {
-  @apply text-black bg-gray-200 absolute rounded-2xl;
+  @apply text-black bg-gray-200 absolute rounded-2xl border-2 ring-2 ring-inset ring-gray-600 border-gray-400;
   // top: 200px;
   // right: 15px;
   bottom: 20px;
