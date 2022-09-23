@@ -3,12 +3,10 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
-  /* 自動隱藏超出的文字或圖片 */
   color: white;
 }
 h1 {
   background: #7f7fd5;
-  /* 背景漸層 */
   background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
   background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
   background-clip: text;
@@ -29,8 +27,6 @@ h1 {
   width: auto;
   background-color: #202020;
   left: 0;
-  /* bottom: 30px;
-  width: 100%; */
 }
 
 #toolbar * {

@@ -8,8 +8,8 @@
   </div>
 <% end %>
 <%= form_with model: question,
-              data: { controller: "editor",
-                      action: "editor#transCode:prevent",
+              data: { controller: "allQuestion",
+                      action: "allQuestion#transCode:prevent",
                       question_id: question.id } do |form| %>
   <div class="grid grid-cols-2">
     <div class="questions-text flex flex-col">
@@ -19,7 +19,7 @@
       <%= form.select :language,
                       ["Javascript", "Ruby", "Python", "Elixer"],
                       {},
-                      data: { action: "editor#questionFormSelectLanguage" } %>
+                      data: { action: "allQuestion#questionFormSelectLanguage" } %>
       <%= form.label :difficulty,"難易度" %>
       <%= form.select :difficulty, ["Easy", "Medium","Hard","Not specified"] %>
       <%= form.label :internal_description, "給面試官的資訊" %>
