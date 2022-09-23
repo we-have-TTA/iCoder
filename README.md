@@ -55,7 +55,7 @@ i Coder - The leading technical interview platform for development teams.
 - 共同編輯題庫及管理會議
 - Collaborate with your team members for creating questions and meeting rooms
 
-## Credits 貢獻
+## Contributors 貢獻
 
 <a href="https://github.com/we-have-TTA/iCoder/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=we-have-TTA/iCoder&max=6" />
