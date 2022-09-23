@@ -1,0 +1,23 @@
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+
+providers:
+  docker:
+    network: webssh
+    exposedByDefault: true
+  file:
+    directory: /etc/traefik/config
+
+certificatesResolvers:
+  letencrypt:
+    acme:
+      email: kerke.2011@gmail.com
+      storage: acme.json
+      httpChallenge:
+        entryPoint: web

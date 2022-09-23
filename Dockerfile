@@ -31,4 +31,4 @@ ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES yes
 ENV RAILS_LOG_TO_STDOUT yes
 
-CMD ["bundle", "exec", "rails", "server"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
