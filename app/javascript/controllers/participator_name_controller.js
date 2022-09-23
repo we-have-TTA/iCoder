@@ -28,13 +28,13 @@ export default class extends Controller {
       }
       data = {
         "message[username]": "system",
-        "message[content]": `${previousName} changes name to ${localStorage["username"]}`,
+        "message[content]": `${previousName} 現在叫做 ${localStorage["username"]}`,
         uuid: document.location.pathname.replace("/", ""),
       }
     } else {
       data = {
         "message[username]": "system",
-        "message[content]": `${previousName} join the room`,
+        "message[content]": `${previousName} 加入會議室。`,
         uuid: document.location.pathname.replace("/", ""),
       }
     }
