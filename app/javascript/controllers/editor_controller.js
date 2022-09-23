@@ -196,7 +196,6 @@ export default class extends Controller {
       Javascript: this.JavascriptTarget,
       Python: this.PythonTarget,
       Elixir: this.ElixirTarget,
-      kk: 1,
     }
     if (sessionStorage["admin"] === "true") {
       changeLanguageDict[language].click()
@@ -236,6 +235,11 @@ export default class extends Controller {
         let cardMove = -32
         this.team_nameTarget.textContent = `${result.team.name} 的題庫`
         result.question.forEach((question) => {
+          const userFind = result.user.reduce((acc,cv,index) => {
+                             if (cv.id === question.user_id) { 
+                                return index
+                             } return acc
+                           },0)
           cardMove += 32
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
@@ -253,7 +257,7 @@ export default class extends Controller {
                          ${question.language}
                        </div>
                        <div class="text-left text-gray-600">
-                         By ${result.user[question.user_id - 1].username}
+                         By ${result.user[userFind].username}
                        </div>
                      </td>
                    </tr>`
@@ -441,7 +445,6 @@ export default class extends Controller {
       url: `/api/v1/rooms/${roomID}/question/${questionId}`,
       type: "get",
       success: ({ language, code, candidate_instructions }) => {
-
         this.webConsoleChangeLanguage(language)
         this.panelTarget.classList.add(language)
         const jar = CodeJar(this.panelTarget, hljs.highlightElement)

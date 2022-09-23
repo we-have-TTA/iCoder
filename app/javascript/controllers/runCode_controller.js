@@ -59,7 +59,6 @@ export default class extends Controller {
   runCode({result, nickname}){
 
     const resultBox = document.getElementById("result")
-    console.log(result)
     let color = "gold"
     let answer = "text-gray-200"
     let answerBg = "bg-gray-700"
