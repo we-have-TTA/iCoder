@@ -10,7 +10,7 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
-    console.log(`runCode connected`)
+    // console.log(`runCode connected`)
   }
 
   _cableDisconnected() {
@@ -100,18 +100,18 @@ export default class extends Controller {
 
   
   selectLanguage({language,new_container}) {
-    const iframe = document.getElementById("iframe").contentWindow
-    iframe.postMessage(`reload`, this.element.dataset.src)
+    // const iframe = document.getElementById("iframe").contentWindow
+    // iframe.postMessage(`reload`, this.element.dataset.src)
     document.getElementById("current_language").textContent = language
-    if (sessionStorage["admin"] === "true"){
-      setTimeout(() => {
-        iframe.postMessage(`${new_container}`, this.element.dataset.src)
-      }, 500);
-    } else {
-      setTimeout(() => {
-        iframe.postMessage(`${new_container}`, this.element.dataset.src)
-      }, 1500);
-    }
+    // if (sessionStorage["admin"] === "true"){
+    //   setTimeout(() => {
+    //     iframe.postMessage(`${new_container}`, this.element.dataset.src)
+    //   }, 500);
+    // } else {
+    //   setTimeout(() => {
+    //     iframe.postMessage(`${new_container}`, this.element.dataset.src)
+    //   }, 1500);
+    // }
   }
 
   getRoomUUID() {

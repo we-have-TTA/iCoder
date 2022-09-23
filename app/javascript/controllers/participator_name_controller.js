@@ -70,8 +70,8 @@ export default class extends Controller {
         `<div class="box p-4 rounded-md items-center">
           <div>輸入名字：</div>
           <form action="" data-action="participator-name#changeName:prevent">
-            <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true" value=${previousName}>
-            <input type="submit" class="btn-dashboard-border">
+            <input id="participatorName" class="text-black px-2 ring ring-inset ring-gray-400 border-2 border-gray-600 p-1" type="text" placeholder="你的名字" required="true" value=${previousName}>
+            <input type="submit" class="btn-dashboard-border cursor-pointer">
           </form>
         </div>`
       )
@@ -80,8 +80,8 @@ export default class extends Controller {
         "afterbegin",
         `<div class="box p-4 rounded-md items-center">
           <form action="" data-action="participator-name#changeName:prevent">
-            <input id="participatorName" class="text-black px-2" type="text" placeholder="你的名字" required="true">
-            <input type="submit" class="btn-dashboard-border">
+            <input id="participatorName" class="ring ring-inset ring-gray-400 border-2 border-gray-600 p-1 text-black px-2" type="text" placeholder="你的名字" required="true">
+            <input type="submit" class="btn-dashboard-border cursor-pointer">
           </form>
         </div>`
       )
