@@ -37,8 +37,6 @@
   <% else %>
     <% question_status = "新增" %>
   <% end %>
-  <div class="">
-    <%= form.submit "#{question_status}", class: "btn-dashboard-border" %>
-    <%= link_to "返回", questions_path, class: "btn-dashboard-border" %>
-  </div>
+  <%= form.submit "#{question_status}", class: "btn-dashboard-border mb-4" %>
+  <%= link_to "返回", questions_path, class: "btn-dashboard-border" %>
 <% end %>
