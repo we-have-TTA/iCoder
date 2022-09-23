@@ -32,6 +32,14 @@ class Order < ApplicationRecord
     event :refund do # 訂單退款
       transitions from: :paid, to: :refunded
     end
+
+    event :back_to_normal do # for test
+      transitions from: :paid, to: :pending
+
+      after do
+        team.update(plan: 'normal')
+      end
+    end
   end
 end
 
