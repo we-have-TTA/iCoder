@@ -24,7 +24,7 @@
         <% if current_user %>
           <button data-action="editor#toggleLanguageMenu">▼</button>
         <% end %>
-        <div class="mt-2.5 py-3 px-3 absolute z-10 bg-gray-800 rounded-md w-full text-white hidden whitespace-pre-wrap break-all"
+        <div class="absolute z-10 mr-1 mt-4 rounded-md right-0 w-full m-auto p-2 ring ring-inset ring-gray-400 border-2 border-gray-600 hidden whitespace-pre-wrap break-all bg-gray-300"
              data-editor-target="questions_instruction">請先選擇題目</div>
         <div
           class="py-3 flex justify-end w-1/2 right-0 absolute z-10 rounded-md"
@@ -38,7 +38,7 @@
         </div>
       </div>
       <%= render "editor" %>
-      <div id="otEmbedContainer" class="facetime animation" data-allRoom-target="camera" data-connected="false"></div>
+      <div id="otEmbedContainer" class="facetime hidden opacity-0 animation" data-allRoom-target="camera" data-connected="false"></div>
       <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=f043a3cc-c635-4760-b099-926c4d019fa6&room=<%=params[:uuid]%>"></script>
       <div data-editor-target="team_question"
          data-action="click->editor#close"

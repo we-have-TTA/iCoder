@@ -4,9 +4,9 @@ class Room < ApplicationRecord
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
   belongs_to :team
   belongs_to :question, optional: true
-  has_many :codes
-  has_many :room_participators
-  has_many :canvas_messages
+  has_many :codes, dependent: :destroy
+  has_many :room_participators, dependent: :destroy
+  has_many :canvas_messages, dependent: :destroy
 
   include AASM
 
