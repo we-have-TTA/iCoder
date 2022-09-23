@@ -38,7 +38,8 @@ class OrdersController < ApplicationController
   end
 
   def back_to_normal
-    @order = Order.where(team: current_user.team).last
+    @order = Order.new(team: current_user.team, creator: current_user, price: 0)
+    @order.pay!
     @order.back_to_normal!
     redirect_to '/plans', notice: '降級成功'
   end

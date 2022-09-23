@@ -3,11 +3,11 @@
 class User < ApplicationRecord
   # relationships
   belongs_to :team, optional: true
-  has_many :rooms
-  has_many :questions
-  has_many :homeworks
-  has_many :orders
-  has_many :comments
+  has_many :rooms, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :homeworks, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # validatations
   validates :username, presence: true
