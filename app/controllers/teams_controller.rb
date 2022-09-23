@@ -42,9 +42,9 @@ class TeamsController < ApplicationController
   def join_team; end
 
   def update_member
-    @team = Team.find(params[:team_id])
-    @team.users << current_user
-    redirect_to members_path
+    team = Team.find(params[:team_id])
+    team.users << current_user
+    redirect_to members_path, notice: "歡迎加入 #{team.name}"
   end
 
   private
