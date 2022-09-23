@@ -51,3 +51,11 @@ h1 {
 #lineWidth {
   color: #000;
 }
+
+canvas.eraser_cursor {
+  cursor: url("/eraser.png"), auto;
+}
+
+canvas.pencil_cursor {
+  cursor: url("/pencil.png"), auto;
+}
