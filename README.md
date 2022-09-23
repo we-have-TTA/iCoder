@@ -64,6 +64,6 @@ i Coder - The leading technical interview platform for development teams.
 [Ker Ker](https://github.com/noracami)
 [Sean Chen](https://github.com/oSeanChen)
 [Yoji](https://github.com/Yojijun)
-[Curry](https://github.com/zxcvbnm7548)
 [Rex Kao](https://github.com/RexXKao)
 [Tien Yuan](https://github.com/chutienyuan)
+[Curry](https://github.com/zxcvbnm7548)
