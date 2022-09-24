@@ -20,8 +20,9 @@ services:
     image: postgres
     container_name: db
     environment:
-      - "POSTGRES_USER=postgres"
-      - "POSTGRES_PASSWORD=postgres"
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     volumes:
       - pg-data:/var/lib/postgresql/data
     networks:
@@ -38,9 +39,9 @@ services:
   app:
     build: .
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db/postgres
+      - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db/$POSTGRES_DB
       - REDIS_URL=redis://redis:6379
-      - SECRET_KEY_BASE=0c5bbac11156530c24e2c40abc914e9493219df6be4a40d23829259ff99b0bf42abcfab65a46ac2c7a2d18371226fe5eeb39e6fafa59f293ba1bc5e6bc34e413
+      - RAILS_MASTER_KEY
     labels:
       - traefik.enable=true
       - traefik.http.routers.app-http.entrypoints=web
