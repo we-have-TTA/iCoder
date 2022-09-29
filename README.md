@@ -7,7 +7,7 @@ Link to [i Coder](http://icoder.tw/)
 We are we-have-TTA. This is a bootcamp project inspired by [CoderPad](https://coderpad.io/)
 We would like to strengthen our skills, being familiar with what we learned and there is no benefit financially.
 
-我們是 we-have-TTA，這是我們在五倍紅寶石進行的專案，希望可以藉此強化我們在網頁開發技能，熟悉這段期間的所學。
+我們是 we-have-TTA，這是我們在 ASTRO Camp 進行的專案，希望可以藉此強化我們在網頁開發技能，熟悉這段期間的所學。
 
 身為人資或是公司面試官的你，正在煩惱疫情的影響，難以透過遠端的方式進行程式碼考試嗎?
 
@@ -24,8 +24,8 @@ i Coder - The leading technical interview platform for development teams.
 
 #### Live Coding Environment 線上程式執行環境
 
-- 四種程式語言可以使用(Ruby, JavaScript, Python, Elixer)
-- 4 programing language can choose (Ruby, JavaScript, Python, Elixer)
+- 四種程式語言可以使用(Ruby, JavaScript, Python, Elixir)
+- 4 programing language can choose (Ruby, JavaScript, Python, Elixir)
 - 同步線上編輯及執行結果
 - Live collaborative coding.
 - 載入預先建立好的題庫進行測驗
@@ -55,15 +55,20 @@ i Coder - The leading technical interview platform for development teams.
 - 共同編輯題庫及管理會議
 - Collaborate with your team members for creating questions and meeting rooms
 
-## Credits 貢獻
+## Contributors 貢獻
 
 <a href="https://github.com/we-have-TTA/iCoder/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=we-have-TTA/iCoder&max=6" />
 </a>
 
 [Ker Ker](https://github.com/noracami)
+
 [Sean Chen](https://github.com/oSeanChen)
+
 [Yoji](https://github.com/Yojijun)
-[Curry](https://github.com/zxcvbnm7548)
+
 [Rex Kao](https://github.com/RexXKao)
+
 [Tien Yuan](https://github.com/chutienyuan)
+
+[Curry](https://github.com/zxcvbnm7548)

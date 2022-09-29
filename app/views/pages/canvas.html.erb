@@ -20,7 +20,7 @@
         <input type="color" name="stroke" id="stroke" data-action="change->canvas#color" data-canvas-target="color" />
         <!--畫筆粗細-->
         <label for="lineWidth">筆畫粗細</label>
-        <input type="number" name="lineWidth" id="lineWidth" data-action="change->canvas#changeLineWidth" value="5" />
+        <input type="number" name="lineWidth" id="lineWidth" data-action="change->canvas#changeLineWidth" min=1 value="5" />
         <!--畫筆鈕-->
         <button id="brush" data-action="canvas#toggleBrush" class="active" data-canvas-target="brush"><i class="fi fi-rs-pencil"></i></button>
         <!-- 清除鈕 -->
