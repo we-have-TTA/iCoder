@@ -3,7 +3,7 @@ import consumer from "../channels/consumer"
 import { v4 as uuidv4 } from "uuid"
 
 export default class extends Controller {
-  static targets = ["input","button"]
+  static targets = ["input", "button"]
 
   getSessionID() {
     return (localStorage["sessionID"] ||= uuidv4())
@@ -19,14 +19,26 @@ export default class extends Controller {
     // can add leave msg otherwise
   }
 
-  _cableReceived({ content, created_at, username }) {
+  _cableReceived({ message, sessionid }) {
     // Called when there's incoming data on the websocket for this channel
+    const { content, created_at, username } = message
     this.inputTarget.focus()
     const time = created_at.match(/T(?<time>.+)\./).groups.time
-    const message = `<div class="flex justify-between"><div>${username}：<span class="message bg-white rounded-full px-1.5 mt-1"> ${content}</span></div><div class="flex items-end">${time}</div></div>`
-    document.querySelector("#msg").insertAdjacentHTML("beforeend", message)
+    let msg = ""
+    if (sessionid === localStorage["sessionID"]) {
+      msg = `<div class="flex justify-end">
+      <div>${username}：<span class="message bg-white rounded-full px-1.5 mt-1"> ${content}</span></div>
+      </div>`
+    } else {
+      msg = `<div>
+      <div>${username}：<span class="message bg-white rounded-full px-1.5 mt-1"> ${content}</span></div>
+      </div>`
+    }
+    msg += `<div class="flex justify-end text-xs">${time}</div>`
+    document.querySelector("#msg").insertAdjacentHTML("beforeend", msg)
     this.inputTarget.value = ""
-    document.querySelector("#msg_scroll").scrollTop=document.querySelector("#msg_scroll").scrollHeight
+    document.querySelector("#msg_scroll").scrollTop =
+      document.querySelector("#msg_scroll").scrollHeight
   }
 
   getRoomUUID() {
@@ -51,7 +63,16 @@ export default class extends Controller {
   readName() {
     this.addUserNameToForm()
     this.addUUIDToForm()
+    this.addSessionIDToForm()
     this.element.submit()
+  }
+
+  addSessionIDToForm() {
+    const field = document.createElement("input")
+    field.setAttribute("type", "hidden")
+    field.setAttribute("name", "sessionid")
+    field.setAttribute("value", this.getSessionID())
+    this.element.appendChild(field)
   }
 
   addUUIDToForm() {

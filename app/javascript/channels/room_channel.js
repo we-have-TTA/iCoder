@@ -1,9 +1,7 @@
 import consumer from "./consumer"
 
 consumer.subscriptions.create("RoomChannel", {
-  connected() {
-    console.log("connect to RoomChannel")
-  },
+  connected() {},
 
   received({ sessionID, type, body }) {
     if (sessionStorage["sessionID"] === sessionID) {

@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     @message = Message.new(msg_params)
     return unless @message.save
 
-    RoomChatChannel.broadcast_to(@room, @message)
+    RoomChatChannel.broadcast_to(@room, { message: @message, sessionid: params[:sessionid] })
   end
 
   private

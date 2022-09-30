@@ -46,7 +46,7 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
-    console.log(`cable connected`)
+
   }
 
   _cableDisconnected() {
@@ -56,8 +56,7 @@ export default class extends Controller {
   _cableReceived({ sessionID, code }) {
     // Called when there's incoming data on the websocket for this channel
     // 自己發出的訊息不處理
-    console.log("receive")
-    console.log(sessionID)
+
     if (sessionStorage["sessionID"] === sessionID) {
       return
     }
@@ -104,7 +103,6 @@ export default class extends Controller {
           jar.updateCode(code)
           jar.destroy()
           if (this.panelTarget.dataset.edit == "false") {
-            console.log(this.panelTarget)
             this.panelTarget.setAttribute("contenteditable", false)
           }
           this.webConsoleChangeLanguage(language)
@@ -193,7 +191,6 @@ export default class extends Controller {
   }
 
   webConsoleChangeLanguage(language) {
-    
     const changeLanguageDict = {
       Ruby: this.RubyTarget,
       Javascript: this.JavascriptTarget,
@@ -238,6 +235,11 @@ export default class extends Controller {
         let cardMove = -32
         this.team_nameTarget.textContent = `${result.team.name} 的題庫`
         result.question.forEach((question) => {
+          const userFind = result.user.reduce((acc,cv,index) => {
+                             if (cv.id === question.user_id) { 
+                                return index
+                             } return acc
+                           },0)
           cardMove += 32
           html += `<tr data-action="click->editor#displayQuestionsItem"
                        id=${question.id}
@@ -255,7 +257,7 @@ export default class extends Controller {
                          ${question.language}
                        </div>
                        <div class="text-left text-gray-600">
-                         By ${result.user[question.user_id - 1].username}
+                         By ${result.user[userFind].username}
                        </div>
                      </td>
                    </tr>`

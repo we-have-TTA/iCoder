@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["title", "input"]
   editMode() {
     sessionStorage["roomTitle"] = this.titleTarget.textContent
-    this.element.innerHTML = `<input data-roomtitle-target="input" class="text-black" type="text" maxlength="50">
+    this.element.innerHTML = `<input data-roomtitle-target="input" class="text-black" type="text" maxlength="50" value="${sessionStorage["roomTitle"]}">
                               <button data-action="click->roomtitle#no_revise_roomtitle" class="text-sm block px-1 py-1 border rounded ml-5 bg-gray-800 hover:bg-blue-900">取消 </button>
                               <button data-action="click->roomtitle#revise_roomtitle" class="text-sm block px-1 py-1 border rounded ml-2 bg-gray-800 hover:bg-blue-900">確認</button>`
   }
@@ -19,9 +19,7 @@ export default class extends Controller {
       url: "/api/v1/rooms/change_roomtitle",
       type: "patch",
       data: new URLSearchParams(data).toString(),
-      success: (res) => {
-        console.log(res)
-      },
+      success: () => {},
       error: () => {},
     })
   }
