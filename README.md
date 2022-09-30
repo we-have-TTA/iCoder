@@ -9,6 +9,8 @@ We would like to strengthen our skills, being familiar with what we learned and 
 
 我們是 we-have-TTA，這是我們在 ASTRO Camp 進行的專案，希望可以藉此強化我們在網頁開發技能，熟悉這段期間的所學。
 
+[DEMO Day 影片連結](https://youtu.be/ThKLkzMPY08)
+
 身為人資或是公司面試官的你，正在煩惱疫情的影響，難以透過遠端的方式進行程式碼考試嗎?
 
 i Coder 是一個面試會議管理平台，致敬知名線上面試平台 Coderpad，為您打造獨特的服務：
