@@ -27,6 +27,8 @@
         <button id="clean" data-action="canvas#clean">清除</button>
         <!-- 橡皮擦 -->
         <button id="eraser" data-action="canvas#toggleEraser" data-canvas-target="eraser">橡皮擦</button>
+        <!-- undo -->
+        <button id="undo" data-action="canvas#toggleEraser" data-canvas-target="undo"><i class="fi fi-rr-undo"></i></button>
       </div>
       <div class="drawing-board">
         <canvas id="drawing-board" data-action="mousedown->canvas#mousedown mouseup->canvas#mouseup mousemove->canvas#mousemove" data-canvas-target="canvas" ></canvas>
