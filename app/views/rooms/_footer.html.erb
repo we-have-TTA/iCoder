@@ -3,7 +3,7 @@
     <% if current_user %>
       <%= link_to "邀請", "/#{@room.uuid}/invite", target: "_blank" %>
     <% end %>
-    <button class="button" data-action="allRoom#displayCamera">視訊通話</button>
+    <button disabled class="button disabled:opacity-50">視訊通話</button>
   </div>
   <div>
     <%= render "participator_name", participator: current_participator %>
