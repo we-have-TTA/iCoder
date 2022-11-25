@@ -70,7 +70,7 @@ class RoomsController < ApplicationController
       unless new_container.in? output
         p '目前沒有可使用的 container...'
         p "建立 #{language} 的 container..."
-        ssh.exec!("docker run -dit --name #{new_container} --network webssh #{language.downcase}_sshd")
+        ssh.exec!("docker run -dit --name #{new_container} --network webssh rexkao/#{language.downcase}_sshd")
         p 'done.'
       end
     end
